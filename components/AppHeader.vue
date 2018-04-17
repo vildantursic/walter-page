@@ -1,7 +1,8 @@
 <template>
   <section>
+    <header>
       <img class="logo" src="~/assets/images/walter-logo.png" alt="">
-    <div class="navigation-bar">
+      <div class="navigation-bar">
         <ul>
           <li><a href="">Our Team</a></li>
           <li><a href="">Cases</a></li>
@@ -11,9 +12,11 @@
           <li><a href="">Home</a></li>
         </ul>
       </div>
+    </header>
   </section>
 </template>
 <script>
+
   export default {
     components: {
     }
@@ -21,30 +24,28 @@
 </script>
 
 <style>
-  section{
+  /*@import "~/assets/styles/mixins";*/
+  header {
+    width: 100%;
+    background-color: #47494e;
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
   .logo{
-    position: absolute;
     height: 3em;
-    padding-left: 10%;
   }
   .navigation-bar{
     display: flex;
     align-items: center;
     height: 4em;
-    width: 100%;
-    background-color: #47494e;
   }
   ul {
-    display: flex;
-    /*float: right;*/
-  }
-  li{
+    list-style: none;
     display: flex;
     justify-content: space-around;
-    float: right;
+  }
+  li{
   }
   a{
     text-decoration: none;
