@@ -1,4 +1,14 @@
-@mixin flex {
-  display: -webkit-flex;
-  display: flex;
+@mixin spacing-l($type, $size, $varible) {
+  @if $type == m {
+    margin-left: $size + $varible;
+  } @else {
+    padding-left: $size + $varible;
+  }
+}
+@mixin spacing-r($type, $size, $varible) {
+  @if $type == m {
+    margin-right: $size + $varible;
+  } @else {
+    padding-right: $size + $varible;
+  }
 }
