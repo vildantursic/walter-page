@@ -1,13 +1,15 @@
 <template>
-    $END$
+    <div>
+
+    </div>
 </template>
 
 <script>
     export default {
-        name: "AppServiceBox"
+
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
