@@ -1,6 +1,6 @@
 <template>
   <section>
-      <img class="logo" src="~/assets/images/walter-logo.png" alt="">
+      <img class="logo" src="~/static/images/walter-logo.png" alt="">
     <div class="navigation-bar">
         <ul>
           <li><a href="">Our Team</a></li>
