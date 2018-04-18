@@ -8,7 +8,9 @@
 </template>
 
 <script>
+  import AppCards from '~/components/AppCards'
   import AppFilter from '~/components/AppFilter'
+
   export default {
     data() {
       return {
@@ -53,6 +55,7 @@
   @import "../../assets/styles/mixins";
 
   .items {
+    width: 100vw;
     @include grid-items(15px, 20px, 5, 3);
   }
 </style>
