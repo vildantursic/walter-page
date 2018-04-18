@@ -1,19 +1,17 @@
 <template>
-  <section>
-    <header>
-      <img class="logo" src="~/static/images/walter-logo.png" alt="">
-      <div class="navigation-bar">
-        <ul>
-          <li><a href="">Our Team</a></li>
-          <li><a href="">Cases</a></li>
-          <li><a href="">About us</a></li>
-          <li><a href="">Contact us</a></li>
-          <li><a href="">Carrier</a></li>
-          <li><a href="">Home</a></li>
-        </ul>
-      </div>
-    </header>
-  </section>
+  <header>
+    <img class="logo" src="~/static/images/walter-logo.png" alt="">
+    <div class="navigation-bar">
+      <ul>
+        <li><a href="">Our Team</a></li>
+        <li><a href="">Cases</a></li>
+        <li><a href="">About us</a></li>
+        <li><a href="">Contact us</a></li>
+        <li><a href="">Carrier</a></li>
+        <li><a href="">Home</a></li>
+      </ul>
+    </div>
+  </header>
 </template>
 <script>
 
