@@ -22,8 +22,7 @@
 
 <style scoped="">
 .card{
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin: 1em;
   position: absolute;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   overflow: hidden;
