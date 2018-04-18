@@ -4,12 +4,12 @@
       <img class="logo" src="~/assets/images/walter-logo.png" alt="">
       <div class="navigation-bar">
         <ul>
-          <li><a href="">Our Team</a></li>
+          <li><a href="">Services</a></li>
           <li><a href="">Cases</a></li>
           <li><a href="">About us</a></li>
           <li><a href="">Contact us</a></li>
-          <li><a href="">Carrier</a></li>
-          <li><a href="">Home</a></li>
+          <li><a href="">Careers</a></li>
+          <li><a href="">News</a></li>
         </ul>
       </div>
     </header>
@@ -43,6 +43,7 @@
     margin-right: 10%;
   }
   ul {
+    -webkit-padding-start: 10px;
     list-style: none;
     display: flex;
     justify-content: space-around;
