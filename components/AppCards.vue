@@ -6,6 +6,7 @@
     <div class="info-card">
       <h1 class="title">Hyatt Regency Maraska Zadar Hotel</h1>
       <div class="about">
+        <p>Author</p>
         <p>The 5-star Hyatt Regency Zadar Maraska is the first hotel in Croatia under the Hyatt brand and is set to open in the spring of 2019...</p>
         <p class="italic">In Collaboration with D&Z d.o.o. Zadar</p>
       </div>
@@ -52,9 +53,11 @@
 
    .title{
      margin-bottom: 0;
+     font-size: 1.5rem;
    }
    .about{
      color: grey;
+     font-size: 0.875rem;
    }
    .italic{
      font-style: italic;
