@@ -19,26 +19,11 @@
       return {
         items: [],
         filters: [
-          {
-            id: 1,
-            name: 'All'
-          },
-          {
-            id: 2,
-            name: 'BIM Consulting and Engineering'
-          },
-          {
-            id: 3,
-            name: 'BIM Modelling'
-          },
-          {
-            id: 4,
-            name: 'BIM Asset Creation'
-          },
-          {
-            id: 5,
-            name: 'Software Development'
-          }
+          { id: 1, name: 'All' },
+          { id: 2, name: 'BIM Consulting and Engineering' },
+          { id: 3, name: 'BIM Modelling' },
+          { id: 4, name: 'BIM Asset Creation' },
+          { id: 5, name: 'Software Development' }
         ]
       }
     },
@@ -61,6 +46,6 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(50px, 30px, 3, 2);
+    @include grid-items(10%, 30px, 3, 2);
   }
 </style>

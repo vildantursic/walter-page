@@ -75,7 +75,8 @@
 
         li {
           border-bottom: solid 1px lightgrey;
-          min-width: 150px;
+          padding: 5px 15px;
+          text-align: center;
 
           &:hover  {
             border-bottom: solid 1px blue;
