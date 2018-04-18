@@ -2,7 +2,7 @@
   <section>
     <AppFilter :filters="filters" :showDateFilter="true"></AppFilter>
     <div class="items">
-      <div class="item" v-for="(test, index) of [1,2,3,4,5,6,7,8,9]" :key="index">{{test}}</div>
+      <AppCards v-for="(test, index) of [1,2,3,4,5,6,7,8,9]" :key="index"/>
     </div>
   </section>
 </template>
@@ -43,7 +43,8 @@
       }
     },
     components: {
-      AppFilter
+      AppFilter,
+      AppCards
     }
   }
 </script>
@@ -53,10 +54,5 @@
 
   .items {
     @include grid-items(15px, 20px, 5, 3);
-
-    .item {
-      height: 100px;
-      border: solid 1px black;
-    }
   }
 </style>
