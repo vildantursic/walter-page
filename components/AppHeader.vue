@@ -34,11 +34,13 @@
   }
   .logo{
     height: 3em;
+    margin-left: 10%;
   }
   .navigation-bar{
     display: flex;
     align-items: center;
     height: 4em;
+    margin-right: 10%;
   }
   ul {
     list-style: none;
