@@ -31,16 +31,6 @@
             id: 4,
             name: 'test 4'
           }
-        ],
-        subfilters: [
-          {
-            id: 1,
-            name: 'subtest 1'
-          },
-          {
-            id: 2,
-            name: 'subtest 2'
-          }
         ]
       }
     },
@@ -55,7 +45,6 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    width: 100vw;
-    @include grid-items(15px, 20px, 5, 3);
+    @include grid-items(50px, 30px, 3, 2);
   }
 </style>

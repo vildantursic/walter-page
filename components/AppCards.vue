@@ -26,6 +26,13 @@
   flex-direction: column;
   width: 100%;
   max-height: 400px;
+
+  border-width: 0 0 8px 0;
+  border-style: solid;
+  -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
+  -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
+  border-image: linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
+  border-image-slice: 1;
 }
  .card-img{
    width: 100%;
