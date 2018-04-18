@@ -22,6 +22,8 @@
 
 <style scoped="">
 .card{
+  margin-top: 1em;
+  margin-bottom: 1em;
   position: absolute;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   overflow: hidden;
@@ -29,7 +31,7 @@
   flex-direction: column;
   align-items: left;
   max-width: 20em;
-  margin: 0;
+  /*margin: 0;*/
 }
  .card-img{
    position: relative;

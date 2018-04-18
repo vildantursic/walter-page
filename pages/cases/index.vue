@@ -1,8 +1,6 @@
 <template>
   <section class="container">
     <AppCards/>
-    <AppCards/>
-    <AppCards/>
     <nuxt/>
   </section>
 </template>
