@@ -9,6 +9,7 @@
 
 <script>
   import AppFilter from '~/components/AppFilter'
+  import AppCards from '~/components/AppCards'
   export default {
     data() {
       return {

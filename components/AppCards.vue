@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="card">
-      <img class="card-img" src="~/assets/images/arch.jpg" alt="">
+      <img class="card-img" src="~/static/images/arch.jpg" alt="">
       <div class="info-card">
           <h1 class="title">Hyatt Regency Maraska Zadar Hotel</h1>
         </div>
