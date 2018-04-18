@@ -5,7 +5,7 @@
         <li v-for="(filter, index) of filters" :key="index" @click="selectFilter(filter.id)">{{filter.name}}</li>
       </ul>
       <div class="search">
-        <!--<input type="text">-->
+        <input type="text" placeholder="Search..">
       </div>
     </div>
     <div class="date-filters" v-if="showDateFilter">
@@ -51,6 +51,7 @@
 <style lang="scss" scoped>
   .filter {
     width: 100%;
+    margin-bottom: 10vh;
 
     ul {
       list-style: none;
@@ -74,7 +75,7 @@
 
         li {
           border-bottom: solid 1px lightgrey;
-          min-width: 200px;
+          min-width: 150px;
 
           &:hover  {
             border-bottom: solid 1px blue;
@@ -84,6 +85,7 @@
 
       .search {
         width: 10%;
+        border-bottom: solid 1px lightgrey;
 
         input {
           width: 100%;
@@ -113,5 +115,8 @@
       }
     }
 
+  }
+  input{
+    border: none;
   }
 </style>

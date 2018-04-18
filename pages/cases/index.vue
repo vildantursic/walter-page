@@ -1,6 +1,7 @@
 <template>
   <section>
-    <AppFilter :filters="filters" :showDateFilter="true"></AppFilter>
+    <AppPageTitle></AppPageTitle>
+    <AppFilter :filters="filters" :showDateFilter="false"></AppFilter>
     <div class="items">
       <AppCards v-for="(test, index) of items" :key="index"/>
     </div>
@@ -10,6 +11,7 @@
 <script>
   import AppCards from '~/components/AppCards'
   import AppFilter from '~/components/AppFilter'
+  import AppPageTitle from '~/components/AppPageTitle'
   import axios from 'axios'
 
   export default {
@@ -19,19 +21,23 @@
         filters: [
           {
             id: 1,
-            name: 'test 1'
+            name: 'All'
           },
           {
             id: 2,
-            name: 'test 2'
+            name: 'BIM Consulting and Engineering'
           },
           {
             id: 3,
-            name: 'test 3'
+            name: 'BIM Modelling'
           },
           {
             id: 4,
-            name: 'test 4'
+            name: 'BIM Asset Creation'
+          },
+          {
+            id: 5,
+            name: 'Software Development'
           }
         ]
       }
@@ -45,7 +51,8 @@
     },
     components: {
       AppFilter,
-      AppCards
+      AppCards,
+      AppPageTitle
     }
   }
 </script>
