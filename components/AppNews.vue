@@ -4,9 +4,17 @@
         <img class="card-img" src="~/static/images/arch-2.jpg" alt="">
       </div>
       <div class="info-card">
-        <h1 class="title">Hyatt Regency Maraska Zadar Hotel</h1>
-        <p>The 5-star Hyatt Regency Zadar Maraska is the first hotel in Croatia under the Hyatt brand and is set to open in the spring of 2019...</p>
-        <p class="italic">In Collaboration with D&Z d.o.o. Zadar</p>
+        <p class="category">BIM Architecture</p>
+        <p class="author">John Doe, June 20 at 10:05 PM</p>
+        <h1 class="title">I'm a title. Click
+          here to edit me.</h1>
+        <p>I'm a paragraph. Click here to add your
+          own text and edit me. It’s easy. Just
+          click “Edit Text” or double click me and
+          you can start adding your own content
+          and make changes to the font...</p>
+        <p class="author">John Doe</p>
+
       </div>
     </div>
 </template>
@@ -46,6 +54,20 @@
     .info-card
     {
       width: 40%;
+      padding: 1em 1em;
+      .category
+      {
+        margin: 0;
+        font-size: 1em;
+        font-weight: 700;
+        color: blue;
+      }
+      .author
+      {
+        margin: 0;
+        font-size: 0.8em;
+        font-weight: 500;
+      }
     }
   }
 </style>
