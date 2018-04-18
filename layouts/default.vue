@@ -38,6 +38,7 @@ export default {
     grid-area: header;
   }
   .main {
+    margin: 0 15%;
     grid-area: main;
     margin: 0 15%;
   }
