@@ -5,7 +5,7 @@
         <li v-for="(filter, index) of filters" :key="index" @click="selectFilter(filter.id)">{{filter.name}}</li>
       </ul>
       <div class="search">
-        <input type="text">
+        <!--<input type="text">-->
       </div>
     </div>
     <div class="date-filters">
