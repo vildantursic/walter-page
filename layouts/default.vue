@@ -39,6 +39,7 @@ export default {
   }
   .main {
     grid-area: main;
+    margin: 0 15%;
   }
   .space {
     grid-area: space;

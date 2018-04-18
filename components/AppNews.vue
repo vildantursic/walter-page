@@ -20,30 +20,27 @@
 
 <style lang="scss">
   .card{
-    margin: 1em auto;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    align-items: left;
-    min-width: 60%;
-    max-width: 80%;
-    min-height: 400px;
-    min-height: 450px;
-    /*margin: 0;*/
+    width: 100%;
+    height: 400px;
+    padding-bottom: 2em;
+    border-bottom: 2px solid blue;
     .card-img-container
     {
-
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60%;
       .card-img {
-        position: relative;
-        display: block;
-        width: 100%;
         height: 100%;
       }
     }
     .info-card
     {
-
+      width: 40%;
     }
   }
 </style>
