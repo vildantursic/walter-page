@@ -3,7 +3,7 @@
     <AppPageTitle></AppPageTitle>
     <AppFilter :filters="filters" :showDateFilter="false"></AppFilter>
     <div class="items">
-      <AppCards v-for="(test, index) of items" :key="index"/>
+      <AppCards v-for="(item, index) of items" :key="index" :item="item"/>
     </div>
   </section>
 </template>

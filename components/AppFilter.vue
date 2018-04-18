@@ -68,14 +68,15 @@
 
     .main-filters {
       display: flex;
+      font-size: 1.3em;
 
       .main-list {
-        width: 90%;
+        width: 85%;
         overflow: hidden;
 
         li {
           border-bottom: solid 1px lightgrey;
-          padding: 5px 15px;
+          padding: 5px 20px;
           text-align: center;
 
           &:hover  {
@@ -85,11 +86,15 @@
       }
 
       .search {
-        width: 10%;
-        border-bottom: solid 1px lightgrey;
+        width: 15%;
+        display: flex;
+        align-items: flex-end;
 
         input {
+          font-size: 0.8em;
+          padding: 5px 20px;
           width: 100%;
+          border-bottom: solid 1px lightgrey;
         }
       }
     }
