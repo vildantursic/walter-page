@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card animated fadeIn" v-scroll-reveal.reset>
     <div class="card-img">
       <img src="~/static/images/arch.jpg" alt="">
     </div>

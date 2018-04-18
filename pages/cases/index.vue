@@ -2,7 +2,7 @@
   <section>
     <AppFilter :filters="filters" :showDateFilter="true"></AppFilter>
     <div class="items">
-      <AppCards v-for="(test, index) of [1,2,3,4,5,6,7,8,9]" :key="index"/>
+      <AppCards v-for="(test, index) of items" :key="index"/>
     </div>
   </section>
 </template>
@@ -10,10 +10,12 @@
 <script>
   import AppCards from '~/components/AppCards'
   import AppFilter from '~/components/AppFilter'
+  import axios from 'axios'
 
   export default {
     data() {
       return {
+        items: [],
         filters: [
           {
             id: 1,
@@ -33,6 +35,13 @@
           }
         ]
       }
+    },
+    asyncData({}) {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases').then(function (response) {
+        return { items: response.data }
+      }).catch(function (error) {
+        console.log(error);
+      });
     },
     components: {
       AppFilter,

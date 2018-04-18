@@ -8,11 +8,11 @@
         <!--<input type="text">-->
       </div>
     </div>
-    <div class="date-filters">
+    <div class="date-filters" v-if="showDateFilter">
       <div class="year">
         <span> prev </span> 2018 <span> next </span>
       </div>
-      <ul class="month-list" v-if="showDateFilter">
+      <ul class="month-list">
         <li v-for="(date, index) of dates" :key="index" @click="selectFilter(date.id)">{{date.name}}</li>
       </ul>
     </div>
