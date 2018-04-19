@@ -67,6 +67,7 @@
         margin: 0;
         font-size: 0.8em;
         font-weight: 500;
+        color: gray;
       }
     }
   }
