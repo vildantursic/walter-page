@@ -20,6 +20,34 @@
       <div class="img-container">
         <img class="img" src="~/static/images/arch.jpg" alt="">
       </div>
+      <div class="post-content">
+        <div class="post-left">
+          <p class="header-left">I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or
+            double click me and you can start adding your own content and make changes to the font. Feel
+            free to drag and drop me anywhere you like on your page. I’m a great place for you to tell a story
+            and let your users know a little more about you.</p>
+          <p>
+            This is a great space to write long text about your company and your services. You can use this space
+            to go into a little more detail about your company. Talk about your team and what services you provide.
+            Tell your visitors the story of how you came up with the idea for your business and what makes you different
+            from your competitors. Make your company stand out and show your visitors who you are. Tip:
+            Add your own image by double clicking the image and clicking Change Image.
+            I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double
+            click me and you can start adding your own content and make changes to the font. Feel free to drag
+            and drop me anywhere you like on your page. I’m a great place for you to tell a story and let your users
+            know a little more about you.
+            This is a great space to write long text about your company and your services. You can use this space
+            to go into a little more detail about your company. Talk about your team and what services you provide.
+            Tell your visitors the story of how you came up with the idea for your business and what makes you different
+            from your competitors. Make your company stand out and show your visitors who you are. Tip:
+            Add your own image by double clicking the image and clicking Change Image
+          </p>
+        </div>
+        <div class="post-right">
+          <OtherPosts :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'" ></OtherPosts>
+          <OtherPosts  :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'"></OtherPosts>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -28,6 +56,7 @@
   import AppFilter from '~/components/AppFilter'
   import AppNews from '~/components/AppNews'
   import AppPageTitle from '~/components/AppPageTitle'
+  import OtherPosts from '~/components/OtherPosts'
   import axios from 'axios'
   export default {
     data() {
@@ -66,7 +95,8 @@
     components: {
       AppFilter,
       AppNews,
-      AppPageTitle
+      AppPageTitle,
+      OtherPosts
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts').then(function (response) {
@@ -130,6 +160,24 @@
     .img {
       height: 100%;
       width: 100%;
+    }
+  }
+  .post-content
+  {
+    display: flex;
+    flex-direction: row;
+    .post-left
+    {
+      width: 70%;
+      padding: 0 2% 0 2%;
+      .header-left
+      {
+        font-weight: 800;
+      }
+    }
+    .post-right
+    {
+      width: 30%;
     }
   }
   .fab ,.fas{
