@@ -14,7 +14,14 @@
           you can start adding your own content
           and make changes to the font...</p>
         <p class="author">John Doe</p>
-
+        <div class="social">
+          <!-- Add font awesome icons -->
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fas fa-envelope"></i></a>
+          <a href="#"><i class="fas fa-paperclip"></i></a>
+        </div>
       </div>
     </div>
 </template>
@@ -53,6 +60,7 @@
     }
     .info-card
     {
+      position: relative;
       width: 40%;
       padding: 1em 1em;
       .category
@@ -70,5 +78,46 @@
         color: gray;
       }
     }
+  }
+  .fab ,.fas{
+    padding: 5px 10px;
+    font-size: 25px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+  }
+  .fab:hover, .fas:hover {
+    opacity: 0.7;
+  }
+  .fa-facebook {
+    background: #ffffff;
+    color: #000000;
+  }
+  .fa-twitter {
+    background: #ffffff;
+    color: #000000;
+  }
+  .fa-google {
+    background: #ffffff;
+    color: #000000;;
+  }
+  .fa-linkedin {
+    background: #ffffff;
+    color: #000000;
+  }
+  .fa-envelope
+  {
+    background: #ffffff;
+    color: #000000;
+  }
+  .fa-paperclip
+  {
+    background: #ffffff;
+    color: #000000;
+  }
+  .social
+  {
+    position: absolute;
+    bottom:0%;
   }
 </style>
