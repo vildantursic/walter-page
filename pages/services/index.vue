@@ -4,6 +4,8 @@
 </template>
 
 <script>
+  import axios from 'axios'
+
   export default {
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/services').then(function (response) {

@@ -1,10 +1,9 @@
 <template>
-    $END$
+    <section></section>
 </template>
 
 <script>
     export default {
-        name: "_id"
     }
 </script>
 

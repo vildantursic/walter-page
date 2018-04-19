@@ -1,6 +1,6 @@
 <template>
   <section>
-    <AppFilter :filters="filters" :showDateFilter="true"></AppFilter>
+    <AppFilter :filters="filters" :filterActive="2" :showDateFilter="true" :monthActive="2"></AppFilter>
     <div class="items">
       <AppNews v-for="(test, index) of [1,2,3,4,5,6]" :key="index"/>
     </div>
@@ -10,6 +10,8 @@
 <script>
   import AppFilter from '~/components/AppFilter'
   import AppNews from '~/components/AppNews'
+  import axios from 'axios'
+
   export default {
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts').then(function (response) {
@@ -21,32 +23,10 @@
     data() {
       return {
         filters: [
-          {
-            id: 1,
-            name: 'test 1'
-          },
-          {
-            id: 2,
-            name: 'test 2'
-          },
-          {
-            id: 3,
-            name: 'test 3'
-          },
-          {
-            id: 4,
-            name: 'test 4'
-          }
-        ],
-        subfilters: [
-          {
-            id: 1,
-            name: 'subtest 1'
-          },
-          {
-            id: 2,
-            name: 'subtest 2'
-          }
+          { id: 1, name: 'test 1' },
+          { id: 2, name: 'test 2' },
+          { id: 3, name: 'test 3' },
+          { id: 4, name: 'test 4' }
         ]
       }
     },

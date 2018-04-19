@@ -1,13 +1,21 @@
 <template>
-    $END$
+  <section>
+  </section>
 </template>
 
 <script>
-    export default {
-        name: "index"
-    }
+  import axios from 'axios'
+
+  export default {
+    asyncData({}) {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers').then(function (response) {
+        return { items: response.data }
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+  }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
 </style>
