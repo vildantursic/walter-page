@@ -12,7 +12,7 @@
         <a href="#"><i class="fas fa-paperclip"></i></a>
       </div>
     </div>
-    <div class="item">
+    <div class="item animated fadeIn" v-scroll-reveal.reset>
       <div class="img-header">
         <p class="category">BIM Architecture</p>
         <p class="author">John Doe, June 20 at 10:05 PM</p>
