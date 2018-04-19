@@ -1,94 +1,111 @@
-<template>
-  <md-card>
-    <md-card-actions>
-      <md-button class="md-icon-button"
-                 target="_blank"
-                 href="https://github.com/surmon-china/vue-awesome-swiper/blob/master/examples/30-thumbs-gallery.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media  style="height: 500px">
-      <!-- swiper1 -->
-      <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
-        <swiper-slide class="slide-1"></swiper-slide>
-        <swiper-slide class="slide-2"></swiper-slide>
-        <swiper-slide class="slide-3"></swiper-slide>
-        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-      </swiper>
-      <!-- swiper2 Thumbs -->
-      <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
-        <swiper-slide class="slide-1"></swiper-slide>
-        <swiper-slide class="slide-2"></swiper-slide>
-        <swiper-slide class="slide-3"></swiper-slide>
-      </swiper>
-    </md-card-media>
-  </md-card>
+<template xmlns:v-swiper="http://www.w3.org/1999/xhtml">
+  <div class="swiper">
+    <div v-swiper:mySwiper="swiperOption" class="my-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="(image, index) in images" :key="index">
+          <img v-if="image" src="~/static/images/arch.jpg">
+        </div>
+      </div>
+    </div>
+    <div v-swiper:mySecondSwiper="swiperThumbOption" class="my-swiper-thumb">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="(test, index) in [1,2,3]" :key="index">
+          <img v-if="test" src="~/static/images/arch.jpg">
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
   export default {
-    data() {
+    props: ['images'],
+    data () {
       return {
-        swiperOptionTop: {
-          spaceBetween: 10,
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
+        swiperOption: {
+          slidesPerView: 1,
+          spaceBetween: 0,
+          loop: false,
+          autoplay: {
+            delay: 4500,
+            disableOnInteraction: false
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
           }
         },
-        swiperOptionThumbs: {
-          spaceBetween: 10,
-          centeredSlides: true,
-          slidesPerView: 'auto',
-          touchRatio: 0.2,
-          slideToClickedSlide: true
+        swiperThumbOption: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+          loop: false,
+          autoplay: {
+            delay: 4500,
+            disableOnInteraction: false
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          }
         }
       }
     },
     mounted() {
-      this.$nextTick(() => {
-        const swiperTop = this.$refs.swiperTop.swiper
-        const swiperThumbs = this.$refs.swiperThumbs.swiper
-        swiperTop.controller.control = swiperThumbs
-        swiperThumbs.controller.control = swiperTop
-      })
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  .swiper-container {
-    background-color: #ffffff;
-  }
-  .swiper-slide {
-    background-size: cover;
-    background-position: center;
-    &.slide-1 {
-      background-image:url('/static/images/arch.jpg');
-    }
-    &.slide-2 {
-      background-image:url('/static/images/arch-2.jpg');
-    }
-    &.slide-3 {
-      background-image:url('/static/images/hyatt.jpg');
-    }
-  }
-  .gallery-top {
-    height: 80%!important;
+  .swiper {
     width: 100%;
-  }
-  .gallery-thumbs {
-    height: 20%!important;
-    box-sizing: border-box;
-    padding: 10px 0;
-  }
-  .gallery-thumbs .swiper-slide {
-    width: 25%;
     height: 100%;
-    opacity: 0.4;
   }
-  .gallery-thumbs .swiper-slide-active {
-    opacity: 1;
+  .my-swiper {
+    height: 500px;
+    width: 100%;
+    overflow: hidden;
+    .swiper-wrapper {
+      .swiper-slide {
+        text-align: center;
+        font-size: 38px;
+        font-weight: 700;
+        background-color: #eee;
+        overflow: hidden;
+        img {
+          height: 100%;
+        }
+      }
+    }
+    .swiper-pagination {
+      > .swiper-pagination-bullet {
+        background-color: red;
+      }
+    }
   }
+  .my-swiper-thumb {
+    height: 200px;
+
+    .swiper-wrapper {
+      .swiper-slide {
+        text-align: center;
+        font-size: 38px;
+        font-weight: 700;
+        background-color: #eee;
+        overflow: hidden;
+        img {
+          height: 100%;
+        }
+      }
+    }
+  }
+  /*.swiper-slide {*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+
+    /*img {*/
+      /*position: absolute;*/
+      /*z-index: 1;*/
+    /*}*/
+  /*}*/
 </style>

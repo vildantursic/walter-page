@@ -1,7 +1,8 @@
 <template>
   <div class="card">
     <div class="card-img-container">
-      <img class="card-img" src="~/static/images/hyatt.jpg" alt="">
+      <AppSlider :images="images"></AppSlider>
+      <!--<img class="card-img" src="~/static/images/hyatt.jpg" alt="">-->
     </div>
     <div class="info-card">
       <p class="category">BIM Consulting and Engineering</p>
@@ -31,16 +32,26 @@
   </div>
 </template>
 <script>
+  import AppSlider from '~/components/AppSlider'
 
   export default {
     components: {
+      AppSlider
+    },
+    data() {
+      return {
+        images: [
+          'static/images/arch.jpg',
+          'static/images/arch-2.jpg',
+          'static/images/hyatt.jpg'
+        ]
+      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
   .card{
-    overflow: hidden;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -51,14 +62,10 @@
     border-image-slice: 1;
     .card-img-container
     {
-      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       width: 60%;
-      .card-img {
-        height: 100%;
-      }
     }
     .info-card
     {
