@@ -69,6 +69,7 @@
         font-size: 1em;
         font-weight: 700;
         color: blue;
+        letter-spacing: 2px;
       }
       .author
       {
@@ -91,29 +92,29 @@
   }
   .fa-facebook {
     background: #ffffff;
-    color: #000000;
+    color: grey;
   }
   .fa-twitter {
     background: #ffffff;
-    color: #000000;
+    color: grey;
   }
   .fa-google {
     background: #ffffff;
-    color: #000000;;
+    color: grey;
   }
   .fa-linkedin {
     background: #ffffff;
-    color: #000000;
+    color: grey;
   }
   .fa-envelope
   {
     background: #ffffff;
-    color: #000000;
+    color: grey;
   }
   .fa-paperclip
   {
     background: #ffffff;
-    color: #000000;
+    color: grey;
   }
   .social
   {

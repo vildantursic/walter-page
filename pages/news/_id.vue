@@ -12,8 +12,14 @@
         <a href="#"><i class="fas fa-paperclip"></i></a>
       </div>
     </div>
-    <div class="items">
-      <AppNews v-for="(test, index) of items" :key="index"/>
+    <div class="item">
+      <div class="img-header">
+        <p class="category">BIM Architecture</p>
+        <p class="author">John Doe, June 20 at 10:05 PM</p>
+      </div>
+      <div class="img-container">
+        <img class="img" src="~/static/images/arch.jpg" alt="">
+      </div>
     </div>
   </section>
 </template>
@@ -75,7 +81,7 @@
 <style lang="scss" scoped>
   @import "../../assets/styles/mixins";
 
-  .items {
+  .item {
     @include grid-items(0px, 20px, 1, 1);
   }
   .header-news
@@ -95,40 +101,71 @@
       justify-content: flex-end;
     }
   }
+  .img-header
+  {
+    .category
+    {
+      margin: 0;
+      font-size: 1em;
+      font-weight: 700;
+      color: blue;
+      letter-spacing: 2px;
+    }
+    .author
+    {
+      margin: 0;
+      font-size: 0.8em;
+      font-weight: 500;
+      color: gray;
+    }
+  }
+  .img-container
+  {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 500px;
+    .img {
+      height: 100%;
+      width: 100%;
+    }
+  }
   .fab ,.fas{
     padding: 5px 10px;
-    font-size: 25px;
-    width: 30px;
+    font-size: 30px;
+    width: 40px;
     text-align: center;
     text-decoration: none;
   }
   .fab:hover, .fas:hover {
-    opacity: 0.7;
+    opacity: 0.75;
   }
   .fa-facebook {
     background: #ffffff;
-    color: #000000;
+    color: grey;
   }
   .fa-twitter {
     background: #ffffff;
-    color: #000000;
+    color: grey;
   }
   .fa-google {
     background: #ffffff;
-    color: #000000;;
+    color: grey;;
   }
   .fa-linkedin {
     background: #ffffff;
-    color: #000000;
+    color: grey;
   }
   .fa-envelope
   {
     background: #ffffff;
-    color: #000000;
+    color: grey;
   }
   .fa-paperclip
   {
     background: #ffffff;
-    color: #000000;
+    color: grey;
   }
 </style>
