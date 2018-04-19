@@ -3,7 +3,8 @@
     <AppPageTitle></AppPageTitle>
     <AppFilter :filters="filters" :showDateFilter="false"></AppFilter>
     <div class="items">
-      <AppCards v-for="(item, index) of items" :key="index" :item="item"/>
+      <AppCards v-if="index < items.length - 1" v-for="(item, index) of items" :key="index" :item="item"/>
+      <AppMoreCard />
     </div>
   </section>
 </template>
@@ -12,9 +13,16 @@
   import AppCards from '~/components/AppCards'
   import AppFilter from '~/components/AppFilter'
   import AppPageTitle from '~/components/AppPageTitle'
+  import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
 
   export default {
+    components: {
+      AppFilter,
+      AppCards,
+      AppPageTitle,
+      AppMoreCard
+    },
     data() {
       return {
         items: [],
@@ -33,11 +41,6 @@
       }).catch(function (error) {
         console.log(error);
       });
-    },
-    components: {
-      AppFilter,
-      AppCards,
-      AppPageTitle
     }
   }
 </script>
