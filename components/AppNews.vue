@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card animated fadeIn" v-scroll-reveal.reset>
       <div class="card-img-container">
         <img class="card-img" src="~/static/images/arch-2.jpg" alt="">
       </div>
@@ -33,7 +33,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .card{
     overflow: hidden;
     display: flex;

@@ -1,8 +1,9 @@
 <template>
   <section>
+    <AppPageTitle :supertitle="'All about BIM'" :title="'Walter Monthly'" :subtitle="'\'I\'m a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click meand you can start adding your own content and make changes to the font. '" ></AppPageTitle>
     <AppFilter :filters="filters" :showDateFilter="true"></AppFilter>
     <div class="items">
-      <AppNews v-for="(test, index) of [1,2,3,4,5,6]" :key="index"/>
+      <AppNews v-for="(test, index) of items" :key="index"/>
     </div>
   </section>
 </template>
@@ -10,9 +11,12 @@
 <script>
   import AppFilter from '~/components/AppFilter'
   import AppNews from '~/components/AppNews'
+  import AppPageTitle from '~/components/AppPageTitle'
+  import axios from 'axios'
   export default {
     data() {
       return {
+        items: [],
         filters: [
           {
             id: 1,
@@ -45,15 +49,16 @@
     },
     components: {
       AppFilter,
-      AppNews
+      AppNews,
+      AppPageTitle
     },
-//    asyncData({}) {
-//      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts').then(function (response) {
-//        return { items: response.data }
-//      }).catch(function (error) {
-//        console.log(error);
-//      });
-//    },
+    asyncData({}) {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts').then(function (response) {
+        return { items: response.data }
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
   }
 </script>
 
