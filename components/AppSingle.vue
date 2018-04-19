@@ -85,6 +85,7 @@
       .divider{
         border: 0.5px solid gray;
         margin-bottom: 1em;
+        margin-top: 1em;
       }
       .text-box{
         height: 100px;
