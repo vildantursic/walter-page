@@ -44,10 +44,17 @@
           </p>
         </div>
         <div class="post-right">
+          <div class="year">
+            <span class="current-year">NEXT ARTICLE</span> <span><i class="fas fa-chevron-right"></i></span>
+          </div>
           <OtherPosts :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'" ></OtherPosts>
+          <OtherPosts  :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'"></OtherPosts>
           <OtherPosts  :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'"></OtherPosts>
         </div>
       </div>
+    </div>
+    <div class="img-container-bottom">
+      <img class="img-bottom" src="~/static/images/hyatt.jpg" alt="">
     </div>
   </section>
 </template>
@@ -162,6 +169,13 @@
       width: 100%;
     }
   }
+  .img-container-bottom
+  {
+    max-height: 500px;
+    .img-bottom {
+      width: 100%;
+    }
+  }
   .post-content
   {
     display: flex;
@@ -177,7 +191,25 @@
     }
     .post-right
     {
+      margin: 0 3% 0 3%;
       width: 30%;
+      .year {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .current-year {
+          font-size: 1.2em;
+          font-weight: bold;
+        }
+        margin: 0 0 1.5em 0;
+        padding-bottom: 1em;
+        border-width: 0 0 4px 0;
+        border-style: solid;
+        -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #c1c8d1 100%);
+        -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #c1c8d1 100%);
+        border-image: linear-gradient(45deg, #405dce 0%, #c1c8d1 100%);
+        border-image-slice: 1;
+      }
     }
   }
   .fab ,.fas{
@@ -215,5 +247,12 @@
   {
     background: #ffffff;
     color: grey;
+  }
+  .fa-chevron-right
+  {
+    background: #ffffff;
+    padding: 0;
+    font-size: 1.2em;
+    width: 30px;
   }
 </style>

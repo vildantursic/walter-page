@@ -19,11 +19,11 @@
   {
     border-width: 0 0 4px 0;
     border-style: solid;
-    -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #bdc003 100%);
-    -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #bdc003 100%);
-    border-image: linear-gradient(45deg, #405dce 0%, #bdc003 100%);
+    -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #c1c8d1 100%);
+    -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #c1c8d1 100%);
+    border-image: linear-gradient(45deg, #405dce 0%, #c1c8d1 100%);
     border-image-slice: 1;
-    margin: 0 5% 1.5em 5%;
+    margin: 0 0 1.5em 0;
     .category
     {
       margin: 0;
