@@ -11,18 +11,19 @@
     <div class="space"></div>
 
     <div class="footer">
-
+      <AppFooter/>
     </div>
   </div>
 </template>
 
 <script>
-//import AppCard from '~/components/AppCard.vue'
 import AppHeader from '~/components/AppHeader.vue'
+import AppFooter from '~/components/AppFooter.vue'
+
 export default {
   components: {
     AppHeader,
-//    AppCard
+    AppFooter
   }
 }
 </script>
@@ -40,6 +41,7 @@ export default {
   .main {
     margin: 0 15%;
     grid-area: main;
+    margin: 0 15%;
   }
   .space {
     grid-area: space;

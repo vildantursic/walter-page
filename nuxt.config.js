@@ -33,9 +33,19 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+    vendor: [
+      'axios'
+    ]
   },
   css: [
-    '@/assets/styles/main.scss'
+    '@/assets/styles/main.scss',
+    '@/assets/styles/variables.scss',
+    '@/assets/styles/mixins.scss',
+    'animate.css/animate.min.css'
+
+  ],
+  plugins: [
+    { src: '@/plugins/scroll-reveal.js', ssr: false }
   ]
 }

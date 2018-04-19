@@ -13,7 +13,11 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "nuxt": "^1.0.0"
+    "animate.css": "^3.6.1",
+    "axios": "^0.18.0",
+    "nuxt": "^1.0.0",
+    "scrollreveal": "^3.4.0",
+    "vue-scroll-reveal": "^1.0.8"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
