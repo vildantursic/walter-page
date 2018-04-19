@@ -9,6 +9,5 @@ npm-debug.log
 
 # Nuxt generate
 dist
+.idea/
 
-# IDE files
-.idea
