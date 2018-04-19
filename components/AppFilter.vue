@@ -5,14 +5,14 @@
         <li v-for="(filter, index) of filters" :key="index" @click="selectFilter(filter.id)">{{filter.name}}</li>
       </ul>
       <div class="search">
-        <!--<input type="text">-->
+        <input type="text" placeholder="Search..">
       </div>
     </div>
-    <div class="date-filters">
+    <div class="date-filters" v-if="showDateFilter">
       <div class="year">
         <span> prev </span> 2018 <span> next </span>
       </div>
-      <ul class="month-list" v-if="showDateFilter">
+      <ul class="month-list">
         <li v-for="(date, index) of dates" :key="index" @click="selectFilter(date.id)">{{date.name}}</li>
       </ul>
     </div>
@@ -51,6 +51,7 @@
 <style lang="scss" scoped>
   .filter {
     width: 100%;
+    margin-bottom: 10vh;
 
     ul {
       list-style: none;
@@ -67,14 +68,16 @@
 
     .main-filters {
       display: flex;
+      font-size: 1.3em;
 
       .main-list {
-        width: 90%;
+        width: 85%;
         overflow: hidden;
 
         li {
           border-bottom: solid 1px lightgrey;
-          min-width: 200px;
+          padding: 5px 20px;
+          text-align: center;
 
           &:hover  {
             border-bottom: solid 1px blue;
@@ -83,10 +86,15 @@
       }
 
       .search {
-        width: 10%;
+        width: 15%;
+        display: flex;
+        align-items: flex-end;
 
         input {
+          font-size: 0.8em;
+          padding: 5px 20px;
           width: 100%;
+          border-bottom: solid 1px lightgrey;
         }
       }
     }
@@ -113,5 +121,8 @@
       }
     }
 
+  }
+  input{
+    border: none;
   }
 </style>

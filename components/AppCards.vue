@@ -1,11 +1,12 @@
 <template>
-  <div class="card">
+  <div class="card animated fadeIn" v-scroll-reveal.reset>
     <div class="card-img">
       <img src="~/static/images/arch.jpg" alt="">
     </div>
     <div class="info-card">
-      <h1 class="title">Hyatt Regency Maraska Zadar Hotel</h1>
+      <h1 class="title">{{item.title.rendered}}</h1>
       <div class="about">
+        <p>Author</p>
         <p>The 5-star Hyatt Regency Zadar Maraska is the first hotel in Croatia under the Hyatt brand and is set to open in the spring of 2019...</p>
         <p class="italic">In Collaboration with D&Z d.o.o. Zadar</p>
       </div>
@@ -15,6 +16,7 @@
 
 <script>
   export default {
+    props: ['item'],
     components: {
     }
   }
@@ -26,8 +28,10 @@
   flex-direction: column;
   width: 100%;
   max-height: 400px;
+  overflow: hidden;
+  padding-bottom: 2em;
 
-  border-width: 0 0 8px 0;
+  border-width: 0 0 3px 0;
   border-style: solid;
   -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
   -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
@@ -52,9 +56,11 @@
 
    .title{
      margin-bottom: 0;
+     font-size: 1.5rem;
    }
    .about{
      color: grey;
+     font-size: 0.875rem;
    }
    .italic{
      font-style: italic;
