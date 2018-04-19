@@ -7,7 +7,7 @@
       <p class="category">BIM Consulting and Engineering</p>
       <h1 class="title">Hyatt Regency Maraska
         Zadar Hotel</h1>
-      <a href="https://www.symetri.com/plm">www.symetri.com/plm</a>
+      <a class="link" href="https://www.symetri.com/plm">www.symetri.com/plm</a>
       <p class="category">Agrob Buchtal GmbH</p>
       <div class="text-box">
         <p class="description">I'm a paragraph. Click here to add your
@@ -24,9 +24,9 @@
           you can start adding your own content
           and make changes to the font...</p>
       </div>
-      <div class="divider"></div>
-      <p class="author">In Collaboration with Symetri</p>
-
+       <div class="divider">
+         <p class="author">In Collaboration with Symetri</p>
+       </div>
     </div>
   </div>
 </template>
@@ -44,8 +44,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 400px;
-    padding-bottom: 2em;
+    height: 500px;
     -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
     -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
     border-image: linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
@@ -63,8 +62,9 @@
     }
     .info-card
     {
+      position: relative;
       width: 40%;
-      padding: 1em 1em;
+      padding: 5em 1em 1em 1.5em;
       .category
       {
         margin-top: 1em;
@@ -73,19 +73,21 @@
       }
       .author
       {
-        margin: 0;
+        /*margin: 0;*/
         font-size: 0.8em;
         font-weight: 500;
         color: gray;
+        font-style: italic;
       }
       .description{
         font-size: 0.8em;
         color: gray;
       }
       .divider{
-        border: 0.5px solid gray;
-        margin-bottom: 1em;
-        margin-top: 1em;
+        border-top: 1px solid gray;
+        width: 70%;
+        position: absolute;
+        bottom: 0;
       }
       .text-box{
         height: 100px;
@@ -93,7 +95,8 @@
         overflow: auto;
       }
     }
-    a{
+    .link{
+      font-size: 0.75rem;
       text-decoration: none;
       margin-bottom: 1em;
     }
