@@ -9,13 +9,24 @@
         Zadar Hotel</h1>
       <a href="https://www.symetri.com/plm">www.symetri.com/plm</a>
       <p class="category">Agrob Buchtal GmbH</p>
-      <p class="description">I'm a paragraph. Click here to add your
-        own text and edit me. It’s easy. Just
-        click “Edit Text” or double click me and
-        you can start adding your own content
-        and make changes to the font...</p>
+      <div class="text-box">
+        <p class="description">I'm a paragraph. Click here to add your
+          own text and edit me. It’s easy. Just
+          click “Edit Text” or double click me and
+          you can start adding your own content
+          and make changes to the font... I'm a paragraph. Click here to add your
+          own text and edit me. It’s easy. Just
+          click “Edit Text” or double click me and
+          you can start adding your own content
+          and make changes to the font...I'm a paragraph. Click here to add your
+          own text and edit me. It’s easy. Just
+          click “Edit Text” or double click me and
+          you can start adding your own content
+          and make changes to the font...</p>
+      </div>
       <div class="divider"></div>
       <p class="author">In Collaboration with Symetri</p>
+
     </div>
   </div>
 </template>
@@ -35,8 +46,6 @@
     width: 100%;
     height: 400px;
     padding-bottom: 2em;
-    border-width: 0 0 2px 0;
-    border-style: solid;
     -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
     -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
     border-image: linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
@@ -58,7 +67,7 @@
       padding: 1em 1em;
       .category
       {
-        margin: 0;
+        margin-top: 1em;
         font-size: 0.75rem;
         font-weight: 300;
       }
@@ -75,6 +84,12 @@
       }
       .divider{
         border: 0.5px solid gray;
+        margin-bottom: 1em;
+      }
+      .text-box{
+        height: 100px;
+        width: 100%;
+        overflow: auto;
       }
     }
     a{
