@@ -97,7 +97,7 @@
         bottom: 0;
       }
       .text-box{
-        height: 100px;
+        height: 200px;
         width: 100%;
         overflow: auto;
       }

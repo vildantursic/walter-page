@@ -69,7 +69,7 @@
         text-align: center;
         font-size: 38px;
         font-weight: 700;
-        background-color: #eee;
+        background-color: #ffffff;
         overflow: hidden;
         img {
           height: 100%;
@@ -83,14 +83,13 @@
     }
   }
   .my-swiper-thumb {
-    height: 200px;
+    height: 100px;
+    margin-top: 1em;
 
     .swiper-wrapper {
       .swiper-slide {
         text-align: center;
-        font-size: 38px;
-        font-weight: 700;
-        background-color: #eee;
+        background-color: #ffffff;
         overflow: hidden;
         img {
           height: 100%;
