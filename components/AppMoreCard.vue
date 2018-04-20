@@ -1,13 +1,19 @@
 <template>
   <div class="more-card">
-      <div class="number">6000</div>
+      <div class="number">{{number}}</div>
       <div class="plus-more">
         <div class="plus">+</div>
         <div class="more-text">more</div>
       </div>
   </div>
 </template>
-
+<script>
+  export default {
+    props: ['number'],
+    components: {
+    }
+  }
+</script>
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
 

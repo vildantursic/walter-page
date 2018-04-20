@@ -4,7 +4,7 @@
     <AppFilter :filters="filters" :showDateFilter="false"></AppFilter>
     <div class="items">
       <AppCards v-if="index < items.length - 1" v-for="(item, index) of items" :key="index" :item="item"/>
-      <AppMoreCard />
+      <AppMoreCard :number="6000"/>
     </div>
   </section>
 </template>
