@@ -7,7 +7,9 @@
       <AppPartner v-for="(item, index) of [1,2]" :key="index"/>
     </section>
     <section id="clients" class="clients">
-      <AppClient v-for="(item, index) of Array(60)" :key="index"/>
+      <div class="clients-content">
+        <AppClient v-for="(item, index) of Array(50)" :key="index"/>
+      </div>
     </section>
     <section id="contact" class="contact">
       <AppMap/>
@@ -50,9 +52,12 @@
 
   .clients {
     height: 100vh;
-    display: flex;
-    align-items: center;
-    @include grid-items(10px, 10px, 10, 5);
+
+    .clients-content {
+      display: flex;
+      align-items: center;
+      @include grid-items(20px, 50px, 10, 5);
+    }
   }
 
   .contact {
