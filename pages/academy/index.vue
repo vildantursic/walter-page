@@ -3,7 +3,7 @@
     <AppPageTitle :supertitle="'All about BIM'" :title="'BIM Academy'" :subtitle="'I\'m a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click meand you can start adding your own content and make changes to the font. '" ></AppPageTitle>
     <AppFilter :filters="filters" :filterActive="2" :showDateFilter="true" :monthActive="2"></AppFilter>
     <div class="items">
-      <AppCards v-if="index < items.length - 1" v-for="(item, index) of items" :key="index" :item="item"/>
+      <AppCards v-if="index < items.length" v-for="(item, index) of items" :key="index" :item="item"/>
     </div>
   </section>
 </template>
