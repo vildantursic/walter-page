@@ -29,7 +29,7 @@
   width: 100%;
   max-height: 400px;
   overflow: hidden;
-  padding-bottom: 2em;
+  padding: 0 2em 2em 2em;
 
   border-width: 0 0 3px 0;
   border-style: solid;
@@ -50,21 +50,4 @@
      width: 100%;
    }
  }
-
- .info-card {
-   height: 60%;
-
-   .title{
-     margin-bottom: 0;
-     font-size: 1.5rem;
-   }
-   .about{
-     color: grey;
-     font-size: 0.875rem;
-   }
-   .italic{
-     font-style: italic;
-   }
- }
-
 </style>
