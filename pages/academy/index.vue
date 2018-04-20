@@ -5,6 +5,7 @@
     <div class="items">
       <AppCards v-if="index < items.length" v-for="(item, index) of items" :key="index" :item="item"/>
     </div>
+    <AppMoreCard />
   </section>
 </template>
 
@@ -12,6 +13,7 @@
   import AppFilter from '~/components/AppFilter'
   import AppCards from '~/components/AppCards'
   import AppPageTitle from '~/components/AppPageTitle'
+  import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
 
   export default {
@@ -29,7 +31,8 @@
     components: {
       AppFilter,
       AppPageTitle,
-      AppCards
+      AppCards,
+      AppMoreCard
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/scholarships').then(function (response) {

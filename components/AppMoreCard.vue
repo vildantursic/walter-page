@@ -1,30 +1,43 @@
 <template>
-  <div class="more">
-    <h1>6000 <span>+</span></h1>
-    <h4>more</h4>
+  <div class="more-card">
+      <div class="number">6000</div>
+      <div class="plus-more">
+        <div class="plus">+</div>
+        <div class="more-text">more</div>
+      </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
 
-  .more {
+  .more-card {
     text-align: right;
     display: flex;
-    align-items: flex-end;
+    align-items: baseline;
     justify-content: flex-end;
-    flex-direction: column;
-
-    h1 {
+    flex-direction: row;
+    .number {
       font-size: 4em;
+      font-weight: bold;
       margin: 0;
-
-      span {
-      }
     }
-    h4 {
-      margin: 0;
-      color: $main-color;
+    .plus-more
+    {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin-left: 10px;
+      .plus
+      {
+        font-size: 4em;
+        font-weight: bold;
+      }
+      .more-text {
+        color: $main-color;
+        font-size: 1.5em;
+        font-weight: bold;
+      }
     }
   }
 </style>
