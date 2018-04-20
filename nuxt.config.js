@@ -39,13 +39,14 @@ module.exports = {
     ]
   },
   css: [
-    '@/assets/styles/main.scss',
+    'animate.css/animate.min.css',
+    'swiper/dist/css/swiper.css',
     '@/assets/styles/variables.scss',
     '@/assets/styles/mixins.scss',
-    'animate.css/animate.min.css'
-
+    '@/assets/styles/main.scss',
   ],
   plugins: [
-    { src: '@/plugins/scroll-reveal.js', ssr: false }
+    {src: '@/plugins/scroll-reveal.js', ssr: false},
+    {src: '@/plugins/swiper.js', ssr: false}
   ]
 }
