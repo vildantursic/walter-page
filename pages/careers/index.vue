@@ -5,6 +5,9 @@
     <div class="items">
       <AppPosition v-for="(test, index) of items" :key="index"/>
     </div>
+    <div class="items-bellow">
+      <AppPosition/>
+    </div>
   </section>
 </template>
 
@@ -46,6 +49,16 @@
 
   .items {
     @include grid-items(0px, 20px, 3, 1);
+    border-width: 0 0 4px 0;
+    border-style: solid;
+    -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #cfbb22 100%);
+    -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #cfbb22 100%);
+    border-image: linear-gradient(45deg, #405dce 0%, #cfbb22 100%);
+    border-image-slice: 1;
+  }
+  .items-bellow
+  {
+    @include grid-items(0px, 20px, 1, 1);
     border-width: 0 0 4px 0;
     border-style: solid;
     -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #cfbb22 100%);

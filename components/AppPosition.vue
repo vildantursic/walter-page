@@ -18,7 +18,10 @@
           <a href="#"><i class="fas fa-envelope"></i></a>
           <a href="#"><i class="fas fa-paperclip"></i></a>
         </div>
-        <h1><span >+</span>Read <span>More</span></h1>
+        <div class="more-container">
+          <div class="plus">+</div>
+          <div class="read"> Read <span class="more">More</span></div>
+        </div>
       </div>
     </div>
 </template>
@@ -36,7 +39,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 400px;
+    max-height: 450px;
     padding-bottom: 2em;
     .info-card
     {
@@ -73,12 +76,35 @@
         font-size: 1.2em;
         font-weight: 700;
       }
+      .more-container
+      {
+        float: right;
+        display: flex;
+        align-items: center;
+        padding-top: 10px;
+        .read
+        {
+          font-size: 1.5em;
+          font-weight: bold;
+          letter-spacing: 1px;
+          .more
+          {
+            color: blue;
+          }
+        }
+        .plus
+        {
+          font-size: 2.5em;
+          font-weight: bold;
+          padding: 0 15px;
+        }
+      }
     }
   }
   .fab ,.fas{
-    padding: 5px 5px;
-    font-size: 20px;
-    width: 30px;
+    padding: 5px 20px 5px 0px;
+    font-size: 25px;
+    width: 20px;
     text-align: center;
     text-decoration: none;
   }
@@ -110,9 +136,5 @@
   {
     background: #ffffff;
     color: black;
-  }
-  .social
-  {
-
   }
 </style>
