@@ -4,6 +4,7 @@
     <AppFilter :filters="filters" :filterActive="2" :showDateFilter="true" :monthActive="2"></AppFilter>
     <div class="items">
       <AppNews v-for="(test, index) of items" :key="index"/>
+      <AppContactBox></AppContactBox>
     </div>
   </section>
 </template>
@@ -12,6 +13,7 @@
   import AppFilter from '~/components/AppFilter'
   import AppNews from '~/components/AppNews'
   import AppPageTitle from '~/components/AppPageTitle'
+  import AppContactBox from '~/components/AppContactBox'
   import axios from 'axios'
 
   export default {
@@ -29,7 +31,8 @@
     components: {
       AppFilter,
       AppNews,
-      AppPageTitle
+      AppPageTitle,
+      AppContactBox
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts').then(function (response) {
