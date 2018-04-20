@@ -1,7 +1,9 @@
 <template>
   <section>
     <header>
-      <img class="logo" src="~/static/images/walter-logo.png" alt="">
+      <nuxt-link style="margin-left: 10%;" :to="{name: 'index'}">
+        <img class="logo" src="~/static/images/walter-logo.png" alt="">
+      </nuxt-link>
       <div class="navigation-bar">
         <ul>
           <li><nuxt-link :to="{name: 'index'}">Services</nuxt-link></li>
@@ -36,33 +38,37 @@
     top: 0;
     left: 0;
     z-index: 10;
-  }
-  .logo{
-    height: 3em;
-    margin-left: 10%;
-  }
-  .navigation-bar{
-    display: flex;
-    align-items: center;
-    height: 4em;
-    margin-right: 10%;
-  }
-  ul {
-    -webkit-padding-start: 10px;
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-  }
-  li{
-  }
-  a{
-    text-decoration: none;
-    color: #FFFFFF;
-    padding: 1em 0.5em;
-  }
 
-  .nuxt-link-exact-active {
-    color: $main-color;
+    .logo {
+      height: 3em;
+    }
+
+    .navigation-bar {
+      display: flex;
+      align-items: center;
+      height: 4em;
+      margin-right: 10%;
+
+      ul {
+        -webkit-padding-start: 10px;
+        list-style: none;
+        display: flex;
+        justify-content: space-around;
+
+        li {
+
+          a {
+            text-decoration: none;
+            color: #FFFFFF;
+            padding: 1em 0.5em;
+          }
+
+          .nuxt-link-exact-active {
+            color: $main-color;
+          }
+        }
+      }
+    }
   }
 
 </style>

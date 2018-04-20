@@ -1,5 +1,11 @@
 <template>
   <section>
+    <section id="statistics" class="statistics">
+      <AppNumber v-for="(item, index) of [1,2,3,4,5,6]" :key="index"/>
+    </section>
+    <section id="history" class="history">
+      <h1>HISTORY</h1>
+    </section>
     <section id="board-members" class="board-members">
       <AppBoardMember v-for="(item, index) of [1,2,3]" :key="index"/>
     </section>
@@ -22,19 +28,35 @@
   import AppPartner from "~/components/AppPartner"
   import AppClient from "~/components/AppClient"
   import AppMap from "~/components/AppMap"
+  import AppNumber from "~/components/AppNumber"
 
   export default {
     components: {
       AppBoardMember,
       AppPartner,
       AppClient,
-      AppMap
+      AppMap,
+      AppNumber
     }
   }
 </script>
 
 <style lang="scss" scoped>
   @import "../../assets/styles/mixins";
+
+  .statistics {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    @include grid-items(10%, 30px, 3, 2);
+  }
+
+  .history {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    @include grid-items(10%, 30px, 3, 2);
+  }
 
   .board-members {
     height: 100vh;
