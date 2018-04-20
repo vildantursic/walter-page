@@ -18,6 +18,7 @@
           <a href="#"><i class="fas fa-envelope"></i></a>
           <a href="#"><i class="fas fa-paperclip"></i></a>
         </div>
+        <h1><span >+</span>Read <span>More</span></h1>
       </div>
     </div>
 </template>
@@ -112,8 +113,6 @@
   }
   .social
   {
-    position: absolute;
-    bottom:0%;
-    left: 0%;
+
   }
 </style>
