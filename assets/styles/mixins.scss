@@ -1,4 +1,54 @@
-@mixin flex {
-  display: -webkit-flex;
-  display: flex;
+@mixin spacing-l($type, $size, $varible) {
+  @if $type == m {
+    margin-left: $size + $varible;
+  } @else {
+    padding-left: $size + $varible;
+  }
+}
+@mixin spacing-r($type, $size, $varible) {
+  @if $type == m {
+    margin-right: $size + $varible;
+  } @else {
+    padding-right: $size + $varible;
+  }
+}
+
+@mixin default-spacing($size){
+
+}
+
+@mixin create-main-grid($size){
+  display: grid;
+  grid-template-columns: 15% auto 15%;
+  grid-template-rows: 60px auto 100px;
+  grid-template-areas: "header header header header header header"
+                       "space main main main main space"
+                       "footer footer footer footer footer footer";
+
+  @media (max-width: 700px) {
+    grid-template-columns: 5% auto 5%;
+  }
+}
+
+@mixin grid-items($gap-col, $gap-row, $column-size, $column-size-md){
+  display: grid;
+  grid-template-columns: repeat($column-size, 1fr);
+  grid-template-rows: auto;
+  grid-column-gap: $gap-col;
+  grid-row-gap: $gap-row;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat($column-size-md, 1fr);
+  }
+  @media (max-width: 700px) {
+    grid-template-columns: 100%;
+  }
+}
+@mixin modal-grid($size){
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: auto;
+  grid-template-areas: "left right"
+                       "slider right";
+
 }

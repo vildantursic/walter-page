@@ -1,55 +1,68 @@
 <template>
   <section>
-      <img class="logo" src="~/assets/images/walter-logo.png" alt="">
-    <div class="navigation-bar">
+    <header>
+      <img class="logo" src="~/static/images/walter-logo.png" alt="">
+      <div class="navigation-bar">
         <ul>
-          <li><a href="">Our Team</a></li>
-          <li><a href="">Cases</a></li>
-          <li><a href="">About us</a></li>
-          <li><a href="">Contact us</a></li>
-          <li><a href="">Carrier</a></li>
-          <li><a href="">Home</a></li>
+          <li><router-link :to="{name: 'index'}">Services</router-link></li>
+          <li><router-link :to="{name: 'cases'}">Cases</router-link></li>
+          <li><router-link :to="{name: 'about'}">About us</router-link></li>
+          <li><router-link :to="{name: 'index'}">Contact us</router-link></li>
+          <li><router-link :to="{name: 'careers'}">Careers</router-link></li>
+          <li><router-link :to="{name: 'news'}">News</router-link></li>
         </ul>
       </div>
+    </header>
   </section>
 </template>
 <script>
+
   export default {
     components: {
     }
   }
 </script>
 
-<style>
-  section{
+<style lang="scss" scoped>
+  @import "../assets/styles/variables";
+
+  header {
+    width: 100%;
+    background-color: rgba(#47494e, 0.5);
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
   }
   .logo{
-    position: absolute;
     height: 3em;
-    padding-left: 10%;
+    margin-left: 10%;
   }
   .navigation-bar{
     display: flex;
     align-items: center;
     height: 4em;
-    width: 100%;
-    background-color: #47494e;
+    margin-right: 10%;
   }
   ul {
-    display: flex;
-    /*float: right;*/
-  }
-  li{
+    -webkit-padding-start: 10px;
+    list-style: none;
     display: flex;
     justify-content: space-around;
-    float: right;
+  }
+  li{
   }
   a{
     text-decoration: none;
     color: #FFFFFF;
     padding: 1em 0.5em;
+  }
+
+  .nuxt-link-exact-active {
+    color: $main-color;
   }
 
 </style>

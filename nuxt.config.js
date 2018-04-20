@@ -3,7 +3,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'walter-page',
+    title: 'Walter',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -16,7 +16,7 @@ module.exports = {
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#3B8070' },
+  loading: '~/components/loading.vue',
   /*
   ** Build configuration
   */
@@ -33,9 +33,20 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+    vendor: [
+      'axios'
+    ]
   },
   css: [
-    '@/assets/styles/main.scss'
+    'animate.css/animate.min.css',
+    'swiper/dist/css/swiper.css',
+    '@/assets/styles/variables.scss',
+    '@/assets/styles/mixins.scss',
+    '@/assets/styles/main.scss',
+  ],
+  plugins: [
+    {src: '@/plugins/scroll-reveal.js', ssr: false},
+    {src: '@/plugins/swiper.js', ssr: false}
   ]
 }

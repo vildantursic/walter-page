@@ -1,3 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://use.fontawesome.com/releases/v5.0.10/css/all.css');
+
 html, body {
   margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+* {
+  transition: ease .3s;
+}
+h1, h2, h3, h4, h5, h6, p {
+  opacity: 0.80;
+}
+
+.page-enter-active, .page-leave-active {
+  transition: opacity .3s;
+}
+.page-enter, .page-leave-to {
+  opacity: 0;
+}
+
+::-webkit-scrollbar-track
+{
+  background-color: transparent;
+}
+::-webkit-scrollbar
+{
+  width: 5px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb
+{
+  background-color: #469fc1;
 }
