@@ -4,12 +4,11 @@
       <img class="logo" src="~/static/images/walter-logo.png" alt="">
       <div class="navigation-bar">
         <ul>
-          <li><router-link :to="{name: 'index'}">Services</router-link></li>
-          <li><router-link :to="{name: 'cases'}">Cases</router-link></li>
-          <li><router-link :to="{name: 'about'}">About us</router-link></li>
-          <li><router-link :to="{name: 'index'}">Contact us</router-link></li>
-          <li><router-link :to="{name: 'careers'}">Careers</router-link></li>
-          <li><router-link :to="{name: 'news'}">News</router-link></li>
+          <li><nuxt-link :to="{name: 'index'}">Services</nuxt-link></li>
+          <li><nuxt-link :to="{name: 'cases'}">Cases</nuxt-link></li>
+          <li><nuxt-link :to="{name: 'about'}">About us</nuxt-link></li>
+          <li><nuxt-link :to="{name: 'careers'}">Careers</nuxt-link></li>
+          <li><nuxt-link :to="{name: 'news'}">News</nuxt-link></li>
         </ul>
       </div>
     </header>
@@ -28,6 +27,7 @@
 
   header {
     width: 100%;
+    height: 80px;
     background-color: rgba(#47494e, 0.5);
     display: flex;
     align-items: center;

@@ -32,7 +32,7 @@
   overflow: hidden;
 
   .image {
-    height: 250px;
+    height: 200px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -45,13 +45,13 @@
   }
 
   .info {
-    padding: 0 2em 2em 2em;
+    padding: 0 2em 1em 2em;
   }
 
   .border {
     width: 100%;
     height: 3px;
-    background-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
+    background-image: linear-gradient(90deg, #0093c8 0%, #faaf40 100%);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;  /* <- here it is */
