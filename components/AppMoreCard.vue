@@ -1,19 +1,26 @@
 <template>
   <div class="more-card">
       <div class="number">{{number}}</div>
-      <div class="plus-more">
+      <div class="plus-more"  @click="showMore()">
         <div class="plus">+</div>
         <div class="more-text">more</div>
       </div>
   </div>
 </template>
+
 <script>
   export default {
     props: ['number'],
     components: {
+    },
+    methods: {
+      showMore() {
+        this.$emit('onShowMore')
+      }
     }
   }
 </script>
+
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
 
@@ -28,14 +35,12 @@
       font-weight: bold;
       margin: 0;
     }
-    .plus-more
-    {
+    .plus-more {
       display: flex;
       align-items: center;
       flex-direction: column;
       margin-left: 10px;
-      .plus
-      {
+      .plus {
         font-size: 4em;
         font-weight: bold;
       }

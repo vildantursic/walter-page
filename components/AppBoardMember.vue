@@ -29,20 +29,19 @@
 <script>
   export default {
     props: ['item'],
-    components: {
-    }
+    components: {}
   }
 </script>
 
 <style lang="scss" scoped="">
-  .card{
+  .card {
     display: flex;
     flex-direction: column;
     width: 100%;
     max-height: 400px;
     overflow: hidden;
 
-    .card-img{
+    .card-img {
       width: 100%;
       height: 40%;
       overflow: hidden;
@@ -69,8 +68,7 @@
       display: grid;
       grid-template-columns: 25% 75%;
       grid-template-rows: 2em 2em;
-      grid-template-areas: "linkedin phone"
-                           "linkedin email";
+      grid-template-areas: "linkedin phone" "linkedin email";
 
       div {
         display: flex;
@@ -93,8 +91,7 @@
         grid-area: email;
       }
 
-
-      .fab ,.fas{
+      .fab, .fas {
         padding-right: 10px;
         font-size: 1em;
         width: 30px;
