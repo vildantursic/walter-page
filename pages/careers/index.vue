@@ -8,7 +8,7 @@
 
   export default {
     asyncData({}) {
-      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/services').then(function (response) {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers').then(function (response) {
         return { items: response.data }
       }).catch(function (error) {
         console.log(error);

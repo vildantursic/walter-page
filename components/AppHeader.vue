@@ -4,12 +4,12 @@
       <img class="logo" src="~/static/images/walter-logo.png" alt="">
       <div class="navigation-bar">
         <ul>
-          <li><a href="">Services</a></li>
-          <li><a href="">Cases</a></li>
-          <li><a href="">About us</a></li>
-          <li><a href="">Contact us</a></li>
-          <li><a href="">Careers</a></li>
-          <li><a href="">News</a></li>
+          <li><nuxt-link to="/">Services</nuxt-link></li>
+          <li><nuxt-link to="/cases">Cases</nuxt-link></li>
+          <li><nuxt-link to="/about">About us</nuxt-link></li>
+          <li><nuxt-link to="/">Contact US</nuxt-link></li>
+          <li><nuxt-link to="/careers">Careers</nuxt-link></li>
+          <li><nuxt-link to="/news">News</nuxt-link></li>
         </ul>
       </div>
     </header>
