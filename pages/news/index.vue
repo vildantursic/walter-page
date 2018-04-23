@@ -3,7 +3,7 @@
     <AppPageTitle :supertitle="'All about BIM'" :title="'Walter Monthly'" :subtitle="'\'I\'m a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click meand you can start adding your own content and make changes to the font. '" ></AppPageTitle>
     <AppFilter :filters="filters" :filterActive="2" :showDateFilter="true" :monthActive="2"></AppFilter>
     <div class="items">
-      <AppNews :imageSource="getImageSource(item)" v-for="(item, index) of items" :key="index"/>
+      <AppNews v-for="(item, index) of items"  :item="item" :key="index"/>
     </div>
   </section>
 </template>
@@ -39,7 +39,7 @@
       }
     },
     asyncData({}) {
-      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts').then(function (response) {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then(function (response) {
         return { items: response.data }
       }).catch(function (error) {
         console.log(error);

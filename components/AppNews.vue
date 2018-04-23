@@ -1,19 +1,15 @@
 <template>
     <div class="card animated fadeIn" v-scroll-reveal.reset>
       <div class="card-img-container">
-        <img class="card-img" src="imageSource" alt="">
+        <img class="card-img" v-if="item._embedded !== undefined" alt="">
+        <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
       </div>
       <div class="info-card">
-        <p class="category">BIM Architecture</p>
-        <p class="author">John Doe, June 20 at 10:05 PM</p>
-        <h1 class="title">I'm a title. Click
-          here to edit me.</h1>
-        <p>I'm a paragraph. Click here to add your
-          own text and edit me. It’s easy. Just
-          click “Edit Text” or double click me and
-          you can start adding your own content
-          and make changes to the font...</p>
-        <p class="author">John Doe</p>
+        <p class="category"></p>
+        <p class="author">{{ item.author }} + , {{item.date}}</p>
+        <h1 class="title">{{ item.title.rendered | truncate(25)}}</h1>
+        <div v-html="item.content.rendered"></div>
+        <p class="author">{{ item.author }}</p>
         <div class="social">
           <!-- Add font awesome icons -->
           <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -28,7 +24,7 @@
 
 <script>
   export default {
-    props: ['imageSource'],
+    props: ['item'],
     components: {
     }
   }
