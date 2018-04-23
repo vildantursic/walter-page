@@ -4,7 +4,7 @@
       <img src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
-      <h4 class="title">Test Service</h4>
+      <h4 class="title">{{item.title.rendered}}</h4>
     </div>
 
     <div class="border"></div>
@@ -28,7 +28,6 @@
   .card{
     display: flex;
     flex-direction: column;
-    width: 100%;
     overflow: hidden;
     background: rgba(#393c3d, 0.3);
     border-radius: 0.2em;

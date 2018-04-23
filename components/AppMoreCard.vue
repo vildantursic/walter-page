@@ -1,12 +1,13 @@
 <template>
   <div class="more">
-    <h1>6000 <span>+</span></h1>
+    <h1>{{numberOfItems}} <span>+</span></h1>
     <h4 @click="showMore()">more</h4>
   </div>
 </template>
 
 <script>
   export default {
+    props: ['numberOfItems'],
     methods: {
       showMore() {
         this.$emit('onShowMore')

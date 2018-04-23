@@ -27,7 +27,6 @@
 .card{
   display: flex;
   flex-direction: column;
-  width: 100%;
   max-height: 500px;
   overflow: hidden;
 

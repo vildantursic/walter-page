@@ -1,28 +1,28 @@
 <template>
   <section>
-    <section id="statistics" class="statistics-section">
+    <section id="statistics" class="statistics-section padded-content">
       <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem blanditiis commodi deserunt dolores, eaque ex illum itaque libero magnam, nesciunt porro quod repellendus suscipit, totam ullam? Asperiores enim facere similique?</h2>
 
       <div class="statistics">
         <AppNumber v-for="(item, index) of [1,2,3,4,5,6]" :key="index"/>
       </div>
     </section>
-    <section id="history" class="history-section">
+    <section id="history" class="history-section padded-content">
       <div class="history">
         <h1>HISTORY</h1>
       </div>
     </section>
-    <section id="board-members" class="board-members-section">
+    <section id="board-members" class="board-members-section padded-content">
       <div class="board-members">
         <AppBoardMember v-for="(item, index) of [1,2,3]" :key="index"/>
       </div>
     </section>
-    <section id="partners" class="partners-section">
+    <section id="partners" class="partners-section padded-content">
       <div class="partners">
         <AppPartner v-for="(item, index) of [1,2]" :key="index"/>
       </div>
     </section>
-    <section id="clients" class="clients-section">
+    <section id="clients" class="clients-section padded-content">
       <div class="clients">
         <AppClient v-for="(item, index) of Array(50)" :key="index"/>
       </div>
@@ -84,7 +84,7 @@
 
     .board-members {
       width: 100%;
-      @include grid-items(10%, 30px, 3, 2);
+      @include grid-items(10%, 30px, 3, 3);
     }
   }
 
