@@ -1,11 +1,17 @@
 <template>
   <div class="card animated fadeIn" v-scroll-reveal.reset>
     <div class="card-img">
-      <img src="~/static/images/arch.jpg" alt="">
+      <img src="~/static/images/Bimobject-log.png" alt="">
     </div>
     <div class="info-card">
       <div class="about">
-        <p>The 5-star Hyatt Regency Zadar Maraska is the first hotel in Croatia under the Hyatt brand and is set to open in the spring of 2019...</p>
+        <p>With over 300 skilled employees and 100,000 daily users across Northern Europe,
+          we provide our clients with expert guidance covering everything from 3D modelling and simulation to Product Lifecycle Management,
+          Building Information Modelling and Facility Management.
+          Many of our solutions follow the principles of Lean,
+          and the bene?ts include lower development and production costs,
+          a reduction in materials used and shorter time to market,
+          not to mention leaving more room for creativity and better end results.</p>
       </div>
     </div>
   </div>
@@ -23,9 +29,11 @@
   .card{
     display: flex;
     flex-direction: column;
-    width: 100%;
     max-height: 400px;
     overflow: hidden;
+    p{
+      font-size: 0.875rem;
+    }
   }
   .card-img{
     width: 100%;

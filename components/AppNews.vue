@@ -53,7 +53,6 @@
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    width: 100%;
     height: 400px;
     padding-bottom: 2em;
     border-width: 0 0 3px 0;

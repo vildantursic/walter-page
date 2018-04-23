@@ -5,20 +5,22 @@
     </div>
     <div class="info-card">
       <div class="about">
-        <h3>Samir Balicevac</h3>
-        <p>Business and Product Development</p>
+        <div class="member">
+          <h3>Samir Balicevac</h3>
+          <p>Business and Product Development</p>
+        </div>
         <div class="divider"></div>
         <div class="social">
           <div class="linkedin">
-            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a class="link" href="#"><i class="fab fa-linkedin"></i></a>
           </div>
           <div class="phone">
             <i class="fas fa-phone"></i>
-            <a href="">+387 66 233 000</a>
+            <a class="link" href="">+387 66 233 000</a>
           </div>
           <div class="email">
             <i class="fas fa-envelope"></i>
-            <a href="mailto:samir.balicevac@mail.com">samir.balicevac@mail.com</a>
+            <a class="link" href="mailto:samir.balicevac@mail.com">samir.balicevac@mail.com</a>
           </div>
         </div>
       </div>
@@ -37,7 +39,6 @@
   .card {
     display: flex;
     flex-direction: column;
-    width: 100%;
     max-height: 400px;
     overflow: hidden;
 
@@ -55,7 +56,17 @@
     }
 
     .about {
+      h3{
+        margin-bottom: 0;
+      }
+      p{
+        margin-top: 0;
+        font-size: 0.75rem;
 
+      }
+    }
+    .member{
+      margin: 0 0 0 1em;
     }
 
     .divider {
@@ -81,19 +92,25 @@
 
         .fa-linkedin {
           width: 100%;
-          font-size: 3em;
+          font-size: 3.5em;
         }
       }
       .phone {
+        padding-top: 0.5em !important;
         grid-area: phone;
       }
       .email {
+        padding-bottom: 0.5em !important;
         grid-area: email;
       }
+      .link {
+        text-decoration: none;
+        color: #2e2f30;
+        font-size: 0.75rem;
+      }
 
-      .fab, .fas {
-        padding-right: 10px;
-        font-size: 1em;
+      .fab ,.fas{
+        font-size: 0.75rem;
         width: 30px;
         text-align: center;
         text-decoration: none;
@@ -102,15 +119,15 @@
       }
       .fa-linkedin {
         background: #ffffff;
-        color: grey;
+        color: #2e2f30;
       }
       .fa-phone {
         background: #ffffff;
-        color: grey;
+        color: #2e2f30;
       }
       .fa-envelope {
         background: #ffffff;
-        color: grey;
+        color: #2e2f30;
       }
     }
   }

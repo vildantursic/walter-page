@@ -1,10 +1,10 @@
 <template>
   <section class="padded-content footing-space">
-    <AppPageTitle></AppPageTitle>
+    <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
     <AppFilter :filters="filters" :showDateFilter="false"></AppFilter>
     <div class="items">
       <AppCards v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item"/>
-      <AppMoreCard :number="itemsToShow" v-if="items.length > itemsToShow" @onShowMore="() => itemsToShow += itemsToShow" />
+      <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
     </div>
   </section>
 </template>
@@ -26,6 +26,9 @@
     data() {
       return {
         itemsToShow: 8,
+        page: {
+          acf: {}
+        },
         items: [],
         filters: [
           { id: 1, name: 'All' },
@@ -36,12 +39,25 @@
         ]
       }
     },
+    created () {
+      this.getItems()
+    },
     asyncData({}) {
-      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases?_embed').then(function (response) {
-        return { items: response.data }
-      }).catch(function (error) {
-        console.log(error);
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/60').then((response) => {
+        return { page: response.data }
+      }).catch((error) => {
+        console.log(error)
       });
+
+    },
+    methods: {
+      getItems() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases?_embed').then((response) => {
+          this.items = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      }
     }
   }
 </script>

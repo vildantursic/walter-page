@@ -7,7 +7,6 @@
     <div class="main">
       <nuxt/>
     </div>
-
   </div>
 </template>
 

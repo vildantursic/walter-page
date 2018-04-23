@@ -54,7 +54,6 @@
   .card{
     display: flex;
     flex-direction: row;
-    width: 100%;
     height: 500px;
     -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
     -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
