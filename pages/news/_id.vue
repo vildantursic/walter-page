@@ -13,8 +13,8 @@
     </div>
     <div class="item animated fadeIn" v-scroll-reveal.reset>
       <div class="img-header">
-        <p class="category">BIM Architecture</p>
-        <p class="author">John Doe, June 20 at 10:05 PM</p>
+        <p class="category">{{page.categories}}</p>
+        <p class="author">{{computedAuthor}}</p>
       </div>
       <div class="img-container">
         <img class="img" src="~/static/images/arch.jpg" alt="">
@@ -80,6 +80,19 @@
         ]
       }
     },
+  computed: {
+    // a computed getter
+    computedAuthor: function () {
+      // `this` points to the vm instance
+      var computedString = ''
+      computedString = this.page.author + ', '
+      var date = this.page.date.split('T')[0]
+      var time = this.page.date.split('T')[1]
+      computedString += date + ' at ' + time
+      return computedString
+    }
+  },
+
     components: {
       AppFilter,
       AppNews,
