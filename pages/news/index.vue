@@ -5,6 +5,7 @@
     <div class="items">
       <AppNews v-for="(test, index) of items" :key="index"/>
       <AppContactBox></AppContactBox>
+      <AppContactBox></AppContactBox>
     </div>
   </section>
 </template>
