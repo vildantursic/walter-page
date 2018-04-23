@@ -37,7 +37,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 2em;
+    padding: 0 1em;
 
     img {
       width: 100%;
@@ -45,7 +45,7 @@
   }
 
   .info {
-    padding: 0 2em 1em 2em;
+    padding: 0 1em 1em 1em;
   }
 
   .border {
