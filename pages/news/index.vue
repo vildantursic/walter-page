@@ -3,7 +3,7 @@
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
     <AppFilter :filters="filters" :filterActive="2" :showDateFilter="true" :monthActive="2"></AppFilter>
     <div class="items">
-      <AppNews v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item"/>
+      <AppNews v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
       <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
     </div>
   </section>
@@ -21,6 +21,7 @@
     data() {
       return {
         itemsToShow: 3,
+        id: null,
         page: {
           acf: {}
         },
@@ -42,8 +43,18 @@
       AppMoreCard
     },
     methods: {
+      goToPost (id) {
+        this.$router.push({ path: `news/${id}`})
+      },
       getImageSource(item) {
         console.log(item.content )
+      },
+      getItems() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
+          this.items = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
       }
     },
     created () {
@@ -55,15 +66,6 @@
       }).catch((error) => {
         console.log(error)
       });
-    },
-    methods: {
-      getItems() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
-          this.items = response.data
-        }).catch((error) => {
-          console.log(error);
-        });
-      }
     }
   }
 </script>

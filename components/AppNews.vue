@@ -1,5 +1,5 @@
 <template>
-    <div class="card animated fadeIn" v-scroll-reveal.reset>
+    <div class="card animated fadeIn" v-scroll-reveal.reset v-on:click="clickPost()">
       <div class="card-img-container">
         <img class="card-img" v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
         <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
@@ -42,7 +42,10 @@
       }
     },
     methods: {
+      clickPost () {
+        this.$emit('onPostClicked')
       }
+    }
   }
 </script>
 
