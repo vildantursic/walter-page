@@ -1,7 +1,7 @@
 <template>
     <div class="card animated fadeIn" v-scroll-reveal.reset>
       <div class="card-img-container">
-        <img class="card-img" v-if="item._embedded !== undefined" alt="">
+        <img class="card-img" v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
         <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
       </div>
       <div class="info-card">
@@ -26,8 +26,8 @@
   export default {
     props: ['item'],
     components: {
+    },
     }
-  }
 </script>
 
 <style lang="scss" scoped>
