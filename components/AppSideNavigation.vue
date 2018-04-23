@@ -2,7 +2,7 @@
     <div>
       <ul v-if="links.length !== 0">
         <li v-for="(link, index) of links" :key="index">
-          <nuxt-link :to="{ name: 'services', params: { id: 1 }}">{{link.title.rendered}}</nuxt-link>
+          <nuxt-link :to="{ path: '/services/' + link.id }">{{link.title.rendered}}</nuxt-link>
         </li>
       </ul>
     </div>
