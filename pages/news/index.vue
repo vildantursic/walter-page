@@ -3,7 +3,7 @@
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
     <AppFilter :filters="filters" :filterActive="2" :showDateFilter="true" :monthActive="2"></AppFilter>
     <div class="items">
-      <AppNews v-for="(test, index) of items" :key="index"/>
+      <AppNews v-for="(item, index) of items"  :item="item" :key="index"/>
     </div>
   </section>
 </template>
@@ -12,6 +12,7 @@
   import AppFilter from '~/components/AppFilter'
   import AppNews from '~/components/AppNews'
   import AppPageTitle from '~/components/AppPageTitle'
+  import AppContactBox from '~/components/AppContactBox'
   import axios from 'axios'
 
   export default {
@@ -32,7 +33,13 @@
     components: {
       AppFilter,
       AppNews,
-      AppPageTitle
+      AppPageTitle,
+      AppContactBox
+    },
+    methods: {
+      getImageSource(item) {
+        console.log(item.content )
+      }
     },
     created () {
       this.getItems()

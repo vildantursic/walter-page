@@ -19,24 +19,31 @@
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
 
-  .more {
+  .more-card {
     text-align: right;
     display: flex;
-    align-items: flex-end;
+    align-items: baseline;
     justify-content: flex-end;
-    flex-direction: column;
-
-    h1 {
+    flex-direction: row;
+    .number {
       font-size: 4em;
+      font-weight: bold;
       margin: 0;
-
-      span {
-      }
     }
-    h4 {
-      margin: 0;
-      color: $main-color;
-      cursor: pointer;
+    .plus-more {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin-left: 10px;
+      .plus {
+        font-size: 4em;
+        font-weight: bold;
+      }
+      .more-text {
+        color: $main-color;
+        font-size: 1.5em;
+        font-weight: bold;
+      }
     }
   }
 </style>

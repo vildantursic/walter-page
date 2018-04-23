@@ -4,16 +4,6 @@
         <img class="card-img" src="~/static/images/bimacademy.jpg" alt="">
       </div>
       <div class="info-card">
-        <p class="category">BIM Architecture</p>
-        <p class="author">John Doe, June 20 at 10:05 PM</p>
-        <h1 class="title">I'm a title. Click
-          here to edit me.</h1>
-        <p>I'm a paragraph. Click here to add your
-          own text and edit me. It’s easy. Just
-          click “Edit Text” or double click me and
-          you can start adding your own content
-          and make changes to the font...</p>
-        <p class="author">John Doe</p>
         <div class="social">
           <!-- Add font awesome icons -->
           <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -21,6 +11,22 @@
           <a href="#"><i class="fab fa-twitter"></i></a>
           <a href="#"><i class="fas fa-envelope"></i></a>
           <a href="#"><i class="fas fa-paperclip"></i></a>
+        </div>
+        <div>
+        <h1 class="title">I'm a title. Click
+          here to edit me.</h1>
+        <p>I'm a paragraph. Click here to add your
+          own text and edit me. It’s easy. Just
+          click “Edit Text” or double click me and
+          you can start adding your own content
+          and make changes to the font...</p>
+        </div>
+        <div class="bottom-group">
+        <p class="published">Deadline: 15-04-2018</p>
+        <div class="more-container">
+          <div class="plus">+</div>
+          <div class="read"> Read <span class="more">more</span></div>
+        </div>
         </div>
       </div>
     </div>
@@ -50,7 +56,7 @@
     {
       overflow: hidden;
       display: flex;
-      justify-content: center;
+      justify-content: left;
       align-items: center;
       width: 45%;
       .card-img {
@@ -61,7 +67,14 @@
     {
       position: relative;
       width: 55%;
-      padding: 1em 1em;
+      padding: 0em 1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .social
+      {
+        align-self: flex-end;
+      }
       .category
       {
         margin: 0;
@@ -70,12 +83,34 @@
         color: blue;
         letter-spacing: 2px;
       }
-      .author
+      .bottom-group
       {
-        margin: 0;
-        font-size: 0.8em;
-        font-weight: 500;
-        color: gray;
+        .published
+        {
+          font-size: 0.8em;
+          font-weight: 500;
+          color: gray;
+        }
+        .more-container {
+          float: right;
+          display: flex;
+          align-items: center;
+          align-self: flex-end;
+          .read {
+            font-size: 1.5em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            .more {
+              color: blue;
+            }
+          }
+          .plus
+          {
+            font-size: 2.5em;
+            font-weight: bold;
+            padding: 0 15px;
+          }
+        }
       }
     }
   }
@@ -114,10 +149,5 @@
   {
     background: #ffffff;
     color: grey;
-  }
-  .social
-  {
-    position: absolute;
-    bottom:0%;
   }
 </style>

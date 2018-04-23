@@ -20,7 +20,7 @@
         </div>
         <div class="more-container">
           <div class="plus">+</div>
-          <div class="read"> Read <span class="more">More</span></div>
+          <div class="read"> Read <span class="more">more</span></div>
         </div>
       </div>
     </div>
