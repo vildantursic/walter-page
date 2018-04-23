@@ -23,6 +23,7 @@
         <section>
           <AppSingleService v-for="(item, index) of [1,2,3,4,5]" :key="index"/>
         </section>
+        <AppContactBox :name="'Dejan Vujicic'" :role="'Department manager'"></AppContactBox>
       </div>
     </div>
   </section>
@@ -30,10 +31,12 @@
 
 <script>
   import AppSingleService from '~/components/AppSingleService'
+  import AppContactBox from '~/components/AppContactBox'
 
   export default {
     components: {
-      AppSingleService
+      AppSingleService,
+      AppContactBox
     },
     methods: {
       goToService () {

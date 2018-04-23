@@ -28,6 +28,8 @@
 
 <style lang="scss" scoped>
   .card {
+    position: relative;
+    float: right;
     display: flex;
     flex-direction: row;
     align-items: center;

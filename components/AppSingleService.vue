@@ -6,7 +6,6 @@
     <div class="info">
       <h4 class="title">Test Service</h4>
     </div>
-
     <div class="border"></div>
   </div>
 </template>
