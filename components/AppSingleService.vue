@@ -30,12 +30,9 @@
     flex-direction: column;
     width: 100%;
     overflow: hidden;
-    background: rgba(#393c3d, 0.3);
-    border-radius: 0.2em;
-    cursor: pointer;
 
     .image {
-      height: 150px;
+      height: 100px;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -44,7 +41,6 @@
 
     .info {
       height: 50px;
-      background: #393c3d;
       display: flex;
       align-items: center;
       justify-content: center;
