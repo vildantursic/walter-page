@@ -35,7 +35,7 @@
     },
     methods: {
       getImageSource(item) {
-        console.log(item.content.rendered)
+        console.log(item.content.wp:attachment )
       }
     },
     asyncData({}) {
