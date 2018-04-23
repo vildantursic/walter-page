@@ -1,10 +1,10 @@
 <template>
-  <section>
+  <section class="padded-content footing-space">
     <AppPageTitle></AppPageTitle>
     <AppFilter :filters="filters" :showDateFilter="false"></AppFilter>
     <div class="items">
-      <AppCards v-if="index < items.length - 1" v-for="(item, index) of items" :key="index" :item="item"/>
-      <AppMoreCard />
+      <AppCards v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item"/>
+      <AppMoreCard v-if="items.length > itemsToShow" @onShowMore="() => itemsToShow += itemsToShow" />
     </div>
   </section>
 </template>
@@ -25,6 +25,7 @@
     },
     data() {
       return {
+        itemsToShow: 8,
         items: [],
         filters: [
           { id: 1, name: 'All' },
@@ -36,7 +37,7 @@
       }
     },
     asyncData({}) {
-      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases').then(function (response) {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases?_embed').then(function (response) {
         return { items: response.data }
       }).catch(function (error) {
         console.log(error);

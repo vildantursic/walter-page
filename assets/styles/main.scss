@@ -12,6 +12,12 @@ html, body {
 h1, h2, h3, h4, h5, h6, p {
   opacity: 0.80;
 }
+.padded-content {
+  margin: 0 15%;
+}
+.footing-space {
+  margin-bottom: 100px;
+}
 
 .page-enter-active, .page-leave-active {
   transition: opacity .3s;
