@@ -20,7 +20,7 @@
         </div>
         <div class="more-container">
           <div class="plus">+</div>
-          <div class="read"> Read <span class="more">More</span></div>
+          <div class="read"> Read <span class="more">more</span></div>
         </div>
       </div>
     </div>
@@ -34,11 +34,12 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/styles/variables";
+
   .card{
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    width: 100%;
     max-height: 450px;
     padding-bottom: 2em;
     .info-card
@@ -63,7 +64,7 @@
         margin: 1.5em 0;
         font-size: 1em;
         font-weight: 600;
-        color: blue;
+        color: $main-color;
         letter-spacing: 2px;
       }
       .data
@@ -89,7 +90,7 @@
           letter-spacing: 1px;
           .more
           {
-            color: blue;
+            color: $main-color;
           }
         }
         .plus

@@ -1,24 +1,67 @@
 <template>
-  <section>
-    <div>
-      <video id="bgvid" playsinline autoplay muted loop>
-        <source src="http://careers.walter-dev.com/assets/walter.mp4" type="video/mp4">
-      </video>
+  <section class="padded-content full-height">
+    <video id="bgvid" playsinline autoplay muted loop>
+      <source src="http://careers.walter-dev.com/assets/walter.mp4" type="video/mp4">
+    </video>
+    <div class="video-cover"></div>
 
-      <div>
-        <h1>SOME CONTENT</h1>
-      </div>
+    <div class="services-info">
+      <h1>Your strategic BIM partner</h1>
+      <h2>
+        Use our knowledge as your tool and add a layer of precision and efficiency to your process.
+        Tell us what's your role and we will instantly BIM you in.
+      </h2>
+      <section class="services">
+        <AppService v-for="(item, index) of items" :key="index" :item="item" @onServiceClicked="goToService(item.id)"/>
+      </section>
     </div>
   </section>
 </template>
 
 <script>
-  export default {
+  import AppService from '~/components/AppService'
+  import axios from 'axios'
 
+  export default {
+    components: {
+      AppService
+    },
+    data() {
+      return {
+        items: [],
+        page: {
+          acf: {}
+        }
+      }
+    },
+    created () {
+      this.getItems()
+    },
+    asyncData({}) {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/64').then((response) => {
+        return { page: response.data }
+      }).catch((error) => {
+        console.log(error)
+      });
+    },
+    methods: {
+      getItems() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/services?_embed').then((response) => {
+          this.items = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      goToService (id) {
+        this.$router.push({ path: `services/${id}`})
+      }
+    }
   }
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/styles/mixins";
+
   video {
     position: fixed;
     top: 50%;
@@ -32,5 +75,40 @@
     background: url('/static/images/video-image.jpg') no-repeat;
     background-size: cover;
     transition: 1s opacity;
+  }
+  .video-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -99;
+    background-image: linear-gradient(45deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
+  }
+
+  .services-info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    margin: 0 10%;
+
+    h1, h2 {
+      opacity: 1;
+      margin: 0 0 50px 0;
+    }
+    h1 {
+      font-size: 4em;
+    }
+    h2 {
+      font-size: 1.5em;
+    }
+
+    .services {
+      @include grid-items(5%, 5%, 4, 4);
+    }
   }
 </style>

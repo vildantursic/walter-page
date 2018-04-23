@@ -4,26 +4,18 @@
       <AppHeader/>
     </div>
 
-    <div class="space"></div>
     <div class="main">
       <nuxt/>
-    </div>
-    <div class="space"></div>
-
-    <div class="footer">
-      <AppFooter/>
     </div>
   </div>
 </template>
 
 <script>
 import AppHeader from '~/components/AppHeader.vue'
-import AppFooter from '~/components/AppFooter.vue'
 
 export default {
   components: {
-    AppHeader,
-    AppFooter
+    AppHeader
   }
 }
 </script>
@@ -39,9 +31,9 @@ export default {
     grid-area: header;
   }
   .main {
-    margin: 0 15%;
+    height: calc(100vh - 80px);
+    margin-top: 80px;
     grid-area: main;
-    margin: 0 15%;
   }
   .space {
     grid-area: space;
