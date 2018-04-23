@@ -11,6 +11,6 @@
 
 <style lang="scss" scoped>
   footer {
-    height: 200px;
+    height: 50px;
   }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="card animated fadeIn" v-scroll-reveal.reset>
-    <div class="card-img">
+    <div class="image">
       <img src="~/static/images/arch.jpg" alt="">
     </div>
-    <div class="info-card">
+    <div class="info">
       <h1 class="title">{{item.title.rendered}}</h1>
       <div class="about">
         <p>Author</p>
@@ -11,6 +11,8 @@
         <p class="italic">In Collaboration with D&Z d.o.o. Zadar</p>
       </div>
     </div>
+
+    <div class="border"></div>
   </div>
 </template>
 
@@ -22,49 +24,37 @@
   }
 </script>
 
-<style lang="scss" scoped="">
+<style lang="scss" scoped>
 .card{
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-height: 400px;
   overflow: hidden;
-  padding-bottom: 2em;
 
-  border-width: 0 0 3px 0;
-  border-style: solid;
-  -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-  -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-  border-image: linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-  border-image-slice: 1;
+  .image {
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2em;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .info {
+    padding: 0 2em 1em 2em;
+  }
+
+  .border {
+    width: 100%;
+    height: 3px;
+    background-image: linear-gradient(90deg, #0093c8 0%, #faaf40 100%);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;  /* <- here it is */
+  }
 }
- .card-img{
-   width: 100%;
-   height: 40%;
-   overflow: hidden;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-
-   img {
-     width: 100%;
-   }
- }
-
- .info-card {
-   height: 60%;
-
-   .title{
-     margin-bottom: 0;
-     font-size: 1.5rem;
-   }
-   .about{
-     color: grey;
-     font-size: 0.875rem;
-   }
-   .italic{
-     font-style: italic;
-   }
- }
-
 </style>

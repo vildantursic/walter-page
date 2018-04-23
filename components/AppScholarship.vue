@@ -1,7 +1,7 @@
 <template>
     <div class="card animated fadeIn" v-scroll-reveal.reset>
       <div class="card-img-container">
-        <img class="card-img" src="~/static/images/arch-2.jpg" alt="">
+        <img class="card-img" src="~/static/images/bimacademy.jpg" alt="">
       </div>
       <div class="info-card">
         <p class="category">BIM Architecture</p>
@@ -34,8 +34,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../assets/styles/variables';
-
   .card{
     overflow: hidden;
     display: flex;
@@ -43,35 +41,38 @@
     width: 100%;
     height: 400px;
     padding-bottom: 2em;
-    border-width: 0 0 3px 0;
+    border-width: 0 0 2px 0;
     border-style: solid;
-    -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-    -webkit-border-image: -webkit-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-    border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
+    -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
+    -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
+    border-image: linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
     border-image-slice: 1;
-
-    .card-img-container {
+    .card-img-container
+    {
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 60%;
+      width: 45%;
       .card-img {
         height: 100%;
       }
     }
-    .info-card {
+    .info-card
+    {
       position: relative;
-      width: 40%;
+      width: 55%;
       padding: 1em 1em;
-      .category {
+      .category
+      {
         margin: 0;
         font-size: 1em;
         font-weight: 700;
-        color: $main-color;
+        color: blue;
         letter-spacing: 2px;
       }
-      .author {
+      .author
+      {
         margin: 0;
         font-size: 0.8em;
         font-weight: 500;
@@ -79,7 +80,7 @@
       }
     }
   }
-  .fab, .fas{
+  .fab ,.fas{
     padding: 5px 10px;
     font-size: 25px;
     width: 30px;
@@ -118,6 +119,6 @@
   .social
   {
     position: absolute;
-    bottom: 0;
+    bottom:0%;
   }
 </style>

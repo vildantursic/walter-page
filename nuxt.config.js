@@ -16,7 +16,7 @@ module.exports = {
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#3B8070' },
+  loading: '~/components/loading.vue',
   /*
   ** Build configuration
   */
@@ -39,11 +39,11 @@ module.exports = {
     ]
   },
   css: [
-    '@/assets/styles/main.scss',
+    'animate.css/animate.min.css',
+    'swiper/dist/css/swiper.css',
     '@/assets/styles/variables.scss',
     '@/assets/styles/mixins.scss',
-    'animate.css/animate.min.css',
-    'swiper/dist/css/swiper.css'
+    '@/assets/styles/main.scss',
   ],
   plugins: [
     {src: '@/plugins/scroll-reveal.js', ssr: false},
