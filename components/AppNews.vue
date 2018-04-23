@@ -8,7 +8,7 @@
         <p class="category">{{item.categories}}</p>
         <p class="author">{{computedAuthor}}</p>
         <h1 class="title">{{ item.title.rendered | truncate(25)}}</h1>
-        <div v-html="item.content.rendered"></div>
+        <div>{{item.acf.description | truncate(250)}}</div>
         <div class="social">
           <!-- Add font awesome icons -->
           <a href="#"><i class="fab fa-linkedin"></i></a>
