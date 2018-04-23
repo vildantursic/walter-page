@@ -1,9 +1,20 @@
 <template>
   <div class="more">
-    <h1>6000 <span>+</span></h1>
-    <h4>more</h4>
+    <h1>{{numberOfItems}} <span>+</span></h1>
+    <h4 @click="showMore()">more</h4>
   </div>
 </template>
+
+<script>
+  export default {
+    props: ['numberOfItems'],
+    methods: {
+      showMore() {
+        this.$emit('onShowMore')
+      }
+    }
+  }
+</script>
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
@@ -25,6 +36,7 @@
     h4 {
       margin: 0;
       color: $main-color;
+      cursor: pointer;
     }
   }
 </style>

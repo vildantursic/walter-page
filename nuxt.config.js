@@ -41,12 +41,13 @@ module.exports = {
   css: [
     'animate.css/animate.min.css',
     'swiper/dist/css/swiper.css',
-    '@/assets/styles/variables.scss',
-    '@/assets/styles/mixins.scss',
-    '@/assets/styles/main.scss',
+    '~/assets/styles/variables.scss',
+    '~/assets/styles/mixins.scss',
+    '~/assets/styles/main.scss',
   ],
   plugins: [
-    {src: '@/plugins/scroll-reveal.js', ssr: false},
-    {src: '@/plugins/swiper.js', ssr: false}
+    {src: '~/plugins/scroll-reveal.js', ssr: false},
+    {src: '~/plugins/swiper.js', ssr: false},
+    '~/plugins/vue2-filters.js'
   ]
 }

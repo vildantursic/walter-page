@@ -7,7 +7,6 @@
     <div class="main">
       <nuxt/>
     </div>
-
   </div>
 </template>
 
@@ -32,9 +31,9 @@ export default {
     grid-area: header;
   }
   .main {
-    margin: 0 15%;
+    height: calc(100vh - 80px);
+    margin-top: 80px;
     grid-area: main;
-    margin: 0 15%;
   }
   .space {
     grid-area: space;

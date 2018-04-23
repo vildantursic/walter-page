@@ -6,7 +6,6 @@
     <div class="info">
       <h4 class="title">Test Service</h4>
     </div>
-
     <div class="border"></div>
   </div>
 </template>
@@ -28,7 +27,6 @@
   .card{
     display: flex;
     flex-direction: column;
-    width: 100%;
     overflow: hidden;
 
     .image {

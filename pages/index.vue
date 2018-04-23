@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="padded-content full-height">
     <video id="bgvid" playsinline autoplay muted loop>
       <source src="http://careers.walter-dev.com/assets/walter.mp4" type="video/mp4">
     </video>
@@ -12,7 +12,7 @@
         Tell us what's your role and we will instantly BIM you in.
       </h2>
       <section class="services">
-        <AppService v-for="(item, index) of [1,2,3,4]" :key="index" @onServiceClicked="goToService()"/>
+        <AppService v-for="(item, index) of items" :key="index" :item="item" @onServiceClicked="goToService(item.id)"/>
       </section>
     </div>
   </section>
@@ -20,14 +20,40 @@
 
 <script>
   import AppService from '~/components/AppService'
+  import axios from 'axios'
 
   export default {
     components: {
       AppService
     },
+    data() {
+      return {
+        items: [],
+        page: {
+          acf: {}
+        }
+      }
+    },
+    created () {
+      this.getItems()
+    },
+    asyncData({}) {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/64').then((response) => {
+        return { page: response.data }
+      }).catch((error) => {
+        console.log(error)
+      });
+    },
     methods: {
-      goToService () {
-        this.$router.push({ path: 'services' })
+      getItems() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/services?_embed').then((response) => {
+          this.items = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      goToService (id) {
+        this.$router.push({ path: `services/${id}`})
       }
     }
   }
@@ -63,7 +89,7 @@
   }
 
   .services-info {
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -82,7 +108,7 @@
     }
 
     .services {
-      @include grid-items(5%, 5%, 4, 2);
+      @include grid-items(5%, 5%, 4, 4);
     }
   }
 </style>

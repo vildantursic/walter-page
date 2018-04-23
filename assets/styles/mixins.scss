@@ -14,7 +14,17 @@
 }
 
 @mixin default-spacing($size){
+  padding: 0 15%;
 
+  @media (max-width: 1024px) {
+    padding: 0 10%;
+  }
+  @media (max-width: 768px) {
+    padding: 0 5%;
+  }
+  @media (max-width: 425px) {
+    padding: 0;
+  }
 }
 
 @mixin create-main-grid($size){
