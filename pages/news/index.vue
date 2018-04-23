@@ -4,8 +4,6 @@
     <AppFilter :filters="filters" :filterActive="2" :showDateFilter="true" :monthActive="2"></AppFilter>
     <div class="items">
       <AppNews v-for="(test, index) of items" :key="index"/>
-      <AppContactBox></AppContactBox>
-      <AppContactBox></AppContactBox>
     </div>
   </section>
 </template>

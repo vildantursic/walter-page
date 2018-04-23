@@ -5,10 +5,10 @@
     </div>
     <div class="info">
       <div class="name">
-        John Doe
+        {{name}}
       </div>
       <div class="role">
-        Department manager
+        {{role}}
       </div>
     </div>
     <div class="icons">
@@ -20,7 +20,7 @@
 
 <script>
   export default {
-    props: ['item'],
+    props: ['name', 'role'],
     components: {
     }
   }
