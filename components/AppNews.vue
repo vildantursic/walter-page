@@ -1,7 +1,7 @@
 <template>
     <div class="card animated fadeIn" v-scroll-reveal.reset>
       <div class="card-img-container">
-        <img class="card-img" src="~/static/images/arch-2.jpg" alt="">
+        <img class="card-img" src="imageSource" alt="">
       </div>
       <div class="info-card">
         <p class="category">BIM Architecture</p>
@@ -28,6 +28,7 @@
 
 <script>
   export default {
+    props: ['imageSource'],
     components: {
     }
   }
