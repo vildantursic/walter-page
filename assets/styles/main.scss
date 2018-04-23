@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://use.fontawesome.com/releases/v5.0.10/css/all.css');
+@import "mixins";
 
 html, body {
   margin: 0;
@@ -11,6 +12,15 @@ html, body {
 }
 h1, h2, h3, h4, h5, h6, p {
   opacity: 0.80;
+}
+.padded-content {
+  @include default-spacing(15)
+}
+.footing-space {
+  margin-bottom: 100px;
+}
+.full-height {
+  height: 100%;
 }
 
 .page-enter-active, .page-leave-active {

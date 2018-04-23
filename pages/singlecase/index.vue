@@ -1,11 +1,11 @@
 <template>
   <section>
-    <AppSingle></AppSingle>
+    <!--<AppSingle></AppSingle>-->
   </section>
 </template>
 
 <script>
-  import AppSingle from '~/components/AppSingle'
+//  import AppSingle from '~/components/AppSingle'
   import axios from 'axios'
   export default {
     components: {

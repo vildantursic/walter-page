@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="padded-content full-height">
     <video id="bgvid" playsinline autoplay muted loop>
       <source src="http://careers.walter-dev.com/assets/walter.mp4" type="video/mp4">
     </video>
@@ -59,6 +59,7 @@
     background: url('/static/images/video-image.jpg') no-repeat;
     background-size: cover;
     transition: 1s opacity;
+    filter:blur(10px);
   }
   .video-cover {
     position: absolute;
@@ -73,7 +74,7 @@
   }
 
   .services-info {
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -102,6 +103,10 @@
     .info {
       width: 60%;
 
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+
       h1, h2 {
         opacity: 1;
         margin: 0 0 50px 0;
@@ -117,7 +122,7 @@
     .services {
 
       section {
-        @include grid-items(5%, 5%, 7, 3);
+        @include grid-items(5%, 5%, 7, 2);
       }
     }
   }
