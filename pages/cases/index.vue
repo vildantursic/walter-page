@@ -1,6 +1,6 @@
 <template>
   <section>
-    <AppPageTitle></AppPageTitle>
+    <AppPageTitle :supertitle="'All about BIM'" :title="'Cases'" :subtitle="'\'I\'m a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click meand you can start adding your own content and make changes to the font. '" ></AppPageTitle>
     <AppFilter :filters="filters" :showDateFilter="false"></AppFilter>
     <div class="items">
       <AppCards v-if="index < items.length - 1" v-for="(item, index) of items" :key="index" :item="item"/>

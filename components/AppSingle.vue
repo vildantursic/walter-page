@@ -52,6 +52,7 @@
 
 <style lang="scss" scoped>
   .card{
+    margin: 2em;
     display: flex;
     flex-direction: row;
     width: 100%;
