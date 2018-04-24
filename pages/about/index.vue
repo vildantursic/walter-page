@@ -65,7 +65,7 @@
 
     h2{
       width: 65%;
-      margin: 10vh 0 30vh 0;
+      margin: 10vh 0 20vh 0;
       font-weight: 300;
     }
     .statistics {
@@ -90,6 +90,7 @@
     grid-auto-columns: 100%;
 
     .board-members {
+      padding-top: 10vh;
       width: 100%;
       @include grid-items(10%, 30px, 3, 3);
     }
@@ -114,6 +115,8 @@
     .clients {
       width: 100%;
       @include grid-items(20px, 50px, 10, 5);
+      justify-content: center;
+      align-items: center
     }
   }
 

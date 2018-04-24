@@ -25,7 +25,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .card{
+  .card {
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -48,6 +48,7 @@
       align-items: center;
       justify-content: center;
       color: white;
+      text-align: center;
     }
   }
 </style>

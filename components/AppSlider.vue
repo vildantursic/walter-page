@@ -84,14 +84,19 @@
   }
   .my-swiper-thumb {
     height: 100px;
-    margin-top: 1em;
+    margin-top: 5em;
 
     .swiper-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       .swiper-slide {
+        width: auto!important;
         text-align: center;
         background-color: #ffffff;
         overflow: hidden;
         img {
+          cursor: pointer;
           height: 100%;
         }
       }
