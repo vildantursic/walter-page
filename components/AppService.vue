@@ -1,5 +1,5 @@
 <template>
-  <div class="card animated fadeIn" v-scroll-reveal.reset v-on:click="clickService()">
+  <div class="card animated fadeIn" data-aos="slide-up" v-on:click="clickService()">
     <div class="image">
       <img src="~/static/images/walter-logo.png" alt="">
     </div>

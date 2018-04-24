@@ -114,6 +114,7 @@
     flex-direction: column;
     justify-content: center;
     color: white;
+    margin: 0 10%;
 
     .navigation {
       position: relative;
@@ -136,7 +137,7 @@
     }
 
     .info {
-      width: 60%;
+      width: 70%;
 
       @media (max-width: 768px) {
         width: 100%;

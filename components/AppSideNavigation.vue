@@ -21,14 +21,19 @@
     list-style: none;
 
     li {
+      margin: 15px 0;
+
       a {
         text-decoration: none;
         color: #FFFFFF;
         padding: 1em 0.5em;
+        font-weight: bolder;
       }
 
       .nuxt-link-exact-active {
-        color: $main-color;
+        font-size: 2.5em;
+        padding: 0;
+        margin-left: -30px;
       }
     }
   }
