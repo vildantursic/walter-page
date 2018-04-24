@@ -1,8 +1,10 @@
 <template>
   <section>
     <section id="statistics" class="statistics-section padded-content">
-      <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem blanditiis commodi deserunt dolores, eaque ex illum itaque libero magnam, nesciunt porro quod repellendus suscipit, totam ullam? Asperiores enim facere similique?</h2>
-
+      <h2>We are a group of talented minds passionate about one thing - to contribute
+        to the sustainable development and maintenance of the world buildings. We
+        strive to provide innovative BIM-based services to the building, construction
+        and real estate industry.</h2>
       <div class="statistics">
         <AppNumber v-for="(item, index) of [1,2,3,4,5,6]" :key="index"/>
       </div>
@@ -61,9 +63,14 @@
     display: grid;
     grid-auto-columns: 100%;
 
+    h2{
+      width: 65%;
+      margin: 10vh 0 30vh 0;
+      font-weight: 300;
+    }
     .statistics {
       width: 100%;
-      @include grid-items(10%, 30px, 3, 2);
+      @include grid-items(10%, 15vh, 3, 2);
     }
   }
 
