@@ -5,6 +5,10 @@
     </video>
     <div class="video-cover"></div>
 
+    <div class="sidebar">
+      <AppSideNavigation :links="links"/>
+    </div>
+
     <div class="services-info">
       <div class="navigation">
         <h1 class="hidden-amount">+ {{page.acf.cases.length}}</h1>
@@ -26,28 +30,41 @@
 
 <script>
   import AppSingleService from '~/components/AppSingleService'
+  import AppSideNavigation from "~/components/AppSideNavigation"
   import axios from 'axios'
 
   export default {
     components: {
-      AppSingleService
+      AppSingleService,
+      AppSideNavigation
     },
     data() {
       return {
         page: {
           acf: {}
-        }
+        },
+        links: [],
+        activeLink: 0
       }
     },
     asyncData({ route }) {
       return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/services/${route.params.id}`).then((response) => {
-        console.log(response.data)
         return { page: response.data }
       }).catch((error) => {
         console.log(error)
       });
     },
+    created () {
+      this.getServices()
+    },
     methods: {
+      getServices () {
+        axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/services`).then((response) => {
+          this.links = response.data;
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
       goToService () {
         this.$router.push({ path: 'services' })
       }
@@ -85,6 +102,12 @@
     background-image: linear-gradient(45deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
   }
 
+  .sidebar {
+    position: absolute;
+    top: 80px;
+    left: 0;
+  }
+
   .services-info {
     height: 100%;
     display: flex;
@@ -97,6 +120,7 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      margin-bottom: 30px;
 
       h1 {
         margin: 0;
@@ -104,7 +128,6 @@
 
       .hidden-amount {
         position: absolute;
-        top: -15px;
         right: 0;
         z-index: -1;
         opacity: 0.1;
