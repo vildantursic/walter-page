@@ -104,7 +104,7 @@
         grid-area: email;
       }
 
-.link {
+      .link {
         text-decoration: none;
         color: #2e2f30;
         font-size: 0.75rem;

@@ -12,7 +12,7 @@
         Tell us what's your role and we will instantly BIM you in.
       </h2>
       <section class="services">
-        <AppService v-for="(item, index) of items" :key="index" :item="item" @onServiceClicked="goToService()"/>
+        <AppService v-for="(item, index) of items" :key="index" :item="item" @onServiceClicked="goToService(item.id)"/>
       </section>
     </div>
   </section>
@@ -52,8 +52,8 @@
           console.log(error);
         });
       },
-      goToService () {
-        this.$router.push({ path: 'services' })
+      goToService (id) {
+        this.$router.push({ path: `services/${id}`})
       }
     }
   }
