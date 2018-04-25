@@ -24,10 +24,10 @@
         </div>
         <div class="post-right">
           <div class="year">
-            <span class="current-year">NEXT ARTICLE</span> <span><i class="fas fa-chevron-right"></i></span>
+            <span class="current-year" >NEXT ARTICLE</span> <span><i class="fas fa-chevron-right"></i></span>
           </div>
           <div v-for="item in items" v-bind:key="item.id">
-            <OtherPosts :category="item.categories" :author="item.author" :title="item.title.rendered" ></OtherPosts>
+            <OtherPosts :category="item.categories" :author="item.author" :title="item.title.rendered"  ></OtherPosts>
           </div>
         </div>
       </div>
