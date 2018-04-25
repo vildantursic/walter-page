@@ -12,7 +12,9 @@
     <div class="services-info">
       <div class="navigation">
         <h1 class="hidden-amount">+ {{page.acf.cases.length}}</h1>
-        <h1 style="float: right">cases</h1>
+        <nuxt-link :to="{ name: 'cases' }">
+          <h1>cases</h1>
+        </nuxt-link>
       </div>
       <div class="info">
         <h1>{{page.acf.description}}</h1>
@@ -119,7 +121,7 @@
     .navigation {
       position: relative;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: flex-end;
       margin-bottom: 30px;
 
@@ -132,11 +134,13 @@
         right: 0;
         z-index: -1;
         opacity: 0.1;
-        font-size: 5em;
+        font-size: 9em;
+        margin-top: 50px;
       }
     }
 
     .info {
+      width: 80%;
 
       @media (max-width: 768px) {
         width: 100%;
