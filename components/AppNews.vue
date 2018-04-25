@@ -1,5 +1,5 @@
 <template>
-    <div class="card animated fadeIn" data-aos="slide-up">
+    <div class="card animated fadeIn" data-aos="slide-up" v-on:click="clickPost()">
       <div class="card-img-container">
         <img class="card-img" v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
         <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
@@ -22,28 +22,50 @@
 </template>
 
 <script>
+  import moment from 'moment'
+  import axios from 'axios'
+
   export default {
     props: ['item'],
     components: {},
     data() {
       return {
+        users: [],
+        author: '',
       }
+    },
+    created () {
+      this.getUsers()
     },
     computed: {
       // a computed getter
       computedAuthor: function () {
-        // `this` points to the vm instance
         var computedString = ''
-        computedString = this.item.author + ', '
-        var date = this.item.date.split('T')[0]
-        var time = this.item.date.split('T')[1]
-        computedString += date + ' at ' + time
+        var computedAuthor = ''
+        var date = ''
+        this.users.forEach( (user) =>
+        {
+          if(this.item.author === user.id)
+          {
+            computedAuthor = user.name
+          }
+        })
+        computedString = computedAuthor  + ', '
+        date = moment(this.item.date).format('MMM YYYY [at] LT');
+        computedString += date
         return computedString
       }
     },
     methods: {
       clickPost () {
         this.$emit('onPostClicked')
+      },
+      getUsers() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
+          this.users = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
       }
     }
   }
