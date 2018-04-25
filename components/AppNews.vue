@@ -65,7 +65,6 @@
           currentCategory = categoryOfItem
           this.categories.forEach( (category) =>
           {
-            console.log(currentCategory)
             if(category.id === currentCategory)
             {
               computedString += category.name + ', '
