@@ -3,7 +3,6 @@
     <div class="header">
       <AppHeader/>
     </div>
-
     <div class="main">
       <nuxt/>
     </div>

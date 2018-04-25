@@ -1,5 +1,5 @@
 <template>
-  <div class="card animated fadeIn" v-scroll-reveal.reset>
+  <div class="card animated fadeIn" data-aos="slide-up">
     <h1 class="number">1200 +</h1>
     <div class="border"></div>
     <h1 class="info">Revit families</h1>
@@ -26,7 +26,7 @@
     }
 
     .info {
-      font-size: 2em;
+      font-size: 1.5em;
       opacity: 0.5;
       margin: 10px 0;
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="card animated fadeIn" v-scroll-reveal.reset>
+  <div class="card animated fadeIn" data-aos="slide-up">
     <div class="card-img">
       <img src="~/static/images/arch.jpg" alt="">
     </div>
@@ -103,13 +103,14 @@
         padding-bottom: 0.5em !important;
         grid-area: email;
       }
+
       .link {
         text-decoration: none;
         color: #2e2f30;
         font-size: 0.75rem;
       }
-
       .fab ,.fas{
+
         font-size: 0.75rem;
         width: 30px;
         text-align: center;

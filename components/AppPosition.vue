@@ -1,5 +1,5 @@
 <template>
-    <div class="card animated fadeIn" v-scroll-reveal.reset>
+    <div class="card animated fadeIn" data-aos="slide-up">
       <div class="info-card">
         <p class="position">BIM Consultant</p>
         <p class="published">Published: 26-03-2018</p>

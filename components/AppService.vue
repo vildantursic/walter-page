@@ -1,7 +1,9 @@
 <template>
-  <div class="card animated fadeIn" v-scroll-reveal.reset v-on:click="clickService()">
+  <div class="card animated fadeIn" data-aos="slide-up" v-on:click="clickService()">
     <div class="image">
-      <img src="~/static/images/walter-logo.png" alt="">
+      <img v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
+
+      <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
       <h4 class="title">{{item.title.rendered}}</h4>
@@ -25,7 +27,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .card{
+  .card {
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -42,12 +44,14 @@
     }
 
     .info {
+      padding: 0 10%;
       height: 50px;
       background: #393c3d;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
+      text-align: center;
     }
   }
 </style>

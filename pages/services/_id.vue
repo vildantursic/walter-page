@@ -5,10 +5,16 @@
     </video>
     <div class="video-cover"></div>
 
+    <div class="sidebar">
+      <AppSideNavigation :links="links"/>
+    </div>
+
     <div class="services-info">
       <div class="navigation">
         <h1 class="hidden-amount">+ {{page.acf.cases.length}}</h1>
-        <h1 style="float: right">cases</h1>
+        <nuxt-link :to="{ name: 'cases' }">
+          <h1>cases</h1>
+        </nuxt-link>
       </div>
       <div class="info">
         <h1>{{page.acf.description}}</h1>
@@ -17,7 +23,7 @@
       <div class="services">
         <h2>Services</h2>
         <section>
-          <AppSingleService v-for="(item, index) of [1,2,3,4,5]" :key="index"/>
+          <AppSingleService v-for="(item, index) of subServices" v-if="item" :key="index" :item="item"/>
         </section>
       </div>
     </div>
@@ -26,28 +32,51 @@
 
 <script>
   import AppSingleService from '~/components/AppSingleService'
+  import AppSideNavigation from "~/components/AppSideNavigation"
   import axios from 'axios'
+  import { find } from 'lodash'
 
   export default {
     components: {
-      AppSingleService
+      AppSingleService,
+      AppSideNavigation
     },
     data() {
       return {
         page: {
           acf: {}
-        }
+        },
+        links: [],
+        subServices: [],
+        activeLink: 0
       }
     },
     asyncData({ route }) {
       return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/services/${route.params.id}`).then((response) => {
-        console.log(response.data)
         return { page: response.data }
       }).catch((error) => {
         console.log(error)
       });
     },
+    created () {
+      this.getServices()
+      this.getSubServices()
+    },
     methods: {
+      getServices () {
+        axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/services`).then((response) => {
+          this.links = response.data;
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
+      getSubServices () {
+        axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/sub_services?_embed`).then((response) => {
+          this.subServices = response.data.map((subService) => find(this.page.acf.sub_services, { ID: subService.id }) ? subService : undefined);
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
       goToService () {
         this.$router.push({ path: 'services' })
       }
@@ -85,18 +114,26 @@
     background-image: linear-gradient(45deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
   }
 
+  .sidebar {
+    position: absolute;
+    top: 80px;
+    left: 0;
+  }
+
   .services-info {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     color: white;
+    margin: 0 10%;
 
     .navigation {
       position: relative;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: flex-end;
+      margin-bottom: 30px;
 
       h1 {
         margin: 0;
@@ -104,16 +141,16 @@
 
       .hidden-amount {
         position: absolute;
-        top: -15px;
         right: 0;
         z-index: -1;
         opacity: 0.1;
-        font-size: 5em;
+        font-size: 9em;
+        margin-top: 50px;
       }
     }
 
     .info {
-      width: 60%;
+      width: 80%;
 
       @media (max-width: 768px) {
         width: 100%;
