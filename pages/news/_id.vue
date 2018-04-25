@@ -11,7 +11,7 @@
         <a href="#"><i class="fas fa-paperclip"></i></a>
       </div>
     </div>
-    <div class="item animated fadeIn" v-scroll-reveal.reset>
+    <div class="item animated fadeIn">
       <div class="img-header">
         <p class="category">{{page.categories}}</p>
         <p class="author">{{computedAuthor}}</p>
@@ -44,9 +44,12 @@
   import AppPageTitle from '~/components/AppPageTitle'
   import OtherPosts from '~/components/OtherPosts'
   import axios from 'axios'
+  import moment from 'moment'
   export default {
     data() {
       return {
+        users: [],
+        author: '',
         page: {
           acf: {}
         },
@@ -84,15 +87,26 @@
     // a computed getter
     computedAuthor: function () {
       // `this` points to the vm instance
+      console.log(this.users)
       var computedString = ''
-      computedString = this.page.author + ', '
-      var date = this.page.date.split('T')[0]
-      var time = this.page.date.split('T')[1]
-      computedString += date + ' at ' + time
+      var computedAuthor = ''
+      this.users.forEach( (user) =>
+      {
+          if(this.page.author === user.id)
+          {
+              computedAuthor = user.name
+          }
+      })
+      console.log(computedAuthor)
+      computedString = computedAuthor  + ', '
+      var date = moment(this.page.date).format('MMM YYYY [at] LT');
+      console.log(date)
+      //var date = this.page.date.split('T')[0]
+      //var time = this.page.date.split('T')[1]
+      computedString += date
       return computedString
     }
   },
-
     components: {
       AppFilter,
       AppNews,
@@ -101,7 +115,6 @@
     },
     asyncData({ route }) {
       return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts/${route.params.id}`).then((response) => {
-        console.log(response.data)
         return { page: response.data }
       }).catch((error) => {
         console.log(error)
@@ -110,7 +123,17 @@
     methods: {
       goToPost () {
         this.$router.push({ path: 'services' })
+      },
+      getUsers() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
+          this.users = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
       }
+    },
+    mounted() {
+      this.getUsers()
     }
   }
 </script>
