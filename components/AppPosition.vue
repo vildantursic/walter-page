@@ -34,6 +34,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/styles/variables";
+
   .card{
     overflow: hidden;
     display: flex;
@@ -62,7 +64,7 @@
         margin: 1.5em 0;
         font-size: 1em;
         font-weight: 600;
-        color: blue;
+        color: $main-color;
         letter-spacing: 2px;
       }
       .data
@@ -88,7 +90,7 @@
           letter-spacing: 1px;
           .more
           {
-            color: blue;
+            color: $main-color;
           }
         }
         .plus
