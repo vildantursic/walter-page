@@ -13,7 +13,7 @@
     </div>
     <div class="item animated fadeIn">
       <div class="img-header">
-        <p class="category">{{page.categories}}</p>
+        <p class="category">{{computedCategories}}</p>
         <p class="author">{{computedAuthor}}</p>
       </div>
       <div class="img-container">
@@ -50,6 +50,7 @@
       return {
         users: [],
         author: '',
+        categories: [],
         page: {
           acf: {}
         },
@@ -100,6 +101,24 @@
       date = moment(this.page.date).format('MMM YYYY [at] LT');
       computedString += date
       return computedString
+    },
+    computedCategories: function () {
+      var computedString = ''
+      var currentCategory = {}
+      this.page.categories.forEach( (categoryOfItem) =>
+      {
+        currentCategory = categoryOfItem
+        this.categories.forEach( (category) =>
+        {
+          console.log(currentCategory)
+          if(category.id === currentCategory)
+          {
+            computedString += category.name + ', '
+          }
+        })
+      })
+      computedString = computedString.slice(0, -2);
+      return computedString
     }
   },
     components: {
@@ -125,10 +144,18 @@
         }).catch((error) => {
           console.log(error);
         });
+      },
+      getCategories() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
+          this.categories = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
       }
     },
     mounted() {
       this.getUsers()
+      this.getCategories()
     }
   }
 </script>

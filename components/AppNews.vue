@@ -74,8 +74,7 @@
         })
         computedString = computedString.slice(0, -2);
         return computedString
-      },
-
+      }
     },
     methods: {
       clickPost () {
