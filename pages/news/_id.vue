@@ -86,10 +86,9 @@
   computed: {
     // a computed getter
     computedAuthor: function () {
-      // `this` points to the vm instance
-      console.log(this.users)
       var computedString = ''
       var computedAuthor = ''
+      var date = ''
       this.users.forEach( (user) =>
       {
           if(this.page.author === user.id)
@@ -97,12 +96,8 @@
               computedAuthor = user.name
           }
       })
-      console.log(computedAuthor)
       computedString = computedAuthor  + ', '
-      var date = moment(this.page.date).format('MMM YYYY [at] LT');
-      console.log(date)
-      //var date = this.page.date.split('T')[0]
-      //var time = this.page.date.split('T')[1]
+      date = moment(this.page.date).format('MMM YYYY [at] LT');
       computedString += date
       return computedString
     }

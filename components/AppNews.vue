@@ -23,32 +23,49 @@
 
 <script>
   import moment from 'moment'
+  import axios from 'axios'
 
   export default {
     props: ['item'],
     components: {},
     data() {
       return {
+        users: [],
+        author: '',
       }
     },
     created () {
-      console.log(moment())
+      this.getUsers()
     },
     computed: {
       // a computed getter
       computedAuthor: function () {
-        // `this` points to the vm instance
         var computedString = ''
-        computedString = this.item.author + ', '
-        var date = this.item.date.split('T')[0]
-        var time = this.item.date.split('T')[1]
-        computedString += date + ' at ' + time
+        var computedAuthor = ''
+        var date = ''
+        this.users.forEach( (user) =>
+        {
+          if(this.item.author === user.id)
+          {
+            computedAuthor = user.name
+          }
+        })
+        computedString = computedAuthor  + ', '
+        date = moment(this.item.date).format('MMM YYYY [at] LT');
+        computedString += date
         return computedString
       }
     },
     methods: {
       clickPost () {
         this.$emit('onPostClicked')
+      },
+      getUsers() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
+          this.users = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
       }
     }
   }
