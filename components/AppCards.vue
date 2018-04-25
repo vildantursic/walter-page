@@ -44,7 +44,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 2em;
+      padding: 0 1em;
       background: #e2e2e2;
 
       img {
@@ -56,7 +56,7 @@
     }
 
     .info {
-      padding: 0 2em 1em 2em;
+      padding: 0 1em 1em 1em;
 
       .title {
         cursor: pointer;

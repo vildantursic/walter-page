@@ -76,10 +76,13 @@
 
     .close {
       width: 100%;
-      height: 100px;
+      height: 5vh;
 
       i {
+        display: flex;
+        float: right;
         font-size: 2em;
+        padding: 1em;
       }
     }
 
@@ -95,7 +98,7 @@
       .info-card {
         position: relative;
         width: 40%;
-        padding: 5em 1em 1em 1.5em;
+        padding: 5em 5em 1em 1em;
 
         .category {
           margin-top: 1em;
@@ -114,10 +117,11 @@
           color: gray;
         }
         .divider {
+          margin-top: 10vh;
           border-top: 1px solid gray;
           width: 70%;
-          position: absolute;
-          bottom: 0;
+          /*position: absolute;*/
+          /*bottom: 0;*/
         }
         .text-box {
           height: 200px;
