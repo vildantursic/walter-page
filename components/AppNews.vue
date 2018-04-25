@@ -5,7 +5,7 @@
         <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
       </div>
       <div class="info-card">
-        <p class="category">{{item.categories}}</p>
+        <p class="category">{{computedCategories}}</p>
         <p class="author">{{computedAuthor}}</p>
         <h1 class="title">{{ item.title.rendered | truncate(25)}}</h1>
         <div>{{item.acf.description | truncate(250)}}</div>
@@ -31,11 +31,13 @@
     data() {
       return {
         users: [],
+        categories: [],
         author: '',
       }
     },
     created () {
       this.getUsers()
+      this.getCategories()
     },
     computed: {
       // a computed getter
@@ -54,7 +56,26 @@
         date = moment(this.item.date).format('MMM YYYY [at] LT');
         computedString += date
         return computedString
-      }
+      },
+      computedCategories: function () {
+        var computedString = ''
+        var currentCategory = {}
+        this.item.categories.forEach( (categoryOfItem) =>
+        {
+          currentCategory = categoryOfItem
+          this.categories.forEach( (category) =>
+          {
+            console.log(currentCategory)
+            if(category.id === currentCategory)
+            {
+              computedString += category.name + ', '
+            }
+          })
+        })
+        computedString = computedString.slice(0, -2);
+        return computedString
+      },
+
     },
     methods: {
       clickPost () {
@@ -63,6 +84,13 @@
       getUsers() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
           this.users = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      getCategories() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
+          this.categories = response.data
         }).catch((error) => {
           console.log(error);
         });
