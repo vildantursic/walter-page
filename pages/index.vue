@@ -106,7 +106,7 @@
     }
 
     .services {
-      @include grid-items(5%, 5%, 4, 4);
+      @include grid-items(5%, 5%, 4, 2);
     }
   }
 </style>

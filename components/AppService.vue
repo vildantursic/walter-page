@@ -42,6 +42,7 @@
     }
 
     .info {
+      padding: 0 10%;
       height: 50px;
       background: #393c3d;
       display: flex;
