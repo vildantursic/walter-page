@@ -6,11 +6,8 @@
     <div class="video-cover"></div>
 
     <div class="services-info">
-      <h1>Your strategic BIM partner</h1>
-      <h2>
-        Use our knowledge as your tool and add a layer of precision and efficiency to your process.
-        Tell us what's your role and we will instantly BIM you in.
-      </h2>
+      <h1>{{page.acf.title}}</h1>
+      <div class="description" v-html="page.acf.description"></div>
       <section class="services">
         <AppService v-for="(item, index) of items" :key="index" :item="item" @onServiceClicked="goToService(item.id)"/>
       </section>
@@ -38,7 +35,7 @@
       this.getItems()
     },
     asyncData({}) {
-      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/64').then((response) => {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/79').then((response) => {
         return { page: response.data }
       }).catch((error) => {
         console.log(error)
@@ -96,15 +93,16 @@
     color: white;
     margin: 0 10%;
 
-    h1, h2 {
+    h1, .description {
       opacity: 1;
       margin: 0 0 50px 0;
     }
     h1 {
-      font-size: 4em;
+      font-size: 3em;
     }
-    h2 {
-      font-size: 1.5em;
+    .description {
+      font-size: 1.3em;
+      font-weight: bolder;
     }
 
     .services {

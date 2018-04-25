@@ -1,5 +1,5 @@
 <template>
-  <div class="card animated fadeIn" v-scroll-reveal.reset>
+  <div class="card animated fadeIn" data-aos="slide-up">
     <div class="card-img">
       <img src="~/static/images/Bimobject-log.png" alt="">
     </div>

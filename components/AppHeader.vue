@@ -6,11 +6,11 @@
       </nuxt-link>
       <div class="navigation-bar">
         <ul>
-          <li><nuxt-link :to="{name: 'index'}">Services</nuxt-link></li>
-          <li><nuxt-link :to="{name: 'cases'}">Cases</nuxt-link></li>
-          <li><nuxt-link :to="{name: 'about'}">About us</nuxt-link></li>
-          <li><nuxt-link :to="{name: 'careers'}">Careers</nuxt-link></li>
-          <li><nuxt-link :to="{name: 'news'}">News</nuxt-link></li>
+          <li><nuxt-link :to="{ name: 'index' }">Services</nuxt-link></li>
+          <li><nuxt-link :to="{ name: 'cases' }">Cases</nuxt-link></li>
+          <li><nuxt-link :to="{ name: 'about' }">About us</nuxt-link></li>
+          <li><nuxt-link :to="{ name: 'careers' }">Careers</nuxt-link></li>
+          <li><nuxt-link :to="{ name: 'news' }">News</nuxt-link></li>
         </ul>
       </div>
     </header>

@@ -2,6 +2,7 @@
   <div class="filter">
     <div class="main-filters">
       <ul class="main-list">
+        <li :class="{ active: -1 === filterActive }" @click="selectFilter(-1)">All</li>
         <li v-for="(filter, index) of filters" :key="index" :class="{ active: filter.id === filterActive }" @click="selectFilter(filter.id)">{{filter.name}}</li>
       </ul>
       <div class="search">

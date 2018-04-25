@@ -1,5 +1,5 @@
 <template>
-  <div class="card animated fadeIn" v-scroll-reveal.reset>
+  <div class="card animated fadeIn" data-aos="slide-up">
     <h1 class="number">1200 +</h1>
     <div class="border"></div>
     <h1 class="info">Revit families</h1>
