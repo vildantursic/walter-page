@@ -13,7 +13,7 @@
     </div>
     <div class="item animated fadeIn">
       <div class="img-header">
-        <p class="category">{{page.categories}}</p>
+        <p class="category">{{computedCategories}}</p>
         <p class="author">{{computedAuthor}}</p>
       </div>
       <div class="img-container">
@@ -26,9 +26,9 @@
           <div class="year">
             <span class="current-year">NEXT ARTICLE</span> <span><i class="fas fa-chevron-right"></i></span>
           </div>
-          <OtherPosts :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'"></OtherPosts>
-          <OtherPosts :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'"></OtherPosts>
-          <OtherPosts :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'"></OtherPosts>
+          <div v-for="item in items" v-bind:key="item.id">
+            <OtherPosts :category="item.categories" :author="item.author" :title="item.title.rendered" ></OtherPosts>
+          </div>
         </div>
       </div>
     </div>
@@ -50,6 +50,8 @@
       return {
         users: [],
         author: '',
+        categories: [],
+        items: [],
         page: {
           acf: {}
         },
@@ -100,6 +102,23 @@
       date = moment(this.page.date).format('MMM YYYY [at] LT');
       computedString += date
       return computedString
+    },
+    computedCategories: function () {
+      var computedString = ''
+      var currentCategory = {}
+      this.page.categories.forEach( (categoryOfItem) =>
+      {
+        currentCategory = categoryOfItem
+        this.categories.forEach( (category) =>
+        {
+          if(category.id === currentCategory)
+          {
+            computedString += category.name + ', '
+          }
+        })
+      })
+      computedString = computedString.slice(0, -2);
+      return computedString
     }
   },
     components: {
@@ -125,10 +144,26 @@
         }).catch((error) => {
           console.log(error);
         });
+      },
+      getCategories() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
+          this.categories = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      getItems() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
+          this.items = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
       }
     },
     mounted() {
       this.getUsers()
+      this.getCategories()
+      this.getItems()
     }
   }
 </script>

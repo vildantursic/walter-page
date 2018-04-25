@@ -1,16 +1,83 @@
 <template>
   <div class="other-news">
-    <p class="category">{{category}}</p>
-    <p class="author">{{author}}</p>
+    <p class="category">{{computedCategories}}</p>
+    <p class="author">{{computedAuthor}}</p>
     <h1 class="title">{{title}}</h1>
   </div>
 </template>
 <script>
-
+  import moment from 'moment'
+  import axios from 'axios'
   export default {
     components: {
     },
-    props: ['category', 'author', 'title']
+    data() {
+      return {
+        users: [],
+        categories: [],
+        authorOfPost: '',
+      }
+    },
+    props: ['category', 'author', 'title'],
+    created () {
+      this.getUsers()
+      this.getCategories()
+    },
+    computed: {
+      // a computed getter
+      computedAuthor: function () {
+        var computedString = ''
+        var computedAuthor = ''
+        var date = ''
+        this.users.forEach( (user) =>
+        {
+          if(this.author === user.id)
+          {
+            computedAuthor = user.name
+          }
+        })
+        computedString = computedAuthor  + ', '
+        date = moment(this.date).format('MMM YYYY [at] LT');
+        computedString += date
+        return computedString
+      },
+      computedCategories: function () {
+        var computedString = ''
+        var currentCategory = {}
+        this.category.forEach( (categoryOfItem) =>
+        {
+          currentCategory = categoryOfItem
+          this.categories.forEach( (category) =>
+          {
+            if(category.id === currentCategory)
+            {
+              computedString += category.name + ', '
+            }
+          })
+        })
+        computedString = computedString.slice(0, -2);
+        return computedString
+      }
+    },
+    methods: {
+      clickPost () {
+        this.$emit('onPostClicked')
+      },
+      getUsers() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
+          this.users = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      getCategories() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
+          this.categories = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      }
+    }
   }
 </script>
 
