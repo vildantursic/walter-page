@@ -1,7 +1,7 @@
 <template>
   <section class="padded-content footing-space">
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
-    <AppFilter :filters="filters" :showDateFilter="false" :filterActive="filterActive"></AppFilter>
+    <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter"></AppFilter>
     <div class="items">
       <AppCards v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item" @onShowCase="showCase($event)"/>
       <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
@@ -35,7 +35,7 @@
         items: [],
         item: null,
         filters: [],
-        filterActive: -1
+        selectedFilter: -1
       }
     },
     created () {
@@ -66,6 +66,9 @@
       },
       showCase(event) {
         this.item = event
+      },
+      selectFilter (id) {
+        this.selectedFilter = id
       }
     }
   }
