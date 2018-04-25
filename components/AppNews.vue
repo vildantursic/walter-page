@@ -8,7 +8,8 @@
         <p class="category">{{item.categories}}</p>
         <p class="author">{{computedAuthor}}</p>
         <h1 class="title">{{ item.title.rendered | truncate(25)}}</h1>
-        <div>{{item.acf.description | truncate(250)}}</div>
+        <div class="scroll" v-html="item.content.rendered"></div>
+        <p class="author">{{ item.author }}</p>
         <div class="social">
           <!-- Add font awesome icons -->
           <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -79,7 +80,7 @@
     display: flex;
     flex-direction: row;
     height: 400px;
-    padding-bottom: 2em;
+    padding: 2em;
     border-width: 0 0 3px 0;
     border-style: solid;
     -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
@@ -156,5 +157,9 @@
   {
     position: absolute;
     bottom: 0;
+  }
+  .scroll{
+    height: 200px;
+    overflow: scroll;
   }
 </style>

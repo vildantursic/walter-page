@@ -44,7 +44,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 1em;
+      /*padding: 0 1em;*/
       background: #e2e2e2;
 
       img {
