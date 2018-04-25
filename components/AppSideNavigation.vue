@@ -19,6 +19,7 @@
 
   ul {
     list-style: none;
+    width: 300px;
 
     li {
       margin: 15px 0;
@@ -33,7 +34,6 @@
       .nuxt-link-exact-active {
         font-size: 2.5em;
         padding: 0;
-        margin-left: -30px;
       }
     }
   }

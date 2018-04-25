@@ -1,10 +1,12 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up" v-on:click="clickService()">
     <div class="image">
-      <img src="~/static/images/walter-logo.png" alt="">
+      <img v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
+
+      <img class="no-image" v-if="!item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
-      <h4 class="title">Test Service</h4>
+      <h4 class="title">{{item.post_title}}</h4>
     </div>
     <div class="border"></div>
   </div>

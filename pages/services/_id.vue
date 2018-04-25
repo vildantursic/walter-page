@@ -23,7 +23,7 @@
       <div class="services">
         <h2>Services</h2>
         <section>
-          <AppSingleService v-for="(item, index) of [1,2,3,4,5]" :key="index"/>
+          <AppSingleService v-for="(item, index) of page.acf.sub_services" :key="index" :item="item"/>
         </section>
       </div>
     </div>
