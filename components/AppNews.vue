@@ -1,14 +1,14 @@
 <template>
-    <div class="card animated fadeIn" v-scroll-reveal.reset>
+    <div class="card animated fadeIn" data-aos="slide-up" v-on:click="clickPost()">
       <div class="card-img-container">
         <img class="card-img" v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
         <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
       </div>
       <div class="info-card">
-        <p class="category"></p>
-        <p class="author">{{ item.author }} + , {{item.date}}</p>
+        <p class="category">{{computedCategories}}</p>
+        <p class="author">{{computedAuthor}}</p>
         <h1 class="title">{{ item.title.rendered | truncate(25)}}</h1>
-        <div v-html="item.content.rendered"></div>
+        <div class="scroll" v-html="item.content.rendered"></div>
         <p class="author">{{ item.author }}</p>
         <div class="social">
           <!-- Add font awesome icons -->
@@ -23,11 +23,79 @@
 </template>
 
 <script>
+  import moment from 'moment'
+  import axios from 'axios'
+
   export default {
     props: ['item'],
-    components: {
+    components: {},
+    data() {
+      return {
+        users: [],
+        categories: [],
+        author: '',
+      }
     },
+    created () {
+      this.getUsers()
+      this.getCategories()
+    },
+    computed: {
+      // a computed getter
+      computedAuthor: function () {
+        var computedString = ''
+        var computedAuthor = ''
+        var date = ''
+        this.users.forEach( (user) =>
+        {
+          if(this.item.author === user.id)
+          {
+            computedAuthor = user.name
+          }
+        })
+        computedString = computedAuthor  + ', '
+        date = moment(this.item.date).format('MMM YYYY [at] LT');
+        computedString += date
+        return computedString
+      },
+      computedCategories: function () {
+        var computedString = ''
+        var currentCategory = {}
+        this.item.categories.forEach( (categoryOfItem) =>
+        {
+          currentCategory = categoryOfItem
+          this.categories.forEach( (category) =>
+          {
+            if(category.id === currentCategory)
+            {
+              computedString += category.name + ', '
+            }
+          })
+        })
+        computedString = computedString.slice(0, -2);
+        return computedString
+      }
+    },
+    methods: {
+      clickPost () {
+        this.$emit('onPostClicked')
+      },
+      getUsers() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
+          this.users = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      getCategories() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
+          this.categories = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      }
     }
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -38,7 +106,7 @@
     display: flex;
     flex-direction: row;
     height: 400px;
-    padding-bottom: 2em;
+    padding: 2em;
     border-width: 0 0 3px 0;
     border-style: solid;
     -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
@@ -115,5 +183,9 @@
   {
     position: absolute;
     bottom: 0;
+  }
+  .scroll{
+    height: 200px;
+    overflow: scroll;
   }
 </style>

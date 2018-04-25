@@ -1,8 +1,7 @@
 <template>
   <section>
-    <div class="header-news">
-      <h1 class="title">I'm a title. Click
-        here to edit me.</h1>
+    <div class="header-news padded-content">
+      <h1 class="title">{{page.acf.description}}</h1>
       <div class="social">
         <!-- Add font awesome icons -->
         <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -12,44 +11,24 @@
         <a href="#"><i class="fas fa-paperclip"></i></a>
       </div>
     </div>
-    <div class="item animated fadeIn" v-scroll-reveal.reset>
+    <div class="item animated fadeIn padded-content">
       <div class="img-header">
-        <p class="category">BIM Architecture</p>
-        <p class="author">John Doe, June 20 at 10:05 PM</p>
+        <p class="category">{{computedCategories}}</p>
+        <p class="author">{{computedAuthor}}</p>
       </div>
       <div class="img-container">
         <img class="img" src="~/static/images/arch.jpg" alt="">
       </div>
       <div class="post-content">
-        <div class="post-left">
-          <p class="header-left">I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or
-            double click me and you can start adding your own content and make changes to the font. Feel
-            free to drag and drop me anywhere you like on your page. I’m a great place for you to tell a story
-            and let your users know a little more about you.</p>
-          <p>
-            This is a great space to write long text about your company and your services. You can use this space
-            to go into a little more detail about your company. Talk about your team and what services you provide.
-            Tell your visitors the story of how you came up with the idea for your business and what makes you different
-            from your competitors. Make your company stand out and show your visitors who you are. Tip:
-            Add your own image by double clicking the image and clicking Change Image.
-            I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double
-            click me and you can start adding your own content and make changes to the font. Feel free to drag
-            and drop me anywhere you like on your page. I’m a great place for you to tell a story and let your users
-            know a little more about you.
-            This is a great space to write long text about your company and your services. You can use this space
-            to go into a little more detail about your company. Talk about your team and what services you provide.
-            Tell your visitors the story of how you came up with the idea for your business and what makes you different
-            from your competitors. Make your company stand out and show your visitors who you are. Tip:
-            Add your own image by double clicking the image and clicking Change Image
-          </p>
+        <div class="post-left" v-html="page.content.rendered">
         </div>
         <div class="post-right">
           <div class="year">
             <span class="current-year">NEXT ARTICLE</span> <span><i class="fas fa-chevron-right"></i></span>
           </div>
-          <OtherPosts :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'" ></OtherPosts>
-          <OtherPosts  :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'"></OtherPosts>
-          <OtherPosts  :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'"></OtherPosts>
+          <div v-for="item in items" v-bind:key="item.id">
+            <OtherPosts :category="item.categories" :author="item.author" :title="item.title.rendered" ></OtherPosts>
+          </div>
         </div>
       </div>
     </div>
@@ -65,10 +44,17 @@
   import AppPageTitle from '~/components/AppPageTitle'
   import OtherPosts from '~/components/OtherPosts'
   import axios from 'axios'
+  import moment from 'moment'
   export default {
     data() {
       return {
+        users: [],
+        author: '',
+        categories: [],
         items: [],
+        page: {
+          acf: {}
+        },
         filters: [
           {
             id: 1,
@@ -99,19 +85,86 @@
         ]
       }
     },
+  computed: {
+    // a computed getter
+    computedAuthor: function () {
+      var computedString = ''
+      var computedAuthor = ''
+      var date = ''
+      this.users.forEach( (user) =>
+      {
+          if(this.page.author === user.id)
+          {
+              computedAuthor = user.name
+          }
+      })
+      computedString = computedAuthor  + ', '
+      date = moment(this.page.date).format('MMM YYYY [at] LT');
+      computedString += date
+      return computedString
+    },
+    computedCategories: function () {
+      var computedString = ''
+      var currentCategory = {}
+      this.page.categories.forEach( (categoryOfItem) =>
+      {
+        currentCategory = categoryOfItem
+        this.categories.forEach( (category) =>
+        {
+          if(category.id === currentCategory)
+          {
+            computedString += category.name + ', '
+          }
+        })
+      })
+      computedString = computedString.slice(0, -2);
+      return computedString
+    }
+  },
     components: {
       AppFilter,
       AppNews,
       AppPageTitle,
       OtherPosts
     },
-    asyncData({}) {
-      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts').then(function (response) {
-        return { items: response.data }
-      }).catch(function (error) {
-        console.log(error);
+    asyncData({ route }) {
+      return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts/${route.params.id}`).then((response) => {
+        return { page: response.data }
+      }).catch((error) => {
+        console.log(error)
       });
     },
+    methods: {
+      goToPost () {
+        this.$router.push({ path: 'services' })
+      },
+      getUsers() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
+          this.users = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      getCategories() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
+          this.categories = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      getItems() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
+          this.items = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      }
+    },
+    mounted() {
+      this.getUsers()
+      this.getCategories()
+      this.getItems()
+    }
   }
 </script>
 

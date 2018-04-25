@@ -35,19 +35,24 @@ module.exports = {
       }
     },
     vendor: [
-      'axios'
+      'axios',
+      'aos',
+      'moment',
+      'lodash'
     ]
   },
   css: [
     'animate.css/animate.min.css',
     'swiper/dist/css/swiper.css',
+    'aos/dist/aos.css',
     '~/assets/styles/variables.scss',
     '~/assets/styles/mixins.scss',
     '~/assets/styles/main.scss',
   ],
   plugins: [
-    {src: '~/plugins/scroll-reveal.js', ssr: false},
     {src: '~/plugins/swiper.js', ssr: false},
-    '~/plugins/vue2-filters.js'
+    {src: '~/plugins/aos.js', ssr: false},
+    '~/plugins/vue2-filters.js',
+    '~plugins/filters.js'
   ]
 }

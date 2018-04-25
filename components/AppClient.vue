@@ -1,5 +1,5 @@
 <template>
-  <img v-scroll-reveal.reset src="~/static/images/walter-logo.png" alt="">
+  <img data-aos="slide-up" src="~/static/images/walter-logo.png" alt="">
 </template>
 
 <style scoped>

@@ -1,7 +1,8 @@
 <template>
-  <div class="card animated fadeIn" v-scroll-reveal.reset>
+  <div class="card animated fadeIn" data-aos="slide-up">
     <div class="image">
       <img v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
+
       <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
@@ -43,7 +44,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 2em;
+      /*padding: 0 1em;*/
       background: #e2e2e2;
 
       img {
@@ -55,7 +56,7 @@
     }
 
     .info {
-      padding: 0 2em 1em 2em;
+      padding: 0 1em 1em 1em;
 
       .title {
         cursor: pointer;
@@ -78,7 +79,7 @@
       background-image: linear-gradient(90deg, #0093c8 0%, #faaf40 100%);
       background-size: cover;
       background-position: center;
-      background-attachment: fixed;  /* <- here it is */
+      background-attachment: fixed;
     }
   }
 </style>

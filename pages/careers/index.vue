@@ -1,7 +1,7 @@
 <template>
   <section class="padded-content footing-space">
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
-    <AppFilter :filters="filters" :filterActive="2" :showDateFilter="true" :monthActive="2"></AppFilter>
+    <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter" @onSearch="search = $event"></AppFilter>
     <div class="items">
       <AppPosition v-for="(test, index) of items" :key="index"/>
     </div>
@@ -24,12 +24,9 @@
           acf: {}
         },
         items: [],
-        filters: [
-          { id: 1, name: 'test 1' },
-          { id: 2, name: 'test 2' },
-          { id: 3, name: 'test 3' },
-          { id: 4, name: 'test 4' }
-        ]
+        filters: [],
+        search: '',
+        selectedFilter: -1
       }
     },
     components: {
@@ -48,12 +45,15 @@
       });
     },
     methods: {
-      getItems() {
+      getItems () {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?_embed').then((response) => {
           this.items = response.data
         }).catch((error) => {
           console.log(error);
         });
+      },
+      selectFilter (id) {
+        this.selectedFilter = id
       }
     }
   }

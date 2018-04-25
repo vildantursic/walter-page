@@ -12,7 +12,9 @@
     <div class="services-info">
       <div class="navigation">
         <h1 class="hidden-amount">+ {{page.acf.cases.length}}</h1>
-        <h1 style="float: right">cases</h1>
+        <nuxt-link :to="{ name: 'cases' }">
+          <h1>cases</h1>
+        </nuxt-link>
       </div>
       <div class="info">
         <h1>{{page.acf.description}}</h1>
@@ -21,7 +23,7 @@
       <div class="services">
         <h2>Services</h2>
         <section>
-          <AppSingleService v-for="(item, index) of [1,2,3,4,5]" :key="index"/>
+          <AppSingleService v-for="(item, index) of subServices" v-if="item" :key="index" :item="item"/>
         </section>
       </div>
     </div>
@@ -32,6 +34,7 @@
   import AppSingleService from '~/components/AppSingleService'
   import AppSideNavigation from "~/components/AppSideNavigation"
   import axios from 'axios'
+  import { find } from 'lodash'
 
   export default {
     components: {
@@ -44,6 +47,7 @@
           acf: {}
         },
         links: [],
+        subServices: [],
         activeLink: 0
       }
     },
@@ -56,11 +60,19 @@
     },
     created () {
       this.getServices()
+      this.getSubServices()
     },
     methods: {
       getServices () {
         axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/services`).then((response) => {
           this.links = response.data;
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
+      getSubServices () {
+        axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/sub_services?_embed`).then((response) => {
+          this.subServices = response.data.map((subService) => find(this.page.acf.sub_services, { ID: subService.id }) ? subService : undefined);
         }).catch((error) => {
           console.log(error)
         });
@@ -114,11 +126,12 @@
     flex-direction: column;
     justify-content: center;
     color: white;
+    margin: 0 10%;
 
     .navigation {
       position: relative;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: flex-end;
       margin-bottom: 30px;
 
@@ -131,12 +144,13 @@
         right: 0;
         z-index: -1;
         opacity: 0.1;
-        font-size: 5em;
+        font-size: 9em;
+        margin-top: 50px;
       }
     }
 
     .info {
-      width: 60%;
+      width: 80%;
 
       @media (max-width: 768px) {
         width: 100%;
