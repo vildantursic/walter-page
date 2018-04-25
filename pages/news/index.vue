@@ -3,7 +3,8 @@
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
     <AppFilter :filters="filters" :filterActive="2" :showDateFilter="true" :monthActive="2"></AppFilter>
     <div class="items">
-      <AppNews v-for="(item, index) of items"  :item="item" :key="index"/>
+      <AppNews v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
+      <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
     </div>
   </section>
 </template>
@@ -13,20 +14,24 @@
   import AppNews from '~/components/AppNews'
   import AppPageTitle from '~/components/AppPageTitle'
   import AppContactBox from '~/components/AppContactBox'
+  import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
 
   export default {
     data() {
       return {
+        itemsToShow: 3,
+        id: null,
         page: {
           acf: {}
         },
         items: [],
         filters: [
-          { id: 1, name: 'test 1' },
-          { id: 2, name: 'test 2' },
-          { id: 3, name: 'test 3' },
-          { id: 4, name: 'test 4' }
+          { id: 1, name: 'All' },
+          { id: 2, name: 'BIM Consulting and Engineering' },
+          { id: 3, name: 'BIM Modelling' },
+          { id: 4, name: 'BIM Asset Creation' },
+          { id: 5, name: 'Software Development' }
         ]
       }
     },
@@ -34,11 +39,22 @@
       AppFilter,
       AppNews,
       AppPageTitle,
-      AppContactBox
+      AppContactBox,
+      AppMoreCard
     },
     methods: {
+      goToPost (id) {
+        this.$router.push({ path: `news/${id}`})
+      },
       getImageSource(item) {
         console.log(item.content )
+      },
+      getItems() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
+          this.items = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
       }
     },
     created () {
@@ -50,15 +66,6 @@
       }).catch((error) => {
         console.log(error)
       });
-    },
-    methods: {
-      getItems() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
-          this.items = response.data
-        }).catch((error) => {
-          console.log(error);
-        });
-      }
     }
   }
 </script>

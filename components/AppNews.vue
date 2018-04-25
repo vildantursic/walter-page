@@ -5,11 +5,10 @@
         <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
       </div>
       <div class="info-card">
-        <p class="category"></p>
-        <p class="author">{{ item.author }} + , {{item.date}}</p>
+        <p class="category">{{item.categories}}</p>
+        <p class="author">{{computedAuthor}}</p>
         <h1 class="title">{{ item.title.rendered | truncate(25)}}</h1>
-        <div v-html="item.content.rendered"></div>
-        <p class="author">{{ item.author }}</p>
+        <div>{{item.acf.description | truncate(250)}}</div>
         <div class="social">
           <!-- Add font awesome icons -->
           <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -25,9 +24,29 @@
 <script>
   export default {
     props: ['item'],
-    components: {
+    components: {},
+    data() {
+      return {
+      }
     },
+    computed: {
+      // a computed getter
+      computedAuthor: function () {
+        // `this` points to the vm instance
+        var computedString = ''
+        computedString = this.item.author + ', '
+        var date = this.item.date.split('T')[0]
+        var time = this.item.date.split('T')[1]
+        computedString += date + ' at ' + time
+        return computedString
+      }
+    },
+    methods: {
+      clickPost () {
+        this.$emit('onPostClicked')
+      }
     }
+  }
 </script>
 
 <style lang="scss" scoped>
