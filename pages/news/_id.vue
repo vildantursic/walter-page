@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="header-news">
+    <div class="header-news padded-content">
       <h1 class="title">{{page.acf.description}}</h1>
       <div class="social">
         <!-- Add font awesome icons -->
@@ -11,7 +11,7 @@
         <a href="#"><i class="fas fa-paperclip"></i></a>
       </div>
     </div>
-    <div class="item animated fadeIn">
+    <div class="item animated fadeIn padded-content">
       <div class="img-header">
         <p class="category">{{computedCategories}}</p>
         <p class="author">{{computedAuthor}}</p>
