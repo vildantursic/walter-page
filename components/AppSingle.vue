@@ -98,7 +98,7 @@
       .info-card {
         position: relative;
         width: 40%;
-        padding: 5em 5em 1em 1em;
+        padding: 5em 7em 5em 3em;
 
         .category {
           margin-top: 1em;
@@ -125,7 +125,7 @@
         }
         .text-box {
           height: 200px;
-          width: 100%;
+          width: 70%;
           overflow: auto;
         }
       }
