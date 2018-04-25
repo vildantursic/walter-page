@@ -26,9 +26,9 @@
           <div class="year">
             <span class="current-year">NEXT ARTICLE</span> <span><i class="fas fa-chevron-right"></i></span>
           </div>
-          <OtherPosts :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'" ></OtherPosts>
-          <OtherPosts  :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'"></OtherPosts>
-          <OtherPosts  :category="'PRESS RELEASE'" :author="'John Doe, June 20 at 10:05 PM'" :title="'I\'m a title. Click here to edit me.'"></OtherPosts>
+          <div v-for="item in items" v-bind:key="item.id">
+            <OtherPosts :category="item.categories" :author="item.author" :title="item.title.rendered" ></OtherPosts>
+          </div>
         </div>
       </div>
     </div>
@@ -51,6 +51,7 @@
         users: [],
         author: '',
         categories: [],
+        items: [],
         page: {
           acf: {}
         },
@@ -151,11 +152,19 @@
         }).catch((error) => {
           console.log(error);
         });
+      },
+      getItems() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
+          this.items = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
       }
     },
     mounted() {
       this.getUsers()
       this.getCategories()
+      this.getItems()
     }
   }
 </script>
