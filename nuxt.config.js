@@ -37,7 +37,8 @@ module.exports = {
     vendor: [
       'axios',
       'aos',
-      'moment'
+      'moment',
+      'lodash'
     ]
   },
   css: [
@@ -52,5 +53,6 @@ module.exports = {
     {src: '~/plugins/swiper.js', ssr: false},
     {src: '~/plugins/aos.js', ssr: false},
     '~/plugins/vue2-filters.js',
+    '~plugins/filters.js'
   ]
 }

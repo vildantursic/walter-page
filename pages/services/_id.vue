@@ -23,7 +23,7 @@
       <div class="services">
         <h2>Services</h2>
         <section>
-          <AppSingleService v-for="(item, index) of page.acf.sub_services" :key="index" :item="item"/>
+          <AppSingleService v-for="(item, index) of subServices" v-if="item" :key="index" :item="item"/>
         </section>
       </div>
     </div>
@@ -34,6 +34,7 @@
   import AppSingleService from '~/components/AppSingleService'
   import AppSideNavigation from "~/components/AppSideNavigation"
   import axios from 'axios'
+  import { find } from 'lodash'
 
   export default {
     components: {
@@ -46,6 +47,7 @@
           acf: {}
         },
         links: [],
+        subServices: [],
         activeLink: 0
       }
     },
@@ -58,11 +60,19 @@
     },
     created () {
       this.getServices()
+      this.getSubServices()
     },
     methods: {
       getServices () {
         axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/services`).then((response) => {
           this.links = response.data;
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
+      getSubServices () {
+        axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/sub_services?_embed`).then((response) => {
+          this.subServices = response.data.map((subService) => find(this.page.acf.sub_services, { ID: subService.id }) ? subService : undefined);
         }).catch((error) => {
           console.log(error)
         });

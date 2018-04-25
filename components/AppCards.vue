@@ -3,7 +3,7 @@
     <div class="image">
       <img v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
 
-      <img class="no-image" v-if="!item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
+      <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
       <h1 class="title" @click="showCase(item)">{{item.title.rendered | truncate(25)}}</h1>

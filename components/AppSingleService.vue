@@ -3,10 +3,10 @@
     <div class="image">
       <img v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
 
-      <img class="no-image" v-if="!item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
+      <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
-      <h4 class="title">{{item.post_title}}</h4>
+      <h4 class="title">{{item.title.rendered}}</h4>
     </div>
     <div class="border"></div>
   </div>
@@ -37,6 +37,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
+      .no-image {
+        width: auto;
+      }
     }
 
     .info {
@@ -45,6 +49,10 @@
       align-items: center;
       justify-content: center;
       color: white;
+
+      .title {
+        text-align: center;
+      }
     }
   }
 </style>

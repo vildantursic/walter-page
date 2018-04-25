@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://use.fontawesome.com/releases/v5.0.10/css/all.css');
 @import "mixins";
+@import "variables";
 
 html, body {
   margin: 0;
@@ -16,6 +17,10 @@ h1, h2, h3, h4, h5, h6, p {
 a {
   text-decoration: none;
   color: #FFFFFF;
+
+  &:hover {
+    color: $main-color !important;
+  }
 }
 
 .padded-content {
@@ -43,5 +48,5 @@ a {
   background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #469fc1;
+  background-color: $main-color;
 }
