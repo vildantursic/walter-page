@@ -1,15 +1,16 @@
 <template>
     <div class="card animated fadeIn" data-aos="slide-up" v-on:click="clickPost()">
       <div class="card-img-container">
-        <img class="card-img" v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
-        <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
+        <img class="card-img" v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
+        <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
       </div>
       <div class="info-card">
-        <p class="category">{{computedCategories}}</p>
-        <p class="author">{{computedAuthor}}</p>
+        <p class="category">
+          <span v-for="(category, index) of item.categories" :key="index"> {{category.name}}<span v-if="index < item.categories.length - 1">,</span></span>
+        </p>
+        <p class="author">{{item.author.name}}</p>
         <h1 class="title">{{ item.title.rendered | truncate(25)}}</h1>
-        <div class="scroll" v-html="item.content.rendered"></div>
-        <p class="author">{{ item.author }}</p>
+        <div class="scroll">{{ item.acf.description | truncate(25)}}</div>
         <div class="social">
           <!-- Add font awesome icons -->
           <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -29,70 +30,14 @@
   export default {
     props: ['item'],
     components: {},
-    data() {
-      return {
-        users: [],
-        categories: [],
-        author: '',
-      }
-    },
-    created () {
-      this.getUsers()
-      this.getCategories()
-    },
     computed: {
-      // a computed getter
-      computedAuthor: function () {
-        var computedString = ''
-        var computedAuthor = ''
-        var date = ''
-        this.users.forEach( (user) =>
-        {
-          if(this.item.author === user.id)
-          {
-            computedAuthor = user.name
-          }
-        })
-        computedString = computedAuthor  + ', '
-        date = moment(this.item.date).format('MMM YYYY [at] LT');
-        computedString += date
-        return computedString
-      },
-      computedCategories: function () {
-        var computedString = ''
-        var currentCategory = {}
-        this.item.categories.forEach( (categoryOfItem) =>
-        {
-          currentCategory = categoryOfItem
-          this.categories.forEach( (category) =>
-          {
-            if(category.id === currentCategory)
-            {
-              computedString += category.name + ', '
-            }
-          })
-        })
-        computedString = computedString.slice(0, -2);
-        return computedString
+      date: () => {
+        return moment(this.item.date).format('MMM YYYY [at] LT')
       }
     },
     methods: {
       clickPost () {
         this.$emit('onPostClicked')
-      },
-      getUsers() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
-          this.users = response.data
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      getCategories() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
-          this.categories = response.data
-        }).catch((error) => {
-          console.log(error);
-        });
       }
     }
   }
@@ -186,6 +131,8 @@
   }
   .scroll{
     height: 200px;
-    overflow: scroll;
+  }
+  .no-image{
+    width: auto;
   }
 </style>
