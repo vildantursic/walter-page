@@ -61,12 +61,18 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/styles/mixins";
+
   .swiper {
     width: 100%;
-    height: 100%;
+    height: 70vh;
+
+    @include screen-size(xs) {
+      width: 100vh;
+    }
   }
   .my-swiper {
-    height: 500px;
+    height: 80%;
     width: 100%;
     overflow: hidden;
     .swiper-wrapper {
@@ -88,7 +94,7 @@
     }
   }
   .my-swiper-thumb {
-    height: 100px;
+    height: 20%;
     margin-top: 5em;
 
     .swiper-wrapper {

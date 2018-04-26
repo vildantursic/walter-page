@@ -7,9 +7,9 @@
     </div>
     <div class="info">
       <h1 class="title" @click="showCase(item)">{{item.title.rendered | truncate(25)}}</h1>
-      <p v-if="item.author">{{item.author}}</p>
-      <div class="content">{{item.acf.description | truncate(250)}}</div>
-      <i v-if="item.acf.partners">In Collaboration with <span v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></i>
+      <h3 class="clients" v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span v-if="index < item.acf.customers.length - 1">,</span></h3>
+      <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>
+      <i class="partner" v-if="item.acf.partners">In Collaboration with <span v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></i>
     </div>
 
     <div class="border"></div>
@@ -33,6 +33,7 @@
   @import "../assets/styles/variables";
 
   .card{
+    position: relative;
     display: flex;
     flex-direction: column;
     height: 400px;
@@ -58,18 +59,29 @@
     .info {
       padding: 0 1em 1em 1em;
       height: 200px;
+
       .title {
         cursor: pointer;
+        font-weight: bold;
+        margin-bottom: 0;
 
         &:hover {
           color: $main-color;
         }
       }
 
+      .clients {
+        margin: 10px 0;
+      }
+
       .content {
-        height: auto;
-        text-overflow: ellipsis;
+        height: 63px;
         overflow: hidden;
+      }
+
+      .partner {
+        position: absolute;
+        bottom: 10px;
       }
     }
 

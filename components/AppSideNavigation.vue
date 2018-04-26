@@ -16,10 +16,13 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
 
   ul {
     list-style: none;
     width: 300px;
+
+    @include hide-mobile();
 
     li {
       margin: 15px 0;

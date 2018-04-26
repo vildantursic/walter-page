@@ -82,7 +82,7 @@
     width: auto;
     height: auto;
     z-index: -99;
-    background-image: linear-gradient(45deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
+    background-image: linear-gradient(90deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
   }
 
   .services-info {
@@ -106,7 +106,7 @@
     }
 
     .services {
-      @include grid-items(5%, 5%, 4, 2);
+      @include grid-items(5%, 20px, 4, 2);
     }
   }
 </style>

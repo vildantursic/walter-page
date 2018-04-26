@@ -61,10 +61,13 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
 
   .filter {
     width: 100%;
     margin: 10vh 0;
+
+    @include hide-mobile();
 
     ul {
       list-style: none;

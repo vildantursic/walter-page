@@ -13,6 +13,32 @@
   }
 }
 
+@mixin hide-mobile() {
+  @media (max-width: 425px) {
+    display: none;
+  }
+}
+
+@mixin screen-size($size) {
+  @if ($size == l) {
+    @media (max-width: 1440px) {
+       @content;
+    }
+  } @else if ($size == m) {
+    @media (max-width: 1024px) {
+       @content;
+    }
+  } @else if ($size == s) {
+    @media (max-width: 768px) {
+       @content;
+    }
+  } @else if ($size == xs) {
+    @media (max-width: 425px) {
+       @content;
+    }
+  }
+}
+
 @mixin default-spacing($size){
   padding: 0 15%;
 
@@ -23,7 +49,7 @@
     padding: 0 5%;
   }
   @media (max-width: 425px) {
-    padding: 0;
+    padding: 0 10px;
   }
 }
 

@@ -3,7 +3,7 @@
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
     <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter"></AppFilter>
     <div class="items">
-      <AppCards v-for="(item, index) of limitBy(items, itemsToShow).filter(el => find(el.categories, selectedFilter) ? el : undefined)" :key="index" :item="item" @onShowCase="showCase($event)"/>
+      <AppCards v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item" @onShowCase="showCase($event)"/>
       <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
     </div>
     <AppSingle v-if="item" :item="item" @onCloseCase="item = null"/>
@@ -41,7 +41,6 @@
     },
     created () {
       this.getItems()
-      this.getCategories()
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/60').then((response) => {
@@ -50,17 +49,34 @@
         console.log(error)
       });
     },
+    computed:{
+      searchItems: () => {
+        console.log(this.items)
+        return this.items
+      }
+    },
     methods: {
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases?_embed').then((response) => {
           this.items = response.data
+          this.getCategories()
         }).catch((error) => {
           console.log(error);
         });
       },
       getCategories() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/case_categories').then((response) => {
-          this.filters = response.data
+          this.filters = response.data;
+          this.items.map((item) => {
+            const cats = []
+            response.data.forEach(cat => {
+              if (find(item.case_categories, (o) => o == cat.id)) {
+                cats.push(cat)
+              }
+            })
+            item.case_categories = cats
+            return item
+          })
         }).catch((error) => {
           console.log(error);
         });
@@ -70,10 +86,6 @@
       },
       selectFilter (id) {
         this.selectedFilter = id
-        this.items.filter(el => {
-          console.log(el.case_categories, find(el.case_categories, this.selectedFilter))
-          return find(el.case_categories, this.selectedFilter) ? el : undefined
-        })
       }
     }
   }
