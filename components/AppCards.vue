@@ -35,7 +35,7 @@
   .card{
     display: flex;
     flex-direction: column;
-    height: 400px;
+    height: 450px;
     overflow: hidden;
 
     .image {
@@ -57,7 +57,7 @@
 
     .info {
       padding: 0 1em 1em 1em;
-      height: 200px;
+      height: 250px;
       .title {
         cursor: pointer;
 
