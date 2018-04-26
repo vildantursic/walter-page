@@ -54,6 +54,7 @@
     border-image-slice: 1;
     .card-img-container
     {
+      background-color: lightgray;
       overflow: hidden;
       display: flex;
       justify-content: left;

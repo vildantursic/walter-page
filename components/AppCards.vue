@@ -35,7 +35,7 @@
   .card{
     display: flex;
     flex-direction: column;
-    max-height: 500px;
+    height: 400px;
     overflow: hidden;
 
     .image {
@@ -57,7 +57,7 @@
 
     .info {
       padding: 0 1em 1em 1em;
-
+      height: 200px;
       .title {
         cursor: pointer;
 
@@ -67,7 +67,7 @@
       }
 
       .content {
-        height: 125px;
+        height: auto;
         text-overflow: ellipsis;
         overflow: hidden;
       }
