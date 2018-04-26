@@ -139,7 +139,6 @@
 
         .current-year {
           font-size: 1.6em;
-          font-weight: bolder;
         }
       }
 
@@ -157,7 +156,6 @@
           }
         }
         .active {
-          font-weight: bolder;
           opacity: 1;
         }
       }

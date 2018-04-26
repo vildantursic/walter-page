@@ -3,10 +3,10 @@
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
     <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter"></AppFilter>
     <div class="items">
-      <AppCards v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item" @onShowCase="showCase($event)"/>
+      <AppCards v-for="(item, index) of limitBy(items, itemsToShow).filter(el => find(el.categories, selectedFilter) ? el : undefined)" :key="index" :item="item" @onShowCase="showCase($event)"/>
       <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
     </div>
-    <AppSingle v-if="item" @onCloseCase="item = null"/>
+    <AppSingle v-if="item" :item="item" @onCloseCase="item = null"/>
   </section>
 </template>
 
@@ -17,6 +17,7 @@
   import AppMoreCard from '~/components/AppMoreCard'
   import AppSingle from "~/components/AppSingle";
   import axios from 'axios'
+  import { find } from 'lodash'
 
   export default {
     components: {
@@ -69,6 +70,10 @@
       },
       selectFilter (id) {
         this.selectedFilter = id
+        this.items.filter(el => {
+          console.log(el.case_categories, find(el.case_categories, this.selectedFilter))
+          return find(el.case_categories, this.selectedFilter) ? el : undefined
+        })
       }
     }
   }

@@ -3,14 +3,14 @@
     <div v-swiper:mySwiper="swiperOption" class="my-swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(image, index) in images" :key="index">
-          <img v-if="image" src="~/static/images/arch.jpg">
+          <img v-if="image" :src="image">
         </div>
       </div>
     </div>
     <div v-swiper:mySecondSwiper="swiperThumbOption" class="my-swiper-thumb">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(test, index) in [1,2,3]" :key="index">
-          <img v-if="test" src="~/static/images/arch.jpg">
+        <div class="swiper-slide" v-for="(image, index) in images" :key="index">
+          <img v-if="image" :src="image" @click="slideTo(index)">
         </div>
       </div>
     </div>
@@ -51,6 +51,11 @@
       }
     },
     mounted() {
+    },
+    methods: {
+      slideTo(index) {
+        this.mySwiper.slideTo(index, 1000, false)
+      }
     }
   }
 </script>
@@ -69,11 +74,10 @@
         text-align: center;
         font-size: 38px;
         font-weight: 700;
-        background-color: #ffffff;
+        background-color: #e1e1e1;
         overflow: hidden;
         img {
           height: 100%;
-          width: 100%;
         }
       }
     }

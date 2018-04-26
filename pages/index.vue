@@ -1,7 +1,7 @@
 <template>
   <section class="padded-content full-height">
     <video id="bgvid" playsinline autoplay muted loop>
-      <source src="http://careers.walter-dev.com/assets/walter.mp4" type="video/mp4">
+      <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/walter.mp4" type="video/mp4">
     </video>
     <div class="video-cover"></div>
 
@@ -98,11 +98,11 @@
       margin: 0 0 50px 0;
     }
     h1 {
-      font-size: 3em;
+      font-weight: bold;
+      font-size: 4em;
     }
     .description {
       font-size: 1.3em;
-      font-weight: bolder;
     }
 
     .services {
