@@ -13,8 +13,10 @@
     </div>
     <div class="item animated fadeIn padded-content">
       <div class="img-header">
-        <p class="category">{{computedCategories}}</p>
-        <p class="author">{{computedAuthor}}</p>
+        <p class="category">
+          <!--<span v-for="(category, index) of page.categories" :key="index"> {{category}}<span v-if="index < page.categories.length - 1">,</span></span>-->
+        </p>
+        <p class="author" v-if="authors.length !== 0">{{authors[0].name}}, {{date}}</p>
       </div>
       <div v-if="page._embedded !== undefined" class="img-container">
         <img v-if="page._embedded['wp:featuredmedia'] !== undefined" :src="page._embedded['wp:featuredmedia'][0].source_url" :alt="page._embedded['wp:featuredmedia'][0].alt_text">
@@ -29,7 +31,7 @@
             <span class="current-year">NEXT ARTICLE</span> <span><i class="fas fa-chevron-right"></i></span>
           </div>
           <div v-for="item in items" v-bind:key="item.id">
-            <OtherPosts :category="item.categories" :author="item.author" :title="item.title.rendered" @onPostClicked="goToPost(item.id)"></OtherPosts>
+            <OtherPosts :item="item"></OtherPosts>
           </div>
         </div>
       </div>
@@ -48,83 +50,20 @@
   import AppPageTitle from '~/components/AppPageTitle'
   import OtherPosts from '~/components/OtherPosts'
   import axios from 'axios'
+  import { find } from 'lodash'
   import moment from 'moment'
+
   export default {
     data() {
       return {
-        users: [],
-        author: '',
+        authors: [],
         categories: [],
         items: [],
         page: {
           acf: {}
         },
-        filters: [
-          {
-            id: 1,
-            name: 'test 1'
-          },
-          {
-            id: 2,
-            name: 'test 2'
-          },
-          {
-            id: 3,
-            name: 'test 3'
-          },
-          {
-            id: 4,
-            name: 'test 4'
-          }
-        ],
-        subfilters: [
-          {
-            id: 1,
-            name: 'subtest 1'
-          },
-          {
-            id: 2,
-            name: 'subtest 2'
-          }
-        ]
       }
     },
-  computed: {
-    // a computed getter
-    computedAuthor: function () {
-      var computedString = ''
-      var computedAuthor = ''
-      var date = ''
-      this.users.forEach( (user) =>
-      {
-          if(this.page.author === user.id)
-          {
-              computedAuthor = user.name
-          }
-      })
-      computedString = computedAuthor  + ', '
-      date = moment(this.page.date).format('MMM YYYY [at] LT');
-      computedString += date
-      return computedString
-    },
-    computedCategories: function () {
-      var computedString = ''
-      var currentCategory = {}
-      this.page.categories.forEach( (categoryOfItem) =>
-      {
-        currentCategory = categoryOfItem
-        this.categories.forEach( (category) =>
-        {
-          if(category.id === currentCategory)
-          {
-            computedString += category.name + ', '
-          }
-        })
-      })
-      computedString = computedString.slice(0, -2);
-      return computedString
-    }
-  },
     components: {
       AppFilter,
       AppNews,
@@ -133,7 +72,10 @@
     },
     asyncData({ route }) {
       return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts/${route.params.id}?_embed`).then((response) => {
-        return { page: response.data }
+        return {
+          page: response.data,
+          date: moment(response.data.date).format('MMM YYYY [at] LT')
+        }
       }).catch((error) => {
         console.log(error)
       });
@@ -142,31 +84,48 @@
       goToPost (id) {
         this.$router.push({ path: `/news/${id}`})
       },
-      getUsers() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
-          this.users = response.data
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      getCategories() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
-          this.categories = response.data
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
           this.items = response.data
+          this.fillUser()
+          this.fillCategories()
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      fillUser() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
+          this.authors = response.data
+          this.items.map((item) => {
+            console.log(item)
+            if (find(response.data, { id: item.author })) {
+              item.author = find(response.data, { id: item.author })
+            }
+            return item
+          })
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      fillCategories() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
+          this.filters = response.data
+          this.items.map((item) => {
+            const cats = []
+            response.data.forEach(cat => {
+              if (find(item.categories, (o) => o == cat.id)) {
+                cats.push(cat)
+              }
+            })
+            item.categories = cats
+            return item
+          })
         }).catch((error) => {
           console.log(error);
         });
       }
     },
     mounted() {
-      this.getUsers()
-      this.getCategories()
       this.getItems()
     }
   }

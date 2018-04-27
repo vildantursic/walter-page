@@ -26,6 +26,9 @@ a {
     color: $main-color !important;
   }
 }
+a.nav-link {
+  color: #000000;
+}
 
 .padded-content {
   @include default-spacing(15)

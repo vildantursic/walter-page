@@ -127,7 +127,7 @@
           width: 100%;
         }
         .text-box {
-          height: 200px;
+          height: 50vh;
           overflow: auto;
         }
       }

@@ -9,7 +9,7 @@
           <span v-for="(category, index) of item.categories" :key="index"> {{category.name}}<span v-if="index < item.categories.length - 1">,</span></span>
         </p>
         <p class="author">{{item.author.name}}, {{date}}</p>
-        <h1 class="title" v-on:click="clickPost()">{{ item.title.rendered | truncate(100)}}</h1>
+        <h1 class="title"><nuxt-link class="nav-link" :to="`/news/${item.id}`">{{ item.title.rendered | truncate(100)}}</nuxt-link></h1>
         <div class="scroll">{{ item.acf.description | truncate(400)}}</div>
         <div class="social">
           <!-- Add font awesome icons -->
@@ -31,12 +31,6 @@
     data() {
       return {
         date: moment(this.item.date).format('MMM YYYY [at] LT')
-      }
-    },
-    components: {},
-    methods: {
-      clickPost () {
-        this.$emit('onPostClicked')
       }
     }
   }
