@@ -6,6 +6,7 @@
       <AppPosition v-for="(item, index) of limitBy(items,itemsToShow)" :key="index" :item="item"/>
     </div>
     <div class="items-bellow">
+      <AppPosition :item="items[items.length - 1]"></AppPosition>
     </div>
   </section>
 </template>
@@ -40,10 +41,8 @@
       AppPageTitle,
       AppPosition
     },
-    created () {
+    mounted() {
       this.getItems()
-      this.itemsToShow = this.items.length - 1
-      this.lastItem = this.items[items.length]
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/64').then((response) => {
@@ -56,12 +55,14 @@
       getItems () {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?_embed').then((response) => {
           this.items = response.data
+          this.itemsToShow = this.items.length - 1
         }).catch((error) => {
           console.log(error);
         });
       },
       selectFilter (id) {
         this.selectedFilter = id
+        console.log(id)
       }
     }
   }
