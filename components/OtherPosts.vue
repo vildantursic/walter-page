@@ -2,7 +2,7 @@
   <div class="other-news">
     <p class="category">{{computedCategories}}</p>
     <p class="author">{{computedAuthor}}</p>
-    <h1 class="title">{{title}}</h1>
+    <h1 class="title" v-on:click="clickPost()">{{title}}</h1>
   </div>
 </template>
 <script>

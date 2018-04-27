@@ -38,6 +38,9 @@
       align-items: center;
       justify-content: center;
 
+      img {
+        width: 50%;
+      }
       .no-image {
         width: auto;
       }
