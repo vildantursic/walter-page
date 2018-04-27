@@ -1,6 +1,6 @@
 <template>
     <div class="card animated fadeIn" data-aos="slide-up">
-      <div class="card-img-container">
+      <div v-if="item._embedded !== undefined" class="card-img-container">
         <img class="card-img" v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
         <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
       </div>
@@ -9,7 +9,7 @@
           <span v-for="(category, index) of item.categories" :key="index"> {{category.name}}<span v-if="index < item.categories.length - 1">,</span></span>
         </p>
         <p class="author">{{item.author.name}}, {{date}}</p>
-        <h1 class="title" v-on:click="clickPost()">{{ item.title.rendered | truncate(25)}}</h1>
+        <h1 class="title" v-on:click="clickPost()">{{ item.title.rendered | truncate(300)}}</h1>
         <div class="scroll">{{ item.acf.description | truncate(25)}}</div>
         <div class="social">
           <!-- Add font awesome icons -->
@@ -45,7 +45,7 @@
 <style lang="scss" scoped>
   @import '../assets/styles/variables';
 
-  .card{
+  .card {
     overflow: hidden;
     display: flex;
     flex-direction: row;
@@ -65,14 +65,17 @@
       justify-content: center;
       align-items: center;
       width: 60%;
+
       .card-img {
         height: 100%;
       }
     }
+
     .info-card {
       position: relative;
       width: 40%;
       padding: 1em 1em;
+
       .category {
         margin: 0;
         font-size: 1em;
@@ -94,49 +97,30 @@
     width: 30px;
     text-align: center;
     text-decoration: none;
+    background: #ffffff;
+    color: grey;
   }
+
   .fab:hover, .fas:hover {
     opacity: 0.7;
   }
-  .fa-facebook {
-    background: #ffffff;
-    color: grey;
-  }
-  .fa-twitter {
-    background: #ffffff;
-    color: grey;
-  }
-  .fa-google {
-    background: #ffffff;
-    color: grey;
-  }
-  .fa-linkedin {
-    background: #ffffff;
-    color: grey;
-  }
-  .fa-envelope
-  {
-    background: #ffffff;
-    color: grey;
-  }
-  .fa-paperclip
-  {
-    background: #ffffff;
-    color: grey;
-  }
-  .social
-  {
+
+  .social {
     position: absolute;
     bottom: 0;
   }
-  .scroll{
+
+  .scroll {
     height: 200px;
   }
-  .no-image{
+
+  .no-image {
     width: auto;
   }
-  .title{
+
+  .title {
     cursor: pointer;
+
     &:hover {
       color: $main-color;
     }

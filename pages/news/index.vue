@@ -22,12 +22,12 @@
     data() {
       return {
         itemsToShow: 3,
-        id: null,
         page: {
           acf: {}
         },
         items: [],
         filters: [],
+        selectedFilter: -1,
         categories: [],
         users: []
       }
@@ -39,9 +39,19 @@
       AppContactBox,
       AppMoreCard
     },
+    created () {
+      this.getItems()
+    },
+    asyncData({}) {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/66').then((response) => {
+        return { page: response.data }
+      }).catch((error) => {
+        console.log(error)
+      });
+    },
     methods: {
       goToPost (id) {
-        this.$router.push({ path: `news/${id}`})
+        this.$router.push({ path: `/news/${id}`})
       },
       getImageSource(item) {
         console.log(item.content )
@@ -83,17 +93,10 @@
         }).catch((error) => {
           console.log(error);
         });
+      },
+      selectFilter (id) {
+        this.selectedFilter = id
       }
-    },
-    created () {
-      this.getItems()
-    },
-    asyncData({}) {
-      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/66').then((response) => {
-        return { page: response.data }
-      }).catch((error) => {
-        console.log(error)
-      });
     }
   }
 </script>

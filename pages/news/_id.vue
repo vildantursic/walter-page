@@ -27,7 +27,7 @@
             <span class="current-year">NEXT ARTICLE</span> <span><i class="fas fa-chevron-right"></i></span>
           </div>
           <div v-for="item in items" v-bind:key="item.id">
-            <OtherPosts :category="item.categories" :author="item.author" :title="item.title.rendered" ></OtherPosts>
+            <OtherPosts :category="item.categories" :author="item.author" :title="item.title.rendered" @onPostClicked="goToPost(item.id)"></OtherPosts>
           </div>
         </div>
       </div>
@@ -135,8 +135,8 @@
       });
     },
     methods: {
-      goToPost () {
-        this.$router.push({ path: 'services' })
+      goToPost (id) {
+        this.$router.push({ path: `/news/${id}`})
       },
       getUsers() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
