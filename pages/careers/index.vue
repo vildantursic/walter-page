@@ -3,10 +3,9 @@
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
     <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter" @onSearch="search = $event"></AppFilter>
     <div class="items">
-      <AppPosition v-for="(test, index) of items" :key="index"/>
+      <AppPosition v-for="(item, index) of items" :key="index" :item="item"/>
     </div>
     <div class="items-bellow">
-      <AppPosition/>
     </div>
   </section>
 </template>
@@ -20,11 +19,18 @@
   export default {
     data() {
       return {
+        itemsToShow: 3,
+        id: null,
         page: {
           acf: {}
         },
         items: [],
-        filters: [],
+        filters: [
+          { id: 2, name: 'BIM Consulting and Engineering' },
+          { id: 3, name: 'BIM Modelling' },
+          { id: 4, name: 'BIM Asset Creation' },
+          { id: 5, name: 'Software Development' }
+        ],
         search: '',
         selectedFilter: -1
       }
