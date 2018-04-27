@@ -3,14 +3,14 @@
     <div v-swiper:mySwiper="swiperOption" class="my-swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(image, index) in images" :key="index">
-          <img v-if="image" src="~/static/images/arch.jpg">
+          <img v-if="image" :src="image">
         </div>
       </div>
     </div>
     <div v-swiper:mySecondSwiper="swiperThumbOption" class="my-swiper-thumb">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(test, index) in [1,2,3]" :key="index">
-          <img v-if="test" src="~/static/images/arch.jpg">
+        <div class="swiper-slide" v-for="(image, index) in images" :key="index">
+          <img v-if="image" :src="image" @click="slideTo(index)">
         </div>
       </div>
     </div>
@@ -51,17 +51,28 @@
       }
     },
     mounted() {
+    },
+    methods: {
+      slideTo(index) {
+        this.mySwiper.slideTo(index, 1000, false)
+      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/styles/mixins";
+
   .swiper {
     width: 100%;
-    height: 100%;
+    height: 70vh;
+
+    @include screen-size(xs) {
+      width: 100vh;
+    }
   }
   .my-swiper {
-    height: 500px;
+    height: 80%;
     width: 100%;
     overflow: hidden;
     .swiper-wrapper {
@@ -69,11 +80,10 @@
         text-align: center;
         font-size: 38px;
         font-weight: 700;
-        background-color: #ffffff;
+        background-color: #e1e1e1;
         overflow: hidden;
         img {
           height: 100%;
-          width: 100%;
         }
       }
     }
@@ -84,7 +94,7 @@
     }
   }
   .my-swiper-thumb {
-    height: 100px;
+    height: 20%;
     margin-top: 5em;
 
     .swiper-wrapper {

@@ -1,7 +1,7 @@
 <template>
   <section class="padded-content full-height">
     <video id="bgvid" playsinline autoplay muted loop>
-      <source src="http://careers.walter-dev.com/assets/walter.mp4" type="video/mp4">
+      <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/walter.mp4" type="video/mp4">
     </video>
     <div class="video-cover"></div>
 
@@ -82,7 +82,7 @@
     width: auto;
     height: auto;
     z-index: -99;
-    background-image: linear-gradient(45deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
+    background-image: linear-gradient(90deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
   }
 
   .services-info {
@@ -98,15 +98,15 @@
       margin: 0 0 50px 0;
     }
     h1 {
-      font-size: 3em;
+      font-weight: bold;
+      font-size: 4em;
     }
     .description {
       font-size: 1.3em;
-      font-weight: bolder;
     }
 
     .services {
-      @include grid-items(5%, 5%, 4, 2);
+      @include grid-items(5%, 20px, 4, 2);
     }
   }
 </style>

@@ -1,3 +1,3 @@
 import Vue from 'vue'
 
-Vue.filter('capitalize', val => val.toLowerCase())
+Vue.filter('capitalize', val => val.toUpperCase())

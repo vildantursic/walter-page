@@ -61,10 +61,13 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
 
   .filter {
     width: 100%;
     margin: 10vh 0;
+
+    @include hide-mobile();
 
     ul {
       list-style: none;
@@ -139,7 +142,6 @@
 
         .current-year {
           font-size: 1.6em;
-          font-weight: bolder;
         }
       }
 
@@ -157,7 +159,6 @@
           }
         }
         .active {
-          font-weight: bolder;
           opacity: 1;
         }
       }
