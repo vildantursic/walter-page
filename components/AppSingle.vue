@@ -1,14 +1,14 @@
 <template>
   <div class="card">
-    <div class="close">
-      <i class="fas fa-times" @click="closeCase"></i>
-    </div>
     <div class="content">
       <div class="card-img-container">
         <AppSlider v-if="item.acf.gallery_images" :images="item.acf.gallery_images.split(',')"></AppSlider>
         <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>
       <div class="info-card">
+        <div class="close">
+          <i class="fas fa-times" @click="closeCase"></i>
+        </div>
         <p class="category">
           <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span v-if="index < item.case_categories.length - 1">,</span></span>
         </p>
@@ -122,12 +122,12 @@
           color: gray;
         }
         .divider {
-          margin-top: 10vh;
+          margin-top: 5vh;
           border-top: 1px solid gray;
           width: 100%;
         }
         .text-box {
-          height: 200px;
+          height: 400px;
           overflow: auto;
         }
       }
