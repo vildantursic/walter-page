@@ -46,7 +46,7 @@
     {
       position: relative;
       width: 100%;
-      padding: 1em 1em;
+      padding: 3em 1em 1em 1em;
       .position
       {
         margin: 0;

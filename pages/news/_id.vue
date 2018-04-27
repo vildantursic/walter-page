@@ -170,7 +170,7 @@
 
 <style lang="scss" scoped>
   @import "../../assets/styles/mixins";
-
+  @import "../../assets/styles/variables";
   .item {
     @include grid-items(0px, 20px, 1, 1);
   }
@@ -182,7 +182,7 @@
     .title
     {
       font-size: 2.5em;
-      color: grey;
+      color: #47494e;
     }
     .social
     {
@@ -198,7 +198,7 @@
       margin: 0;
       font-size: 1em;
       font-weight: 700;
-      color: blue;
+      color: $main-color;
       letter-spacing: 2px;
     }
     .author
@@ -224,6 +224,7 @@
   }
   .img-container-bottom
   {
+    display: flex;
     max-height: 500px;
     .img-bottom {
       width: 100%;
@@ -236,7 +237,7 @@
     .post-left
     {
       width: 70%;
-      padding: 0 2% 0 2%;
+      padding: 0 2% 0 0;
       .header-left
       {
         font-weight: 800;
@@ -244,7 +245,7 @@
     }
     .post-right
     {
-      margin: 0 3% 0 3%;
+      margin: 0 0 0 3%;
       width: 30%;
       .year {
         display: flex;
@@ -253,6 +254,7 @@
         .current-year {
           font-size: 1.2em;
           font-weight: bold;
+          cursor: pointer;
         }
         margin: 0 0 1.5em 0;
         padding-bottom: 1em;
