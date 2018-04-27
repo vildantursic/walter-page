@@ -1,5 +1,5 @@
 <template>
-    <div class="card animated fadeIn" data-aos="slide-up" v-on:click="clickPost()">
+    <div class="card animated fadeIn" data-aos="slide-up">
       <div class="card-img-container">
         <img class="card-img" v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
         <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
@@ -9,7 +9,7 @@
           <span v-for="(category, index) of item.categories" :key="index"> {{category.name}}<span v-if="index < item.categories.length - 1">,</span></span>
         </p>
         <p class="author">{{item.author.name}}, {{date}}</p>
-        <h1 class="title">{{ item.title.rendered | truncate(25)}}</h1>
+        <h1 class="title" v-on:click="clickPost()">{{ item.title.rendered | truncate(25)}}</h1>
         <div class="scroll">{{ item.acf.description | truncate(25)}}</div>
         <div class="social">
           <!-- Add font awesome icons -->
@@ -59,6 +59,7 @@
     border-image-slice: 1;
 
     .card-img-container {
+      background-color: lightgray;
       overflow: hidden;
       display: flex;
       justify-content: center;
@@ -133,5 +134,11 @@
   }
   .no-image{
     width: auto;
+  }
+  .title{
+    cursor: pointer;
+    &:hover {
+      color: $main-color;
+    }
   }
 </style>
