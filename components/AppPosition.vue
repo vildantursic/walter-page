@@ -42,6 +42,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: row;
+    min-height: 424px;
     max-height: 450px;
     padding-bottom: 2em;
     .info-card

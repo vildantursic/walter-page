@@ -6,7 +6,7 @@
       <AppPosition v-for="(item, index) of limitBy(items,itemsToShow)" :key="index" :item="item"/>
     </div>
     <div class="items-bellow">
-      <AppPosition :item="items[items.length - 1]"></AppPosition>
+      <AppPosition v-if="items[items.length - 1]" :item="items[items.length - 1]"></AppPosition>
     </div>
   </section>
 </template>
