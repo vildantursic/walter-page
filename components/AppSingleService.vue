@@ -1,9 +1,9 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up" v-on:click="clickService()">
-    <div class="image">
-      <img v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
+    <div v-if="item._embedded !== undefined" class="image">
+      <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
 
-      <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
+      <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
       <h4 class="title">{{item.title.rendered}}</h4>
@@ -26,13 +26,15 @@
 </script>
 
 <style lang="scss" scoped>
-  .card{
+  .card {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    width: 100px;
+    /*overflow: hidden;*/
 
     .image {
-      height: 100px;
+      min-height: 100px;
+      max-height: 100px;
       overflow: hidden;
       display: flex;
       align-items: center;

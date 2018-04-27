@@ -8,6 +8,7 @@
 <script>
   import moment from 'moment'
   import axios from 'axios'
+
   export default {
     components: {
     },
@@ -82,8 +83,9 @@
 </script>
 
 <style lang="scss" scoped>
-  .other-news
-  {
+  @import "../assets/styles/variables";
+
+  .other-news {
     border-width: 0 0 4px 0;
     border-style: solid;
     -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #c1c8d1 100%);
@@ -105,6 +107,13 @@
       font-size: 0.8em;
       font-weight: 500;
       color: gray;
+    }
+    .title {
+      cursor: pointer;
+
+      &:hover {
+        color: $main-color;
+      }
     }
   }
 </style>
