@@ -5,32 +5,23 @@
     </div>
     <div class="content">
       <div class="card-img-container">
-        <AppSlider :images="images"></AppSlider>
-        <!--<img class="card-img" src="~/static/images/hyatt.jpg" alt="">-->
+        <AppSlider v-if="item.acf.gallery_images" :images="item.acf.gallery_images.split(',')"></AppSlider>
+        <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>
       <div class="info-card">
-        <p class="category">BIM Consulting and Engineering</p>
-        <h1 class="title">Hyatt Regency Maraska
-          Zadar Hotel</h1>
-        <a class="link" href="https://www.symetri.com/plm">www.symetri.com/plm</a>
-        <p class="category">Agrob Buchtal GmbH</p>
+        <p class="category">
+          <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span v-if="index < item.case_categories.length - 1">,</span></span>
+        </p>
+        <h1 class="title">{{item.title.rendered}}</h1>
+        <a class="link" href="https://www.symetri.com/plm" target="_blank">www.symetri.com/plm</a>
+        <p class="customer">
+          <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span v-if="index < item.acf.customers.length - 1">,</span></span>
+        </p>
         <div class="text-box">
-          <p class="description">I'm a paragraph. Click here to add your
-            own text and edit me. It’s easy. Just
-            click “Edit Text” or double click me and
-            you can start adding your own content
-            and make changes to the font... I'm a paragraph. Click here to add your
-            own text and edit me. It’s easy. Just
-            click “Edit Text” or double click me and
-            you can start adding your own content
-            and make changes to the font...I'm a paragraph. Click here to add your
-            own text and edit me. It’s easy. Just
-            click “Edit Text” or double click me and
-            you can start adding your own content
-            and make changes to the font...</p>
+          <div class="description" v-html="item.content.rendered"></div>
         </div>
         <div class="divider">
-          <p class="author">In Collaboration with Symetri</p>
+          <p v-if="item.acf.partners" class="author">In Collaboration with <span v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></p>
         </div>
       </div>
     </div>
@@ -40,17 +31,9 @@
   import AppSlider from '~/components/AppSlider'
 
   export default {
+    props: ['item'],
     components: {
       AppSlider
-    },
-    data() {
-      return {
-        images: [
-          'static/images/arch.jpg',
-          'static/images/arch-2.jpg',
-          'static/images/hyatt.jpg'
-        ]
-      }
     },
     methods: {
       closeCase() {
@@ -61,6 +44,9 @@
 </script>
 
 <style lang="scss" scoped>
+  @import '../assets/styles/variables';
+  @import '../assets/styles/mixins';
+
   .card {
     position: fixed;
     z-index: 100;
@@ -69,6 +55,7 @@
     width: 100%;
     height: 100%;
     background: white;
+    overflow: scroll;
     -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
     -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
     border-image: linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
@@ -76,63 +63,77 @@
 
     .close {
       width: 100%;
-      height: 5vh;
 
       i {
         display: flex;
-        float: right;
+        align-items: flex-start;
+        justify-content: flex-end;
         font-size: 2em;
-        padding: 1em;
+        margin: 20px;
+        cursor: pointer;
+
+        &:hover {
+          color: $main-color;
+        }
       }
     }
 
     .content {
       display: flex;
 
+      @include screen-size(xs) {
+        flex-direction: column;
+      }
+
       .card-img-container {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 60%;
+
+        @include screen-size(xs) {
+          width: 100%;
+        }
       }
       .info-card {
         position: relative;
-        width: 40%;
-        padding: 5em 7em 5em 3em;
+        width: 25%;
+        padding: 0 3em;
+
+        @include screen-size(xs) {
+          width: 100%;
+        }
 
         .category {
           margin-top: 1em;
-          font-size: 0.75rem;
           font-weight: 300;
         }
+        .title {
+          font-size: 3em;
+          font-weight: bold;
+          margin: 0;
+        }
         .author {
-          /*margin: 0;*/
-          font-size: 0.8em;
           font-weight: 500;
           color: gray;
           font-style: italic;
         }
         .description {
-          font-size: 0.8em;
           color: gray;
         }
         .divider {
           margin-top: 10vh;
           border-top: 1px solid gray;
-          width: 70%;
-          /*position: absolute;*/
-          /*bottom: 0;*/
+          width: 100%;
         }
         .text-box {
           height: 200px;
-          width: 70%;
           overflow: auto;
         }
       }
       .link {
-        font-size: 0.75rem;
         text-decoration: none;
-        margin-bottom: 1em;
+        color: $main-color;
       }
     }
   }

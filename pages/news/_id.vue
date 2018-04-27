@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="header-news padded-content">
-      <h1 class="title">{{page.acf.description}}</h1>
+      <h1 class="title">{{page.title.rendered}}</h1>
       <div class="social">
         <!-- Add font awesome icons -->
         <a href="#"><i class="fab fa-linkedin"></i></a>

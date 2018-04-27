@@ -6,7 +6,7 @@
       <AppCards v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item" @onShowCase="showCase($event)"/>
       <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
     </div>
-    <AppSingle v-if="item" @onCloseCase="item = null"/>
+    <AppSingle v-if="item" :item="item" @onCloseCase="item = null"/>
   </section>
 </template>
 
@@ -17,6 +17,7 @@
   import AppMoreCard from '~/components/AppMoreCard'
   import AppSingle from "~/components/AppSingle";
   import axios from 'axios'
+  import { find } from 'lodash'
 
   export default {
     components: {
@@ -40,7 +41,6 @@
     },
     created () {
       this.getItems()
-      this.getCategories()
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/60').then((response) => {
@@ -49,17 +49,34 @@
         console.log(error)
       });
     },
+    computed:{
+      searchItems: () => {
+        console.log(this.items)
+        return this.items
+      }
+    },
     methods: {
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases?_embed').then((response) => {
           this.items = response.data
+          this.getCategories()
         }).catch((error) => {
           console.log(error);
         });
       },
       getCategories() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/case_categories').then((response) => {
-          this.filters = response.data
+          this.filters = response.data;
+          this.items.map((item) => {
+            const cats = []
+            response.data.forEach(cat => {
+              if (find(item.case_categories, (o) => o == cat.id)) {
+                cats.push(cat)
+              }
+            })
+            item.case_categories = cats
+            return item
+          })
         }).catch((error) => {
           console.log(error);
         });

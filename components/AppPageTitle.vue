@@ -16,7 +16,7 @@
 
 <style lang="scss" scoped>
   .title-page{
-    margin: 20vh 0 10vh 0;
+    margin: 15vh 0 10vh 0;
 
     .supertitle {
       font-size: 1.5em;
