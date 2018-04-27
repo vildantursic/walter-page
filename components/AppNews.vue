@@ -8,7 +8,7 @@
         <p class="category">
           <span v-for="(category, index) of item.categories" :key="index"> {{category.name}}<span v-if="index < item.categories.length - 1">,</span></span>
         </p>
-        <p class="author">{{item.author.name}}</p>
+        <p class="author">{{item.author.name}}, {{date}}</p>
         <h1 class="title">{{ item.title.rendered | truncate(25)}}</h1>
         <div class="scroll">{{ item.acf.description | truncate(25)}}</div>
         <div class="social">
@@ -25,16 +25,15 @@
 
 <script>
   import moment from 'moment'
-  import axios from 'axios'
 
   export default {
     props: ['item'],
-    components: {},
-    computed: {
-      date: () => {
-        return moment(this.item.date).format('MMM YYYY [at] LT')
+    data() {
+      return {
+        date: moment(this.item.date).format('MMM YYYY [at] LT')
       }
     },
+    components: {},
     methods: {
       clickPost () {
         this.$emit('onPostClicked')

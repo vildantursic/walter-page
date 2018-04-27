@@ -69,6 +69,7 @@
       },
       fillCategories() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
+          this.filters = response.data
           this.items.map((item) => {
             const cats = []
             response.data.forEach(cat => {
