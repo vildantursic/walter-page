@@ -16,10 +16,13 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
 
   ul {
     list-style: none;
     width: 300px;
+
+    @include hide-mobile();
 
     li {
       margin: 15px 0;
@@ -28,12 +31,12 @@
         text-decoration: none;
         color: #FFFFFF;
         padding: 1em 0.5em;
-        font-weight: bolder;
       }
 
       .nuxt-link-exact-active {
         font-size: 2.5em;
         padding: 0;
+        font-weight: bolder;
       }
     }
   }

@@ -26,6 +26,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
 
   header {
     width: 100%;
@@ -48,6 +49,8 @@
       align-items: center;
       height: 4em;
       margin-right: 10%;
+
+      @include hide-mobile();
 
       ul {
         -webkit-padding-start: 10px;

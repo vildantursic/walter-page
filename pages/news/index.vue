@@ -16,6 +16,7 @@
   import AppContactBox from '~/components/AppContactBox'
   import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
+  import { find } from 'lodash'
 
   export default {
     data() {
@@ -26,13 +27,9 @@
           acf: {}
         },
         items: [],
-        filters: [
-          { id: 1, name: 'All' },
-          { id: 2, name: 'BIM Consulting and Engineering' },
-          { id: 3, name: 'BIM Modelling' },
-          { id: 4, name: 'BIM Asset Creation' },
-          { id: 5, name: 'Software Development' }
-        ]
+        filters: [],
+        categories: [],
+        users: []
       }
     },
     components: {
@@ -52,6 +49,37 @@
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
           this.items = response.data
+          this.fillUser()
+          this.fillCategories()
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      fillUser() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
+          this.items.map((item) => {
+            if (find(response.data, { id: item.author })) {
+              item.author = find(response.data, { id: item.author })
+            }
+            return item
+          })
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      fillCategories() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
+          this.filters = response.data
+          this.items.map((item) => {
+            const cats = []
+            response.data.forEach(cat => {
+              if (find(item.categories, (o) => o == cat.id)) {
+                cats.push(cat)
+              }
+            })
+            item.categories = cats
+            return item
+          })
         }).catch((error) => {
           console.log(error);
         });
