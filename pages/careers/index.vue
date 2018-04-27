@@ -3,7 +3,7 @@
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
     <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter" @onSearch="search = $event"></AppFilter>
     <div class="items">
-      <AppPosition v-for="(item, index) of items" :key="index" :item="item"/>
+      <AppPosition v-for="(item, index) of limitBy(items,itemsToShow)" :key="index" :item="item"/>
     </div>
     <div class="items-bellow">
     </div>
@@ -19,17 +19,17 @@
   export default {
     data() {
       return {
-        itemsToShow: 3,
+        items: [],
+        itemsLenght: null,
+        itemsToShow: null,
+        lastItem: {},
         id: null,
         page: {
           acf: {}
         },
-        items: [],
         filters: [
-          { id: 2, name: 'BIM Consulting and Engineering' },
-          { id: 3, name: 'BIM Modelling' },
-          { id: 4, name: 'BIM Asset Creation' },
-          { id: 5, name: 'Software Development' }
+          { id: 2, name: 'Newest' },
+          { id: 3, name: 'Oldest' },
         ],
         search: '',
         selectedFilter: -1
@@ -42,6 +42,8 @@
     },
     created () {
       this.getItems()
+      this.itemsToShow = this.items.length - 1
+      this.lastItem = this.items[items.length]
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/64').then((response) => {
@@ -70,7 +72,7 @@
 
   .items {
     @include grid-items(0px, 20px, 3, 1);
-    border-width: 0 0 4px 0;
+    border-width: 0 0 2px 0;
     border-style: solid;
     -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #cfbb22 100%);
     -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #cfbb22 100%);

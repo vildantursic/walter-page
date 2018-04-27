@@ -3,13 +3,10 @@
       <div class="info-card">
         <p class="position">{{ item.title.rendered | truncate(25)}}</p>
         <p class="published">Published: {{item.date.split('T')[0]}}</p>
-        <h1 class="description">{{item.acf.description | truncate(25)}}</h1>
-        <p class="data">We have an immediate opportunity
-          for a BIM Consultants to join our
-          talented team. The successful candidates
-          will work on digitization - </p>
+        <h1 class="description">Job description</h1>
+        <p class="data">{{ item.acf.description | truncate(250)}}</p>
         <p class="number">Number of positions: <span>{{item.acf.number_of_positions}}</span></p>
-        <p class="published">Deadline: 15-04-2018</p>
+        <p class="published">Deadline: {{item.modified.split('T')[0]}}</p>
         <div class="social">
           <!-- Add font awesome icons -->
           <a href="#"><i class="fab fa-linkedin"></i></a>
