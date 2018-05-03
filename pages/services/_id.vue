@@ -23,7 +23,7 @@
       <div class="services">
         <h2>Services</h2>
         <section>
-          <AppSingleService v-for="(item, index) of subServices" v-if="item" :key="index" :item="item"/>
+          <AppSingleService v-for="(item, index) of subServices" :key="index" :item="item"/>
         </section>
       </div>
     </div>
@@ -71,8 +71,10 @@
         });
       },
       getSubServices () {
-        axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/sub_services?_embed`).then((response) => {
-          this.subServices = response.data.map((subService) => find(this.page.acf.sub_services, { ID: subService.id }) ? subService : undefined);
+        axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/sub_services?per_page=100&_embed`).then((response) => {
+          this.subServices = response.data.filter((subService) => {
+            return find(this.page.acf.sub_services, { ID: subService.id }) ? subService : undefined
+          });
         }).catch((error) => {
           console.log(error)
         });
@@ -171,7 +173,10 @@
     .services {
 
       section {
-        @include grid-items(5%, 5%, 7, 2);
+        display: flex;
+        justify-content: space-around;
+        // for switching to grid system
+        // @include grid-items(5%, 5%, 7, 2);
       }
     }
   }

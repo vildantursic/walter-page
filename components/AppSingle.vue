@@ -129,7 +129,7 @@
           /*width: 85%;*/
         }
         .text-box {
-          height: 400px;
+          height: 50vh;
           overflow: auto;
           /*width: 85%;*/
         }
