@@ -1,14 +1,14 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
-    <h1 class="number">1200 +</h1>
+    <h1 class="number">{{number > 1000000 ? Math.abs(Number(number)) / 1.0e+6 + "M" : number}} +</h1>
     <div class="border"></div>
-    <h1 class="info">Revit families</h1>
+    <h1 class="info">{{text}}</h1>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['item'],
+    props: ['number', 'text'],
     components: {
     }
   }
