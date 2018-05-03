@@ -93,6 +93,16 @@
         this.filterNews(this.selectedFilter)
       },
       filterNews (id) {
+        this.items.map((item) => {
+          const cats = []
+          response.data.forEach(cat => {
+            if (find(item.case_categories, (o) => o == cat.id)) {
+              cats.push(cat)
+            }
+          })
+          item.case_categories = cats
+          return item
+        })
         this.newItems = this.items.filter( (item) => {
             item.categories.forEach( (category) => {
               console.log('kategorija :' + category.id)
@@ -102,7 +112,6 @@
               }
             })
         })
-        console.log(this.newItems)
       }
     },
     created () {
