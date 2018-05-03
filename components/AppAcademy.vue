@@ -1,64 +1,101 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
-    <div class="image">
-      <img src="~/static/images/arch.jpg" alt="">
+    <div v-if="item._links !== undefined" class="card-img-container">
+      <img class="card-img" v-if="item['featured_media'] !== 0" :src="getImage(item['featured_media'])">
+      <img class="no-image" v-if="item['featured_media'] === 0" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
       <h1 class="title">{{item.title.rendered}}</h1>
       <div class="about">
-        <p>Author</p>
-        <p>The 5-star Hyatt Regency Zadar Maraska is the first hotel in Croatia under the Hyatt brand and is set to open in the spring of 2019...</p>
+        <p>{{item["featured_media"]}}</p>
       </div>
-      <div class="published">Deadline: 15-04-2018</div>
-      <div class="border"></div>
+      <div class="published">{{item.date}}</div>
     </div>
   </div>
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     props: ['item'],
+    data() {
+      return {
+        media: {}
+      }
+    },
     components: {
+    },
+    methods: {
+      getImage(featuredMedia)
+      {
+        setTimeout(this.getMedia(featuredMedia), 4000)
+        console.log(this.media.guid)
+        var source_url  = this.media
+        console.log(source_url)
+        return source_url
+      },
+      getMedia(featuredMedia)
+      {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/media/' + featuredMedia).then((response) => {
+          console.log(this.media)
+         this.media = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  .card{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    overflow: hidden;
+  @import '../assets/styles/variables';
+  @import '../assets/styles/mixins';
 
-    .image {
-      height: 250px;
+  .card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    height: 400px;
+    padding: 2em;
+    border-width: 0 0 3px 0;
+    border-style: solid;
+    -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
+    -webkit-border-image: -webkit-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
+    border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
+    border-image-slice: 1;
+
+    @include screen-size(xs) {
+      flex-direction: row;
+    }
+
+    .card-img-container {
+      background-color: $secondary-color;
       overflow: hidden;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 0 3em;
+      align-items: center;
+      width: 40%;
+      height: 100%;
 
-      img {
+      @include screen-size(xs) {
         width: 100%;
+        height: 300px;
+      }
+
+      .card-img {
+        height: 100%;
       }
     }
-
     .info {
+      display: flex;
+      flex-direction: column;
       padding: 0 3em 3em 3em;
-    }
-    .published
-    {
-      font-size: 0.8em;
-      font-weight: 500;
-      color: gray;
-    }
-    .border {
-      width: 100%;
-      height: 3px;
-      background-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;  /* <- here it is */
+      .published
+      {
+        font-size: 0.8em;
+        font-weight: 500;
+        color: gray;
+      }
     }
   }
 </style>
