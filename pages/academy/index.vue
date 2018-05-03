@@ -5,7 +5,7 @@
     <div class="items">
       <AppAcademy v-if="index < items.length" v-for="(item, index) of items" :key="index" :item="item"/>
     </div>
-    <AppMoreCard :number="10"/>
+    <AppMoreCard :numberOfItems="items.length"/>
   </section>
 </template>
 
@@ -47,7 +47,7 @@
         console.log(item.content )
       },
       getItems() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/bim_academy_posts').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/bim_academy_posts?_embed').then((response) => {
           this.items = response.data
           this.fillUser()
           this.fillCategories()
@@ -128,6 +128,6 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(0%, 10px, 1, 1);
+    @include grid-items(0%, 0px, 3, 1);
   }
 </style>

@@ -1,49 +1,32 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
-    <div v-if="item._links !== undefined" class="card-img-container">
-      <img class="card-img" v-if="item['featured_media'] !== 0" :src="getImage(item['featured_media'])">
-      <img class="no-image" v-if="item['featured_media'] === 0" src="~/static/images/walter-logo.png" alt="">
+    <div v-if="item._embedded !== undefined" class="card-img-container">
+      <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+      <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
       <h1 class="title">{{item.title.rendered}}</h1>
-      <div class="about">
-        <p>{{item["featured_media"]}}</p>
+      <div class="author">
       </div>
-      <div class="published">{{item.date}}</div>
+      <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>
+      <div class="published">Deadline: {{date}}</div>
     </div>
   </div>
 </template>
 
 <script>
   import axios from 'axios'
+  import moment from 'moment'
   export default {
     props: ['item'],
     data() {
       return {
-        media: {}
+          date: moment(this.item.date).format('DD-MM-YYYY')
       }
     },
     components: {
     },
-    methods: {
-      getImage(featuredMedia)
-      {
-        setTimeout(this.getMedia(featuredMedia), 4000)
-        console.log(this.media.guid)
-        var source_url  = this.media
-        console.log(source_url)
-        return source_url
-      },
-      getMedia(featuredMedia)
-      {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/media/' + featuredMedia).then((response) => {
-          console.log(this.media)
-         this.media = response.data
-        }).catch((error) => {
-          console.log(error);
-        });
-      }
-    }
+    methods: {}
   }
 </script>
 
@@ -52,11 +35,12 @@
   @import '../assets/styles/mixins';
 
   .card {
-    overflow: hidden;
+    position: relative;
     display: flex;
-    flex-direction: row;
-    height: 400px;
-    padding: 2em;
+    flex-direction: column;
+    height: 450px;
+    overflow: hidden;
+    margin: 1em;
     border-width: 0 0 3px 0;
     border-style: solid;
     -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
@@ -64,24 +48,14 @@
     border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
     border-image-slice: 1;
 
-    @include screen-size(xs) {
-      flex-direction: row;
-    }
-
     .card-img-container {
       background-color: $secondary-color;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 40%;
-      height: 100%;
-
-      @include screen-size(xs) {
-        width: 100%;
-        height: 300px;
-      }
-
+      width: 100%;
+      height: 45%;
       .card-img {
         height: 100%;
       }
@@ -89,12 +63,20 @@
     .info {
       display: flex;
       flex-direction: column;
-      padding: 0 3em 3em 3em;
+      .title
+      {
+        font-weight: 600;
+        font-size: 1.5em;
+      }
       .published
       {
+        position: absolute;
+        bottom: 0;
         font-size: 0.8em;
         font-weight: 500;
         color: gray;
+        padding-top: 1em;
+        padding-bottom: 1em;
       }
     }
   }
