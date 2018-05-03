@@ -1,7 +1,7 @@
 <template>
   <section class="padded-content footing-space">
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
-    <AppFilter :filters="filters" :filterActive="2" :showDateFilter="true" :monthActive="2"></AppFilter>
+    <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter" @onSearch="search = $event"></AppFilter>
     <div class="items">
       <AppNews v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
       <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
@@ -22,14 +22,17 @@
     data() {
       return {
         itemsToShow: 3,
+        id: null,
         page: {
           acf: {}
         },
         items: [],
+        newItems: [],
         filters: [],
-        selectedFilter: -1,
         categories: [],
-        users: []
+        users: [],
+        search: '',
+        selectedFilter: -1
       }
     },
     components: {
@@ -39,19 +42,9 @@
       AppContactBox,
       AppMoreCard
     },
-    created () {
-      this.getItems()
-    },
-    asyncData({}) {
-      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/66').then((response) => {
-        return { page: response.data }
-      }).catch((error) => {
-        console.log(error)
-      });
-    },
     methods: {
       goToPost (id) {
-        this.$router.push({ path: `/news/${id}`})
+        this.$router.push({ path: `news/${id}`})
       },
       getImageSource(item) {
         console.log(item.content )
@@ -96,7 +89,40 @@
       },
       selectFilter (id) {
         this.selectedFilter = id
+        console.log(id)
+        this.filterNews(this.selectedFilter)
+      },
+      filterNews (id) {
+        this.items.map((item) => {
+          const cats = []
+          response.data.forEach(cat => {
+            if (find(item.case_categories, (o) => o == cat.id)) {
+              cats.push(cat)
+            }
+          })
+          item.case_categories = cats
+          return item
+        })
+        this.newItems = this.items.filter( (item) => {
+            item.categories.forEach( (category) => {
+              console.log('kategorija :' + category.id)
+              console.log('izabranakategorija :' + id)
+              if (category.id === id) {
+                return item
+              }
+            })
+        })
       }
+    },
+    created () {
+      this.getItems()
+    },
+    asyncData({}) {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/66').then((response) => {
+        return { page: response.data }
+      }).catch((error) => {
+        console.log(error)
+      });
     }
   }
 </script>

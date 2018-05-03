@@ -3,10 +3,10 @@
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
     <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter" @onSearch="search = $event"></AppFilter>
     <div class="items">
-      <AppPosition v-for="(test, index) of items" :key="index"/>
+      <AppPosition v-for="(item, index) of limitBy(items,itemsToShow)" :key="index" :item="item"/>
     </div>
     <div class="items-bellow">
-      <AppPosition/>
+      <AppPosition v-if="items[items.length - 1]" :item="items[items.length - 1]"></AppPosition>
     </div>
   </section>
 </template>
@@ -20,11 +20,18 @@
   export default {
     data() {
       return {
+        items: [],
+        itemsLenght: null,
+        itemsToShow: null,
+        lastItem: {},
+        id: null,
         page: {
           acf: {}
         },
-        items: [],
-        filters: [],
+        filters: [
+          { id: 2, name: 'Newest' },
+          { id: 3, name: 'Oldest' },
+        ],
         search: '',
         selectedFilter: -1
       }
@@ -34,7 +41,7 @@
       AppPageTitle,
       AppPosition
     },
-    created () {
+    mounted() {
       this.getItems()
     },
     asyncData({}) {
@@ -48,12 +55,14 @@
       getItems () {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?_embed').then((response) => {
           this.items = response.data
+          this.itemsToShow = this.items.length - 1
         }).catch((error) => {
           console.log(error);
         });
       },
       selectFilter (id) {
         this.selectedFilter = id
+        console.log(id)
       }
     }
   }
@@ -64,7 +73,7 @@
 
   .items {
     @include grid-items(0px, 20px, 3, 1);
-    border-width: 0 0 4px 0;
+    border-width: 0 0 2px 0;
     border-style: solid;
     -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #cfbb22 100%);
     -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #cfbb22 100%);

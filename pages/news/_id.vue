@@ -28,7 +28,7 @@
         </div>
         <div class="post-right">
           <div class="year">
-            <span class="current-year">NEXT ARTICLE</span> <span><i class="fas fa-chevron-right"></i></span>
+            <span class="current-year" >NEXT ARTICLE</span> <span><i class="fas fa-chevron-right"></i></span>
           </div>
           <div v-for="item in items" v-bind:key="item.id">
             <OtherPosts :item="item"></OtherPosts>
