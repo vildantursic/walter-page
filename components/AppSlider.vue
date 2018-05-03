@@ -65,7 +65,7 @@
 
   .swiper {
     width: 100%;
-    height: 70vh;
+    height: 100vh;
 
     @include screen-size(xs) {
       width: 100vh;
@@ -95,7 +95,7 @@
   }
   .my-swiper-thumb {
     height: 20%;
-    margin-top: 5em;
+    margin-top: 3em;
 
     .swiper-wrapper {
       display: flex;
@@ -108,7 +108,7 @@
         overflow: hidden;
         img {
           cursor: pointer;
-          height: 100%;
+          height: 60%;
         }
       }
     }

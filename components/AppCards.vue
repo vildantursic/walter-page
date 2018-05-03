@@ -1,6 +1,6 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
-    <div v-if="item._embedded !== undefined" class="image">
+    <div class="image">
       <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
 
       <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">

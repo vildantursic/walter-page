@@ -1,18 +1,19 @@
 <template>
   <div class="card">
-    <div class="close">
-      <i class="fas fa-times" @click="closeCase"></i>
-    </div>
     <div class="content">
       <div class="card-img-container">
         <AppSlider v-if="item.acf.gallery_images" :images="item.acf.gallery_images.split(',')"></AppSlider>
         <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>
       <div class="info-card">
+        <div class="close">
+          <i class="fas fa-times" @click="closeCase"></i>
+        </div>
+        <div class="right-content">
         <p class="category">
           <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span v-if="index < item.case_categories.length - 1">,</span></span>
         </p>
-        <h1 class="title">{{item.title.rendered}}</h1>
+        <h4 class="title">{{item.title.rendered}}</h4>
         <a class="link" href="https://www.symetri.com/plm" target="_blank">www.symetri.com/plm</a>
         <p class="customer">
           <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span v-if="index < item.acf.customers.length - 1">,</span></span>
@@ -22,6 +23,7 @@
         </div>
         <div class="divider">
           <p v-if="item.acf.partners" class="author">In Collaboration with <span v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></p>
+        </div>
         </div>
       </div>
     </div>
@@ -88,7 +90,7 @@
       .card-img-container {
         display: flex;
         justify-content: center;
-        align-items: center;
+        /*align-items: center;*/
         width: 60%;
 
         @include screen-size(xs) {
@@ -97,8 +99,8 @@
       }
       .info-card {
         position: relative;
-        width: 25%;
-        padding: 0 3em;
+        width: 35%;
+        padding: 0 0 0 3em;
 
         @include screen-size(xs) {
           width: 100%;
@@ -109,7 +111,7 @@
           font-weight: 300;
         }
         .title {
-          font-size: 3em;
+          font-size: 2em;
           font-weight: bold;
           margin: 0;
         }
@@ -124,11 +126,12 @@
         .divider {
           margin-top: 10vh;
           border-top: 1px solid gray;
-          width: 100%;
+          /*width: 85%;*/
         }
         .text-box {
-          height: 200px;
+          height: 400px;
           overflow: auto;
+          /*width: 85%;*/
         }
       }
       .link {
@@ -137,5 +140,7 @@
       }
     }
   }
-
+  .right-content{
+    width: 85%;
+  }
 </style>
