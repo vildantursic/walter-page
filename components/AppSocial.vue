@@ -19,7 +19,6 @@
   .social {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
   }
 
   .fab, .fas{

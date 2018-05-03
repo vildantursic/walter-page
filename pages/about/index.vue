@@ -25,6 +25,7 @@
       </div>
     </section>
     <section id="clients" class="clients-section padded-content">
+      <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci aliquid consequatur dolore doloribus eaque</h1>
       <div class="clients">
         <AppClient v-for="(item, index) of Array(50)" :key="index"/>
       </div>
@@ -60,17 +61,15 @@
 
   .statistics-section {
     min-height: 100vh;
-    display: grid;
-    grid-auto-columns: 100%;
 
     h2{
       width: 65%;
-      margin: 10vh 0 20vh 0;
+      margin: 100px 0;
       font-weight: 300;
     }
     .statistics {
       width: 100%;
-      @include grid-items(10%, 15vh, 3, 2);
+      @include grid-items(10%, 20px, 3, 2);
     }
   }
 
@@ -85,7 +84,8 @@
   }
 
   .board-members-section {
-    min-height: 100vh;
+    min-height: 50vh;
+    margin: 20vh 0;
     display: grid;
     grid-auto-columns: 100%;
 
@@ -97,7 +97,8 @@
   }
 
   .partners-section {
-    min-height: 100vh;
+    min-height: 50vh;
+    margin: 20vh 0;
     display: grid;
     grid-auto-columns: 100%;
 
@@ -109,6 +110,7 @@
 
   .clients-section {
     min-height: 100vh;
+    margin: 10vh 0;
     display: grid;
     grid-auto-columns: 100%;
 
