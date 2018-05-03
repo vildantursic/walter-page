@@ -7,6 +7,7 @@
     <div class="info">
       <h1 class="title">{{item.title.rendered}}</h1>
       <div class="author">
+        {{item["_embedded"]["wp:featuredmedia"][0]["author"]}}
       </div>
       <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>
       <div class="published">Deadline: {{date}}</div>
@@ -67,6 +68,13 @@
       {
         font-weight: 600;
         font-size: 1.5em;
+        padding-bottom: 1em;
+      }
+      .author
+      {
+        font-size: 1em;
+        font-weight: 600;
+        padding-bottom: 1em;
       }
       .published
       {

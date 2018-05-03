@@ -3,9 +3,9 @@
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
     <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter" @onSearch="search = $event"></AppFilter>
     <div class="items">
-      <AppAcademy v-if="index < items.length" v-for="(item, index) of items" :key="index" :item="item"/>
+      <AppAcademy v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
     </div>
-    <AppMoreCard :numberOfItems="items.length"/>
+    <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
   </section>
 </template>
 
@@ -58,8 +58,8 @@
       fillUser() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
           this.items.map((item) => {
-            if (find(response.data, { id: item.author })) {
-              item.author = find(response.data, { id: item.author })
+            if (find(response.data[0].id, { id: item["_embedded"]["wp:featuredmedia"][0]["author"]})) {
+              item["_embedded"]["wp:featuredmedia"][0]["author"] = response.data[0].name
             }
             return item
           })
