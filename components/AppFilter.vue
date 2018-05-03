@@ -6,7 +6,7 @@
         <li v-for="(filter, index) of filters" :key="index" :class="{ active: filter.id === selectedFilter }" @click="selectFilter(filter.id)">{{filter.name}}</li>
       </ul>
       <div class="search">
-        <input type="text" placeholder="Search..">
+        <slot></slot>
       </div>
     </div>
     <div class="date-filters" v-if="showDateFilter">
@@ -27,7 +27,7 @@
       return {
         date: {
           year: 2018,
-          month: 1
+          month: -1
         },
         dates: [
           { id: 1, name: 'Jan' },
@@ -47,13 +47,17 @@
     },
     methods: {
       selectFilter(id) {
+        this.date.month = -1
         this.$emit('onFilterSelected', id)
       },
       setMonth(id) {
         this.date.month = id
+        this.$emit('onMonthSelected', this.date.month)
       },
       setYear(direction) {
+        this.date.month = -1
         direction === 1 ? this.date.year++ : this.date.year--
+        this.$emit('onYearSelected', this.date.year)
       }
     }
   }

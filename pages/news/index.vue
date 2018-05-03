@@ -1,9 +1,17 @@
 <template>
   <section class="padded-content footing-space">
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
-    <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter" @onSearch="search = $event"></AppFilter>
+    <AppFilter :filters="filters"
+               :selectedFilter="selectedFilter"
+               :showDateFilter="true"
+               :monthActive="2"
+               @onFilterSelected="selectFilter"
+               @onYearSelected="selectYear"
+               @onMonthSelected="selectMonth">
+      <input type="text" placeholder="Search.." v-model="search">
+    </AppFilter>
     <div class="items">
-      <AppNews v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
+      <AppNews v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
       <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
     </div>
   </section>
@@ -16,6 +24,7 @@
   import AppContactBox from '~/components/AppContactBox'
   import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
+  import moment from 'moment'
   import { find } from 'lodash'
 
   export default {
@@ -27,7 +36,7 @@
           acf: {}
         },
         items: [],
-        newItems: [],
+        tempItems: [],
         filters: [],
         categories: [],
         users: [],
@@ -42,6 +51,13 @@
       AppContactBox,
       AppMoreCard
     },
+    computed: {
+      searchedList() {
+        return this.items.filter(item => {
+          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase())
+        })
+      }
+    },
     methods: {
       goToPost (id) {
         this.$router.push({ path: `news/${id}`})
@@ -52,6 +68,7 @@
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
           this.items = response.data
+          this.tempItems = this.items
           this.fillUser()
           this.fillCategories()
         }).catch((error) => {
@@ -89,29 +106,27 @@
       },
       selectFilter (id) {
         this.selectedFilter = id
-        console.log(id)
-        this.filterNews(this.selectedFilter)
+        this.items = this.filterItems()
       },
-      filterNews (id) {
-        this.items.map((item) => {
-          const cats = []
-          response.data.forEach(cat => {
-            if (find(item.case_categories, (o) => o == cat.id)) {
-              cats.push(cat)
-            }
+      selectYear (year) {
+        this.items = this.filterItems().filter((item) => {
+          return moment(item.date).year() === year
+        })
+      },
+      selectMonth (month) {
+        this.items = this.filterItems().filter((item) => {
+          return moment(item.date).month() + 1 === month
+        })
+      },
+      filterItems () {
+        this.search = ''
+        if (this.selectedFilter === -1) {
+          return this.tempItems;
+        } else {
+          return this.tempItems.filter((item) => {
+            return find(item.categories, (o) => o.id === this.selectedFilter) ? item : undefined
           })
-          item.case_categories = cats
-          return item
-        })
-        this.newItems = this.items.filter( (item) => {
-            item.categories.forEach( (category) => {
-              console.log('kategorija :' + category.id)
-              console.log('izabranakategorija :' + id)
-              if (category.id === id) {
-                return item
-              }
-            })
-        })
+        }
       }
     },
     created () {

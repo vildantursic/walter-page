@@ -11,23 +11,20 @@
         <p class="author">{{item.author.name}}, {{date}}</p>
         <h1 class="title"><nuxt-link class="nav-link" :to="`/news/${item.id}`">{{ item.title.rendered | truncate(100)}}</nuxt-link></h1>
         <div class="scroll">{{ item.acf.description | truncate(400)}}</div>
-        <div class="social">
-          <!-- Add font awesome icons -->
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fas fa-envelope"></i></a>
-          <a href="#"><i class="fas fa-paperclip"></i></a>
-        </div>
+        <AppSocial></AppSocial>
       </div>
     </div>
 </template>
 
 <script>
   import moment from 'moment'
+  import AppSocial from '~/components/AppSocial'
 
   export default {
     props: ['item'],
+    components: {
+      AppSocial
+    },
     data() {
       return {
         date: moment(this.item.date).format('MMM YYYY [at] LT')

@@ -1,14 +1,15 @@
 <template>
   <div class="card">
-    <div class="close">
-      <i class="fas fa-times" @click="closeCase"></i>
-    </div>
     <div class="content">
       <div class="card-img-container">
-        <AppSlider v-if="item.acf.gallery_images" :images="item.acf.gallery_images.split(',')"></AppSlider>
+        <AppSlider v-if="item.acf.gallery_images" :images="item.acf.gallery_images.split(',')" :miniSlider="true"></AppSlider>
         <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>
       <div class="info-card">
+        <div class="close">
+          <AppSocial></AppSocial>
+          <i class="fas fa-times" @click="closeCase"></i>
+        </div>
         <p class="category">
           <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span v-if="index < item.case_categories.length - 1">,</span></span>
         </p>
@@ -29,11 +30,13 @@
 </template>
 <script>
   import AppSlider from '~/components/AppSlider'
+  import AppSocial from '~/components/AppSocial'
 
   export default {
     props: ['item'],
     components: {
-      AppSlider
+      AppSlider,
+      AppSocial
     },
     methods: {
       closeCase() {
@@ -54,6 +57,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    padding-top: 50px;
     background: white;
     overflow: scroll;
     -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
@@ -63,6 +67,8 @@
 
     .close {
       width: 100%;
+      display: flex;
+      justify-content: space-between;
 
       i {
         display: flex;
@@ -90,6 +96,7 @@
         justify-content: center;
         align-items: center;
         width: 60%;
+        height: 70vh;
 
         @include screen-size(xs) {
           width: 100%;
@@ -137,5 +144,4 @@
       }
     }
   }
-
 </style>
