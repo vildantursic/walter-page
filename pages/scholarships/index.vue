@@ -9,7 +9,8 @@
                @onYearSelected="selectYear"
                @onMonthSelected="selectMonth">
       <input type="text" placeholder="Search.." v-model="search">
-    </AppFilter><div class="items">
+    </AppFilter>
+    <div class="items">
       <AppScholarship v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
     </div>
     <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
