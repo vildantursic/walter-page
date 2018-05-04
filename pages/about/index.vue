@@ -1,17 +1,19 @@
 <template>
   <section>
     <section id="statistics" class="statistics-section padded-content">
-      <h2>We are a group of talented minds passionate about one thing - to contribute
-        to the sustainable development and maintenance of the world buildings. We
-        strive to provide innovative BIM-based services to the building, construction
-        and real estate industry.</h2>
+      <h2 v-html="page.content.rendered"></h2>
       <div class="statistics">
-        <AppNumber v-for="(item, index) of [1,2,3,4,5,6]" :key="index"/>
+        <AppNumber :number="page.acf.engineers" :text="'Engineers'"/>
+        <AppNumber :number="page.acf.experience_bim" :text="'Years of gathered BIM experience'"/>
+        <AppNumber :number="page.acf.projects" :text="'Projects'"/>
+        <AppNumber :number="page.acf.clients" :text="'Clients'"/>
+        <AppNumber :number="page.acf.revit_families" :text="'Revit families'"/>
+        <AppNumber :number="page.acf.digitalized_sqm" :text="'sqm digitized'"/>
       </div>
     </section>
     <section id="history" class="history-section padded-content">
       <div class="history">
-        <h1>HISTORY</h1>
+        <h1>{{histories}}</h1>
       </div>
     </section>
     <section id="board-members" class="board-members-section padded-content">
@@ -25,6 +27,7 @@
       </div>
     </section>
     <section id="clients" class="clients-section padded-content">
+      <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci aliquid consequatur dolore doloribus eaque</h1>
       <div class="clients">
         <AppClient v-for="(item, index) of Array(50)" :key="index"/>
       </div>
@@ -43,6 +46,7 @@
   import AppClient from "~/components/AppClient"
   import AppMap from "~/components/AppMap"
   import AppNumber from "~/components/AppNumber"
+  import axios from "axios"
 
   export default {
     components: {
@@ -51,6 +55,34 @@
       AppClient,
       AppMap,
       AppNumber
+    },
+    data() {
+      return {
+        items: [],
+        page: {
+          acf: {}
+        },
+        histories: []
+      }
+    },
+    created() {
+      this.getHistories()
+    },
+    asyncData({}) {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/73?_embed').then((response) => {
+        return { page: response.data }
+      }).catch((error) => {
+        console.log(error)
+      });
+    },
+    methods: {
+      getHistories() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/histories?_embed').then((response) => {
+          this.histories = response.data
+        }).catch((error) => {
+          console.log(error)
+        });
+      }
     }
   }
 </script>
@@ -60,17 +92,15 @@
 
   .statistics-section {
     min-height: 100vh;
-    display: grid;
-    grid-auto-columns: 100%;
 
     h2{
       width: 65%;
-      margin: 10vh 0 20vh 0;
+      margin: 100px 0;
       font-weight: 300;
     }
     .statistics {
       width: 100%;
-      @include grid-items(10%, 15vh, 3, 2);
+      @include grid-items(10%, 20px, 3, 2);
     }
   }
 
@@ -85,7 +115,8 @@
   }
 
   .board-members-section {
-    min-height: 100vh;
+    min-height: 50vh;
+    margin: 20vh 0;
     display: grid;
     grid-auto-columns: 100%;
 
@@ -97,7 +128,8 @@
   }
 
   .partners-section {
-    min-height: 100vh;
+    min-height: 50vh;
+    margin: 20vh 0;
     display: grid;
     grid-auto-columns: 100%;
 
@@ -109,6 +141,7 @@
 
   .clients-section {
     min-height: 100vh;
+    margin: 10vh 0;
     display: grid;
     grid-auto-columns: 100%;
 

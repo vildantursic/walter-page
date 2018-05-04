@@ -1,36 +1,33 @@
 <template>
-    <div class="card animated fadeIn" data-aos="slide-up">
-      <div class="info-card">
-        <p class="position">{{ item.title.rendered | truncate(25)}}</p>
-        <p class="published">Published: {{item.date.split('T')[0]}}</p>
-        <h1 class="description">Job description</h1>
-        <p class="data">{{ item.acf.description | truncate(250)}}</p>
-        <p class="number">Number of positions: <span>{{item.acf.number_of_positions}}</span></p>
-        <p class="published">Deadline: {{item.modified.split('T')[0]}}</p>
-        <div class="social">
-          <!-- Add font awesome icons -->
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fas fa-envelope"></i></a>
-          <a href="#"><i class="fas fa-paperclip"></i></a>
-        </div>
-        <div class="more-container">
-          <div class="plus">+</div>
-          <div class="read"> Read <span class="more">more</span></div>
-        </div>
-      </div>
+  <div class="info-card animated fadeIn" data-aos="slide-up">
+    <h1 class="position">{{ item.title.rendered | truncate(25)}}</h1>
+    <p class="published">Published: {{item.date.split('T')[0]}}</p>
+    <h1 class="description">Job description</h1>
+    <p class="data">{{ item.acf.description | truncate(250)}}</p>
+    <p class="number">Number of positions: {{item.acf.number_of_positions}}</p>
+    <p class="published">Deadline: {{item.modified.split('T')[0]}}</p>
+    <div class="bottom">
+      <AppSocial></AppSocial>
+      <nuxt-link :to="`/careers/${item.id}`" class="more-container nav-link">
+        <div class="plus">+</div>
+        <div class="read"> Read <span class="more">more</span></div>
+      </nuxt-link>
     </div>
+
+    <div class="border"></div>
+  </div>
 </template>
 
 <script>
+  import AppSocial from '~/components/AppSocial'
+
   export default {
     props: ['item'],
     components: {
+      AppSocial
     },
     data() {
-      return {
-      }
+      return {}
     }
   }
 </script>
@@ -38,66 +35,64 @@
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
 
-  .card{
+  .info-card {
+    position: relative;
+    width: 100%;
+    height: 450px;
     overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    min-height: 424px;
-    max-height: 450px;
-    padding-bottom: 2em;
-    .info-card
-    {
-      position: relative;
+
+    .position {
+      margin: 0;
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    .published {
+      font-size: 0.8em;
+      font-weight: 500;
+      color: gray;
+    }
+
+    .description {
+      margin: 1.5em 0;
+      font-size: 1em;
+      font-weight: 600;
+      color: $main-color;
+      letter-spacing: 2px;
+    }
+
+    .data {
+      margin: 0;
+    }
+
+    .number {
+      margin: 1.5em 0;
+      font-size: 1.2em;
+      font-weight: 700;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
       width: 100%;
-      padding: 1em 1em;
-      .position
-      {
-        margin: 0;
-        font-size: 2em;
-        font-weight: bold;
-      }
-      .published
-      {
-        font-size: 0.8em;
-        font-weight: 500;
-        color: gray;
-      }
-      .description
-      {
-        margin: 1.5em 0;
-        font-size: 1em;
-        font-weight: 600;
-        color: $main-color;
-        letter-spacing: 2px;
-      }
-      .data
-      {
-        margin: 0;
-      }
-      .number
-      {
-        margin: 1.5em 0;
-        font-size: 1.2em;
-        font-weight: 700;
-      }
-      .more-container
-      {
-        float: right;
+      margin-bottom: 2em;
+
+      .more-container {
         display: flex;
         align-items: center;
         padding-top: 10px;
-        .read
-        {
+
+        .read {
           font-size: 1.5em;
           font-weight: bold;
           letter-spacing: 1px;
-          .more
-          {
+
+          .more {
             color: $main-color;
           }
         }
-        .plus
-        {
+
+        .plus {
           font-size: 2.5em;
           font-weight: bold;
           padding: 0 15px;
@@ -105,40 +100,13 @@
       }
     }
   }
-  .fab ,.fas{
-    padding: 5px 20px 5px 0px;
-    font-size: 25px;
-    width: 20px;
-    text-align: center;
-    text-decoration: none;
-  }
-  .fab:hover, .fas:hover {
-    opacity: 0.7;
-  }
-  .fa-facebook {
-    background: #ffffff;
-    color: black;
-  }
-  .fa-twitter {
-    background: #ffffff;
-    color: black;
-  }
-  .fa-google {
-    background: #ffffff;
-    color: black;
-  }
-  .fa-linkedin {
-    background: #ffffff;
-    color: black;
-  }
-  .fa-envelope
-  {
-    background: #ffffff;
-    color: black;
-  }
-  .fa-paperclip
-  {
-    background: #ffffff;
-    color: black;
+
+  .border {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background-size: cover;
+    background: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) fixed center;
   }
 </style>

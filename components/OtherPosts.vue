@@ -4,9 +4,10 @@
       <span v-for="(category, index) of item.categories" :key="index"> {{category.name}}<span v-if="index < item.categories.length - 1">,</span></span>
     </p>
     <p class="author">{{item.author.name}}, {{date}}</p>
-    <h1 class="title"><nuxt-link class="nav-link" :to="`/news/1`">{{ item.title.rendered | truncate(50)}}</nuxt-link></h1>
+    <h1 class="title"><nuxt-link class="nav-link" :to="`/news/${item.id}`">{{ item.title.rendered | truncate(50)}}</nuxt-link></h1>
   </div>
 </template>
+
 <script>
   import moment from 'moment'
   import axios from 'axios'
@@ -27,11 +28,9 @@
   .other-news {
     border-width: 0 0 4px 0;
     border-style: solid;
-    -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #c1c8d1 100%);
-    -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #c1c8d1 100%);
-    border-image: linear-gradient(45deg, #405dce 0%, #c1c8d1 100%);
-    border-image-slice: 1;
+    border-image: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) 1;
     margin: 0 0 1.5em 0;
+
     .category
     {
       margin: 0;

@@ -27,19 +27,23 @@
         </section>
       </div>
     </div>
+
+    <AppContactBox :user="page.acf.contact_person"></AppContactBox>
   </section>
 </template>
 
 <script>
   import AppSingleService from '~/components/AppSingleService'
   import AppSideNavigation from "~/components/AppSideNavigation"
+  import AppContactBox from "~/components/AppContactBox"
   import axios from 'axios'
   import { find } from 'lodash'
 
   export default {
     components: {
       AppSingleService,
-      AppSideNavigation
+      AppSideNavigation,
+      AppContactBox
     },
     data() {
       return {
