@@ -27,9 +27,8 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
-<script>
+<script >
   import AppSlider from '~/components/AppSlider'
   import AppSocial from '~/components/AppSocial'
 
