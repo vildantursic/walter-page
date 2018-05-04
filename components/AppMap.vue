@@ -6,8 +6,8 @@
  Image based on a map (http://commons.wikimedia.org/wiki/Image:Europe_countries.svg) by Júlio "Tintazul" Reis.
  made by Marian "maix" Sigler. Released under CreativeCommons Attribution ShareAlike (http://creativecommons.org/licenses/by-sa/2.5/).
 </desc><defs id="defs8" data-v-1a1d1b16=""><inkscape:perspective sodipodi:type="inkscape:persp3d" inkscape:vp_x="0 : 260 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_z="680 : 260 : 1" inkscape:persp3d-origin="340 : 173.33333 : 1" id="perspective2458" data-v-1a1d1b16=""></inkscape:perspective><style type="text/css" id="style10" data-v-1a1d1b16="">
-  *           { fill:none; }
-  path        { fill:#C0C0C0; stroke:white; stroke-width:8; }
+  .map *           { fill:none; }
+  .map path        { fill:#C0C0C0; stroke:white; stroke-width:8; }
   /* stroke-width was originally at around 4px, but this makes it difficult to see when the image is smaller */
 
   .europe     {}
@@ -73,8 +73,8 @@
   #tr         {}
   #ua         {}
  </style><style id="style2412" type="text/css" data-v-1a1d1b16="">
-  *           { fill:none; }
-  path        { fill:#C0C0C0; stroke:white; stroke-width:8; }
+  .map *           { fill:none; }
+  .map path        { fill:#C0C0C0; stroke:white; stroke-width:8; }
 
   .gmt /* GMT/WET (UTC) */
   { fill:#5F61BF; }
@@ -101,24 +101,23 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .map {
     background: #2e3539;
 
     svg {
+      path {
+        fill:#262d30 !important;
+        stroke:#262d30 !important;
+        stroke-width:0 !important;
+        fill-opacity:1 !important;
+      }
+      path#ba {
+        fill:#3294cd !important;
+      }
+      path#se {
+        fill:#3294cd !important;
+      }
     }
-  }
-
-  path {
-    fill:#262d30 !important;
-    stroke:#262d30 !important;
-    stroke-width:0 !important;
-    fill-opacity:1 !important;
-  }
-  path#ba {
-    fill:#3294cd !important;
-  }
-  path#se {
-    fill:#3294cd !important;
   }
 </style>

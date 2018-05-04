@@ -1,8 +1,8 @@
 <template>
-  <div class="card animated fadeIn" data-aos="slide-up">
-    <h1 class="number">{{number > 1000000 ? Math.abs(Number(number)) / 1.0e+6 + "M" : number}} +</h1>
+  <div class="card animated fadeIn" data-aos="fade">
+    <h1 class="number" data-aos="fade-down">{{number > 1000000 ? Math.abs(Number(number)) / 1.0e+6 + "M" : number}} +</h1>
     <div class="border"></div>
-    <h1 class="info">{{text}}</h1>
+    <h1 class="info" data-aos="fade-up">{{text}}</h1>
   </div>
 </template>
 

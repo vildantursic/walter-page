@@ -2,7 +2,8 @@
   <div class="card">
     <div class="content">
       <div class="card-img-container">
-        <AppSlider v-if="item.acf.gallery_images" :images="item.acf.gallery_images.split(',')" :miniSlider="true"></AppSlider>
+        <AppSlider v-if="item.acf.gallery_images" :images="item.acf.gallery_images.split(',')"
+                   :miniSlider="true"></AppSlider>
         <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>
       <div class="info-card">
@@ -11,24 +12,27 @@
           <i class="fas fa-times" @click="closeCase"></i>
         </div>
         <p class="category">
-          <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span v-if="index < item.case_categories.length - 1">,</span></span>
+          <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span
+            v-if="index < item.case_categories.length - 1">,</span></span>
         </p>
         <h4 class="title">{{item.title.rendered}}</h4>
         <a class="link" href="https://www.symetri.com/plm" target="_blank">www.symetri.com/plm</a>
         <p class="customer">
-          <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span v-if="index < item.acf.customers.length - 1">,</span></span>
+          <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span
+            v-if="index < item.acf.customers.length - 1">,</span></span>
         </p>
         <div class="text-box">
           <div class="description" v-html="item.content.rendered"></div>
         </div>
         <div class="divider">
-          <p v-if="item.acf.partners" class="author">In Collaboration with <span v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></p>
-        </div>
+          <p v-if="item.acf.partners" class="author">In Collaboration with <span
+            v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></p>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
   import AppSlider from '~/components/AppSlider'
   import AppSocial from '~/components/AppSocial'
@@ -146,7 +150,8 @@
       }
     }
   }
-  .right-content{
+
+  .right-content {
     width: 85%;
   }
 </style>

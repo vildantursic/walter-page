@@ -34,6 +34,12 @@ module.exports = {
         })
       }
     },
+    loaders:[
+      {
+        test: /\.svg$/,
+        loader: 'vue-svg-loader'
+      }
+    ],
     vendor: [
       'axios',
       'aos',

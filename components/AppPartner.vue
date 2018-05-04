@@ -1,7 +1,7 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
     <div class="card-img">
-      <img src="~/static/images/Bimobject-log.png" alt="">
+      <img src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info-card">
       <div class="about">

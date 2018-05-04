@@ -1,43 +1,54 @@
 <template>
-  <section>
-    <section id="statistics" class="statistics-section padded-content">
-      <h2 v-html="page.content.rendered"></h2>
-      <div class="statistics">
-        <AppNumber :number="page.acf.engineers" :text="'Engineers'"/>
-        <AppNumber :number="page.acf.experience_bim" :text="'Years of gathered BIM experience'"/>
-        <AppNumber :number="page.acf.projects" :text="'Projects'"/>
-        <AppNumber :number="page.acf.clients" :text="'Clients'"/>
-        <AppNumber :number="page.acf.revit_families" :text="'Revit families'"/>
-        <AppNumber :number="page.acf.digitalized_sqm" :text="'sqm digitized'"/>
-      </div>
-    </section>
-    <section id="history" class="history-section padded-content">
-      <div class="history">
-        <h1>{{histories}}</h1>
-      </div>
-    </section>
-    <section id="board-members" class="board-members-section padded-content">
-      <div class="board-members">
-        <AppBoardMember v-for="(item, index) of [1,2,3]" :key="index"/>
-      </div>
-    </section>
-    <section id="partners" class="partners-section padded-content">
-      <div class="partners">
-        <AppPartner v-for="(item, index) of [1,2]" :key="index"/>
-      </div>
-    </section>
-    <section id="clients" class="clients-section padded-content">
-      <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci aliquid consequatur dolore doloribus eaque</h1>
-      <div class="clients">
-        <AppClient v-for="(item, index) of Array(50)" :key="index"/>
-      </div>
-    </section>
-    <section id="contact" class="contact-section">
-      <div class="contact">
-        <AppMap/>
-      </div>
-    </section>
-  </section>
+  <div>
+    <div class="section">
+      <section id="statistics" class="statistics-section padded-content">
+        <h2 v-html="page.content.rendered"></h2>
+        <div class="statistics">
+          <AppNumber :number="page.acf.engineers" :text="'Engineers'"/>
+          <AppNumber :number="page.acf.experience_bim" :text="'Years of gathered BIM experience'"/>
+          <AppNumber :number="page.acf.projects" :text="'Projects'"/>
+          <AppNumber :number="page.acf.clients" :text="'Clients'"/>
+          <AppNumber :number="page.acf.revit_families" :text="'Revit families'"/>
+          <AppNumber :number="page.acf.digitalized_sqm" :text="'sqm digitized'"/>
+        </div>
+      </section>
+    </div>
+    <div class="section">
+      <section id="history" class="history-section">
+        <AppHistory :items="histories"></AppHistory>
+      </section>
+    </div>
+    <div class="section">
+      <section id="board-members" class="board-members-section padded-content">
+        <div class="board-members">
+          <AppBoardMember v-for="(item, index) of [1,2,3]" :key="index"/>
+        </div>
+      </section>
+    </div>
+    <div class="section">
+      <section id="partners" class="partners-section padded-content">
+        <div class="partners">
+          <AppPartner v-for="(item, index) of [1,2]" :key="index"/>
+        </div>
+      </section>
+    </div>
+    <div class="section">
+      <section id="clients" class="clients-section padded-content">
+        <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci aliquid consequatur dolore
+          doloribus eaque</h1>
+        <div class="clients">
+          <AppClient v-for="(item, index) of Array(50)" :key="index"/>
+        </div>
+      </section>
+    </div>
+    <div class="section">
+      <section id="contact" class="contact-section">
+        <div class="contact">
+          <AppMap/>
+        </div>
+      </section>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -46,6 +57,7 @@
   import AppClient from "~/components/AppClient"
   import AppMap from "~/components/AppMap"
   import AppNumber from "~/components/AppNumber"
+  import AppHistory from "~/components/AppHistory"
   import axios from "axios"
 
   export default {
@@ -54,10 +66,16 @@
       AppPartner,
       AppClient,
       AppMap,
-      AppNumber
+      AppNumber,
+      AppHistory
     },
     data() {
       return {
+        options: {
+          navigation: true,
+          anchors: ['page1', 'page2', 'page3', 'page4'],
+          sectionsColor: ['#41b883', '#ff5f45', '#0798ec', '#fec401', '#1bcee6', '#ee1a59', '#2c3e4f', '#ba5be9', '#b4b8ab']
+        },
         items: [],
         page: {
           acf: {}
@@ -70,7 +88,7 @@
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/73?_embed').then((response) => {
-        return { page: response.data }
+        return {page: response.data}
       }).catch((error) => {
         console.log(error)
       });
@@ -91,9 +109,8 @@
   @import "../../assets/styles/mixins";
 
   .statistics-section {
-    min-height: 100vh;
 
-    h2{
+    h2 {
       width: 65%;
       margin: 100px 0;
       font-weight: 300;
@@ -105,7 +122,8 @@
   }
 
   .history-section {
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
     display: grid;
     grid-auto-columns: 100%;
 
@@ -115,21 +133,16 @@
   }
 
   .board-members-section {
-    min-height: 50vh;
-    margin: 20vh 0;
     display: grid;
     grid-auto-columns: 100%;
 
     .board-members {
-      padding-top: 10vh;
       width: 100%;
       @include grid-items(10%, 30px, 3, 3);
     }
   }
 
   .partners-section {
-    min-height: 50vh;
-    margin: 20vh 0;
     display: grid;
     grid-auto-columns: 100%;
 
@@ -140,8 +153,6 @@
   }
 
   .clients-section {
-    min-height: 100vh;
-    margin: 10vh 0;
     display: grid;
     grid-auto-columns: 100%;
 
@@ -154,8 +165,8 @@
   }
 
   .contact {
-    min-height: 100vh;
     display: grid;
     grid-auto-columns: 100%;
   }
+
 </style>
