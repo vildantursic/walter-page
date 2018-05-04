@@ -102,7 +102,7 @@
   }
   .my-swiper-thumb {
     height: 20%;
-    margin-top: 5em;
+    margin-top: 3em;
 
     .swiper-wrapper {
       display: flex;
@@ -117,7 +117,7 @@
 
         img {
           cursor: pointer;
-          height: 100%;
+          height: 60%;
         }
       }
     }

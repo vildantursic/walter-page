@@ -1,11 +1,11 @@
 <template>
-  <section>
-    <AppPageTitle :supertitle="'All about BIM'" :title="'BIM Academy'" :subtitle="'I\'m a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click meand you can start adding your own content and make changes to the font. '" ></AppPageTitle>
-    <AppFilter :filters="filters" :filterActive="2" :showDateFilter="true" :monthActive="2"></AppFilter>
+  <section class="padded-content footing-space">
+    <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
+    <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter" @onSearch="search = $event"></AppFilter>
     <div class="items">
-      <AppAcademy v-if="index < items.length" v-for="(item, index) of items" :key="index" :item="item"/>
+      <AppAcademy v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
     </div>
-    <AppMoreCard :number="10"/>
+    <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
   </section>
 </template>
 
@@ -19,13 +19,18 @@
   export default {
     data() {
       return {
+        itemsToShow: 3,
+        id: null,
         items: [],
-        filters: [
-          { id: 1, name: 'test 1' },
-          { id: 2, name: 'test 2' },
-          { id: 3, name: 'test 3' },
-          { id: 4, name: 'test 4' }
-        ]
+        page: {
+          acf: {}
+        },
+        newItems: [],
+        filters: [],
+        categories: [],
+        users: [],
+        search: '',
+        selectedFilter: -1
       }
     },
     components: {
@@ -34,13 +39,88 @@
       AppAcademy,
       AppMoreCard
     },
-    asyncData({}) {
-      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/bim_academy_posts').then(function (response) {
-        return { items: response.data }
-      }).catch(function (error) {
-        console.log(error);
-      });
+    methods: {
+      goToPost (id) {
+        this.$router.push({ path: `news/${id}`})
+      },
+      getImageSource(item) {
+        console.log(item.content )
+      },
+      getItems() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/bim_academy_posts?_embed').then((response) => {
+          this.items = response.data
+          this.fillUser()
+          this.fillCategories()
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      fillUser() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
+          this.items.map((item) => {
+            if (find(response.data[0].id, { id: item["_embedded"]["wp:featuredmedia"][0]["author"]})) {
+              item["_embedded"]["wp:featuredmedia"][0]["author"] = response.data[0].name
+            }
+            return item
+          })
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      fillCategories() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
+          this.filters = response.data
+          this.items.map((item) => {
+            const cats = []
+            response.data.forEach(cat => {
+              if (find(item.categories, (o) => o == cat.id)) {
+                cats.push(cat)
+              }
+            })
+            item.categories = cats
+            return item
+          })
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      selectFilter (id) {
+        this.selectedFilter = id
+        console.log(id)
+        this.filterAcademyNews(this.selectedFilter)
+      },
+      filterAcademyNews (id) {
+        this.items.map((item) => {
+          const cats = []
+          response.data.forEach(cat => {
+            if (find(item.case_categories, (o) => o == cat.id)) {
+              cats.push(cat)
+            }
+          })
+          item.case_categories = cats
+          return item
+        })
+        this.newItems = this.items.filter( (item) => {
+          item.categories.forEach( (category) => {
+            console.log('kategorija :' + category.id)
+            console.log('izabranakategorija :' + id)
+            if (category.id === id) {
+              return item
+            }
+          })
+        })
+      }
     },
+    created () {
+        this.getItems()
+      },
+      asyncData({}) {
+        return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/70').then((response) => {
+          return {page: response.data}
+        }).catch((error) => {
+          console.log(error)
+        });
+      }
   }
 </script>
 
@@ -48,6 +128,6 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(0px, 20px, 3, 1);
+    @include grid-items(0%, 0px, 3, 1);
   }
 </style>
