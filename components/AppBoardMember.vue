@@ -1,26 +1,27 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
-    <div class="card-img">
-      <img src="~/static/images/walter-logo.png" alt="">
+    <div class="card-img" v-if="item._embedded !== undefined">
+      <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+      <img v-if="item._embedded['wp:featuredmedia'] === undefined" class="no-image" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info-card">
       <div class="about">
         <div class="member">
-          <h3>Samir Balicevac</h3>
-          <p>Business and Product Development</p>
+          <h3>{{item.title.rendered}}</h3>
+          <p>{{item.acf.position}}</p>
         </div>
         <div class="divider"></div>
         <div class="social">
           <div class="linkedin">
-            <a class="link" href="#"><i class="fab fa-linkedin"></i></a>
+            <a class="link" :href="item.acf.linkedin"><i class="fab fa-linkedin"></i></a>
           </div>
           <div class="phone">
             <i class="fas fa-phone"></i>
-            <a class="link" href="">+387 66 233 000</a>
+            <a class="link" :href="`tel:${item.acf.phone}`">{{item.acf.phone}}</a>
           </div>
           <div class="email">
             <i class="fas fa-envelope"></i>
-            <a class="link" href="mailto:samir.balicevac@mail.com">samir.balicevac@mail.com</a>
+            <a class="link" :href="`mailto:${item.acf.email}`">{{item.acf.email}}</a>
           </div>
         </div>
       </div>
@@ -36,22 +37,29 @@
 </script>
 
 <style lang="scss" scoped="">
+  @import "../assets/styles/variables";
+
   .card {
     display: flex;
     flex-direction: column;
-    max-height: 400px;
+    height: 400px;
     overflow: hidden;
 
     .card-img {
       width: 100%;
-      height: 40%;
+      height: 70%;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      background: $secondary-color;
 
       img {
         width: 100%;
+      }
+
+      .no-image {
+        width: auto;
       }
     }
 

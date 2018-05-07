@@ -21,14 +21,14 @@
     <div class="section">
       <section id="board-members" class="board-members-section padded-content">
         <div class="board-members">
-          <AppBoardMember v-for="(item, index) of [1,2,3]" :key="index"/>
+          <AppBoardMember v-for="(item, index) of boardMembers" :key="index" :item="item"/>
         </div>
       </section>
     </div>
     <div class="section">
       <section id="partners" class="partners-section padded-content">
         <div class="partners">
-          <AppPartner v-for="(item, index) of [1,2]" :key="index"/>
+          <AppPartner v-for="(item, index) of partners" :key="index" :item="item"/>
         </div>
       </section>
     </div>
@@ -37,7 +37,7 @@
         <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci aliquid consequatur dolore
           doloribus eaque</h1>
         <div class="clients">
-          <AppClient v-for="(item, index) of Array(50)" :key="index"/>
+          <AppClient v-for="(item, index) of customers" :key="index" :item="item"/>
         </div>
       </section>
     </div>
@@ -80,11 +80,17 @@
         page: {
           acf: {}
         },
-        histories: []
+        histories: [],
+        partners: [],
+        boardMembers: [],
+        customers: []
       }
     },
     created() {
       this.getHistories()
+      this.getPartners()
+      this.getBoardMembers()
+      this.getCustomers()
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/73?_embed').then((response) => {
@@ -100,6 +106,27 @@
         }).catch((error) => {
           console.log(error)
         });
+      },
+      getPartners() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/partners?_embed').then((response) => {
+          this.partners = response.data
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
+      getBoardMembers() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/board_members?_embed').then((response) => {
+          this.boardMembers = response.data
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
+      getCustomers() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/customers?_embed').then((response) => {
+          this.customers = response.data
+        }).catch((error) => {
+          console.log(error)
+        });
       }
     }
   }
@@ -109,6 +136,7 @@
   @import "../../assets/styles/mixins";
 
   .statistics-section {
+    height: 100vh;
 
     h2 {
       width: 65%;
@@ -124,8 +152,6 @@
   .history-section {
     height: 100vh;
     overflow: hidden;
-    display: grid;
-    grid-auto-columns: 100%;
 
     .history {
       width: 100%;
@@ -133,8 +159,7 @@
   }
 
   .board-members-section {
-    display: grid;
-    grid-auto-columns: 100%;
+    height: 100vh;
 
     .board-members {
       width: 100%;
@@ -143,6 +168,7 @@
   }
 
   .partners-section {
+    height: 100vh;
     display: grid;
     grid-auto-columns: 100%;
 
@@ -153,8 +179,7 @@
   }
 
   .clients-section {
-    display: grid;
-    grid-auto-columns: 100%;
+    height: 100vh;
 
     .clients {
       width: 100%;

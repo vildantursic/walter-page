@@ -77,6 +77,14 @@
 
         svg {
           width: 100%;
+
+          path {
+            fill: none;
+            stroke-width: 2px;
+            stroke-miterlimit: 10;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+          }
         }
       }
     }
