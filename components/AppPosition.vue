@@ -1,11 +1,11 @@
 <template>
   <div class="info-card animated fadeIn" data-aos="slide-up">
     <h1 class="position">{{ item.title.rendered | truncate(25)}}</h1>
-    <p class="published">Published: {{item.date.split('T')[0]}}</p>
+    <p class="published">Published: {{date}}</p>
     <h1 class="description">Job description</h1>
     <p class="data">{{ item.acf.description | truncate(250)}}</p>
     <p class="number">Number of positions: {{item.acf.number_of_positions}}</p>
-    <p class="published">Deadline: {{item.modified.split('T')[0]}}</p>
+    <p class="published">Deadline: {{deadline}}</p>
     <div class="bottom">
       <AppSocial></AppSocial>
       <nuxt-link :to="`/careers/${item.id}`" class="more-container nav-link">
@@ -20,6 +20,7 @@
 
 <script>
   import AppSocial from '~/components/AppSocial'
+  import moment from 'moment'
 
   export default {
     props: ['item'],
@@ -27,7 +28,10 @@
       AppSocial
     },
     data() {
-      return {}
+      return {
+        date: moment(this.item.date).format('DD-MM-YYYY'),
+        deadline: moment(this.item.acf.deadline ? this.item.acf.deadline : this.item.date).format('DD-MM-YYYY')
+      }
     }
   }
 </script>
@@ -63,6 +67,8 @@
 
     .data {
       margin: 0;
+      height: 70px;
+      overflow: hidden;
     }
 
     .number {

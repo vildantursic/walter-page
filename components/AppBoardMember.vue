@@ -73,7 +73,7 @@
 
       }
     }
-    .member{
+    .member {
       margin: 0 0 0 1em;
     }
 
@@ -117,26 +117,11 @@
         color: #2e2f30;
         font-size: 0.75rem;
       }
-      .fab ,.fas{
-
+      .fab, .fas{
         font-size: 0.75rem;
         width: 30px;
         text-align: center;
         text-decoration: none;
-      }
-      .fab:hover, .fas:hover {
-      }
-      .fa-linkedin {
-        background: #ffffff;
-        color: #2e2f30;
-      }
-      .fa-phone {
-        background: #ffffff;
-        color: #2e2f30;
-      }
-      .fa-envelope {
-        background: #ffffff;
-        color: #2e2f30;
       }
     }
   }

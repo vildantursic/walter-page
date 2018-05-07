@@ -17,8 +17,8 @@
 </template>
 
 <script>
-  import moment from 'moment'
   import AppSocial from '~/components/AppSocial'
+  import moment from 'moment'
 
   export default {
     props: ['item'],

@@ -44,6 +44,7 @@
     <div class="section">
       <section id="contact" class="contact-section">
         <div class="contact">
+          <!--<AppContactPerson></AppContactPerson>-->
           <AppMap/>
         </div>
       </section>
@@ -58,6 +59,7 @@
   import AppMap from "~/components/AppMap"
   import AppNumber from "~/components/AppNumber"
   import AppHistory from "~/components/AppHistory"
+  import AppContactPerson from "~/components/AppContactPerson"
   import axios from "axios"
 
   export default {
@@ -67,7 +69,8 @@
       AppClient,
       AppMap,
       AppNumber,
-      AppHistory
+      AppHistory,
+      AppContactPerson
     },
     data() {
       return {
@@ -134,13 +137,17 @@
 
 <style lang="scss" scoped>
   @import "../../assets/styles/mixins";
+  @import "../../assets/styles/variables";
 
   .statistics-section {
-    height: 100vh;
+    min-height: 100vh;
+    background: $secondary-color;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
 
     h2 {
       width: 65%;
-      margin: 100px 0;
       font-weight: 300;
     }
     .statistics {
@@ -150,7 +157,7 @@
   }
 
   .history-section {
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
 
     .history {
@@ -159,7 +166,10 @@
   }
 
   .board-members-section {
-    height: 100vh;
+    min-height: 100vh;
+    background: $secondary-color;
+    display: flex;
+    align-items: center;
 
     .board-members {
       width: 100%;
@@ -168,9 +178,9 @@
   }
 
   .partners-section {
-    height: 100vh;
-    display: grid;
-    grid-auto-columns: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 
     .partners {
       width: 100%;
@@ -179,7 +189,8 @@
   }
 
   .clients-section {
-    height: 100vh;
+    min-height: 100vh;
+    background: $secondary-color;
 
     .clients {
       width: 100%;

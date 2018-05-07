@@ -5,8 +5,8 @@
     <p class="subtitle">{{subtitle}}</p>
   </div>
 </template>
-<script>
 
+<script>
   export default {
     components: {
     },

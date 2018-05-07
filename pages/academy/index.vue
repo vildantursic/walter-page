@@ -24,6 +24,7 @@
   import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
   import moment from 'moment'
+  import { orderBy, find } from 'lodash'
 
   export default {
     data() {
@@ -35,7 +36,10 @@
           acf: {}
         },
         newItems: [],
-        filters: [],
+        filters: [
+          { id: 1, name: 'Newest' },
+          { id: 2, name: 'Oldest' },
+        ],
         categories: [],
         users: [],
         search: '',
@@ -87,7 +91,6 @@
       },
       fillCategories() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
-          this.filters = response.data
           this.items.map((item) => {
             const cats = []
             response.data.forEach(cat => {
@@ -121,9 +124,7 @@
         if (this.selectedFilter === -1) {
           return this.tempItems;
         } else {
-          return this.tempItems.filter((item) => {
-            return find(item.categories, (o) => o.id === this.selectedFilter) ? item : undefined
-          })
+          return orderBy(this.tempItems, ['date'], [this.selectedFilter === 1 ? 'desc' : 'asc']);
         }
       }
     },

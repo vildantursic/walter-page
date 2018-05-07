@@ -36,7 +36,7 @@
           }
         },
         swiperThumbOption: {
-          slidesPerView: 3,
+          slidesPerView: 6,
           spaceBetween: 30,
           loop: false,
           autoplay: {

@@ -16,7 +16,6 @@
             v-if="index < item.case_categories.length - 1">,</span></span>
         </p>
         <h4 class="title">{{item.title.rendered}}</h4>
-        <a class="link" href="https://www.symetri.com/plm" target="_blank">www.symetri.com/plm</a>
         <p class="customer">
           <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span
             v-if="index < item.acf.customers.length - 1">,</span></span>
@@ -30,6 +29,7 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>

@@ -1,15 +1,15 @@
 <template>
   <section class="padded-content footing-space">
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
-    <AppFilter :filters="filters"
-               :selectedFilter="selectedFilter"
-               :showDateFilter="true"
-               :monthActive="2"
-               @onFilterSelected="selectFilter"
-               @onYearSelected="selectYear"
-               @onMonthSelected="selectMonth">
-      <input type="text" placeholder="Search.." v-model="search">
-    </AppFilter>
+    <!--<AppFilter :filters="filters"-->
+               <!--:selectedFilter="selectedFilter"-->
+               <!--:showDateFilter="true"-->
+               <!--:monthActive="2"-->
+               <!--@onFilterSelected="selectFilter"-->
+               <!--@onYearSelected="selectYear"-->
+               <!--@onMonthSelected="selectMonth">-->
+      <!--<input type="text" placeholder="Search.." v-model="search">-->
+    <!--</AppFilter>-->
     <div class="items">
       <AppScholarship v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
     </div>
@@ -24,6 +24,7 @@
   import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
   import moment from 'moment'
+  import { orderBy, find } from 'lodash'
   import AppScholarship from '~/components/AppScholarship'
 
   export default {
@@ -36,7 +37,10 @@
           acf: {}
         },
         newItems: [],
-        filters: [],
+        filters: [
+          { id: 1, name: 'Newest' },
+          { id: 2, name: 'Oldest' },
+        ],
         categories: [],
         users: [],
         search: '',
@@ -98,7 +102,6 @@
     },
     fillCategories() {
       axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
-        this.filters = response.data
         this.items.map((item) => {
           const cats = []
           response.data.forEach(cat => {
@@ -132,9 +135,7 @@
       if (this.selectedFilter === -1) {
         return this.tempItems;
       } else {
-        return this.tempItems.filter((item) => {
-          return find(item.categories, (o) => o.id === this.selectedFilter) ? item : undefined
-        })
+        return orderBy(this.tempItems, ['date'], [this.selectedFilter === 1 ? 'desc' : 'asc']);
       }
     }
   }

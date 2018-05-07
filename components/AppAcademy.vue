@@ -6,23 +6,23 @@
     </div>
     <div class="info">
       <h1 class="title">{{item.title.rendered}}</h1>
-      <div class="author">
-        {{item["_embedded"]["wp:featuredmedia"][0]["author"]}}
-      </div>
+      <!--<div class="author">-->
+        <!--{{item["_embedded"]["wp:featuredmedia"][0]["author"]}}-->
+      <!--</div>-->
       <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>
-      <div class="published">Deadline: {{date}}</div>
+      <div class="published">Deadline: {{deadline}}</div>
     </div>
   </div>
 </template>
 
 <script>
-  import axios from 'axios'
   import moment from 'moment'
+
   export default {
     props: ['item'],
     data() {
       return {
-          date: moment(this.item.date).format('DD-MM-YYYY')
+          deadline: moment(this.item.acf.deadline ? this.item.acf.deadline : this.item.date).format('DD-MM-YYYY')
       }
     },
     components: {

@@ -1,15 +1,15 @@
 <template>
   <section class="padded-content footing-space">
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
-    <AppFilter :filters="filters"
-               :selectedFilter="selectedFilter"
-               :showDateFilter="true"
-               :monthActive="2"
-               @onFilterSelected="selectFilter"
-               @onYearSelected="selectYear"
-               @onMonthSelected="selectMonth">
-      <input type="text" placeholder="Search.." v-model="search">
-    </AppFilter>
+    <!--<AppFilter :filters="filters"-->
+               <!--:selectedFilter="selectedFilter"-->
+               <!--:showDateFilter="true"-->
+               <!--:monthActive="2"-->
+               <!--@onFilterSelected="selectFilter"-->
+               <!--@onYearSelected="selectYear"-->
+               <!--@onMonthSelected="selectMonth">-->
+      <!--<input type="text" placeholder="Search.." v-model="search">-->
+    <!--</AppFilter>-->
     <div class="items">
       <AppPosition v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item"/>
     </div>
@@ -25,6 +25,7 @@
   import AppPageTitle from '~/components/AppPageTitle'
   import axios from 'axios'
   import moment from 'moment'
+  import { orderBy, find } from 'lodash'
 
   export default {
     data() {
@@ -98,9 +99,7 @@
         if (this.selectedFilter === -1) {
           return this.tempItems;
         } else {
-          return this.tempItems.filter((item) => {
-            return find(item.categories, (o) => o.id === this.selectedFilter) ? item : undefined
-          })
+          return orderBy(this.tempItems, ['date'], [this.selectedFilter === 1 ? 'desc' : 'asc']);
         }
       }
     }
@@ -111,7 +110,7 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(0px, 2em, 3, 1);
+    @include grid-items(0px, 2em, 3, 2);
     margin-bottom: 2em;
   }
   .items-bellow

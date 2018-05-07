@@ -22,7 +22,6 @@
 </template>
 
 <script>
-
   export default {
     props: ['items'],
     data () {
@@ -57,6 +56,10 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/mixins";
+
+  * {
+    /*all: unset;*/
+  }
 
   .swiper {
     width: 100%;

@@ -18,7 +18,7 @@
         <p>{{item.acf.description | truncate(35 * 3)}}</p>
         </div>
         <div class="bottom-group">
-        <p class="published">Deadline: {{date}}</p>
+        <p class="published">Deadline: {{deadline}}</p>
         <div class="more-container">
           <div class="plus">+</div>
           <div class="read"> Read <span class="more">more</span></div>
@@ -29,13 +29,13 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import moment from 'moment'
+
   export default {
     props: ['item'],
     data() {
       return {
-        date: moment(this.item.date).format('DD-MM-YYYY')
+        deadline: moment(this.item.acf.deadline ? this.item.acf.deadline : this.item.date).format('DD-MM-YYYY')
       }
     },
     components: {
