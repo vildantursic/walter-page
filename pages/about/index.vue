@@ -1,5 +1,20 @@
 <template>
   <div>
+    <div class="navigation">
+      <scrollactive ref="scrollactive"
+                    class="nav"
+                    active-class="is-active"
+                    :offset="80"
+                    :duration="800"
+                    bezier-easing-value=".5,0,.35,1">
+        <a href="#statistics" class="scrollactive-item">Statistics</a>
+        <a href="#history" class="scrollactive-item">History</a>
+        <a href="#board-members" class="scrollactive-item">Board Members</a>
+        <a href="#partners" class="scrollactive-item">Partners</a>
+        <a href="#clients" class="scrollactive-item">Clients</a>
+        <a href="#contact" class="scrollactive-item">Contact</a>
+      </scrollactive>
+    </div>
     <div class="section">
       <section id="statistics" class="statistics-section padded-content">
         <h2 v-html="page.content.rendered"></h2>
@@ -44,7 +59,9 @@
     <div class="section">
       <section id="contact" class="contact-section">
         <div class="contact">
-          <!--<AppContactPerson></AppContactPerson>-->
+          <div class="users">
+            <AppContactPerson v-for="(item, index) of page.acf.contact_persons" :key="index" :user="item"></AppContactPerson>
+          </div>
           <AppMap/>
         </div>
       </section>
@@ -184,7 +201,7 @@
 
     .partners {
       width: 100%;
-      @include grid-items(10%, 30px, 2, 2);
+      @include grid-items(10%, 30px, 3, 1);
     }
   }
 
@@ -201,8 +218,43 @@
   }
 
   .contact {
+    position: relative;
     display: grid;
     grid-auto-columns: 100%;
+
+    .users {
+      position: absolute;
+      left: 0;
+      height: 100vh;
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      .card {
+        margin: 50px 0;
+      }
+    }
   }
 
+  .navigation {
+    position: fixed;
+    z-index: 200;
+    top: 100px;
+    left: 0;
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+
+      a {
+        color: black;
+      }
+    }
+  }
+  .is-active {
+    font-size: 1.4em !important;
+    font-weight: bolder !important;
+  }
 </style>

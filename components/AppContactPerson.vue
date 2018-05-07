@@ -2,8 +2,8 @@
     <div class="card">
       <style>
         .avatar.photo {
-          width: 50px;
-          height: 50px;
+          width: 70px;
+          height: 70px;
           border-radius: 50%;
         }
       </style>
@@ -25,15 +25,36 @@
 
 <script>
     export default {
-        name: "AppContactPerson"
+      props: ['user']
     }
 </script>
 
 <style lang="scss" scoped>
   .card {
+    width: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    color: white;
+
+    div {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .name {
+      font-weight: bolder;
+      font-size: 1.2em;
+    }
+
+    .icons {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      border-top: solid 1px white;
+      padding: 5% 0;
+      font-size: 1.2em;
+    }
   }
 </style>
