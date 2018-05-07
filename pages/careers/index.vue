@@ -1,9 +1,17 @@
 <template>
   <section class="padded-content footing-space">
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
-    <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter" @onSearch="search = $event"></AppFilter>
+    <AppFilter :filters="filters"
+               :selectedFilter="selectedFilter"
+               :showDateFilter="true"
+               :monthActive="2"
+               @onFilterSelected="selectFilter"
+               @onYearSelected="selectYear"
+               @onMonthSelected="selectMonth">
+      <input type="text" placeholder="Search.." v-model="search">
+    </AppFilter>
     <div class="items">
-      <AppPosition v-for="(item, index) of limitBy(items,itemsToShow)" :key="index" :item="item"/>
+      <AppPosition v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item"/>
     </div>
     <div class="items-bellow">
       <AppPosition v-if="items[items.length - 1]" :item="items[items.length - 1]"></AppPosition>
@@ -16,6 +24,7 @@
   import AppPosition from '~/components/AppPosition'
   import AppPageTitle from '~/components/AppPageTitle'
   import axios from 'axios'
+  import moment from 'moment'
 
   export default {
     data() {
@@ -29,17 +38,26 @@
           acf: {}
         },
         filters: [
-          { id: 2, name: 'Newest' },
-          { id: 3, name: 'Oldest' },
+          { id: 1, name: 'Newest' },
+          { id: 2, name: 'Oldest' },
         ],
         search: '',
-        selectedFilter: -1
+        selectedFilter: -1,
+        tempItems: [],
+        categories: []
       }
     },
     components: {
       AppFilter,
       AppPageTitle,
       AppPosition
+    },
+    computed: {
+      searchedList() {
+        return this.items.filter(item => {
+          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase())
+        })
+      }
     },
     mounted() {
       this.getItems()
@@ -56,13 +74,34 @@
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?_embed').then((response) => {
           this.items = response.data
           this.itemsToShow = this.items.length - 1
+          this.tempItems = response.data
         }).catch((error) => {
           console.log(error);
         });
       },
       selectFilter (id) {
         this.selectedFilter = id
-        console.log(id)
+        this.items = this.filterItems()
+      },
+      selectYear (year) {
+        this.items = this.filterItems().filter((item) => {
+          return moment(item.date).year() === year
+        })
+      },
+      selectMonth (month) {
+        this.items = this.filterItems().filter((item) => {
+          return moment(item.date).month() + 1 === month
+        })
+      },
+      filterItems () {
+        this.search = ''
+        if (this.selectedFilter === -1) {
+          return this.tempItems;
+        } else {
+          return this.tempItems.filter((item) => {
+            return find(item.categories, (o) => o.id === this.selectedFilter) ? item : undefined
+          })
+        }
       }
     }
   }
