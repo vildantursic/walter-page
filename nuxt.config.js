@@ -7,7 +7,7 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Walter page' }
+      { hid: 'description', name: 'description', content: 'Walter page, Your strategic BIM partner' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -34,6 +34,12 @@ module.exports = {
         })
       }
     },
+    loaders:[
+      {
+        test: /\.svg$/,
+        loader: 'vue-svg-loader'
+      }
+    ],
     vendor: [
       'axios',
       'aos',
@@ -51,6 +57,7 @@ module.exports = {
   ],
   plugins: [
     {src: '~/plugins/swiper.js', ssr: false},
+    {src: '~plugins/scroll.js', ssr: true},
     {src: '~/plugins/aos.js', ssr: false},
     '~/plugins/vue2-filters.js',
     '~plugins/filters.js'

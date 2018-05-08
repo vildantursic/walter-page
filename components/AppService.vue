@@ -1,7 +1,7 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up" v-on:click="clickService()">
     <div class="image">
-      <img v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
+      <img v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
 
       <img class="no-image" v-if="item._embedded === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
@@ -41,6 +41,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
+      img {
+        width: 50%;
+      }
     }
 
     .info {

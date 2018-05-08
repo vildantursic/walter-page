@@ -1,18 +1,11 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
-    <div class="card-img">
-      <img src="~/static/images/Bimobject-log.png" alt="">
+    <div class="card-img" v-if="item._embedded !== undefined">
+      <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+      <img v-if="item._embedded['wp:featuredmedia'] === undefined" class="no-image" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info-card">
-      <div class="about">
-        <p>With over 300 skilled employees and 100,000 daily users across Northern Europe,
-          we provide our clients with expert guidance covering everything from 3D modelling and simulation to Product Lifecycle Management,
-          Building Information Modelling and Facility Management.
-          Many of our solutions follow the principles of Lean,
-          and the bene?ts include lower development and production costs,
-          a reduction in materials used and shorter time to market,
-          not to mention leaving more room for creativity and better end results.</p>
-      </div>
+      <div class="about" v-html="item.content.rendered"></div>
     </div>
   </div>
 </template>
@@ -26,26 +19,33 @@
 </script>
 
 <style lang="scss" scoped="">
-  .card{
+  @import "../assets/styles/variables";
+
+  .card {
     display: flex;
     flex-direction: column;
-    max-height: 400px;
+    height: 400px;
     overflow: hidden;
-    p{
+
+    p {
       font-size: 0.875rem;
     }
   }
-  .card-img{
+  .card-img {
     width: 100%;
-    height: 40%;
+    height: 70%;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: $secondary-color;
 
     img {
       width: 100%;
     }
-  }
 
+    .no-image {
+      width: auto;
+    }
+  }
 </style>

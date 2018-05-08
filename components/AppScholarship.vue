@@ -1,7 +1,8 @@
 <template>
     <div class="card animated fadeIn" data-aos="slide-up">
-      <div class="card-img-container">
-        <img class="card-img" src="~/static/images/bimacademy.jpg" alt="">
+      <div v-if="item._embedded !== undefined" class="card-img-container">
+        <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+        <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
       </div>
       <div class="info-card">
         <div class="social">
@@ -13,16 +14,11 @@
           <a href="#"><i class="fas fa-paperclip"></i></a>
         </div>
         <div>
-        <h1 class="title">I'm a title. Click
-          here to edit me.</h1>
-        <p>I'm a paragraph. Click here to add your
-          own text and edit me. It’s easy. Just
-          click “Edit Text” or double click me and
-          you can start adding your own content
-          and make changes to the font...</p>
+        <h1 class="title">{{item.title.rendered}}</h1>
+        <p>{{item.acf.description | truncate(35 * 3)}}</p>
         </div>
         <div class="bottom-group">
-        <p class="published">Deadline: 15-04-2018</p>
+        <p class="published">Deadline: {{deadline}}</p>
         <div class="more-container">
           <div class="plus">+</div>
           <div class="read"> Read <span class="more">more</span></div>
@@ -33,9 +29,18 @@
 </template>
 
 <script>
+  import moment from 'moment'
+
   export default {
+    props: ['item'],
+    data() {
+      return {
+        deadline: moment(this.item.acf.deadline ? this.item.acf.deadline : this.item.date).format('DD-MM-YYYY')
+      }
+    },
     components: {
-    }
+    },
+    methods: {}
   }
 </script>
 
@@ -56,7 +61,7 @@
     {
       overflow: hidden;
       display: flex;
-      justify-content: left;
+      justify-content: center;
       align-items: center;
       width: 45%;
       .card-img {
@@ -67,10 +72,10 @@
     {
       position: relative;
       width: 55%;
-      padding: 0em 1em;
+      padding: 1em 1em;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       .social
       {
         align-self: flex-end;
@@ -83,19 +88,29 @@
         color: blue;
         letter-spacing: 2px;
       }
+      .title
+      {
+        font-weight: 800;
+        font-size: 1.5em;
+      }
       .bottom-group
       {
+        position: absolute;
+        bottom: 0;
+        width: 95%;
         .published
         {
           font-size: 0.8em;
           font-weight: 500;
           color: gray;
+          float: left;
         }
         .more-container {
           float: right;
           display: flex;
           align-items: center;
           align-self: flex-end;
+          margin-top: 2em;
           .read {
             font-size: 1.5em;
             font-weight: bold;
