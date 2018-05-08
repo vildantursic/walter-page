@@ -6,7 +6,8 @@
                     active-class="is-active"
                     :offset="80"
                     :duration="800"
-                    bezier-easing-value=".5,0,.35,1">
+                    bezier-easing-value=".5,0,.35,1"
+                    v-on:itemchanged="onItemChanged">
         <a href="#statistics" class="scrollactive-item">Statistics</a>
         <a href="#history" class="scrollactive-item">History</a>
         <a href="#board-members" class="scrollactive-item">Board Members</a>
@@ -30,7 +31,24 @@
     </div>
     <div class="section">
       <section id="history" class="history-section">
-        <AppHistory :items="histories"></AppHistory>
+        <div class="tabs">
+          <div class="tabbed-section__selector">
+            <a :class="[index === currentHistory ? 'active': '', `tabbed-section__selector-tab-${currentHistory + 1}`]"
+               v-for="(obj, index) in histories"
+               :key="index" @click="currentHistory = index">
+              {{obj.title.rendered}}
+            </a>
+            <span class="tabbed-section__highlighter"></span>
+          </div>
+        </div>
+        <AppHistory :items="histories" :currentHistory="currentHistory" @currentHistory="currentHistory = $event"></AppHistory>
+        <div class="achievements" v-if="histories.length !== 0">
+          <div v-for="(item, index) in achievements" :key="index">
+            <AppAchievement v-if="item.id !== -1" :item="item"></AppAchievement>
+            <div class="plus" v-if="item.id === -1">+</div>
+          </div>
+        </div>
+
       </section>
     </div>
     <div class="section">
@@ -77,7 +95,9 @@
   import AppNumber from "~/components/AppNumber"
   import AppHistory from "~/components/AppHistory"
   import AppContactPerson from "~/components/AppContactPerson"
+  import AppAchievement from "~/components/AppAchievement"
   import axios from "axios"
+  import { find } from "lodash"
 
   export default {
     components: {
@@ -87,7 +107,8 @@
       AppMap,
       AppNumber,
       AppHistory,
-      AppContactPerson
+      AppContactPerson,
+      AppAchievement
     },
     data() {
       return {
@@ -101,9 +122,21 @@
           acf: {}
         },
         histories: [],
+        achievements: [],
+        currentHistory: 0,
         partners: [],
         boardMembers: [],
         customers: []
+      }
+    },
+    watch: {
+      currentHistory: function (newVal, oldVal) {
+        if (newVal > oldVal) {
+          this.achievements = this.achievements.concat({ id: -1 }).concat(this.histories[newVal].acf.achievements)
+        } else {
+          this.histories[oldVal].acf.achievements.forEach(el => this.achievements.pop())
+          this.achievements.pop()
+        }
       }
     },
     created() {
@@ -120,9 +153,35 @@
       });
     },
     methods: {
+      onItemChanged(event, currentItem, lastActiveItem) {
+        if (currentItem) {
+          const parser = new DOMParser();
+          let htmlDoc = parser.parseFromString('<a data-v-5357e832="" href="#contact" class="scrollactive-item is-active">Contact</a>', "text/html");
+          if (currentItem.toString() === htmlDoc.body.firstChild.toString()) {
+            this.$refs.scrollactive.$el.className = 'scrollactive-nav nav last-section'
+          } else {
+            this.$refs.scrollactive.$el.className = 'scrollactive-nav nav'
+          }
+        }
+      },
       getHistories() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/histories?_embed').then((response) => {
-          this.histories = response.data
+          this.histories = response.data.reverse()
+          this.getAchievements()
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
+      getAchievements() {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/achievements?_embed').then((response) => {
+          this.histories.map(history => {
+            history.acf.achievements = response.data.filter((achievement) => {
+              return find(history.acf.achievements, { ID: achievement.id }) ? achievement : undefined
+            });
+            console.log(history)
+            return history
+          })
+          this.achievements = this.achievements.concat(this.histories[this.currentHistory].acf.achievements)
         }).catch((error) => {
           console.log(error)
         });
@@ -142,7 +201,7 @@
         });
       },
       getCustomers() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/customers?_embed').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/customers?per_page=100&_embed').then((response) => {
           this.customers = response.data
         }).catch((error) => {
           console.log(error)
@@ -176,9 +235,24 @@
   .history-section {
     min-height: 100vh;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
     .history {
       width: 100%;
+    }
+
+    .achievements {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 50px 15%;
+
+      .plus {
+        font-size: 2em;
+        font-weight: bolder;
+      }
     }
   }
 
@@ -201,19 +275,19 @@
 
     .partners {
       width: 100%;
-      @include grid-items(10%, 30px, 3, 1);
+      @include grid-items(10%, 30px, 2, 1);
     }
   }
 
   .clients-section {
     min-height: 100vh;
     background: $secondary-color;
+    padding-top: 50px;
 
     .clients {
       width: 100%;
+      margin-top: 50px;
       @include grid-items(20px, 50px, 10, 5);
-      justify-content: center;
-      align-items: center
     }
   }
 
@@ -226,7 +300,7 @@
       position: absolute;
       left: 0;
       height: 100vh;
-      width: 50%;
+      width: 70%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -241,20 +315,103 @@
   .navigation {
     position: fixed;
     z-index: 200;
-    top: 100px;
-    left: 0;
+    top: 150px;
+    left: 50px;
+
+    .is-active {
+      font-size: 3em !important;
+      font-weight: bolder !important;
+    }
 
     .nav {
       display: flex;
       flex-direction: column;
 
       a {
+        width: 5px;
         color: black;
+        margin: 5px 0;
+        font-size: 1em;
+      }
+    }
+    .last-section {
+
+      a {
+        color: white;
       }
     }
   }
-  .is-active {
-    font-size: 1.4em !important;
-    font-weight: bolder !important;
+
+  // history tabs
+  .tabs {
+    margin: 0 0 100px 15%;
+
+    .tabbed-section__selector {
+      position: relative;
+      height: $main-size*2;
+      top: -$main-size*1.95;
+      left: -$main-size;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      float: left;
+
+      [class*="-tab-"] {
+        float: left;
+        display: block;
+        height: $main-size*2;
+        line-height: $main-size*2;
+        width: 100px;
+        text-align: center;
+        background: #fff;
+        font-weight: bold;
+        text-decoration: none;
+        color: black;
+        font-size: 14px;
+
+
+        &.active {
+          color: $main-color;
+        }
+      }
+
+      a {
+        cursor: pointer;
+      }
+      a:first-child {
+        border-top-left-radius: 2px;
+      }
+      a:last-of-type {
+        border-top-right-radius: 2px;
+      }
+    }
+
+    .tabbed-section__highlighter {
+      position: absolute;
+      z-index: 10;
+      bottom: 0;
+      height: 2px;
+      background: $main-color;
+      max-width: 100px;
+      width: 100%;
+      transform: translateX(0);
+      display: block;
+      left: 0;
+      transition: transform .23s ease ;
+    }
+
+
+    .tabbed-section__selector-tab-4.active ~ .tabbed-section__highlighter {
+      transform: translateX(300px);
+    }
+    .tabbed-section__selector-tab-3.active ~ .tabbed-section__highlighter {
+      transform: translateX(200px);
+    }
+    .tabbed-section__selector-tab-2.active ~ .tabbed-section__highlighter {
+      transform: translateX(100px);
+    }
+    .tabbed-section__selector-tab-1.active ~ .tabbed-section__highlighter {
+      transform: translateX(0);
+    }
   }
 </style>

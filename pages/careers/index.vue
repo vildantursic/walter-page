@@ -72,7 +72,7 @@
     },
     methods: {
       getItems () {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?_embed').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?per_page=100&_embed').then((response) => {
           this.items = response.data
           this.itemsToShow = this.items.length - 1
           this.tempItems = response.data

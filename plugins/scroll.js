@@ -1,4 +1,4 @@
 import Vue from 'vue'
-const Scrollactive = require('vue-scrollactive');
+import Scrollactive from 'vue-scrollactive';
 
 Vue.use(Scrollactive);

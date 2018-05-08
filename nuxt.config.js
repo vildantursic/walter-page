@@ -57,7 +57,7 @@ module.exports = {
   ],
   plugins: [
     {src: '~/plugins/swiper.js', ssr: false},
-    {src: '~plugins/scroll.js', ssr: false},
+    {src: '~plugins/scroll.js', ssr: true},
     {src: '~/plugins/aos.js', ssr: false},
     '~/plugins/vue2-filters.js',
     '~plugins/filters.js'
