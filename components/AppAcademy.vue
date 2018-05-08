@@ -1,64 +1,91 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
-    <div class="image">
-      <img src="~/static/images/arch.jpg" alt="">
+    <div v-if="item._embedded !== undefined" class="card-img-container">
+      <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+      <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
       <h1 class="title">{{item.title.rendered}}</h1>
-      <div class="about">
-        <p>Author</p>
-        <p>The 5-star Hyatt Regency Zadar Maraska is the first hotel in Croatia under the Hyatt brand and is set to open in the spring of 2019...</p>
-      </div>
-      <div class="published">Deadline: 15-04-2018</div>
-      <div class="border"></div>
+      <!--<div class="author">-->
+        <!--{{item["_embedded"]["wp:featuredmedia"][0]["author"]}}-->
+      <!--</div>-->
+      <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>
+      <div class="published">Deadline: {{deadline}}</div>
     </div>
   </div>
 </template>
 
 <script>
+  import moment from 'moment'
+
   export default {
     props: ['item'],
+    data() {
+      return {
+          deadline: moment(this.item.acf.deadline ? this.item.acf.deadline : this.item.date).format('DD-MM-YYYY')
+      }
+    },
     components: {
-    }
+    },
+    methods: {}
   }
 </script>
 
 <style lang="scss" scoped>
-  .card{
+  @import '../assets/styles/variables';
+  @import '../assets/styles/mixins';
+
+  .card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    height: 450px;
     overflow: hidden;
+    margin: 1em;
+    border-width: 0 0 3px 0;
+    border-style: solid;
+    -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
+    -webkit-border-image: -webkit-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
+    border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
+    border-image-slice: 1;
 
-    .image {
-      height: 250px;
+    .card-img-container {
+      background-color: $secondary-color;
       overflow: hidden;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 0 3em;
-
-      img {
-        width: 100%;
+      align-items: center;
+      width: 100%;
+      height: 45%;
+      .card-img {
+        height: 100%;
       }
     }
-
     .info {
-      padding: 0 3em 3em 3em;
-    }
-    .published
-    {
-      font-size: 0.8em;
-      font-weight: 500;
-      color: gray;
-    }
-    .border {
-      width: 100%;
-      height: 3px;
-      background-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;  /* <- here it is */
+      display: flex;
+      flex-direction: column;
+      .title
+      {
+        font-weight: 600;
+        font-size: 1.5em;
+        padding-bottom: 1em;
+      }
+      .author
+      {
+        font-size: 1em;
+        font-weight: 600;
+        padding-bottom: 1em;
+      }
+      .published
+      {
+        position: absolute;
+        bottom: 0;
+        font-size: 0.8em;
+        font-weight: 500;
+        color: gray;
+        padding-top: 1em;
+        padding-bottom: 1em;
+      }
     }
   }
 </style>

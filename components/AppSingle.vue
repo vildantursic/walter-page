@@ -2,40 +2,45 @@
   <div class="card">
     <div class="content">
       <div class="card-img-container">
-        <AppSlider v-if="item.acf.gallery_images" :images="item.acf.gallery_images.split(',')"></AppSlider>
+        <AppSlider v-if="item.acf.gallery_images" :images="item.acf.gallery_images.split(',')"
+                   :miniSlider="true"></AppSlider>
         <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>
       <div class="info-card">
         <div class="close">
+          <AppSocial></AppSocial>
           <i class="fas fa-times" @click="closeCase"></i>
         </div>
-        <div class="right-content">
         <p class="category">
-          <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span v-if="index < item.case_categories.length - 1">,</span></span>
+          <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span
+            v-if="index < item.case_categories.length - 1">,</span></span>
         </p>
         <h4 class="title">{{item.title.rendered}}</h4>
-        <a class="link" href="https://www.symetri.com/plm" target="_blank">www.symetri.com/plm</a>
         <p class="customer">
-          <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span v-if="index < item.acf.customers.length - 1">,</span></span>
+          <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span
+            v-if="index < item.acf.customers.length - 1">,</span></span>
         </p>
         <div class="text-box">
           <div class="description" v-html="item.content.rendered"></div>
         </div>
         <div class="divider">
-          <p v-if="item.acf.partners" class="author">In Collaboration with <span v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></p>
-        </div>
+          <p v-if="item.acf.partners" class="author">In Collaboration with <span
+            v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></p>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
   import AppSlider from '~/components/AppSlider'
+  import AppSocial from '~/components/AppSocial'
 
   export default {
     props: ['item'],
     components: {
-      AppSlider
+      AppSlider,
+      AppSocial
     },
     methods: {
       closeCase() {
@@ -56,6 +61,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    padding-top: 50px;
     background: white;
     overflow: scroll;
     -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
@@ -65,6 +71,8 @@
 
     .close {
       width: 100%;
+      display: flex;
+      justify-content: space-between;
 
       i {
         display: flex;
@@ -92,6 +100,7 @@
         justify-content: center;
         /*align-items: center;*/
         width: 60%;
+        height: 70vh;
 
         @include screen-size(xs) {
           width: 100%;
@@ -129,7 +138,7 @@
           /*width: 85%;*/
         }
         .text-box {
-          height: 400px;
+          height: 50vh;
           overflow: auto;
           /*width: 85%;*/
         }
@@ -140,7 +149,8 @@
       }
     }
   }
-  .right-content{
+
+  .right-content {
     width: 85%;
   }
 </style>

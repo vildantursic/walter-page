@@ -5,8 +5,8 @@
     <p class="subtitle">{{subtitle}}</p>
   </div>
 </template>
-<script>
 
+<script>
   export default {
     components: {
     },
@@ -27,6 +27,7 @@
       font-size: 4.5em;
       margin: 10px 0;
       opacity: 0.80;
+      font-weight: bold;
     }
     .subtitle{
       font-size: 1.5em;

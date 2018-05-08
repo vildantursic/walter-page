@@ -1,9 +1,14 @@
 <template>
   <section class="padded-content footing-space">
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
-    <AppFilter :filters="filters" :selectedFilter="selectedFilter" :showDateFilter="true" :monthActive="2" @onFilterSelected="selectFilter"></AppFilter>
+    <AppFilter :filters="filters"
+               :selectedFilter="selectedFilter"
+               :monthActive="2"
+               @onFilterSelected="selectFilter">
+      <input type="text" placeholder="Search.." v-model="search">
+    </AppFilter>
     <div class="items">
-      <AppCards v-for="(item, index) of limitBy(items, itemsToShow)" :key="index" :item="item" @onShowCase="showCase($event)"/>
+      <AppCards v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onShowCase="showCase($event)"/>
       <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
     </div>
     <AppSingle v-if="item" :item="item" @onCloseCase="item = null"/>
@@ -34,8 +39,10 @@
           acf: {}
         },
         items: [],
+        tempItems: [],
         item: null,
         filters: [],
+        search: '',
         selectedFilter: -1
       }
     },
@@ -49,16 +56,18 @@
         console.log(error)
       });
     },
-    computed:{
-      searchItems: () => {
-        console.log(this.items)
-        return this.items
+    computed: {
+      searchedList() {
+        return this.items.filter(item => {
+          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase())
+        })
       }
     },
     methods: {
       getItems() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases?_embed').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases?per_page=100&_embed').then((response) => {
           this.items = response.data
+          this.tempItems = this.items
           this.getCategories()
         }).catch((error) => {
           console.log(error);
@@ -86,6 +95,17 @@
       },
       selectFilter (id) {
         this.selectedFilter = id
+        this.items = this.filterItems(id)
+      },
+      filterItems () {
+        this.search = ''
+        if (this.selectedFilter === -1) {
+          return this.tempItems;
+        } else {
+          return this.tempItems.filter((item) => {
+            return find(item.case_categories, (o) => o.id === this.selectedFilter) ? item : undefined
+          })
+        }
       }
     }
   }

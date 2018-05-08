@@ -1,13 +1,12 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
-    <div class="image">
-      <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" alt="">
-
+    <div v-if="item._embedded !== undefined" class="image">
+      <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
       <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
-      <h1 class="title" @click="showCase(item)">{{item.title.rendered | truncate(25)}}</h1>
-      <h3 class="clients" v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span v-if="index < item.acf.customers.length - 1">,</span></h3>
+      <h1 class="title" @click="showCase(item)">{{item.title.rendered | truncate(45)}}</h1>
+      <i class="clients" v-for="(customer, index) of item.acf.customers" :key="index">{{customer.post_title}}<span v-if="index < item.acf.customers.length - 1">,</span></i>
       <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>
       <i class="partner" v-if="item.acf.partners">In Collaboration with <span v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></i>
     </div>
@@ -71,12 +70,15 @@
       }
 
       .clients {
-        margin: 10px 0;
+        display: inline-block;
+        margin: 10px 2px 10px 0;
+        opacity: 0.8;
       }
 
       .content {
         height: 63px;
         overflow: hidden;
+        opacity: 0.8;
       }
 
       .partner {
@@ -88,10 +90,8 @@
     .border {
       width: 100%;
       height: 3px;
-      background-image: linear-gradient(90deg, #0093c8 0%, #faaf40 100%);
       background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      background: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) fixed center;
     }
   }
 </style>

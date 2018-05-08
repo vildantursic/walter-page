@@ -9,7 +9,13 @@
           <li><nuxt-link :to="{ name: 'index' }">Services</nuxt-link></li>
           <li><nuxt-link :to="{ name: 'cases' }">Cases</nuxt-link></li>
           <li><nuxt-link :to="{ name: 'about' }">About us</nuxt-link></li>
-          <li><nuxt-link :to="{ name: 'careers' }">Careers</nuxt-link></li>
+          <li @mouseover="upHere = true" @mouseleave="upHere = false">
+            <nuxt-link :to="{ name: 'careers' }">Careers</nuxt-link>
+            <ul class="dropdown-menu" id="menu-drop" v-show="upHere">
+              <li><nuxt-link :to="{ name: 'academy' }">BIM Academy</nuxt-link></li>
+              <li><nuxt-link :to="{ name: 'scholarships' }">Scholarships</nuxt-link></li>
+            </ul>
+          </li>
           <li><nuxt-link :to="{ name: 'news' }">News</nuxt-link></li>
         </ul>
       </div>
@@ -19,7 +25,19 @@
 <script>
 
   export default {
+    data() {
+      return {
+          upHere:false
+      }
+    },
     components: {
+    },
+    methods: {
+      openDropdown()
+      {
+          console.log('ok')
+        document.getElementById('menu-drop').setAttribute('visibility','visible')
+      }
     }
   }
 </script>
@@ -31,7 +49,7 @@
   header {
     width: 100%;
     height: 80px;
-    background-color: rgba(#47494e, 0.5);
+    background-color: rgba(#47494e, 0.7);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -68,6 +86,28 @@
 
           .nuxt-link-exact-active {
             color: $main-color;
+          }
+        }
+      }
+      .dropdown-menu
+      {
+        list-style: none;
+        justify-content: space-around;
+        position: absolute;
+        bottom:-100%;
+        display: flex;
+        flex-direction: column;
+        li
+        {
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
+          color: #FFFFFF;
+          padding: 1em 1em;
+          background-color:#47494e;
+          &:hover
+          {
+            background-color: rgba(#47494e, 0.7);
           }
         }
       }
