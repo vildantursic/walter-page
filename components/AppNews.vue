@@ -10,8 +10,8 @@
         </p>
         <p class="author">{{item.author.name}}, {{date}}</p>
         <h1 class="title"><nuxt-link class="nav-link" :to="`/news/${item.id}`">{{ item.title.rendered | truncate(100)}}</nuxt-link></h1>
-        <div class="scroll">{{ item.acf.description | truncate(400)}}</div>
-        <AppSocial></AppSocial>
+        <div class="scroll">{{item.acf.description | truncate(400)}}</div>
+        <AppSocial :item="item" :link="$route.path"></AppSocial>
       </div>
     </div>
 </template>

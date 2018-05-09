@@ -12,6 +12,7 @@
           <li @mouseover="upHere = true" @mouseleave="upHere = false">
             <nuxt-link :to="{ name: 'careers' }">Careers</nuxt-link>
             <ul class="dropdown-menu" id="menu-drop" v-show="upHere">
+              <li><nuxt-link :to="{ name: 'careers' }">Open positions</nuxt-link></li>
               <li><nuxt-link :to="{ name: 'academy' }">BIM Academy</nuxt-link></li>
               <li><nuxt-link :to="{ name: 'scholarships' }">Scholarships</nuxt-link></li>
             </ul>
@@ -49,7 +50,7 @@
   header {
     width: 100%;
     height: 80px;
-    background-color: rgba(#47494e, 0.7);
+    background-color: rgba($dark-color, 0.7);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -93,7 +94,7 @@
         list-style: none;
         justify-content: space-around;
         position: absolute;
-        bottom:-100%;
+        bottom: -180%;
         display: flex;
         flex-direction: column;
 

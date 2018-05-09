@@ -66,11 +66,12 @@
     .about {
       h3{
         margin-bottom: 0;
+        font-size: 1.5em;
+        font-weight: bolder;
       }
       p{
         margin-top: 0;
-        font-size: 0.75rem;
-
+        font-size: 1.2em;
       }
     }
     .member {
@@ -78,9 +79,10 @@
     }
 
     .divider {
-      background: linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-      height: 3px;
       width: 100%;
+      height: 3px;
+      background-size: cover;
+      background: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) fixed center;
     }
 
     .social {
@@ -115,10 +117,8 @@
       .link {
         text-decoration: none;
         color: #2e2f30;
-        font-size: 0.75rem;
       }
       .fab, .fas{
-        font-size: 0.75rem;
         width: 30px;
         text-align: center;
         text-decoration: none;

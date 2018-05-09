@@ -115,10 +115,6 @@
 <style lang="scss" scoped>
   @import "../assets/styles/mixins";
 
-  * {
-    /*all: unset;*/
-  }
-
   .swiper {
     width: 100%;
     height: 100%;
@@ -175,12 +171,10 @@
   }
 
   .line-draw-left {
-    stroke-width: 3px;
     stroke-dasharray: 5045;
     animation: 5s write-left;
   }
   .line-draw-right {
-    stroke-width: 3px;
     stroke-dasharray: 5045;
     animation: 5s write-right;
   }

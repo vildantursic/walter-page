@@ -8,7 +8,7 @@
       </div>
       <div class="info-card">
         <div class="close">
-          <AppSocial></AppSocial>
+          <AppSocial :item="item" :link="$route.path"></AppSocial>
           <i class="fas fa-times" @click="closeCase"></i>
         </div>
         <p class="category">

@@ -62,6 +62,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/mixins";
+  @import "../assets/styles/variables";
 
   .swiper {
     width: 100%;
@@ -85,7 +86,7 @@
         text-align: center;
         font-size: 38px;
         font-weight: 700;
-        background-color: #e1e1e1;
+        background-color: $secondary-color;
         overflow: hidden;
 
         img {

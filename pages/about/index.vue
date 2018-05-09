@@ -8,12 +8,12 @@
                     :duration="800"
                     bezier-easing-value=".5,0,.35,1"
                     v-on:itemchanged="onItemChanged">
-        <a href="#statistics" class="scrollactive-item">Statistics</a>
-        <a href="#history" class="scrollactive-item">History</a>
+        <a href="#statistics" class="scrollactive-item">Who are we</a>
+        <a href="#history" class="scrollactive-item">Our history</a>
         <a href="#board-members" class="scrollactive-item">Board Members</a>
-        <a href="#partners" class="scrollactive-item">Partners</a>
-        <a href="#clients" class="scrollactive-item">Clients</a>
-        <a href="#contact" class="scrollactive-item">Contact</a>
+        <a href="#partners" class="scrollactive-item">Our partners</a>
+        <a href="#clients" class="scrollactive-item">Our clients</a>
+        <a href="#contact" class="scrollactive-item">Contact us</a>
       </scrollactive>
     </div>
     <div class="section">
@@ -118,11 +118,6 @@
     },
     data() {
       return {
-        options: {
-          navigation: true,
-          anchors: ['page1', 'page2', 'page3', 'page4'],
-          sectionsColor: ['#41b883', '#ff5f45', '#0798ec', '#fec401', '#1bcee6', '#ee1a59', '#2c3e4f', '#ba5be9', '#b4b8ab']
-        },
         items: [],
         page: {
           acf: {}
@@ -164,6 +159,7 @@
     },
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
+        this.$refs.scrollactive.$el.className = 'scrollactive-nav nav'
         if (currentItem) {
           const parser = new DOMParser();
           let htmlDoc = parser.parseFromString('<a data-v-5357e832="" href="#contact" class="scrollactive-item is-active">Contact</a>', "text/html");
@@ -226,7 +222,7 @@
 
   .statistics-section {
     min-height: 100vh;
-    background: $secondary-color;
+    background: $secondary-dark-color;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -264,29 +260,6 @@
         font-weight: bolder;
       }
     }
-
-    .next-button {
-      position: absolute;
-      z-index: 50;
-      right: 0;
-      top: calc(50% + 35px);
-      padding: 2px;
-      border-radius: 50%;
-      background: linear-gradient(90deg, #0093c8 0%, #faaf40 100%);
-      cursor: pointer;
-
-      i {
-        font-size: 2em;
-        background: white;
-        mix-blend-mode: screen;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-      }
-    }
   }
 
   .board-members-section {
@@ -294,10 +267,11 @@
     background: $secondary-color;
     display: flex;
     align-items: center;
+    background: $secondary-dark-color;
 
     .board-members {
       width: 100%;
-      @include grid-items(10%, 30px, 3, 3);
+      @include grid-items(5%, 20px, 3, 3);
     }
   }
 
@@ -314,8 +288,8 @@
 
   .clients-section {
     min-height: 100vh;
-    background: $secondary-color;
     padding-top: 50px;
+    background: $secondary-dark-color;
 
     .clients {
       width: 100%;
@@ -344,7 +318,7 @@
         flex-direction: column;
 
         .card {
-          margin: 100px 0;
+          margin: 170px 0 0 0;
         }
       }
 
@@ -352,14 +326,16 @@
         position: absolute;
         right: 0;
         height: 100%;
-        width: 35%;
+        width: 25%;
         display: flex;
-        align-items: center;
         justify-content: space-around;
         flex-direction: column;
 
         .text {
+          margin-top: 100px;
           color: $main-color;
+          opacity: 1;
+          font-weight: bolder;
         }
       }
     }
@@ -371,6 +347,10 @@
     top: 150px;
     left: 50px;
 
+    @include screen-size('xs') {
+      display: none;
+    }
+
     .is-active {
       font-size: 3em !important;
       font-weight: bolder !important;
@@ -379,9 +359,10 @@
     .nav {
       display: flex;
       flex-direction: column;
+      width: 100%;
 
       a {
-        width: 5px;
+        width: 100%;
         color: black;
         margin: 5px 0;
         font-size: 1em;
@@ -420,7 +401,7 @@
         font-weight: bold;
         text-decoration: none;
         color: black;
-        font-size: 14px;
+        font-size: 1.2em;
 
 
         &.active {

@@ -47,7 +47,7 @@
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
 
-  .card{
+  .card {
     overflow: hidden;
     display: flex;
     flex-direction: row;
@@ -59,70 +59,73 @@
     -webkit-border-image: -webkit-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
     border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
     border-image-slice: 1;
-    .card-img-container
-    {
+
+    .card-img-container {
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       width: 45%;
+
       .card-img {
         height: 100%;
       }
     }
-    .info-card
-    {
+    .info-card {
       position: relative;
       width: 55%;
       padding: 1em 1em;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      .social
-      {
+
+      .social {
         align-self: flex-end;
       }
-      .category
-      {
+
+      .category {
         margin: 0;
         font-size: 1em;
         font-weight: 700;
         color: $main-color;
         letter-spacing: 2px;
       }
-      .title
-      {
-        font-weight: 800;
-        font-size: 1.5em;
+
+      .title {
+        font-size: 3em;
+        font-weight: bold;
+        margin: 15px 0;
       }
-      .bottom-group
-      {
+
+      .bottom-group {
         position: absolute;
         bottom: 0;
         width: 95%;
-        .published
-        {
+
+        .published {
           font-size: 0.8em;
           font-weight: 500;
           color: gray;
           float: left;
         }
+
         .more-container {
           float: right;
           display: flex;
           align-items: center;
           align-self: flex-end;
           margin-top: 2em;
+
           .read {
             font-size: 1.5em;
             font-weight: bold;
             letter-spacing: 1px;
+
             .more {
               color: $main-color;
             }
           }
-          .plus
-          {
+          .plus {
             font-size: 2.5em;
             font-weight: bold;
             padding: 0 15px;
@@ -130,41 +133,5 @@
         }
       }
     }
-  }
-  .fab ,.fas{
-    padding: 5px 10px;
-    font-size: 25px;
-    width: 30px;
-    text-align: center;
-    text-decoration: none;
-  }
-  .fab:hover, .fas:hover {
-    opacity: 0.7;
-  }
-  .fa-facebook {
-    background: #ffffff;
-    color: grey;
-  }
-  .fa-twitter {
-    background: #ffffff;
-    color: grey;
-  }
-  .fa-google {
-    background: #ffffff;
-    color: grey;
-  }
-  .fa-linkedin {
-    background: #ffffff;
-    color: grey;
-  }
-  .fa-envelope
-  {
-    background: #ffffff;
-    color: grey;
-  }
-  .fa-paperclip
-  {
-    background: #ffffff;
-    color: grey;
   }
 </style>
