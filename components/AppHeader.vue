@@ -89,26 +89,21 @@
           }
         }
       }
-      .dropdown-menu
-      {
+      .dropdown-menu {
         list-style: none;
         justify-content: space-around;
         position: absolute;
         bottom:-100%;
         display: flex;
         flex-direction: column;
-        li
-        {
+
+        li {
           justify-content: center;
           align-items: center;
           text-decoration: none;
           color: #FFFFFF;
           padding: 1em 1em;
           background-color:#47494e;
-          &:hover
-          {
-            background-color: rgba(#47494e, 0.7);
-          }
         }
       }
     }

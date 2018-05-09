@@ -9,7 +9,7 @@
     </AppFilter>
     <div class="items">
       <AppCards v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onShowCase="showCase($event)"/>
-      <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
+      <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += 9"/>
     </div>
     <AppSingle v-if="item" :item="item" @onCloseCase="item = null"/>
   </section>

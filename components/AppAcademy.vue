@@ -5,7 +5,9 @@
       <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
-      <h1 class="title">{{item.title.rendered}}</h1>
+      <nuxt-link class="nav-link" :to="`/academy/${item.id}`">
+        <h1 class="title">{{item.title.rendered}}</h1>
+      </nuxt-link>
       <!--<div class="author">-->
         <!--{{item["_embedded"]["wp:featuredmedia"][0]["author"]}}-->
       <!--</div>-->

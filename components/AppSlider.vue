@@ -96,7 +96,7 @@
     .swiper-pagination {
 
       > .swiper-pagination-bullet {
-        background-color: red;
+        background-color: black;
       }
     }
   }

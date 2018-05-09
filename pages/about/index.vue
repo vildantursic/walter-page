@@ -22,8 +22,8 @@
         <div class="statistics">
           <AppNumber :number="page.acf.engineers" :text="'Engineers'"/>
           <AppNumber :number="page.acf.experience_bim" :text="'Years of gathered BIM experience'"/>
-          <AppNumber :number="page.acf.projects" :text="'Projects'"/>
           <AppNumber :number="page.acf.clients" :text="'Clients'"/>
+          <AppNumber :number="page.acf.projects" :text="'Projects'"/>
           <AppNumber :number="page.acf.revit_families" :text="'Revit families'"/>
           <AppNumber :number="page.acf.digitalized_sqm" :text="'sqm digitized'"/>
         </div>
@@ -41,6 +41,9 @@
             <span class="tabbed-section__highlighter"></span>
           </div>
         </div>
+        <!--<div v-if="currentHistory < histories.length - 1" class="next-button" @click="currentHistory++">-->
+          <!--<i class="fas fa-chevron-right"></i>-->
+        <!--</div>-->
         <AppHistory :items="histories" :currentHistory="currentHistory" @currentHistory="currentHistory = $event"></AppHistory>
         <div class="achievements" v-if="histories.length !== 0">
           <div v-for="(item, index) in achievements" :key="index">
@@ -67,8 +70,7 @@
     </div>
     <div class="section">
       <section id="clients" class="clients-section padded-content">
-        <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci aliquid consequatur dolore
-          doloribus eaque</h1>
+        <h1 v-html="page.acf.clients_text"></h1>
         <div class="clients">
           <AppClient v-for="(item, index) of customers" :key="index" :item="item"/>
         </div>
@@ -79,6 +81,10 @@
         <div class="contact">
           <div class="users">
             <AppContactPerson v-for="(item, index) of page.acf.contact_persons" :key="index" :user="item"></AppContactPerson>
+          </div>
+          <div class="countries">
+            <h3 class="text">Stockholm, Sweden</h3>
+            <h3 class="text">Sarajevo, Bosnia and Herzegovina</h3>
           </div>
           <AppMap/>
         </div>
@@ -132,10 +138,14 @@
     watch: {
       currentHistory: function (newVal, oldVal) {
         if (newVal > oldVal) {
-          this.achievements = this.achievements.concat({ id: -1 }).concat(this.histories[newVal].acf.achievements)
+          for (let i = oldVal; i < newVal; i++) {
+            this.achievements = this.achievements.concat({ id: -1 }).concat(this.histories[i + 1].acf.achievements)
+          }
         } else {
-          this.histories[oldVal].acf.achievements.forEach(el => this.achievements.pop())
-          this.achievements.pop()
+          for (let i = oldVal; i > newVal; i--) {
+            this.histories[i].acf.achievements.forEach(el => this.achievements.pop())
+            this.achievements.pop()
+          }
         }
       }
     },
@@ -178,7 +188,6 @@
             history.acf.achievements = response.data.filter((achievement) => {
               return find(history.acf.achievements, { ID: achievement.id }) ? achievement : undefined
             });
-            console.log(history)
             return history
           })
           this.achievements = this.achievements.concat(this.histories[this.currentHistory].acf.achievements)
@@ -238,6 +247,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    position: relative;
 
     .history {
       width: 100%;
@@ -252,6 +262,29 @@
       .plus {
         font-size: 2em;
         font-weight: bolder;
+      }
+    }
+
+    .next-button {
+      position: absolute;
+      z-index: 50;
+      right: 0;
+      top: calc(50% + 35px);
+      padding: 2px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #0093c8 0%, #faaf40 100%);
+      cursor: pointer;
+
+      i {
+        font-size: 2em;
+        background: white;
+        mix-blend-mode: screen;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
       }
     }
   }
@@ -291,23 +324,43 @@
     }
   }
 
-  .contact {
-    position: relative;
-    display: grid;
-    grid-auto-columns: 100%;
+  .contact-section {
+    height: 100vh;
 
-    .users {
-      position: absolute;
-      left: 0;
-      height: 100vh;
-      width: 70%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+    .contact {
+      position: relative;
+      display: grid;
+      grid-auto-columns: 100%;
+      height: 100%;
 
-      .card {
-        margin: 50px 0;
+      .users {
+        position: absolute;
+        left: 0;
+        height: 100%;
+        width: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .card {
+          margin: 100px 0;
+        }
+      }
+
+      .countries {
+        position: absolute;
+        right: 0;
+        height: 100%;
+        width: 35%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+
+        .text {
+          color: $main-color;
+        }
       }
     }
   }

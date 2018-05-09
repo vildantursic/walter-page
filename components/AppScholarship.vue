@@ -19,10 +19,10 @@
         </div>
         <div class="bottom-group">
         <p class="published">Deadline: {{deadline}}</p>
-        <div class="more-container">
+        <nuxt-link :to="`/scholarships/${item.id}`" class="more-container nav-link">
           <div class="plus">+</div>
           <div class="read"> Read <span class="more">more</span></div>
-        </div>
+        </nuxt-link>
         </div>
       </div>
     </div>
@@ -45,6 +45,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/styles/variables";
+
   .card{
     overflow: hidden;
     display: flex;
@@ -53,9 +55,9 @@
     padding-bottom: 2em;
     border-width: 0 0 2px 0;
     border-style: solid;
-    -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-    -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-    border-image: linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
+    -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
+    -webkit-border-image: -webkit-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
+    border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
     border-image-slice: 1;
     .card-img-container
     {
@@ -85,7 +87,7 @@
         margin: 0;
         font-size: 1em;
         font-weight: 700;
-        color: blue;
+        color: $main-color;
         letter-spacing: 2px;
       }
       .title
@@ -116,7 +118,7 @@
             font-weight: bold;
             letter-spacing: 1px;
             .more {
-              color: blue;
+              color: $main-color;
             }
           }
           .plus
