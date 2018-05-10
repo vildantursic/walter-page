@@ -1,6 +1,6 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
-    <div v-if="item._embedded !== undefined" class="image">
+    <div v-if="item._embedded !== undefined" class="image" @click="showCase(item)">
       <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
       <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
@@ -45,6 +45,7 @@
       align-items: center;
       justify-content: center;
       /*padding: 0 1em;*/
+      cursor: pointer;
       background: $secondary-color;
 
       img {

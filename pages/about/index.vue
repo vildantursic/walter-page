@@ -41,9 +41,6 @@
             <span class="tabbed-section__highlighter"></span>
           </div>
         </div>
-        <!--<div v-if="currentHistory < histories.length - 1" class="next-button" @click="currentHistory++">-->
-          <!--<i class="fas fa-chevron-right"></i>-->
-        <!--</div>-->
         <AppHistory :items="histories" :currentHistory="currentHistory" @currentHistory="currentHistory = $event"></AppHistory>
         <div class="achievements" v-if="histories.length !== 0">
           <div v-for="(item, index) in achievements" :key="index">
@@ -79,14 +76,16 @@
     <div class="section">
       <section id="contact" class="contact-section">
         <div class="contact">
-          <div class="users">
-            <AppContactPerson v-for="(item, index) of page.acf.contact_persons" :key="index" :user="item"></AppContactPerson>
-          </div>
           <div class="countries">
             <h3 class="text">Stockholm, Sweden</h3>
             <h3 class="text">Sarajevo, Bosnia and Herzegovina</h3>
           </div>
-          <AppMap/>
+          <div class="map">
+            <AppMap/>
+          </div>
+          <div class="users">
+            <AppContactPerson v-for="(item, index) of page.acf.contact_persons" :key="index" :user="item"></AppContactPerson>
+          </div>
         </div>
       </section>
     </div>
@@ -181,6 +180,7 @@
       getAchievements() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/achievements?_embed').then((response) => {
           this.histories.map(history => {
+            console.log(history.acf.achievements)
             history.acf.achievements = response.data.filter((achievement) => {
               return find(history.acf.achievements, { ID: achievement.id }) ? achievement : undefined
             });
@@ -230,6 +230,13 @@
     h2 {
       width: 65%;
       font-weight: 300;
+      font-size: 1.5em;
+
+      * {
+        line-height: 35px;
+      }
+
+      @include screen-size('xs') { width: 100% }
     }
     .statistics {
       width: 100%;
@@ -239,11 +246,13 @@
 
   .history-section {
     min-height: 100vh;
+    width: auto;
     overflow: hidden;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    position: relative;
+
+    @include screen-size('xs') { display: none }
 
     .history {
       width: 100%;
@@ -253,7 +262,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 50px 15%;
 
       .plus {
         font-size: 2em;
@@ -294,7 +302,7 @@
     .clients {
       width: 100%;
       margin-top: 50px;
-      @include grid-items(20px, 50px, 10, 5);
+      @include grid-items(20px, 50px, 10, 5, 2);
     }
   }
 
@@ -303,15 +311,16 @@
 
     .contact {
       position: relative;
-      display: grid;
-      grid-auto-columns: 100%;
+      display: flex;
       height: 100%;
 
+      .map {
+        width: 100%;
+        overflow: hidden;
+      }
+
       .users {
-        position: absolute;
-        left: 0;
-        height: 100%;
-        width: 70%;
+        background: #262d30;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -324,10 +333,11 @@
 
       .countries {
         position: absolute;
-        right: 0;
+        left: 0;
         height: 100%;
-        width: 25%;
+        width: 55%;
         display: flex;
+        align-items: flex-end;
         justify-content: space-around;
         flex-direction: column;
 
@@ -346,14 +356,16 @@
     z-index: 200;
     top: 150px;
     left: 50px;
+    width: 200px;
 
     @include screen-size('xs') {
       display: none;
     }
 
     .is-active {
-      font-size: 3em !important;
+      font-size: 2em !important;
       font-weight: bolder !important;
+      line-height: 1em;
     }
 
     .nav {
@@ -378,7 +390,7 @@
 
   // history tabs
   .tabs {
-    margin: 0 0 100px 15%;
+    margin: 0 15%;
 
     .tabbed-section__selector {
       position: relative;

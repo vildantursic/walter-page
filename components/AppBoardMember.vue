@@ -42,7 +42,7 @@
   .card {
     display: flex;
     flex-direction: column;
-    height: 400px;
+    height: auto;
     overflow: hidden;
 
     .card-img {
@@ -64,6 +64,7 @@
     }
 
     .about {
+
       h3{
         margin-bottom: 0;
         font-size: 1.5em;
@@ -79,6 +80,7 @@
     }
 
     .divider {
+      margin-bottom: 15px;
       width: 100%;
       height: 3px;
       background-size: cover;

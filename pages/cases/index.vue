@@ -9,7 +9,7 @@
     </AppFilter>
     <div class="items">
       <AppCards v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onShowCase="showCase($event)"/>
-      <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += 9"/>
+      <AppMoreCard v-if="searchedList.length > itemsToShow" :numberOfItems="searchedList.length - itemsToShow" @onShowMore="() => itemsToShow += 9"/>
     </div>
     <AppSingle v-if="item" :item="item" @onCloseCase="item = null"/>
   </section>
@@ -48,6 +48,7 @@
     },
     created () {
       this.getItems()
+      this.selectFilter(this.$route.query.filter)
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/60').then((response) => {
@@ -59,7 +60,8 @@
     computed: {
       searchedList() {
         return this.items.filter(item => {
-          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase())
+          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase()) ||
+          item.acf.description.toLowerCase().includes(this.search.toLowerCase())
         })
       }
     },
@@ -94,8 +96,11 @@
         this.item = event
       },
       selectFilter (id) {
-        this.selectedFilter = id
-        this.items = this.filterItems(id)
+        if (id) {
+          this.selectedFilter = +id
+          console.log(this.selectedFilter)
+          this.items = this.filterItems(+id)
+        }
       },
       filterItems () {
         this.search = ''

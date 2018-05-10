@@ -112,7 +112,9 @@
         padding: 0 0 0 3em;
 
         @include screen-size(xs) {
+          margin-top: 50px;
           width: 100%;
+          padding: 0;
         }
 
         .category {

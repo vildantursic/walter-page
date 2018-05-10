@@ -94,7 +94,7 @@
         list-style: none;
         justify-content: space-around;
         position: absolute;
-        bottom: -180%;
+        top: 60px;
         display: flex;
         flex-direction: column;
 

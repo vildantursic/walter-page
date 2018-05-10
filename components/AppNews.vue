@@ -51,6 +51,7 @@
 
     @include screen-size(xs) {
       flex-direction: column;
+      padding: 0;
     }
 
     .card-img-container {
@@ -61,7 +62,7 @@
       align-items: center;
       width: 60%;
 
-      @include screen-size(xs) {
+      @include screen-size('xs') {
         width: 100%;
         height: 300px;
       }

@@ -4,47 +4,47 @@
       <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/walter.mp4" type="video/mp4">
     </video>
 
-    <section class="main-section">
-
+    <div class="main-section">
       <div class="navigation">
         <scrollactive ref="scrollactive"
                       class="nav"
                       active-class="is-active"
                       :offset="80"
                       :duration="800"
-                      bezier-easing-value=".5,0,.35,1">
-          <a href="#statistics" class="scrollactive-item">Who are we</a>
-          <a href="#history" class="scrollactive-item">Our history</a>
-          <a href="#board-members" class="scrollactive-item">Board Members</a>
-          <a href="#partners" class="scrollactive-item">Our partners</a>
-          <a href="#clients" class="scrollactive-item">Our clients</a>
-          <a href="#contact" class="scrollactive-item">Contact us</a>
+                      bezier-easing-value=".5,0,.35,1"
+                      v-on:itemchanged="onItemChanged">
+          <a v-for="(item, index) in services" :key="index" :href="`#${item.id}`" class="scrollactive-item">{{item.title.rendered}}</a>
         </scrollactive>
       </div>
+      <div class="section" v-for="(item, index) in services" :key="index">
+        <div style="height: 300px" v-if="index !== 0"></div>
+        <section :id="`${item.id}`">
+          <div class="services-info services-spacing">
+            <div class="padded-content center-more">
+              <div class="cases-link">
+                <h1 class="hidden-amount">+ {{item.acf.cases.length}}</h1>
+                <nuxt-link :to="`cases?filter=${item.case_categories[0]}`">
+                  <h1>cases</h1>
+                </nuxt-link>
+              </div>
+              <div class="info">
+                <h1>{{item.acf.description}}</h1>
+                <div v-html="item.content.rendered"></div>
+              </div>
+              <div class="services">
+                <h2>Services</h2>
+                <section>
+                  <AppSingleService v-if="loadedServices" v-for="(obj, index) of item.acf.sub_services" :key="index" :item="obj"/>
+                </section>
+              </div>
+              <div class="services-spacing"></div>
+            </div>
 
-      <div v-for="(item, index) in services" :key="index" class="services-info">
-        <div class="padded-content">
-          <div class="navigation">
-            <h1 class="hidden-amount">+ {{item.acf.cases.length}}</h1>
-            <nuxt-link :to="{ name: 'cases' }">
-              <h1>cases</h1>
-            </nuxt-link>
+            <AppContactBox :user="item.acf.contact_person"></AppContactBox>
           </div>
-          <div class="info">
-            <h1>{{item.acf.description}}</h1>
-            <div v-html="item.content.rendered"></div>
-          </div>
-          <div class="services">
-            <h2>Services</h2>
-            <section>
-              <!--<AppSingleService v-for="(obj, index) of item.acf.sub_services" :key="index" :item="obj"/>-->
-            </section>
-          </div>
-        </div>
-
-        <AppContactBox :user="item.acf.contact_person"></AppContactBox>
+        </section>
       </div>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -64,7 +64,8 @@
     data() {
       return {
         services: [],
-        subServices: []
+        subServices: [],
+        loadedServices: false
       }
     },
     asyncData({ }) {
@@ -78,6 +79,9 @@
       this.fillSubServices()
     },
     methods: {
+      onItemChanged(event, currentItem, lastActiveItem) {
+
+      },
       fillSubServices () {
         axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/sub_services?per_page=100&_embed`).then((response) => {
           if (this.services.length !== 0) {
@@ -88,6 +92,7 @@
               return service
             })
           }
+          this.loadedServices = true
         }).catch((error) => {
           console.log(error)
         });
@@ -123,16 +128,57 @@
     background-image: linear-gradient(90deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
   }
 
+  .navigation {
+    position: fixed;
+    z-index: 200;
+    top: 150px;
+    left: 50px;
+    width: 300px;
+
+    @include screen-size('xs') {
+      display: none;
+    }
+
+    .is-active {
+      font-size: 2em !important;
+      font-weight: bolder !important;
+      line-height: 1em;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      a {
+        width: 100%;
+        color: white;
+        margin: 5px 0;
+        font-size: 1em;
+      }
+    }
+    .last-section {
+
+      a {
+        color: white;
+      }
+    }
+  }
+
+  .center-more {
+    margin: 0 10%;
+  }
+  .services-spacing:not(last-child) {
+  }
   .services-info {
     position: relative;
-    height: 100vh;
+    min-height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     color: white;
-    margin: 0 10%;
 
-    .navigation {
+    .cases-link {
       position: relative;
       display: flex;
       align-items: flex-end;
@@ -147,7 +193,7 @@
         position: absolute;
         right: 0;
         z-index: -1;
-        opacity: 0.1;
+        opacity: 0.2;
         font-size: 9em;
         margin-top: 50px;
       }
@@ -181,4 +227,3 @@
     }
   }
 </style>
-

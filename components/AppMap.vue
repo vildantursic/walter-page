@@ -104,10 +104,10 @@
 <style lang="scss" scoped>
   .map {
     background: #2e3539;
+    width: 100%;
 
     svg {
       height: 100vh;
-      float: right;
 
       path {
         fill:#262d30 !important;

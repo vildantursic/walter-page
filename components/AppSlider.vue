@@ -68,8 +68,8 @@
     width: 100%;
     height: 100%;
 
-    @include screen-size(xs) {
-      width: 100vh;
+    @include screen-size('xs') {
+      width: 100vw;
     }
   }
   .thumbs {
@@ -88,6 +88,9 @@
         font-weight: 700;
         background-color: $secondary-color;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         img {
           height: 100%;
@@ -104,6 +107,10 @@
   .my-swiper-thumb {
     height: 20%;
     margin-top: 3em;
+
+    @include screen-size('xs') {
+      width: 100vw;
+    }
 
     .swiper-wrapper {
       display: flex;

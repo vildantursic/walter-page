@@ -1,18 +1,21 @@
 <template>
-  <section class="padded-content full-height">
-    <video id="bgvid" playsinline autoplay muted loop>
-      <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/walter.mp4" type="video/mp4">
-    </video>
-    <div class="video-cover"></div>
 
-    <div class="services-info">
-      <h1>{{page.acf.title}}</h1>
-      <div class="description" v-html="page.acf.description"></div>
-      <section class="services">
-        <AppService v-for="(item, index) of items" :key="index" :item="item" @onServiceClicked="goToService(item.id)"/>
-      </section>
-    </div>
-  </section>
+  <div class="main-section">
+    <section class="padded-content full-height">
+      <video id="bgvid" playsinline autoplay muted loop>
+        <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/walter.mp4" type="video/mp4">
+      </video>
+
+      <div class="services-info">
+        <h1>{{page.acf.title}}</h1>
+        <div class="description" v-html="page.acf.description"></div>
+        <section class="services">
+          <AppService v-for="(item, index) of items" :key="index" :item="item" @onServiceClicked="goToService(item.id)"/>
+        </section>
+      </div>
+    </section>
+  </div>
+
 </template>
 
 <script>
@@ -50,7 +53,7 @@
         });
       },
       goToService (id) {
-        this.$router.push({ path: `services/${id}`})
+        this.$router.push({ path: `services#${id}`})
       }
     }
   }
@@ -82,6 +85,11 @@
     width: auto;
     height: auto;
     z-index: -99;
+    background-image: linear-gradient(90deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
+  }
+
+  .main-section {
+    height: 100%;
     background-image: linear-gradient(90deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
   }
 
