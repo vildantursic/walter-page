@@ -11,7 +11,9 @@
       <AppCards v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onShowCase="showCase($event)"/>
       <AppMoreCard v-if="searchedList.length > itemsToShow" :numberOfItems="searchedList.length - itemsToShow" @onShowMore="() => itemsToShow += 9"/>
     </div>
-    <AppSingle v-if="item" :item="item" @onCloseCase="item = null"/>
+    <modal name="case-modal" :width="1200" :height="600">
+      <AppSingle v-if="item" :item="item" @onCloseCase="hide()"/>
+    </modal>
   </section>
 </template>
 
@@ -48,7 +50,6 @@
     },
     created () {
       this.getItems()
-      this.selectFilter(this.$route.query.filter)
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/60').then((response) => {
@@ -66,11 +67,20 @@
       }
     },
     methods: {
+      show() {
+        this.$modal.show('case-modal');
+      },
+      hide() {
+        this.$modal.hide('case-modal');
+      },
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases?per_page=100&_embed').then((response) => {
           this.items = response.data
           this.tempItems = this.items
           this.getCategories()
+          setTimeout(() => {
+            this.selectFilter(this.$route.query.filter)
+          }, 1000)
         }).catch((error) => {
           console.log(error);
         });
@@ -81,7 +91,7 @@
           this.items.map((item) => {
             const cats = []
             response.data.forEach(cat => {
-              if (find(item.case_categories, (o) => o == cat.id)) {
+              if (find(item.case_categories, (o) => o === cat.id)) {
                 cats.push(cat)
               }
             })
@@ -94,6 +104,7 @@
       },
       showCase(event) {
         this.item = event
+        this.show()
       },
       selectFilter (id) {
         if (id) {

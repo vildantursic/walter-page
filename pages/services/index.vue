@@ -133,7 +133,7 @@
     z-index: 200;
     top: 150px;
     left: 50px;
-    width: 300px;
+    width: 280px;
 
     @include screen-size('xs') {
       display: none;
@@ -166,7 +166,6 @@
   }
 
   .center-more {
-    margin: 0 10%;
   }
   .services-spacing:not(last-child) {
   }

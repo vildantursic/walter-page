@@ -65,24 +65,20 @@
   @import "../assets/styles/variables";
 
   .swiper {
+    position: relative;
     width: 100%;
     height: 100%;
-
-    @include screen-size('xs') {
-      width: 100vw;
-    }
-  }
-  .thumbs {
-    height: 80% !important;
   }
   .my-swiper {
-    height: 100%;
     width: 100%;
-    overflow: hidden;
+    height: 100%;
 
     .swiper-wrapper {
+      width: 100%;
+      height: 100%;
 
       .swiper-slide {
+        height: 100%;
         text-align: center;
         font-size: 38px;
         font-weight: 700;
@@ -105,8 +101,12 @@
     }
   }
   .my-swiper-thumb {
-    height: 20%;
-    margin-top: 3em;
+    position: absolute;
+    z-index: 50;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    background: transparent;
 
     @include screen-size('xs') {
       width: 100vw;
@@ -120,7 +120,7 @@
       .swiper-slide {
         width: auto!important;
         text-align: center;
-        background-color: #ffffff;
+        background: transparent;
         overflow: hidden;
 
         img {

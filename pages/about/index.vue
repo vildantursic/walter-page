@@ -71,6 +71,12 @@
         <div class="clients">
           <AppClient v-for="(item, index) of customers" :key="index" :item="item"/>
         </div>
+        <!--<GmapMap-->
+          <!--:center="{lat:10, lng:10}"-->
+          <!--:zoom="3"-->
+          <!--style="width: 100%; height: 100vh"-->
+        <!--&gt;</GmapMap>-->
+        <!--<mapbox></mapbox>-->
       </section>
     </div>
     <div class="section">
@@ -101,6 +107,7 @@
   import AppHistory from "~/components/AppHistory"
   import AppContactPerson from "~/components/AppContactPerson"
   import AppAchievement from "~/components/AppAchievement"
+  import Mapbox from 'mapbox-gl-vue';
   import axios from "axios"
   import { find } from "lodash"
 
@@ -113,7 +120,8 @@
       AppNumber,
       AppHistory,
       AppContactPerson,
-      AppAchievement
+      AppAchievement,
+      Mapbox
     },
     data() {
       return {
@@ -315,19 +323,18 @@
       height: 100%;
 
       .map {
-        width: 100%;
         overflow: hidden;
       }
 
       .users {
+        width: 60%;
         background: #262d30;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
         flex-direction: column;
 
         .card {
-          margin: 170px 0 0 0;
         }
       }
 
@@ -335,14 +342,13 @@
         position: absolute;
         left: 0;
         height: 100%;
-        width: 55%;
+        width: 40%;
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         justify-content: space-around;
         flex-direction: column;
 
         .text {
-          margin-top: 100px;
           color: $main-color;
           opacity: 1;
           font-weight: bolder;

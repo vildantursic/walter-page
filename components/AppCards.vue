@@ -30,6 +30,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
 
   .card{
     position: relative;
@@ -37,6 +38,10 @@
     flex-direction: column;
     height: 450px;
     overflow: hidden;
+
+    @include screen-size(xs) {
+      height: auto;
+    }
 
     .image {
       height: 200px;

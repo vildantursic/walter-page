@@ -6,6 +6,10 @@
 html, body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
+
+  @media (max-width: 425px) {
+    font-size: 0.9em;
+  }
 }
 
 button, h1, h2, h3, h4, h5, h6, p, a, i, li, input, textarea {
@@ -38,6 +42,17 @@ a.nav-link {
 }
 .full-height {
   height: 100%;
+}
+
+.desktop {
+  @media (max-width: 425px) {
+    display: none !important;
+  }
+}
+.mobile {
+  @media (min-width: 425px) {
+    display: none !important;
+  }
 }
 
 .page-enter-active, .page-leave-active {

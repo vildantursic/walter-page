@@ -13,12 +13,6 @@
   }
 }
 
-@mixin hide-mobile() {
-  @media (max-width: 425px) {
-    display: none;
-  }
-}
-
 @mixin screen-size($size) {
   @if ($size == l) {
     @media (max-width: 1440px) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="card animated fadeIn" data-aos="slide-up" v-on:click="clickService()">
+  <div class="card animated fadeIn" v-on:click="clickService()">
     <div class="image">
       <img v-if="item._embedded !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
 

@@ -89,7 +89,10 @@
   }
 
   .main-section {
-    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
     background-image: linear-gradient(90deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
   }
 

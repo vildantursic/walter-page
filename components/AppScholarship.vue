@@ -46,6 +46,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
 
   .card {
     overflow: hidden;
@@ -60,12 +61,23 @@
     border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
     border-image-slice: 1;
 
+    @include screen-size(xs) {
+      flex-direction: column;
+      padding: 0;
+      height: auto;
+    }
+
     .card-img-container {
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       width: 45%;
+
+      @include screen-size('xs') {
+        width: 100%;
+        height: 300px;
+      }
 
       .card-img {
         height: 100%;
@@ -78,6 +90,11 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+
+      @include screen-size(xs) {
+        width: 100%;
+        padding: 1em 0;
+      }
 
       .social {
         align-self: flex-end;
