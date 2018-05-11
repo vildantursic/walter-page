@@ -8,12 +8,12 @@
                     :duration="800"
                     bezier-easing-value=".5,0,.35,1"
                     v-on:itemchanged="onItemChanged">
-        <a href="#statistics" class="scrollactive-item">Statistics</a>
-        <a href="#history" class="scrollactive-item">History</a>
+        <a href="#statistics" class="scrollactive-item">Who are we</a>
+        <a href="#history" class="scrollactive-item">Our history</a>
         <a href="#board-members" class="scrollactive-item">Board Members</a>
-        <a href="#partners" class="scrollactive-item">Partners</a>
-        <a href="#clients" class="scrollactive-item">Clients</a>
-        <a href="#contact" class="scrollactive-item">Contact</a>
+        <a href="#partners" class="scrollactive-item">Our partners</a>
+        <a href="#clients" class="scrollactive-item">Our clients</a>
+        <a href="#contact" class="scrollactive-item">Contact us</a>
       </scrollactive>
     </div>
     <div class="section">
@@ -22,8 +22,8 @@
         <div class="statistics">
           <AppNumber :number="page.acf.engineers" :text="'Engineers'"/>
           <AppNumber :number="page.acf.experience_bim" :text="'Years of gathered BIM experience'"/>
-          <AppNumber :number="page.acf.projects" :text="'Projects'"/>
           <AppNumber :number="page.acf.clients" :text="'Clients'"/>
+          <AppNumber :number="page.acf.projects" :text="'Projects'"/>
           <AppNumber :number="page.acf.revit_families" :text="'Revit families'"/>
           <AppNumber :number="page.acf.digitalized_sqm" :text="'sqm digitized'"/>
         </div>
@@ -67,20 +67,31 @@
     </div>
     <div class="section">
       <section id="clients" class="clients-section padded-content">
-        <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci aliquid consequatur dolore
-          doloribus eaque</h1>
+        <h1 v-html="page.acf.clients_text"></h1>
         <div class="clients">
           <AppClient v-for="(item, index) of customers" :key="index" :item="item"/>
         </div>
+        <!--<GmapMap-->
+          <!--:center="{lat:10, lng:10}"-->
+          <!--:zoom="3"-->
+          <!--style="width: 100%; height: 100vh"-->
+        <!--&gt;</GmapMap>-->
+        <!--<mapbox></mapbox>-->
       </section>
     </div>
     <div class="section">
       <section id="contact" class="contact-section">
         <div class="contact">
+          <div class="countries">
+            <h3 class="text">Stockholm, Sweden</h3>
+            <h3 class="text">Sarajevo, Bosnia and Herzegovina</h3>
+          </div>
+          <div class="map">
+            <AppMap/>
+          </div>
           <div class="users">
             <AppContactPerson v-for="(item, index) of page.acf.contact_persons" :key="index" :user="item"></AppContactPerson>
           </div>
-          <AppMap/>
         </div>
       </section>
     </div>
@@ -96,6 +107,7 @@
   import AppHistory from "~/components/AppHistory"
   import AppContactPerson from "~/components/AppContactPerson"
   import AppAchievement from "~/components/AppAchievement"
+  import Mapbox from 'mapbox-gl-vue';
   import axios from "axios"
   import { find } from "lodash"
 
@@ -108,15 +120,11 @@
       AppNumber,
       AppHistory,
       AppContactPerson,
-      AppAchievement
+      AppAchievement,
+      Mapbox
     },
     data() {
       return {
-        options: {
-          navigation: true,
-          anchors: ['page1', 'page2', 'page3', 'page4'],
-          sectionsColor: ['#41b883', '#ff5f45', '#0798ec', '#fec401', '#1bcee6', '#ee1a59', '#2c3e4f', '#ba5be9', '#b4b8ab']
-        },
         items: [],
         page: {
           acf: {}
@@ -132,10 +140,14 @@
     watch: {
       currentHistory: function (newVal, oldVal) {
         if (newVal > oldVal) {
-          this.achievements = this.achievements.concat({ id: -1 }).concat(this.histories[newVal].acf.achievements)
+          for (let i = oldVal; i < newVal; i++) {
+            this.achievements = this.achievements.concat({ id: -1 }).concat(this.histories[i + 1].acf.achievements)
+          }
         } else {
-          this.histories[oldVal].acf.achievements.forEach(el => this.achievements.pop())
-          this.achievements.pop()
+          for (let i = oldVal; i > newVal; i--) {
+            this.histories[i].acf.achievements.forEach(el => this.achievements.pop())
+            this.achievements.pop()
+          }
         }
       }
     },
@@ -154,6 +166,7 @@
     },
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
+        this.$refs.scrollactive.$el.className = 'scrollactive-nav nav'
         if (currentItem) {
           const parser = new DOMParser();
           let htmlDoc = parser.parseFromString('<a data-v-5357e832="" href="#contact" class="scrollactive-item is-active">Contact</a>', "text/html");
@@ -175,10 +188,10 @@
       getAchievements() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/achievements?_embed').then((response) => {
           this.histories.map(history => {
+            console.log(history.acf.achievements)
             history.acf.achievements = response.data.filter((achievement) => {
               return find(history.acf.achievements, { ID: achievement.id }) ? achievement : undefined
             });
-            console.log(history)
             return history
           })
           this.achievements = this.achievements.concat(this.histories[this.currentHistory].acf.achievements)
@@ -217,7 +230,7 @@
 
   .statistics-section {
     min-height: 100vh;
-    background: $secondary-color;
+    background: $secondary-dark-color;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -225,6 +238,13 @@
     h2 {
       width: 65%;
       font-weight: 300;
+      font-size: 1.5em;
+
+      * {
+        line-height: 35px;
+      }
+
+      @include screen-size('xs') { width: 100% }
     }
     .statistics {
       width: 100%;
@@ -234,10 +254,13 @@
 
   .history-section {
     min-height: 100vh;
+    width: auto;
     overflow: hidden;
     display: flex;
     justify-content: center;
     flex-direction: column;
+
+    @include screen-size('xs') { display: none }
 
     .history {
       width: 100%;
@@ -247,7 +270,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 50px 15%;
 
       .plus {
         font-size: 2em;
@@ -261,10 +283,11 @@
     background: $secondary-color;
     display: flex;
     align-items: center;
+    background: $secondary-dark-color;
 
     .board-members {
       width: 100%;
-      @include grid-items(10%, 30px, 3, 3);
+      @include grid-items(5%, 20px, 3, 3);
     }
   }
 
@@ -281,33 +304,55 @@
 
   .clients-section {
     min-height: 100vh;
-    background: $secondary-color;
     padding-top: 50px;
+    background: $secondary-dark-color;
 
     .clients {
       width: 100%;
       margin-top: 50px;
-      @include grid-items(20px, 50px, 10, 5);
+      @include grid-items(20px, 50px, 10, 5, 2);
     }
   }
 
-  .contact {
-    position: relative;
-    display: grid;
-    grid-auto-columns: 100%;
+  .contact-section {
+    height: 100vh;
 
-    .users {
-      position: absolute;
-      left: 0;
-      height: 100vh;
-      width: 70%;
+    .contact {
+      position: relative;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+      height: 100%;
 
-      .card {
-        margin: 50px 0;
+      .map {
+        overflow: hidden;
+      }
+
+      .users {
+        width: 60%;
+        background: #262d30;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+
+        .card {
+        }
+      }
+
+      .countries {
+        position: absolute;
+        left: 0;
+        height: 100%;
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+
+        .text {
+          color: $main-color;
+          opacity: 1;
+          font-weight: bolder;
+        }
       }
     }
   }
@@ -317,18 +362,25 @@
     z-index: 200;
     top: 150px;
     left: 50px;
+    width: 200px;
+
+    @include screen-size('xs') {
+      display: none;
+    }
 
     .is-active {
-      font-size: 3em !important;
+      font-size: 2em !important;
       font-weight: bolder !important;
+      line-height: 1em;
     }
 
     .nav {
       display: flex;
       flex-direction: column;
+      width: 100%;
 
       a {
-        width: 5px;
+        width: 100%;
         color: black;
         margin: 5px 0;
         font-size: 1em;
@@ -344,7 +396,7 @@
 
   // history tabs
   .tabs {
-    margin: 0 0 100px 15%;
+    margin: 0 15%;
 
     .tabbed-section__selector {
       position: relative;
@@ -367,7 +419,7 @@
         font-weight: bold;
         text-decoration: none;
         color: black;
-        font-size: 14px;
+        font-size: 1.2em;
 
 
         &.active {

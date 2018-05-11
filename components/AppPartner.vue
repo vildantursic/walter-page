@@ -24,7 +24,7 @@
   .card {
     display: flex;
     flex-direction: column;
-    height: 400px;
+    height: auto;
     overflow: hidden;
 
     p {
@@ -33,7 +33,7 @@
   }
   .card-img {
     width: 100%;
-    height: 70%;
+    height: 200px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -41,7 +41,7 @@
     background: $secondary-color;
 
     img {
-      width: 100%;
+      width: 120%;
     }
 
     .no-image {

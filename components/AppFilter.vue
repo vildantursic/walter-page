@@ -1,5 +1,5 @@
 <template>
-  <div class="filter">
+  <div class="filter desktop">
     <div class="main-filters">
       <ul class="main-list">
         <li :class="{ active: -1 === selectedFilter }" @click="selectFilter(-1)">All</li>
@@ -70,8 +70,6 @@
   .filter {
     width: 100%;
     margin: 10vh 0;
-
-    @include hide-mobile();
 
     ul {
       list-style: none;

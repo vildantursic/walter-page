@@ -9,9 +9,11 @@
     </AppFilter>
     <div class="items">
       <AppCards v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onShowCase="showCase($event)"/>
-      <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
+      <AppMoreCard v-if="searchedList.length > itemsToShow" :numberOfItems="searchedList.length - itemsToShow" @onShowMore="() => itemsToShow += 9"/>
     </div>
-    <AppSingle v-if="item" :item="item" @onCloseCase="item = null"/>
+    <modal name="case-modal" :width="1200" :height="600">
+      <AppSingle v-if="item" :item="item" @onCloseCase="hide()"/>
+    </modal>
   </section>
 </template>
 
@@ -59,16 +61,26 @@
     computed: {
       searchedList() {
         return this.items.filter(item => {
-          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase())
+          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase()) ||
+          item.acf.description.toLowerCase().includes(this.search.toLowerCase())
         })
       }
     },
     methods: {
+      show() {
+        this.$modal.show('case-modal');
+      },
+      hide() {
+        this.$modal.hide('case-modal');
+      },
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases?per_page=100&_embed').then((response) => {
           this.items = response.data
           this.tempItems = this.items
           this.getCategories()
+          setTimeout(() => {
+            this.selectFilter(this.$route.query.filter)
+          }, 1000)
         }).catch((error) => {
           console.log(error);
         });
@@ -79,7 +91,7 @@
           this.items.map((item) => {
             const cats = []
             response.data.forEach(cat => {
-              if (find(item.case_categories, (o) => o == cat.id)) {
+              if (find(item.case_categories, (o) => o === cat.id)) {
                 cats.push(cat)
               }
             })
@@ -92,10 +104,14 @@
       },
       showCase(event) {
         this.item = event
+        this.show()
       },
       selectFilter (id) {
-        this.selectedFilter = id
-        this.items = this.filterItems(id)
+        if (id) {
+          this.selectedFilter = +id
+          console.log(this.selectedFilter)
+          this.items = this.filterItems(+id)
+        }
       },
       filterItems () {
         this.search = ''

@@ -2,7 +2,7 @@
   <section>
     <div class="header-news padded-content">
       <h1 class="title">{{page.title.rendered}}</h1>
-      <AppSocial></AppSocial>
+      <AppSocial :item="page" :link="$route.path"></AppSocial>
     </div>
     <div class="item animated fadeIn padded-content">
       <div class="img-header">

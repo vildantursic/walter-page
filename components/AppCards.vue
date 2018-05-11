@@ -1,6 +1,6 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
-    <div v-if="item._embedded !== undefined" class="image">
+    <div v-if="item._embedded !== undefined" class="image" @click="showCase(item)">
       <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
       <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
@@ -30,6 +30,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
 
   .card{
     position: relative;
@@ -38,6 +39,10 @@
     height: 450px;
     overflow: hidden;
 
+    @include screen-size(xs) {
+      height: auto;
+    }
+
     .image {
       height: 200px;
       overflow: hidden;
@@ -45,7 +50,8 @@
       align-items: center;
       justify-content: center;
       /*padding: 0 1em;*/
-      background: #e2e2e2;
+      cursor: pointer;
+      background: $secondary-color;
 
       img {
         width: 100%;

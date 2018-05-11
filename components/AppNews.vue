@@ -10,8 +10,8 @@
         </p>
         <p class="author">{{item.author.name}}, {{date}}</p>
         <h1 class="title"><nuxt-link class="nav-link" :to="`/news/${item.id}`">{{ item.title.rendered | truncate(100)}}</nuxt-link></h1>
-        <div class="scroll">{{ item.acf.description | truncate(400)}}</div>
-        <AppSocial></AppSocial>
+        <div class="scroll">{{item.acf.description | truncate(400)}}</div>
+        <AppSocial :item="item" :link="$route.path"></AppSocial>
       </div>
     </div>
 </template>
@@ -40,9 +40,10 @@
   .card {
     overflow: hidden;
     display: flex;
+    flex-direction: row;
     height: 400px;
-    padding: 2em;
-    border-width: 0 0 3px 0;
+    padding-bottom: 2em;
+    border-width: 0 0 2px 0;
     border-style: solid;
     -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
     -webkit-border-image: -webkit-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
@@ -51,17 +52,18 @@
 
     @include screen-size(xs) {
       flex-direction: column;
+      padding: 0;
+      height: auto;
     }
 
     .card-img-container {
-      background-color: $secondary-color;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 60%;
+      width: 45%;
 
-      @include screen-size(xs) {
+      @include screen-size('xs') {
         width: 100%;
         height: 300px;
       }

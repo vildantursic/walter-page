@@ -30,7 +30,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+  @import "../assets/styles/mixins";
 
   .card {
     position: absolute;
@@ -46,6 +46,10 @@
     padding: 1.5em 1em;
     width: 300px;
     box-shadow: 8px 8px 8px 0 rgba(57, 60, 61, 0.8);
+
+    @include screen-size('xs') {
+      position: relative;
+    }
 
     .image {
       overflow: hidden;

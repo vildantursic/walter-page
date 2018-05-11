@@ -1,6 +1,6 @@
 <template>
     <div>
-      <ul v-if="links.length !== 0">
+      <ul v-if="links.length !== 0" class="desktop">
         <li v-for="(link, index) of links" :key="index">
           <nuxt-link :to="{ path: '/services/' + link.id }">{{link.title.rendered}}</nuxt-link>
         </li>
@@ -21,8 +21,6 @@
   ul {
     list-style: none;
     width: 300px;
-
-    @include hide-mobile();
 
     li {
       margin: 15px 0;

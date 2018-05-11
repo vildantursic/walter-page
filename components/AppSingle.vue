@@ -8,7 +8,7 @@
       </div>
       <div class="info-card">
         <div class="close">
-          <AppSocial></AppSocial>
+          <AppSocial :item="item" :link="$route.path"></AppSocial>
           <i class="fas fa-times" @click="closeCase"></i>
         </div>
         <p class="category">
@@ -55,15 +55,9 @@
   @import '../assets/styles/mixins';
 
   .card {
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    padding-top: 50px;
     background: white;
-    overflow: scroll;
     -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
     -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
     border-image: linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
@@ -100,7 +94,7 @@
         justify-content: center;
         /*align-items: center;*/
         width: 60%;
-        height: 70vh;
+        height: 100%;
 
         @include screen-size(xs) {
           width: 100%;
@@ -112,7 +106,9 @@
         padding: 0 0 0 3em;
 
         @include screen-size(xs) {
+          margin-top: 50px;
           width: 100%;
+          padding: 0;
         }
 
         .category {
@@ -138,7 +134,7 @@
           /*width: 85%;*/
         }
         .text-box {
-          height: 50vh;
+          height: 380px;
           overflow: auto;
           /*width: 85%;*/
         }
