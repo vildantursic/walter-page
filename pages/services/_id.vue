@@ -156,7 +156,7 @@
     }
 
     .info {
-      width: 80%;
+      width: 100%;
 
       @media (max-width: 768px) {
         width: 100%;
@@ -178,7 +178,7 @@
 
       section {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         // for switching to grid system
         // @include grid-items(5%, 5%, 7, 2);
       }

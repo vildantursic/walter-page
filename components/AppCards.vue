@@ -5,12 +5,11 @@
       <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
-      <h1 class="title" @click="showCase(item)">{{item.title.rendered | truncate(45)}}</h1>
-      <i class="clients" v-for="(customer, index) of item.acf.customers" :key="index">{{customer.post_title}}<span v-if="index < item.acf.customers.length - 1">,</span></i>
-      <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>
+      <h1 class="title" @click="showCase(item)">{{item.title.rendered | truncate(30)}}</h1>
+      <i class="clients" v-for="(customer, index) of item.acf.customers" :key="index">{{customer.post_title}}<span v-if="index < item.acf.customers.length - 1"></span></i>
+      <div class="content">{{item.acf.description | truncate(30 * 4)}}</div>
       <i class="partner" v-if="item.acf.partners">In Collaboration with <span v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></i>
     </div>
-
     <div class="border"></div>
   </div>
 </template>
@@ -36,7 +35,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 450px;
+    height: 400px;
     overflow: hidden;
 
     @include screen-size(xs) {
@@ -49,7 +48,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      /*padding: 0 1em;*/
+      margin: 0 1em 0em 1em;
       cursor: pointer;
       background: $secondary-color;
 
@@ -63,12 +62,14 @@
 
     .info {
       padding: 0 1em 1em 1em;
-      height: 250px;
+      height: 200px;
 
       .title {
         cursor: pointer;
         font-weight: bold;
         margin-bottom: 0;
+        margin-top: 15px;
+        line-height: 1;
 
         &:hover {
           color: $main-color;
@@ -77,19 +78,24 @@
 
       .clients {
         display: inline-block;
-        margin: 10px 2px 10px 0;
+        margin: 10px 0 0 0;
         opacity: 0.8;
+        font-size: 0.8em;
+        font-style: normal;
       }
 
       .content {
-        height: 63px;
+        height: 90px;
         overflow: hidden;
         opacity: 0.8;
+        padding-top: 15px;
+        font-size: 0.9em;
       }
 
       .partner {
         position: absolute;
-        bottom: 10px;
+        bottom: 15px;
+        font-size: 0.8em;
       }
     }
 

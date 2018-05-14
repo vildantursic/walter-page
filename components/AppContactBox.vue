@@ -39,12 +39,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
     overflow: hidden;
     background-color: #393c3d;
     border-radius: 5px;
     padding: 1.5em 1em;
-    width: 300px;
+    width: 363px;
     box-shadow: 8px 8px 8px 0 rgba(57, 60, 61, 0.8);
 
     @include screen-size('xs') {
@@ -56,9 +56,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding-left: 1em;
     }
     .info {
-      padding: 0em 0.5em;
+      padding: 0em 1em;
 
       .name {
         font-size: 1.1em;
@@ -77,14 +78,14 @@
       justify-content: space-between;
 
       .mail {
-        font-size: 1.3em;
+        font-size: 1.5em;
         color: white;
-        padding-left: 1em;
+        padding-left: 1.5em;
       }
       .phone {
-        font-size: 1.3em;
+        font-size: 1.5em;
         color: white;
-        padding-left: 1em;
+        padding-left: 1.5em;
       }
     }
   }

@@ -24,7 +24,7 @@
               <div class="cases-link">
                 <h1 class="hidden-amount">+ {{item.acf.cases.length}}</h1>
                 <nuxt-link :to="`cases?filter=${item.case_categories[0]}`">
-                  <h1>cases</h1>
+                  <h1>cases<i class="fas fa-caret-right"></i></h1>
                 </nuxt-link>
               </div>
               <div class="info">
@@ -140,9 +140,10 @@
     }
 
     .is-active {
-      font-size: 2em !important;
+      font-size: 1.6em !important;
       font-weight: bolder !important;
       line-height: 1em;
+      /*opacity: 1;*/
     }
 
     .nav {
@@ -151,10 +152,14 @@
       width: 100%;
 
       a {
-        width: 100%;
+        width: 80%;
         color: white;
-        margin: 5px 0;
+        margin: 5px 0 20px 0;
         font-size: 1em;
+        /*opacity: 0.2;*/
+        /*.is-active{*/
+          /*opacity: 1;*/
+        /*}*/
       }
     }
     .last-section {
@@ -182,10 +187,15 @@
       display: flex;
       align-items: flex-end;
       justify-content: flex-end;
-      margin-bottom: 30px;
+      /*margin-bottom: 30px;*/
+
 
       h1 {
         margin: 0;
+        i{
+          padding-top-top: 0.5em;
+          padding-left: 0.3em;
+        }
       }
 
       .hidden-amount {
@@ -199,7 +209,7 @@
     }
 
     .info {
-      width: 80%;
+      width: 100%;
 
       @media (max-width: 768px) {
         width: 100%;
@@ -221,7 +231,7 @@
 
       section {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
       }
     }
   }
