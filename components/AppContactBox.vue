@@ -62,7 +62,7 @@
       padding: 0em 1em;
 
       .name {
-        font-size: 1.1em;
+        font-size: 1.25em;
         font-weight: 900;
         color: white;
       }

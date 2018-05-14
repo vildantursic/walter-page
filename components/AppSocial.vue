@@ -40,12 +40,11 @@
   }
 
   .fab, .fas{
-    padding: 5px 10px;
+    padding: 5px 10px 5px 0;
     font-size: 30px;
     width: 40px;
-    text-align: center;
     text-decoration: none;
-    color: $dark-color;
+    color: $social-icon;
   }
   .fab:hover, .fas:hover {
     opacity: 0.75;

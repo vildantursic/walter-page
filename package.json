@@ -28,7 +28,8 @@
     "vue-no-ssr": "^0.2.2",
     "vue-scrollactive": "^0.6.1",
     "vue2-filters": "^0.3.0",
-    "vue2-google-maps": "^0.9.7"
+    "vue2-google-maps": "^0.9.7",
+    "vue2-scrollspy": "^2.2.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

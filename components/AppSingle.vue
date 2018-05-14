@@ -102,8 +102,8 @@
       }
       .info-card {
         position: relative;
-        width: 35%;
-        padding: 0 0 0 3em;
+        width: 100%;
+        padding: 1.5em;
 
         @include screen-size(xs) {
           margin-top: 50px;
@@ -122,11 +122,11 @@
         }
         .author {
           font-weight: 500;
-          color: gray;
+          /*color: gray;*/
           font-style: italic;
         }
         .description {
-          color: gray;
+          /*color: gray;*/
         }
         .divider {
           margin-top: 10vh;
@@ -136,7 +136,7 @@
         .text-box {
           height: 380px;
           overflow: auto;
-          /*width: 85%;*/
+          width: 85%;
         }
       }
       .link {
@@ -149,4 +149,16 @@
   .right-content {
     width: 85%;
   }
+  .social{
+    .fab, .fas{
+      padding: 5px 10px;
+      font-size: 30px;
+      width: 40px;
+      text-align: center;
+      text-decoration: none;
+      color: $social-icon;
+    }
+  }
+
+
 </style>

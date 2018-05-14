@@ -35,7 +35,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 400px;
+    height: 420px;
     overflow: hidden;
 
     @include screen-size(xs) {
@@ -94,7 +94,7 @@
 
       .partner {
         position: absolute;
-        bottom: 15px;
+        bottom: 30px;
         font-size: 0.8em;
       }
     }

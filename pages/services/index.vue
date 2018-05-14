@@ -192,6 +192,7 @@
 
       h1 {
         margin: 0;
+        font-size: 1.8em;
         i{
           padding-top-top: 0.5em;
           padding-left: 0.3em;
@@ -203,7 +204,7 @@
         right: 0;
         z-index: -1;
         opacity: 0.2;
-        font-size: 9em;
+        font-size: 7.8em;
         margin-top: 50px;
       }
     }
@@ -220,19 +221,26 @@
         margin: 0 0 50px 0;
       }
       h1 {
-        font-size: 3em;
+        font-size: 2.7em;
       }
       div {
-        font-size: 1.3em;
+        font-size: 1.2em;
       }
     }
 
     .services {
 
       section {
+        padding-top: 20px;
         display: flex;
-        justify-content: space-between;
+        /*justify-content: space-between;*/
       }
     }
   }
+  /*.services-info{*/
+    /*.padded-content{*/
+      /*padding-left: 310px;*/
+      /*padding-right: 15%;*/
+    /*}*/
+  /*}*/
 </style>

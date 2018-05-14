@@ -29,11 +29,12 @@
   .card {
     display: flex;
     flex-direction: column;
-    width: 100px;
+    width: 180px;
+    padding-right: 4em;
     /*overflow: hidden;*/
 
     .image {
-      min-height: 100px;
+      /*min-height: 100px;*/
       max-height: 100px;
       overflow: hidden;
       display: flex;
@@ -41,7 +42,7 @@
       justify-content: center;
 
       img {
-        width: 50%;
+        width: 50px;
       }
       .no-image {
         width: auto;
@@ -57,6 +58,7 @@
 
       .title {
         text-align: center;
+        font-size: 0.8em;
       }
     }
   }

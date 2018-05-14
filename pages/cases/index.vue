@@ -133,4 +133,7 @@
   .items {
     @include grid-items(10%, 30px, 3, 2);
   }
+  .v--modal-overlay{
+    background: rgba(0, 0, 0, 0.5);
+  }
 </style>
