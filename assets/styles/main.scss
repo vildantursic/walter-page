@@ -109,3 +109,13 @@ a.nav-link {
     }
   }
 }
+.services-info {
+  @media (max-width: 425px) {
+    font-size: 2.5em;
+  }
+}
+.description {
+  @media (min-width: 425px) {
+    font-size: 1.5em;
+  }
+}
