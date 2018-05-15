@@ -10,7 +10,7 @@
         <h1>{{page.acf.title}}</h1>
         <div class="description" v-html="page.acf.description"></div>
         <section class="services">
-          <AppService v-for="(item, index) of items" :key="index" :item="item" @onServiceClicked="goToService(item.id)"/>
+          <AppService v-for="(item, index) of items" :key="index" :item="item" @onServiceClicked="goToService(item.id - 1)"/>
         </section>
       </div>
     </section>
