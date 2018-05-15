@@ -26,11 +26,15 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/styles/mixins";
   .card {
     display: flex;
     flex-direction: column;
     width: 180px;
     padding-right: 4em;
+    @include screen-size('m') {
+      padding-right: 2em;
+    }
     /*overflow: hidden;*/
 
     .image {
@@ -43,6 +47,9 @@
 
       img {
         width: 50px;
+        @include screen-size('m') {
+          width: 35px;
+        }
       }
       .no-image {
         width: auto;
@@ -59,6 +66,9 @@
       .title {
         text-align: center;
         font-size: 0.8em;
+        @include screen-size('m') {
+          font-size: 0.7em;
+        }
       }
     }
   }

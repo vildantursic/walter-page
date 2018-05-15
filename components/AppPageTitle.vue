@@ -16,6 +16,7 @@
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables";
+@import "../assets/styles/mixins";
   .title-page{
     margin: 15vh 0 10vh 0;
 
@@ -30,6 +31,9 @@
       opacity: 0.80;
       font-weight: bold;
       color: $dark-grey;
+      @include screen-size('m') {
+        font-size: 3.5em;
+      }
     }
     .subtitle{
       font-size: 1.5em;

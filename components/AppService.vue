@@ -27,6 +27,7 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/styles/mixins";
   .card {
     display: flex;
     flex-direction: column;
@@ -41,6 +42,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      @include screen-size('m') {
+        height: 100px;
+      }
 
       img {
         width: 50%;
@@ -56,12 +60,16 @@
       justify-content: center;
       color: white;
       text-align: center;
+      @include screen-size('m') {
+        padding: 0 5%
+      }
+      .title{
+        color: #ffffff;
+          @include screen-size('m') {
+            font-size: 0.8em!important;
+          }
+      }
     }
   }
-  .title{
-    color: #ffffff;
-  }
-  h1, h2, h3, h4, h5, h6, p {
-    color: white !important;
-  }
+
 </style>

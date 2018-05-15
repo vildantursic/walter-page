@@ -133,6 +133,9 @@
     justify-content: center;
     color: white;
     margin: 0 10%;
+    @include screen-size('m') {
+      margin: 0 5% 0 0%;
+    }
 
     .navigation {
       position: relative;
@@ -178,7 +181,7 @@
 
       section {
         display: flex;
-        justify-content: space-between;
+        /*justify-content: space-between;*/
         // for switching to grid system
         // @include grid-items(5%, 5%, 7, 2);
       }

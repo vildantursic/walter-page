@@ -38,7 +38,7 @@
 
 <style lang="scss" scoped="">
   @import "../assets/styles/variables";
-
+  @import "../assets/styles/mixins";
   .card {
     display: flex;
     flex-direction: column;
@@ -70,10 +70,16 @@
         margin-bottom: 0;
         font-size: 1.5em;
         font-weight: bolder;
+        @include screen-size('m') {
+          font-size: 1em;
+        }
       }
       p{
         margin-top: 0;
-        font-size: 1em;
+        font-size: 0.9em;
+        @include screen-size('m') {
+          font-size: 0.7em;
+        }
       }
     }
     .member {
@@ -107,6 +113,9 @@
           color: $dark-grey;
           width: 100%;
           font-size: 3em;
+          @include screen-size('m') {
+            font-size: 1.7em;
+          }
         }
       }
       .phone {

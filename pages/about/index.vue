@@ -243,7 +243,10 @@
       margin-top: 5%;
       margin-bottom: 5%;
       color: $dark-grey;
-
+      @include screen-size('m') {
+        width: 90%;
+        font-size: 1em;
+      }
       * {
         line-height: 35px;
       }
@@ -374,11 +377,20 @@
     @include screen-size('xs') {
       display: none;
     }
+    @include screen-size('m') {
+      top: 120px;
+      left: 30px;
+      width: 210px;
+    }
 
     .is-active {
-      font-size: 2em !important;
+      font-size: 1.6em !important;
       font-weight: bolder !important;
       line-height: 1em;
+      /*opacity: 1;*/
+      @include screen-size('m') {
+        font-size: 1.3em !important;
+      }
     }
 
     .nav {
@@ -391,6 +403,10 @@
         color: $dark-grey;
         margin: 5px 0;
         font-size: 1em;
+        @include screen-size('m') {
+          margin: 0 0 10px 0;
+          font-size: 0.8em;
+        }
       }
     }
     .last-section {

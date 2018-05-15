@@ -103,17 +103,29 @@
     justify-content: center;
     color: white;
     margin: 0 10%;
+    @include screen-size('m') {
+      margin: 0;
+    }
 
     h1, .description {
       opacity: 1;
       margin: 0 0 50px 0;
+      @include screen-size('m') {
+        margin: 0 0 30px 0;
+      }
     }
     h1 {
       font-weight: bold;
       font-size: 4em;
+      @include screen-size('m') {
+        font-size: 3em;
+      }
     }
     .description {
       font-size: 1.3em;
+      @include screen-size('m') {
+        font-size: 1.2em;
+      }
     }
 
     .services {
