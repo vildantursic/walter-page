@@ -83,6 +83,9 @@
     mounted () {
       window.addEventListener('scroll', this.handleScroll);
     },
+    beforeDestroy () {
+      window.removeEventListener("scroll", this.handleScroll);
+    },
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
 
@@ -106,12 +109,13 @@
         this.$router.push({ path: 'services' })
       },
       handleScroll (e) {
+        e.preventDefault()
         var top  = window.pageYOffset || document.documentElement.scrollTop
         console.log(top)
         if(this.oldScroll < top)
         {
           console.log('down')
-          if(top > 80 && top < 1002)
+          if(top > 5 && top < 1002)
           {
             window.scrollTo(0, 1002);
             this.oldScroll = 1002
