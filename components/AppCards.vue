@@ -70,6 +70,7 @@
         margin-bottom: 0;
         margin-top: 15px;
         line-height: 1;
+        color: $dark-grey;
 
         &:hover {
           color: $main-color;

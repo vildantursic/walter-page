@@ -236,9 +236,13 @@
     flex-direction: column;
 
     h2 {
-      width: 65%;
+      width: 75%;
       font-weight: 300;
-      font-size: 1.5em;
+      font-size: 1.4em;
+      opacity: 1;
+      margin-top: 5%;
+      margin-bottom: 5%;
+      color: $dark-grey;
 
       * {
         line-height: 35px;
@@ -272,8 +276,9 @@
       justify-content: center;
 
       .plus {
-        font-size: 2em;
+        font-size: 1.5em;
         font-weight: bolder;
+        color: $dark-grey;
       }
     }
   }
@@ -306,7 +311,9 @@
     min-height: 100vh;
     padding-top: 50px;
     background: $secondary-dark-color;
-
+    h1{
+      color: $dark-grey;
+    }
     .clients {
       width: 100%;
       margin-top: 50px;
@@ -381,7 +388,7 @@
 
       a {
         width: 100%;
-        color: black;
+        color: $dark-grey;
         margin: 5px 0;
         font-size: 1em;
       }
@@ -418,7 +425,7 @@
         background: #fff;
         font-weight: bold;
         text-decoration: none;
-        color: black;
+        color: $dark-grey;
         font-size: 1.2em;
 
 

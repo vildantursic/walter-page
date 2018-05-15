@@ -46,6 +46,7 @@
     overflow: hidden;
 
     .position {
+      color: $dark-grey;
       margin: 0;
       font-size: 2em;
       font-weight: bold;
@@ -72,6 +73,7 @@
     }
 
     .number {
+      color: $dark-grey;
       margin: 1.5em 0;
       font-size: 1.2em;
       font-weight: 700;
@@ -89,6 +91,7 @@
         padding-top: 10px;
 
         .read {
+          color: $dark-grey;
           font-size: 1.5em;
           font-weight: bold;
           letter-spacing: 1px;

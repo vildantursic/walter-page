@@ -15,6 +15,7 @@
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/styles/variables";
   .title-page{
     margin: 15vh 0 10vh 0;
 
@@ -28,6 +29,7 @@
       margin: 10px 0;
       opacity: 0.80;
       font-weight: bold;
+      color: $dark-grey;
     }
     .subtitle{
       font-size: 1.5em;

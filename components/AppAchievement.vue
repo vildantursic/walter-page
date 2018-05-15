@@ -19,10 +19,12 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/styles/variables";
   .card {
+    margin-right: 1em;
     display: flex;
     flex-direction: column;
-    width: 100px;
+    width: 130px;
     /*overflow: hidden;*/
 
     .image {
@@ -43,11 +45,16 @@
     }
 
     .info {
-      height: 50px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-
+      h4{
+        font-size: 1em;
+        margin: 0;
+        font-weight: 400;
+        color: #595959;
+      }
       .title {
         text-align: center;
       }

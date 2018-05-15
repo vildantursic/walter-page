@@ -1,6 +1,6 @@
 <template>
   <div class="more">
-    <h1>{{numberOfItems}} <span>+</span></h1>
+    <h1 @click="showMore()">{{numberOfItems}} <span>+</span></h1>
     <h4 @click="showMore()">more</h4>
   </div>
 </template>
@@ -27,8 +27,10 @@
     flex-direction: column;
 
     h1 {
+      color: $dark-grey;
       font-size: 4em;
       margin: 0;
+      cursor: pointer;
 
       span {
       }

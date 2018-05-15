@@ -114,7 +114,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/mixins";
-
+  @import "../assets/styles/variables";
   .swiper {
     width: 100%;
     height: 100%;
@@ -140,6 +140,7 @@
           position: absolute;
           top: 0;
           right: 30%;
+          color: $dark-grey;
         }
 
         .image {

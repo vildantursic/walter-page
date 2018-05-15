@@ -93,6 +93,7 @@
         overflow: hidden;
 
         li {
+
           border-bottom: solid 3px lightgrey;
           padding: 15px 30px;
           opacity: 0.7;

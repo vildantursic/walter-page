@@ -66,13 +66,14 @@
     .about {
 
       h3{
+        color: $dark-grey;
         margin-bottom: 0;
         font-size: 1.5em;
         font-weight: bolder;
       }
       p{
         margin-top: 0;
-        font-size: 1.2em;
+        font-size: 1em;
       }
     }
     .member {
@@ -103,8 +104,9 @@
         justify-content: center;
 
         .fa-linkedin {
+          color: $dark-grey;
           width: 100%;
-          font-size: 3.5em;
+          font-size: 3em;
         }
       }
       .phone {
@@ -118,9 +120,10 @@
 
       .link {
         text-decoration: none;
-        color: #2e2f30;
+        color: $dark-grey;;
       }
       .fab, .fas{
+        color: $dark-grey;
         width: 30px;
         text-align: center;
         text-decoration: none;
