@@ -65,8 +65,10 @@
       return {
         services: [],
         subServices: [],
-        loadedServices: false
-      }
+        loadedServices: false,
+        scrolled: false,
+        oldScroll: 0
+    }
     },
     asyncData({ }) {
       return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/services?_embed`).then((response) => {
@@ -77,6 +79,9 @@
     },
     created () {
       this.fillSubServices()
+    },
+    mounted () {
+      window.addEventListener('scroll', this.handleScroll);
     },
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
@@ -99,6 +104,50 @@
       },
       goToService () {
         this.$router.push({ path: 'services' })
+      },
+      handleScroll (e) {
+        var top  = window.pageYOffset || document.documentElement.scrollTop
+        console.log(top)
+        if(this.oldScroll < top)
+        {
+          console.log('down')
+          if(top > 80 && top < 1002)
+          {
+            window.scrollTo(0, 1002);
+            this.oldScroll = 1002
+          }
+          else if(top > 1002 && top < 2004)
+          {
+            window.scrollTo(0, 2004);
+            this.oldScroll = 2004
+          }
+          else if(top > 2004 && top < 3006)
+          {
+            window.scrollTo(0, 3006);
+            this.oldScroll = 3006
+          }
+        }
+        else if (this.oldScroll > top)
+        {
+          console.log(top)
+          console.log('top')
+          if(top > 2004 && top < 3006)
+          {
+            window.scrollTo(0, 2004);
+            this.oldScroll = 2004
+          }
+          else if(top > 1002 && top < 2004)
+          {
+            window.scrollTo(0, 1002);
+            this.oldScroll = 1002
+          }
+          else if(top > 0 && top < 1002)
+          {
+            window.scrollTo(0, 0);
+            this.oldScroll = 0
+          }
+        }
+        this.oldScroll = top
       }
     }
   }

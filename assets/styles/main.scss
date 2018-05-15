@@ -109,13 +109,15 @@ a.nav-link {
     }
   }
 }
-.services-info {
-  @media (max-width: 425px) {
-    font-size: 2.5em;
-  }
-}
-.description {
-  @media (min-width: 425px) {
+@media screen and (max-width: 425px) {
+    .services-info {
+      margin: 0 !important;
+      h1 {
+        font-size: 2.5em;
+      }
+    }
+  .description {
     font-size: 1.5em;
   }
 }
+
