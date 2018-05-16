@@ -13,7 +13,7 @@
                       :duration="800"
                       bezier-easing-value=".5,0,.35,1"
                       v-on:itemchanged="onItemChanged">
-          <a v-for="(item, index) in services" :key="index" :href="`#${item.id}`" class="scrollactive-item">{{item.title.rendered}}</a>
+          <a v-for="(item, index) in services" :key="index" :href="`#${item.id}`" :ref="`${item.id}`" class="scrollactive-item">{{item.title.rendered}}</a>
         </scrollactive>
       </div>
       <div class="section" v-for="(item, index) in services" :key="index">
@@ -67,7 +67,10 @@
         subServices: [],
         loadedServices: false,
         scrolled: false,
-        oldScroll: 0
+        activeItem: null,
+        lastActiveItem: null,
+        oldScroll: 0,
+        once: false
     }
     },
     asyncData({ }) {
@@ -88,8 +91,9 @@
     },
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
-
-      },
+        this.activeItem = currentItem
+        this.once = false
+    },
       fillSubServices () {
         axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/sub_services?per_page=100&_embed`).then((response) => {
           if (this.services.length !== 0) {
@@ -109,46 +113,37 @@
         this.$router.push({ path: 'services' })
       },
       handleScroll (e) {
-        e.preventDefault()
         var top  = window.pageYOffset || document.documentElement.scrollTop
         console.log(top)
+        var nextId = 0
         if(this.oldScroll < top)
         {
           console.log('down')
-          if(top > 5 && top < 1002)
-          {
-            window.scrollTo(0, 1002);
-            this.oldScroll = 1002
-          }
-          else if(top > 1002 && top < 2004)
-          {
-            window.scrollTo(0, 2004);
-            this.oldScroll = 2004
-          }
-          else if(top > 2004 && top < 3006)
-          {
-            window.scrollTo(0, 3006);
-            this.oldScroll = 3006
+          console.log(this.activeItem['href'])
+          var href = this.activeItem['href']
+          var res = href.split("#");
+          var link = res[0]
+          var number = parseInt(res[1])
+          nextId = number + 1;
+
+          if(!this.once) {
+            console.log(this.$refs[nextId][0].click());
+            this.once = true;
           }
         }
         else if (this.oldScroll > top)
         {
-          console.log(top)
           console.log('top')
-          if(top > 2004 && top < 3006)
-          {
-            window.scrollTo(0, 2004);
-            this.oldScroll = 2004
-          }
-          else if(top > 1002 && top < 2004)
-          {
-            window.scrollTo(0, 1002);
-            this.oldScroll = 1002
-          }
-          else if(top > 0 && top < 1002)
-          {
-            window.scrollTo(0, 0);
-            this.oldScroll = 0
+          console.log(this.activeItem['href'])
+          var href = this.activeItem['href']
+          var res = href.split("#");
+          var link = res[0]
+          var number = parseInt(res[1])
+          nextId = number - 1;
+
+          if(!this.once) {
+            console.log(this.$refs[nextId][0].click());
+            this.once = true;
           }
         }
         this.oldScroll = top
