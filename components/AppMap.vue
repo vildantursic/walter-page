@@ -1,13 +1,13 @@
 <template>
     <div class="map">
-      <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xml:space="preserve" viewBox="1754 161 9938 7945" version="1.0" id="svg2" sodipodi:version="0.32" inkscape:version="0.46" sodipodi:docname="Iberian_map_europe.svg" sodipodi:docbase="C:\Documents and Settings\Botek\Desktop" inkscape:output_extension="org.inkscape.output.svg.inkscape" data-v-1a1d1b16="" style="\n;height: 100vh;float: right;"><metadata id="metadata78" data-v-1a1d1b16=""><rdf:rdf data-v-1a1d1b16=""><cc:work rdf:about="" data-v-1a1d1b16=""><dc:format data-v-1a1d1b16="">image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" data-v-1a1d1b16=""></dc:type></cc:work></rdf:rdf></metadata><sodipodi:namedview inkscape:window-height="994" inkscape:window-width="1280" inkscape:pageshadow="2" inkscape:pageopacity="0.0" guidetolerance="10.0" gridtolerance="10.0" objecttolerance="10.0" borderopacity="1.0" bordercolor="#666666" pagecolor="#ffffff" id="base" inkscape:zoom="1" inkscape:cx="128.6116" inkscape:cy="91.963677" inkscape:window-x="0" inkscape:window-y="0" inkscape:current-layer="outlines" showgrid="false" data-v-1a1d1b16=""></sodipodi:namedview><title id="title4" data-v-1a1d1b16="">Countries of Europe</title><desc id="desc6" data-v-1a1d1b16="">
+      <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xml:space="preserve" viewBox="1754 161 9938 7945" version="1.0" id="svg2" sodipodi:version="0.32" inkscape:version="0.46" sodipodi:docname="Iberian_map_europe.svg" sodipodi:docbase="C:\Documents and Settings\Botek\Desktop" inkscape:output_extension="org.inkscape.output.svg.inkscape" data-v-1a1d1b16=""><metadata id="metadata78" data-v-1a1d1b16=""><rdf:rdf data-v-1a1d1b16=""><cc:work rdf:about="" data-v-1a1d1b16=""><dc:format data-v-1a1d1b16="">image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" data-v-1a1d1b16=""></dc:type></cc:work></rdf:rdf></metadata><sodipodi:namedview inkscape:window-height="994" inkscape:window-width="1280" inkscape:pageshadow="2" inkscape:pageopacity="0.0" guidetolerance="10.0" gridtolerance="10.0" objecttolerance="10.0" borderopacity="1.0" bordercolor="#666666" pagecolor="#ffffff" id="base" inkscape:zoom="1" inkscape:cx="128.6116" inkscape:cy="91.963677" inkscape:window-x="0" inkscape:window-y="0" inkscape:current-layer="outlines" showgrid="false" data-v-1a1d1b16=""></sodipodi:namedview><title id="title4" data-v-1a1d1b16="">Countries of Europe</title><desc id="desc6" data-v-1a1d1b16="">
  A blank Map of Europe. Every country has an id which is its ISO-3116-1-ALPHA2 code in lower case.
  Members of the EU have a class="eu", countries in europe (which I found turkey to be but russia not) have a class="europe".
  Image based on a map (http://commons.wikimedia.org/wiki/Image:Europe_countries.svg) by Júlio "Tintazul" Reis.
  made by Marian "maix" Sigler. Released under CreativeCommons Attribution ShareAlike (http://creativecommons.org/licenses/by-sa/2.5/).
 </desc><defs id="defs8" data-v-1a1d1b16=""><inkscape:perspective sodipodi:type="inkscape:persp3d" inkscape:vp_x="0 : 260 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_z="680 : 260 : 1" inkscape:persp3d-origin="340 : 173.33333 : 1" id="perspective2458" data-v-1a1d1b16=""></inkscape:perspective><style type="text/css" id="style10" data-v-1a1d1b16="">
-  *           { fill:none; }
-  path        { fill:#C0C0C0; stroke:white; stroke-width:8; }
+  .map *           { fill:none; }
+  .map path        { fill:#C0C0C0; stroke:white; stroke-width:8; }
   /* stroke-width was originally at around 4px, but this makes it difficult to see when the image is smaller */
 
   .europe     {}
@@ -73,8 +73,8 @@
   #tr         {}
   #ua         {}
  </style><style id="style2412" type="text/css" data-v-1a1d1b16="">
-  *           { fill:none; }
-  path        { fill:#C0C0C0; stroke:white; stroke-width:8; }
+  .map *           { fill:none; }
+  .map path        { fill:#C0C0C0; stroke:white; stroke-width:8; }
 
   .gmt /* GMT/WET (UTC) */
   { fill:#5F61BF; }
@@ -101,24 +101,26 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .map {
     background: #2e3539;
+    width: 100%;
 
     svg {
-    }
-  }
+      height: 100vh;
 
-  path {
-    fill:#262d30 !important;
-    stroke:#262d30 !important;
-    stroke-width:0 !important;
-    fill-opacity:1 !important;
-  }
-  path#ba {
-    fill:#3294cd !important;
-  }
-  path#se {
-    fill:#3294cd !important;
+      path {
+        fill:#262d30 !important;
+        stroke:#262d30 !important;
+        stroke-width:0 !important;
+        fill-opacity:1 !important;
+      }
+      path#ba {
+        fill:#3294cd !important;
+      }
+      path#se {
+        fill:#3294cd !important;
+      }
+    }
   }
 </style>

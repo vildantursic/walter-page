@@ -23,23 +23,27 @@
       <div class="services">
         <h2>Services</h2>
         <section>
-          <AppSingleService v-for="(item, index) of subServices" v-if="item" :key="index" :item="item"/>
+          <AppSingleService v-for="(item, index) of subServices" :key="index" :item="item"/>
         </section>
       </div>
     </div>
+
+    <AppContactBox :user="page.acf.contact_person"></AppContactBox>
   </section>
 </template>
 
 <script>
   import AppSingleService from '~/components/AppSingleService'
   import AppSideNavigation from "~/components/AppSideNavigation"
+  import AppContactBox from "~/components/AppContactBox"
   import axios from 'axios'
   import { find } from 'lodash'
 
   export default {
     components: {
       AppSingleService,
-      AppSideNavigation
+      AppSideNavigation,
+      AppContactBox
     },
     data() {
       return {
@@ -71,8 +75,10 @@
         });
       },
       getSubServices () {
-        axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/sub_services?_embed`).then((response) => {
-          this.subServices = response.data.map((subService) => find(this.page.acf.sub_services, { ID: subService.id }) ? subService : undefined);
+        axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/sub_services?per_page=100&_embed`).then((response) => {
+          this.subServices = response.data.filter((subService) => {
+            return find(this.page.acf.sub_services, { ID: subService.id }) ? subService : undefined
+          });
         }).catch((error) => {
           console.log(error)
         });
@@ -127,6 +133,9 @@
     justify-content: center;
     color: white;
     margin: 0 10%;
+    @include screen-size('m') {
+      margin: 0 5% 0 0%;
+    }
 
     .navigation {
       position: relative;
@@ -150,7 +159,7 @@
     }
 
     .info {
-      width: 80%;
+      width: 100%;
 
       @media (max-width: 768px) {
         width: 100%;
@@ -171,7 +180,10 @@
     .services {
 
       section {
-        @include grid-items(5%, 5%, 7, 2);
+        display: flex;
+        /*justify-content: space-between;*/
+        // for switching to grid system
+        // @include grid-items(5%, 5%, 7, 2);
       }
     }
   }

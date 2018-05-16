@@ -1,12 +1,12 @@
 <template>
-  <div class="filter">
+  <div class="filter desktop">
     <div class="main-filters">
       <ul class="main-list">
         <li :class="{ active: -1 === selectedFilter }" @click="selectFilter(-1)">All</li>
         <li v-for="(filter, index) of filters" :key="index" :class="{ active: filter.id === selectedFilter }" @click="selectFilter(filter.id)">{{filter.name}}</li>
       </ul>
       <div class="search">
-        <input type="text" placeholder="Search..">
+        <slot></slot>
       </div>
     </div>
     <div class="date-filters" v-if="showDateFilter">
@@ -27,7 +27,7 @@
       return {
         date: {
           year: 2018,
-          month: 1
+          month: -1
         },
         dates: [
           { id: 1, name: 'Jan' },
@@ -47,13 +47,17 @@
     },
     methods: {
       selectFilter(id) {
+        this.date.month = -1
         this.$emit('onFilterSelected', id)
       },
       setMonth(id) {
         this.date.month = id
+        this.$emit('onMonthSelected', this.date.month)
       },
       setYear(direction) {
+        this.date.month = -1
         direction === 1 ? this.date.year++ : this.date.year--
+        this.$emit('onYearSelected', this.date.year)
       }
     }
   }
@@ -66,8 +70,9 @@
   .filter {
     width: 100%;
     margin: 10vh 0;
-
-    @include hide-mobile();
+    @include screen-size('m') {
+     margin: 5vh 0;
+    }
 
     ul {
       list-style: none;
@@ -85,16 +90,21 @@
       display: flex;
       font-size: 1em;
       margin-bottom: 1em;
-
+      @include screen-size('m') {
+        font-size: 0.8em;
+      }
       .main-list {
         width: 85%;
         overflow: hidden;
 
         li {
+
           border-bottom: solid 3px lightgrey;
           padding: 15px 30px;
           opacity: 0.7;
-
+          @include screen-size('m') {
+            padding: 10px 20px;
+          }
           &:hover  {
             border-bottom: solid 3px $main-color;
           }
@@ -109,6 +119,7 @@
         width: 15%;
         display: flex;
         align-items: flex-end;
+        margin-left: 5px;
 
         input {
           font-size: 0.8em;

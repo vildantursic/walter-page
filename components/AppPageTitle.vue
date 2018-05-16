@@ -5,8 +5,8 @@
     <p class="subtitle">{{subtitle}}</p>
   </div>
 </template>
-<script>
 
+<script>
   export default {
     components: {
     },
@@ -15,6 +15,8 @@
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/styles/variables";
+@import "../assets/styles/mixins";
   .title-page{
     margin: 15vh 0 10vh 0;
 
@@ -27,6 +29,11 @@
       font-size: 4.5em;
       margin: 10px 0;
       opacity: 0.80;
+      font-weight: bold;
+      color: $dark-grey;
+      @include screen-size('m') {
+        font-size: 3.5em;
+      }
     }
     .subtitle{
       font-size: 1.5em;

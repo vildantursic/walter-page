@@ -1,13 +1,18 @@
 <template xmlns:v-swiper="http://www.w3.org/1999/xhtml">
   <div class="swiper">
-    <div v-swiper:mySwiper="swiperOption" class="my-swiper">
+    <div v-swiper:mySwiper="swiperOption" class="my-swiper" :class="{ thumbs: miniSlider }">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(image, index) in images" :key="index">
           <img v-if="image" :src="image">
+          <div class="swiper-button-prev" slot="button-prev"></div>
+          <div class="swiper-button-next" slot="button-next"></div>
         </div>
+        <!--<div class="swiper-pagination" slot="pagination"></div>-->
+        <!--<div class="swiper-button-prev" slot="button-prev"></div>-->
+        <!--<div class="swiper-button-next" slot="button-next"></div>-->
       </div>
     </div>
-    <div v-swiper:mySecondSwiper="swiperThumbOption" class="my-swiper-thumb">
+    <div v-if="miniSlider" v-swiper:mySecondSwiper="swiperThumbOption" class="my-swiper-thumb">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(image, index) in images" :key="index">
           <img v-if="image" :src="image" @click="slideTo(index)">
@@ -19,7 +24,7 @@
 
 <script>
   export default {
-    props: ['images'],
+    props: ['images', 'miniSlider'],
     data () {
       return {
         swiperOption: {
@@ -33,16 +38,20 @@
           pagination: {
             el: '.swiper-pagination',
             clickable: true
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
           }
         },
         swiperThumbOption: {
-          slidesPerView: 3,
+          slidesPerView: 6,
           spaceBetween: 30,
           loop: false,
-          autoplay: {
-            delay: 4500,
-            disableOnInteraction: false
-          },
+//          autoplay: {
+//            delay: 4500,
+//            disableOnInteraction: false
+//          },
           pagination: {
             el: '.swiper-pagination',
             clickable: true
@@ -62,65 +71,82 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/mixins";
+  @import "../assets/styles/variables";
 
   .swiper {
+    position: relative;
     width: 100%;
-    height: 70vh;
-
-    @include screen-size(xs) {
-      width: 100vh;
-    }
+    height: 100%;
   }
   .my-swiper {
-    height: 80%;
     width: 100%;
-    overflow: hidden;
+    height: 100%;
+
     .swiper-wrapper {
+      width: 100%;
+      height: 100%;
+
       .swiper-slide {
+        height: 100%;
         text-align: center;
         font-size: 38px;
         font-weight: 700;
-        background-color: #e1e1e1;
+        background-color: $secondary-color;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         img {
           height: 100%;
         }
       }
     }
     .swiper-pagination {
+
       > .swiper-pagination-bullet {
-        background-color: red;
+        background-color: black;
       }
     }
   }
   .my-swiper-thumb {
-    height: 20%;
-    margin-top: 5em;
+    position: absolute;
+    z-index: 50;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    background: transparent;
+
+    @include screen-size('xs') {
+      width: 100vw;
+    }
 
     .swiper-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
+
       .swiper-slide {
         width: auto!important;
         text-align: center;
-        background-color: #ffffff;
+        background: transparent;
         overflow: hidden;
+
         img {
           cursor: pointer;
-          height: 100%;
+          height: 60%;
         }
       }
     }
   }
-  /*.swiper-slide {*/
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
-
-    /*img {*/
-      /*position: absolute;*/
-      /*z-index: 1;*/
-    /*}*/
-  /*}*/
+  .swiper-button-next{
+    margin-top: auto;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+  }
+  .swiper-button-prev {
+    margin-top: auto;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+  }
 </style>

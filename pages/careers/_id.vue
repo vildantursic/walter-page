@@ -1,34 +1,17 @@
 <template>
   <section>
+    <!--<div v-if="item._embedded !== undefined" class="card-img-container">-->
+      <!--<img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">-->
+      <!--<img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">-->
+    <!--</div>-->
     <div class="header-news padded-content">
       <h1 class="title">{{page.title.rendered}}</h1>
       <AppSocial :item="page" :link="$route.path"></AppSocial>
     </div>
     <div class="item animated fadeIn padded-content">
-      <div class="img-header">
-        <p class="category">
-          <span v-for="(category, index) of page.categories" :key="index"> {{category.name}}<span v-if="index < page.categories.length - 1">,</span></span>
-        </p>
-        <p class="author" v-if="authors.length !== 0">{{authors[0].name}}, {{date}}</p>
-      </div>
-      <div v-if="page.acf.gallery_images !== ''" class="img-container">
-        <AppSlider v-if="page.acf.gallery_images" :images="page.acf.gallery_images.split(',')" :miniSlider="false"></AppSlider>
-      </div>
       <div class="post-content">
-        <div class="post-left" v-html="page.content.rendered">
-        </div>
-        <div class="post-right">
-          <div v-if="items[items.findIndex(el => el.id === page.id) + 1]" class="next">
-            <span @click="generateNextLink">NEXT ARTICLE <i class="fas fa-chevron-right"></i></span>
-          </div>
-          <div v-for="item in limitBy(items, 3)" v-bind:key="item.id">
-            <OtherPosts :item="item"></OtherPosts>
-          </div>
-        </div>
+        <div class="post-left" v-html="page.content.rendered"></div>
       </div>
-    </div>
-    <div v-if="page._embedded !== undefined" class="img-container-bottom">
-      <img v-if="page._embedded['wp:featuredmedia'] !== undefined" :src="page._embedded['wp:featuredmedia'][0].source_url" :alt="page._embedded['wp:featuredmedia'][0].alt_text">
     </div>
   </section>
 </template>
@@ -64,7 +47,7 @@
       AppSocial
     },
     asyncData({ route }) {
-      return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts/${route.params.id}?_embed`).then((response) => {
+      return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers/${route.params.id}?_embed`).then((response) => {
         return {
           page: response.data,
           date: moment(response.data.date).format('MMM YYYY [at] LT')
@@ -74,53 +57,12 @@
       });
     },
     methods: {
-      generateNextLink () {
-        if (this.items[this.items.findIndex(el => el.id === this.page.id) + 1]) {
-          const link = `/news/${this.items[this.items.findIndex(el => el.id === this.page.id) + 1].id}`
-          this.$router.push({ path: link })
-        }
-      },
       goToPost (id) {
         this.$router.push({ path: `/news/${id}`})
       },
       getItems() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?_embed').then((response) => {
           this.items = response.data
-          this.fillUser()
-          this.fillCategories()
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      fillUser() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
-          this.authors = response.data
-          this.items.map((item) => {
-            if (find(response.data, { id: item.author })) {
-              item.author = find(response.data, { id: item.author })
-            }
-            return item
-          })
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      fillCategories() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
-          this.categories = response.data
-          this.page.categories = this.page.categories.map(cat => {
-            return find(this.categories, (o) => o.id === cat)
-          })
-          this.items.map((item) => {
-            const cats = []
-            response.data.forEach(cat => {
-              if (find(item.categories, (o) => o === cat.id)) {
-                cats.push(cat)
-              }
-            })
-            item.categories = cats
-            return item
-          })
         }).catch((error) => {
           console.log(error);
         });
@@ -146,9 +88,6 @@
     .title {
       font-size: 3em;
       font-weight: bold;
-      h1{
-        color: $dark-grey!important;
-      }
     }
 
     .social {

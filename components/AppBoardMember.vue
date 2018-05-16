@@ -1,26 +1,29 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
-    <div class="card-img">
-      <img src="~/static/images/arch.jpg" alt="">
+    <div class="card-img" v-if="item._embedded !== undefined">
+      <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+      <img v-if="item._embedded['wp:featuredmedia'] === undefined" class="no-image" src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info-card">
       <div class="about">
         <div class="member">
-          <h3>Samir Balicevac</h3>
-          <p>Business and Product Development</p>
+          <div>
+            <h3>{{item.title.rendered}}</h3>
+            <p>{{item.acf.position}}</p>
+          </div>
         </div>
         <div class="divider"></div>
         <div class="social">
           <div class="linkedin">
-            <a class="link" href="#"><i class="fab fa-linkedin"></i></a>
+            <a :href="item.acf.linkedin"><i class="fab fa-linkedin"></i></a>
           </div>
           <div class="phone">
             <i class="fas fa-phone"></i>
-            <a class="link" href="">+387 66 233 000</a>
+            <a class="link" :href="`tel:${item.acf.phone}`">{{item.acf.phone}}</a>
           </div>
           <div class="email">
             <i class="fas fa-envelope"></i>
-            <a class="link" href="mailto:samir.balicevac@mail.com">samir.balicevac@mail.com</a>
+            <a class="link" :href="`mailto:${item.acf.email}`">{{item.acf.email}}</a>
           </div>
         </div>
       </div>
@@ -36,43 +39,79 @@
 </script>
 
 <style lang="scss" scoped="">
+  @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
   .card {
-    display: flex;
-    flex-direction: column;
-    max-height: 400px;
+    height: auto;
     overflow: hidden;
 
     .card-img {
       width: 100%;
-      height: 40%;
+      height: 70%;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: $secondary-color;
 
       img {
         width: 100%;
       }
+
+      .no-image {
+        width: auto;
+      }
     }
 
     .about {
+
       h3{
+        color: $dark-grey;
         margin-bottom: 0;
+        font-size: 1.5em;
+        font-weight: bolder;
+        @include screen-size('l') {
+          font-size: 1.3em;
+        }
+        @include screen-size('m') {
+          font-size: 1em;
+        }
       }
       p{
         margin-top: 0;
-        font-size: 0.75rem;
-
+        font-size: 0.9em;
+        @include screen-size('l') {
+          font-size: 0.8em;
+        }
+        @include screen-size('m') {
+          font-size: 0.7em;
+        }
       }
     }
-    .member{
+    .member {
       margin: 0 0 0 1em;
+      position: relative;
+      height: 65px;
+      @include screen-size('xl') {
+      height: 70px;
+    }
+      @include screen-size('l') {
+        height: 65px;
+      }
+      @include screen-size('m') {
+        height: 55px;
+      }
     }
 
     .divider {
-      background: linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-      height: 3px;
+      margin-bottom: 15px;
       width: 100%;
+      height: 3px;
+      background-size: cover;
+      background: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) fixed center;
+      @include screen-size('l') {
+        margin-bottom: 5px;
+      }
+      @include screen-size('m') {
+        margin-bottom: 0;
+      }
     }
 
     .social {
@@ -81,54 +120,63 @@
       grid-template-rows: 2em 2em;
       grid-template-areas: "linkedin phone" "linkedin email";
 
-      div {
-        display: flex;
-        align-items: center;
-      }
 
       .linkedin {
         grid-area: linkedin;
         justify-content: center;
+        display: flex;
+        align-items: center;
 
         .fa-linkedin {
+          color: $dark-grey;
           width: 100%;
-          font-size: 3.5em;
+          font-size: 3em;
+          @include screen-size('l') {
+            font-size: 2.5em;
+          }
+          @include screen-size('m') {
+            font-size: 1.5em;
+          }
         }
       }
       .phone {
         padding-top: 0.5em !important;
         grid-area: phone;
+        @include screen-size('m') {
+          font-size: 0.8em;
+          padding-top: 15px !important;
+        }
       }
       .email {
         padding-bottom: 0.5em !important;
         grid-area: email;
+        @include screen-size('m') {
+          font-size: 0.8em;
+        }
       }
 
       .link {
         text-decoration: none;
-        color: #2e2f30;
-        font-size: 0.75rem;
+        color: $dark-grey;;
+        font-size: 1em;
+        @include screen-size('xl') {
+          font-size: 0.9em;
+        }
+        @include screen-size('l') {
+          font-size: 0.8em;
+        }
+        @include screen-size('m') {
+          font-size: 0.7em;
+        }
       }
-      .fab ,.fas{
-
-        font-size: 0.75rem;
+      .fab, .fas{
+        color: $dark-grey;
         width: 30px;
         text-align: center;
         text-decoration: none;
-      }
-      .fab:hover, .fas:hover {
-      }
-      .fa-linkedin {
-        background: #ffffff;
-        color: #2e2f30;
-      }
-      .fa-phone {
-        background: #ffffff;
-        color: #2e2f30;
-      }
-      .fa-envelope {
-        background: #ffffff;
-        color: #2e2f30;
+        @include screen-size('m') {
+          width: 25px;
+        }
       }
     }
   }

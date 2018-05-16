@@ -13,40 +13,38 @@
   }
 }
 
-@mixin hide-mobile() {
-  @media (max-width: 425px) {
-    display: none;
-  }
-}
-
 @mixin screen-size($size) {
-  @if ($size == l) {
-    @media (max-width: 1440px) {
-       @content;
+  @if ($size == xl) {
+    @media (max-width: 1600px) {
+      @content;
     }
-  } @else if ($size == m) {
-    @media (max-width: 1024px) {
-       @content;
-    }
-  } @else if ($size == s) {
-    @media (max-width: 768px) {
-       @content;
-    }
-  } @else if ($size == xs) {
-    @media (max-width: 425px) {
-       @content;
+    }  @else if ($size == l) {
+      @media (max-width: 1440px) {
+        @content;
+      }
+    } @else if ($size == m) {
+      @media (max-width: 1024px) {
+        @content;
+      }
+    } @else if ($size == s) {
+      @media (max-width: 768px) {
+        @content;
+      }
+    } @else if ($size == xs) {
+      @media (max-width: 425px) {
+        @content;
+      }
     }
   }
-}
 
 @mixin default-spacing($size){
-  padding: 0 15%;
+  padding: 0 20%;
 
   @media (max-width: 1024px) {
-    padding: 0 10%;
+    padding: 0 20%;
   }
   @media (max-width: 768px) {
-    padding: 0 5%;
+    padding: 0 10%;
   }
   @media (max-width: 425px) {
     padding: 0 10px;
@@ -66,7 +64,7 @@
   }
 }
 
-@mixin grid-items($gap-col, $gap-row, $column-size, $column-size-md){
+@mixin grid-items($gap-col, $gap-row, $column-size, $column-size-md, $column-size-sm: 1){
   display: grid;
   grid-template-columns: repeat($column-size, 1fr);
   grid-template-rows: auto;
@@ -77,7 +75,7 @@
     grid-template-columns: repeat($column-size-md, 1fr);
   }
   @media (max-width: 700px) {
-    grid-template-columns: 100%;
+    grid-template-columns: repeat($column-size-sm, 1fr);
   }
 }
 @mixin modal-grid($size){

@@ -1,32 +1,37 @@
 <template>
   <div class="card">
-    <div class="image">
-      <img src="~/static/images/profile.png" alt="">
-    </div>
+    <style>
+      .avatar.photo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+    </style>
+    <div class="image" v-html="user.user_avatar"></div>
     <div class="info">
       <div class="name">
-        {{name}}
+        {{user.user_firstname}} {{user.user_lastname}}
       </div>
       <div class="role">
-        {{role}}
+        {{user.user_description.split(',')[0]}}
       </div>
     </div>
     <div class="icons">
-      <div class="mail"><i class="fas fa-envelope"></i></div>
-      <div class="phone"><i class="fas fa-phone"></i></div>
+      <a class="mail" :href="`mailto:${user.user_email}`"><i class="fas fa-envelope"></i></a>
+      <a class="phone" :href="`tel:${user.user_description.split(',')[1]}`"><i class="fas fa-phone"></i></a>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['name', 'role'],
-    components: {
-    }
+    props: ['user']
   }
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/styles/mixins";
+
   .card {
     position: absolute;
     bottom: 2%;
@@ -34,52 +39,71 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    /*justify-content: space-around;*/
     overflow: hidden;
     background-color: #393c3d;
     border-radius: 5px;
     padding: 1.5em 1em;
-    width: 350px;
-    -webkit-box-shadow: 8px 8px 8px 0px rgba(57, 60, 61, 0.8);
-    -moz-box-shadow: 8px 8px 8px 0px rgba(57, 60, 61, 0.8);
-    box-shadow: 8px 8px 8px 0px rgba(57, 60, 61, 0.8);
+    width: 363px;
+    box-shadow: 8px 8px 8px 0 rgba(57, 60, 61, 0.8);
+
+    @include screen-size('xs') {
+      position: relative;
+    }
+    @include screen-size('m') {
+      padding: 0.5em 0.5em;
+      width: 260px;
+    }
+
     .image {
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      img {
-        width: 50px;
-        height: 50px;
-        position: relative;
-        float: left;
-      }
+      padding-left: 1em;
     }
     .info {
-      padding: 0em 0.5em;
+      padding: 0em 1em;
+
       .name {
-        font-size: 1.3em;
+        font-size: 1.25em;
         font-weight: 900;
         color: white;
+        @include screen-size('m') {
+          font-size: 1em;
+        }
       }
       .role {
-        font-size: 1em;
+        font-size: 0.8em;
         font-weight: 500;
         color: white;
+        @include screen-size('m') {
+          font-size: 0.6em;
+        }
       }
     }
     .icons {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+
       .mail {
-        font-size:2em;
+        font-size: 1.5em;
         color: white;
-        padding-left: 1em;
+        padding-left: 1.5em;
+        @include screen-size('m') {
+          font-size: 1em;
+          padding-left: 0.5em;
+        }
       }
       .phone {
-        font-size: 2em;
+        font-size: 1.5em;
         color: white;
-        padding-left: 1em;
+        padding-left: 1.5em;
+        @include screen-size('m') {
+          font-size: 1em;
+          padding-left: 0.5em;
+        }
       }
     }
   }
