@@ -157,9 +157,16 @@
 
         .arrow {
           position: absolute;
-          right: 0;
-          top: calc(50% + 60px);
+          right: -8px;
+          top: calc(50% + 70px);
           cursor: pointer;
+          height: 45px;
+          @include screen-size('l') {
+            top: calc(50% + 45px);
+          }
+          @include screen-size('m') {
+            top: calc(50% + 25px);
+          }
         }
       }
     }

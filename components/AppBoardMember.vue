@@ -7,7 +7,9 @@
     <div class="info-card">
       <div class="about">
         <div class="member">
-          <h3>{{item.title.rendered}}</h3>
+          <div>
+            <h3>{{item.title.rendered}}</h3>
+          </div>
           <p>{{item.acf.position}}</p>
         </div>
         <div class="divider"></div>
