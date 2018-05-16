@@ -12,13 +12,13 @@
         <!--<div class="swiper-button-next" slot="button-next"></div>-->
       </div>
     </div>
-    <div v-if="miniSlider" v-swiper:mySecondSwiper="swiperThumbOption" class="my-swiper-thumb">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(image, index) in images" :key="index">
-          <img v-if="image" :src="image" @click="slideTo(index)">
-        </div>
-      </div>
-    </div>
+    <!--<div v-if="miniSlider" v-swiper:mySecondSwiper="swiperThumbOption" class="my-swiper-thumb">-->
+      <!--<div class="swiper-wrapper">-->
+        <!--<div class="swiper-slide" v-for="(image, index) in images" :key="index">-->
+          <!--<img v-if="image" :src="image" @click="slideTo(index)">-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 </template>
 
@@ -80,7 +80,7 @@
   }
   .my-swiper {
     width: 100%;
-    height: 100%;
+    height: 600px;
 
     .swiper-wrapper {
       width: 100%;
@@ -99,6 +99,7 @@
 
         img {
           height: 100%;
+          width: 100%;
         }
       }
     }
@@ -121,23 +122,23 @@
       width: 100vw;
     }
 
-    .swiper-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    /*.swiper-wrapper {*/
+      /*display: flex;*/
+      /*justify-content: center;*/
+      /*align-items: center;*/
 
-      .swiper-slide {
-        width: auto!important;
-        text-align: center;
-        background: transparent;
-        overflow: hidden;
+      /*.swiper-slide {*/
+        /*width: auto!important;*/
+        /*text-align: center;*/
+        /*background: transparent;*/
+        /*overflow: hidden;*/
 
-        img {
-          cursor: pointer;
-          height: 60%;
-        }
-      }
-    }
+        /*img {*/
+          /*cursor: pointer;*/
+          /*height: 60%;*/
+        /*}*/
+      /*}*/
+    /*}*/
   }
   .swiper-button-next{
     margin-top: auto;
