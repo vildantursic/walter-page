@@ -186,12 +186,21 @@
     @include screen-size('xs') {
       display: none;
     }
+    @include screen-size('m') {
+      top: 120px;
+      left: 30px;
+      width: 210px;
+    }
+
 
     .is-active {
       font-size: 1.6em !important;
       font-weight: bolder !important;
       line-height: 1em;
       /*opacity: 1;*/
+      @include screen-size('m') {
+        font-size: 1.3em !important;
+      }
     }
 
     .nav {
@@ -208,6 +217,10 @@
         /*.is-active{*/
           /*opacity: 1;*/
         /*}*/
+        @include screen-size('m') {
+          margin: 0 0 10px 0;
+          font-size: 0.8em;
+        }
       }
     }
     .last-section {
@@ -235,12 +248,15 @@
       display: flex;
       align-items: flex-end;
       justify-content: flex-end;
-      /*margin-bottom: 30px;*/
+      margin-bottom: 20px;
 
 
       h1 {
         margin: 0;
         font-size: 1.8em;
+        @include screen-size('m') {
+          font-size: 1.3em;
+        }
         i{
           padding-top-top: 0.5em;
           padding-left: 0.3em;
@@ -254,6 +270,10 @@
         opacity: 0.2;
         font-size: 7.8em;
         margin-top: 50px;
+        @include screen-size('m') {
+          font-size: 5em;
+          margin-top: 30px;
+        }
       }
     }
 
@@ -267,20 +287,37 @@
       h1, div {
         opacity: 1;
         margin: 0 0 50px 0;
+        @include screen-size('m') {
+          margin: 0 0 20px 0;
+        }
+
       }
       h1 {
         font-size: 2.7em;
+        @include screen-size('m') {
+          font-size: 2em;
+        }
       }
       div {
         font-size: 1.2em;
+        @include screen-size('m') {
+          font-size: 0.8em;
+        }
       }
     }
 
     .services {
-
+      h2{
+        @include screen-size('m') {
+          font-size: 1.2em;
+        }
+      }
       section {
         padding-top: 20px;
         display: flex;
+        @include screen-size('m') {
+          padding-top: 0;
+        }
         /*justify-content: space-between;*/
       }
     }

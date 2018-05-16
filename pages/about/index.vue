@@ -236,10 +236,17 @@
     flex-direction: column;
 
     h2 {
-      width: 65%;
+      width: 75%;
       font-weight: 300;
-      font-size: 1.5em;
-
+      font-size: 1.4em;
+      opacity: 1;
+      margin-top: 5%;
+      margin-bottom: 5%;
+      color: $dark-grey;
+      @include screen-size('m') {
+        width: 90%;
+        font-size: 1em;
+      }
       * {
         line-height: 35px;
       }
@@ -272,8 +279,9 @@
       justify-content: center;
 
       .plus {
-        font-size: 2em;
+        font-size: 1.5em;
         font-weight: bolder;
+        color: $dark-grey;
       }
     }
   }
@@ -306,7 +314,9 @@
     min-height: 100vh;
     padding-top: 50px;
     background: $secondary-dark-color;
-
+    h1{
+      color: $dark-grey;
+    }
     .clients {
       width: 100%;
       margin-top: 50px;
@@ -367,11 +377,20 @@
     @include screen-size('xs') {
       display: none;
     }
+    @include screen-size('m') {
+      top: 120px;
+      left: 30px;
+      width: 210px;
+    }
 
     .is-active {
-      font-size: 2em !important;
+      font-size: 1.6em !important;
       font-weight: bolder !important;
       line-height: 1em;
+      /*opacity: 1;*/
+      @include screen-size('m') {
+        font-size: 1.3em !important;
+      }
     }
 
     .nav {
@@ -381,9 +400,13 @@
 
       a {
         width: 100%;
-        color: black;
+        color: $dark-grey;
         margin: 5px 0;
         font-size: 1em;
+        @include screen-size('m') {
+          margin: 0 0 10px 0;
+          font-size: 0.8em;
+        }
       }
     }
     .last-section {
@@ -418,7 +441,7 @@
         background: #fff;
         font-weight: bold;
         text-decoration: none;
-        color: black;
+        color: $dark-grey;
         font-size: 1.2em;
 
 

@@ -38,7 +38,7 @@
 
 <style lang="scss" scoped="">
   @import "../assets/styles/variables";
-
+  @import "../assets/styles/mixins";
   .card {
     display: flex;
     flex-direction: column;
@@ -66,13 +66,20 @@
     .about {
 
       h3{
+        color: $dark-grey;
         margin-bottom: 0;
         font-size: 1.5em;
         font-weight: bolder;
+        @include screen-size('m') {
+          font-size: 1em;
+        }
       }
       p{
         margin-top: 0;
-        font-size: 1.2em;
+        font-size: 0.9em;
+        @include screen-size('m') {
+          font-size: 0.7em;
+        }
       }
     }
     .member {
@@ -103,8 +110,12 @@
         justify-content: center;
 
         .fa-linkedin {
+          color: $dark-grey;
           width: 100%;
-          font-size: 3.5em;
+          font-size: 3em;
+          @include screen-size('m') {
+            font-size: 1.7em;
+          }
         }
       }
       .phone {
@@ -118,9 +129,10 @@
 
       .link {
         text-decoration: none;
-        color: #2e2f30;
+        color: $dark-grey;;
       }
       .fab, .fas{
+        color: $dark-grey;
         width: 30px;
         text-align: center;
         text-decoration: none;

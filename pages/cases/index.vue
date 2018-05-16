@@ -1,5 +1,5 @@
 <template>
-  <section class="padded-content footing-space">
+  <section class="padded-content footing-space content-fix">
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
     <AppFilter :filters="filters"
                :selectedFilter="selectedFilter"
@@ -135,5 +135,8 @@
   }
   .v--modal-overlay{
     background: rgba(0, 0, 0, 0.5);
+  }
+  .content-fix{
+    padding: 0 10%;
   }
 </style>

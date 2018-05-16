@@ -75,6 +75,7 @@
         font-size: 2em;
         margin: 20px;
         cursor: pointer;
+        color: $dark-grey;
 
         &:hover {
           color: $main-color;
@@ -119,6 +120,7 @@
           font-size: 2em;
           font-weight: bold;
           margin: 0;
+          color: $dark-grey;
         }
         .author {
           font-weight: 500;

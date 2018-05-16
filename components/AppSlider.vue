@@ -4,7 +4,12 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(image, index) in images" :key="index">
           <img v-if="image" :src="image">
+          <div class="swiper-button-prev" slot="button-prev"></div>
+          <div class="swiper-button-next" slot="button-next"></div>
         </div>
+        <!--<div class="swiper-pagination" slot="pagination"></div>-->
+        <!--<div class="swiper-button-prev" slot="button-prev"></div>-->
+        <!--<div class="swiper-button-next" slot="button-next"></div>-->
       </div>
     </div>
     <div v-if="miniSlider" v-swiper:mySecondSwiper="swiperThumbOption" class="my-swiper-thumb">
@@ -33,16 +38,20 @@
           pagination: {
             el: '.swiper-pagination',
             clickable: true
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
           }
         },
         swiperThumbOption: {
           slidesPerView: 6,
           spaceBetween: 30,
           loop: false,
-          autoplay: {
-            delay: 4500,
-            disableOnInteraction: false
-          },
+//          autoplay: {
+//            delay: 4500,
+//            disableOnInteraction: false
+//          },
           pagination: {
             el: '.swiper-pagination',
             clickable: true
@@ -129,5 +138,15 @@
         }
       }
     }
+  }
+  .swiper-button-next{
+    margin-top: auto;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+  }
+  .swiper-button-prev {
+    margin-top: auto;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
   }
 </style>

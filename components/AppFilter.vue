@@ -70,6 +70,9 @@
   .filter {
     width: 100%;
     margin: 10vh 0;
+    @include screen-size('m') {
+     margin: 5vh 0;
+    }
 
     ul {
       list-style: none;
@@ -87,16 +90,21 @@
       display: flex;
       font-size: 1em;
       margin-bottom: 1em;
-
+      @include screen-size('m') {
+        font-size: 0.8em;
+      }
       .main-list {
         width: 85%;
         overflow: hidden;
 
         li {
+
           border-bottom: solid 3px lightgrey;
           padding: 15px 30px;
           opacity: 0.7;
-
+          @include screen-size('m') {
+            padding: 10px 20px;
+          }
           &:hover  {
             border-bottom: solid 3px $main-color;
           }
@@ -111,6 +119,7 @@
         width: 15%;
         display: flex;
         align-items: flex-end;
+        margin-left: 5px;
 
         input {
           font-size: 0.8em;

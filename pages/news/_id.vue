@@ -146,6 +146,9 @@
     .title {
       font-size: 3em;
       font-weight: bold;
+      h1{
+        color: $dark-grey!important;
+      }
     }
 
     .social {

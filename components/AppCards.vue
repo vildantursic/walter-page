@@ -37,6 +37,9 @@
     flex-direction: column;
     height: 420px;
     overflow: hidden;
+    @include screen-size('m') {
+      height: 370px;
+    }
 
     @include screen-size(xs) {
       height: auto;
@@ -51,7 +54,10 @@
       margin: 0 1em 0em 1em;
       cursor: pointer;
       background: $secondary-color;
-
+      @include screen-size('m') {
+        height: 180px;
+        margin: 0 0.5em 0 0.5em
+      }
       img {
         width: 100%;
       }
@@ -63,14 +69,20 @@
     .info {
       padding: 0 1em 1em 1em;
       height: 200px;
-
+      @include screen-size('m') {
+        padding: 0 0.5em 0.5em 0.5em
+      }
       .title {
         cursor: pointer;
         font-weight: bold;
         margin-bottom: 0;
         margin-top: 15px;
         line-height: 1;
-
+        color: $dark-grey;
+        @include screen-size('m') {
+          font-size: 1.2em;
+          margin-top: 10px;
+        }
         &:hover {
           color: $main-color;
         }
@@ -82,6 +94,9 @@
         opacity: 0.8;
         font-size: 0.8em;
         font-style: normal;
+        @include screen-size('m') {
+          font-size: 0.7em;
+        }
       }
 
       .content {
@@ -90,12 +105,19 @@
         opacity: 0.8;
         padding-top: 15px;
         font-size: 0.9em;
+        @include screen-size('m') {
+          font-size: 0.8em;
+        }
       }
 
       .partner {
         position: absolute;
         bottom: 30px;
         font-size: 0.8em;
+        @include screen-size('m') {
+          font-size: 0.7em;
+          bottom: 15px;
+        }
       }
     }
 

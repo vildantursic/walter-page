@@ -50,6 +50,10 @@
     @include screen-size('xs') {
       position: relative;
     }
+    @include screen-size('m') {
+      padding: 0.5em 0.5em;
+      width: 260px;
+    }
 
     .image {
       overflow: hidden;
@@ -65,11 +69,17 @@
         font-size: 1.25em;
         font-weight: 900;
         color: white;
+        @include screen-size('m') {
+          font-size: 1em;
+        }
       }
       .role {
         font-size: 0.8em;
         font-weight: 500;
         color: white;
+        @include screen-size('m') {
+          font-size: 0.6em;
+        }
       }
     }
     .icons {
@@ -81,11 +91,19 @@
         font-size: 1.5em;
         color: white;
         padding-left: 1.5em;
+        @include screen-size('m') {
+          font-size: 1em;
+          padding-left: 0.5em;
+        }
       }
       .phone {
         font-size: 1.5em;
         color: white;
         padding-left: 1.5em;
+        @include screen-size('m') {
+          font-size: 1em;
+          padding-left: 0.5em;
+        }
       }
     }
   }

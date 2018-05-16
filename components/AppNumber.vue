@@ -34,22 +34,31 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
   .card{
     display: flex;
     flex-direction: column;
     overflow: hidden;
 
     .number {
-      font-size: 5em;
+      font-size: 4.5em;
       margin: 10px 0;
-      opacity: 0.8;
+      /*opacity: 0.8;*/
       font-weight: bolder;
+      color: $dark-grey;
+      @include screen-size('m') {
+        font-size: 3em;
+      }
     }
 
     .info {
-      font-size: 1.5em;
+      font-size: 1.3em;
       opacity: 0.5;
       margin: 10px 0;
+      @include screen-size('m') {
+        font-size: 0.9em;
+      }
     }
 
     .border {
