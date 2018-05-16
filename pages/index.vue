@@ -103,6 +103,12 @@
     justify-content: center;
     color: white;
     margin: 0 10%;
+    @include screen-size('xl') {
+      margin: 0;
+    }
+    @include screen-size('l') {
+      margin: 0;
+    }
     @include screen-size('m') {
       margin: 0;
     }

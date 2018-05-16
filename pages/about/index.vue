@@ -243,6 +243,14 @@
       margin-top: 5%;
       margin-bottom: 5%;
       color: $dark-grey;
+      @include screen-size('xl') {
+      font-size: 1.2em;
+      margin-top: 8%;
+    }
+      @include screen-size('l') {
+        font-size: 1.2em;
+        margin-top: 8%;
+      }
       @include screen-size('m') {
         width: 90%;
         font-size: 1em;

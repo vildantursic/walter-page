@@ -141,8 +141,10 @@
           top: 0;
           right: 30%;
           color: $dark-grey;
+          @include screen-size('m') {
+            right: 10%;
+          }
         }
-
         .image {
           width: 100%;
 
@@ -157,9 +159,22 @@
 
         .arrow {
           position: absolute;
-          right: 0;
-          top: calc(50% + 60px);
+          right: -8px;
+          top: calc(50% + 70px);
           cursor: pointer;
+          height: 45px;
+          @include screen-size('xl') {
+            top: calc(50% + 55px);
+          }
+          @include screen-size('l') {
+            top: calc(50% + 45px);
+          }
+          @include screen-size('m') {
+            top: calc(50% + 25px);
+          }
+          @include screen-size('s') {
+            top: calc(50% + 20px);
+          }
         }
       }
     }

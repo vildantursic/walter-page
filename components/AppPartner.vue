@@ -20,7 +20,7 @@
 
 <style lang="scss" scoped="">
   @import "../assets/styles/variables";
-
+  @import "../assets/styles/mixins";
   .card {
     display: flex;
     flex-direction: column;
@@ -33,7 +33,7 @@
   }
   .card-img {
     width: 100%;
-    height: 200px;
+    height: 150px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -41,11 +41,19 @@
     background: $secondary-color;
 
     img {
-      width: 120%;
+      width: 100%;
     }
 
     .no-image {
       width: auto;
+    }
+  }
+  .about{
+    @include screen-size('l') {
+      font-size: 0.8em;
+    }
+    @include screen-size('m') {
+      font-size: 0.75em;
     }
   }
 </style>
