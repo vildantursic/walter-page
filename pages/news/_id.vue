@@ -134,7 +134,8 @@
 
 <style lang="scss" scoped>
   @import "../../assets/styles/mixins";
-@import "../../assets/styles/variables";
+  @import "../../assets/styles/variables";
+
   .item {
   }
   .header-news {
@@ -206,27 +207,20 @@
     }
     .post-right {
       margin: 0 3%;
-      .post-right {
-        margin: 0 0 0 3%;
-        width: 30%;
+      width: 30%;
 
-        .next {
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          .current-year {
-            font-size: 1.2em;
-            font-weight: bold;
-            cursor: pointer;
-          }
-          margin: 0 0 1em 0;
-          padding-bottom: 1em;
-          border-width: 0 0 4px 0;
-          border-style: solid;
-          border-image: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) 1;
-          font-size: 1.5em;
-          font-weight: bold;
-          cursor: pointer;
+      .next {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin: 0 0 1em 0;
+        padding-bottom: 1em;
+        border-width: 0 0 4px 0;
+        border-style: solid;
+        border-image: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) 1;
+        font-size: 1.5em;
+        font-weight: bold;
+        cursor: pointer;
 
           &:hover {
             color: $main-color !important;
