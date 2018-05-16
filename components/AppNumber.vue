@@ -47,6 +47,12 @@
       /*opacity: 0.8;*/
       font-weight: bolder;
       color: $dark-grey;
+      @include screen-size('xl') {
+        font-size: 4em;
+      }
+      @include screen-size('l') {
+        font-size: 3.5em;
+      }
       @include screen-size('m') {
         font-size: 3em;
       }

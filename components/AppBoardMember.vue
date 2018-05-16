@@ -89,6 +89,9 @@
       margin: 0 0 0 1em;
       position: relative;
       height: 65px;
+      @include screen-size('xl') {
+      height: 70px;
+    }
       @include screen-size('l') {
         height: 65px;
       }
@@ -156,6 +159,9 @@
         text-decoration: none;
         color: $dark-grey;;
         font-size: 1em;
+        @include screen-size('xl') {
+          font-size: 0.9em;
+        }
         @include screen-size('l') {
           font-size: 0.8em;
         }
