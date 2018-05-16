@@ -328,7 +328,7 @@
     .clients {
       width: 100%;
       margin-top: 50px;
-      @include grid-items(20px, 50px, 10, 5, 2);
+      @include grid-items(20px, 0, 6, 5, 2);
     }
   }
 

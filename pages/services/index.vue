@@ -298,7 +298,13 @@
 
       h1, div {
         opacity: 1;
-        margin: 0 0 50px 0;
+        margin: 0 0 40px 0;
+        @include screen-size('xl') {
+          margin: 0 0 20px 0;
+        }
+        @include screen-size('l') {
+          margin: 0 0 20px 0;
+        }
         @include screen-size('m') {
           margin: 0 0 20px 0;
         }
@@ -306,12 +312,24 @@
       }
       h1 {
         font-size: 2.7em;
+        @include screen-size('xl') {
+        font-size: 2.4em;
+      }
+        @include screen-size('l') {
+          font-size: 2.3em;
+        }
         @include screen-size('m') {
           font-size: 2em;
         }
       }
       div {
         font-size: 1.2em;
+        @include screen-size('xl') {
+          font-size: 1.1em;
+        }
+        @include screen-size('l') {
+          font-size: 1em;
+        }
         @include screen-size('m') {
           font-size: 0.8em;
         }
@@ -320,6 +338,7 @@
 
     .services {
       h2{
+        margin: 0;
         @include screen-size('m') {
           font-size: 1.2em;
         }
