@@ -335,7 +335,7 @@
         padding-top: 20px;
         display: flex;
         @include screen-size('m') {
-          padding-top: 0;
+          padding-top: 10px;
         }
         /*justify-content: space-between;*/
       }
