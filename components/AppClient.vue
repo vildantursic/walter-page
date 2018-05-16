@@ -14,7 +14,7 @@
 <style scoped>
   img {
     width: 100%;
-    filter: grayscale(100%);
+    /*filter: grayscale(100%);*/
 
     &:hover {
       filter: grayscale(0%);

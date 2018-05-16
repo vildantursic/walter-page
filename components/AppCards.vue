@@ -105,6 +105,12 @@
         opacity: 0.8;
         padding-top: 15px;
         font-size: 0.9em;
+        @include screen-size('xl') {
+          padding-top: 20px;
+        }
+        @include screen-size('xl') {
+          padding-top: 15px;
+        }
         @include screen-size('m') {
           font-size: 0.8em;
         }
@@ -114,6 +120,9 @@
         position: absolute;
         bottom: 30px;
         font-size: 0.8em;
+        @include screen-size('l') {
+          bottom: 20px;
+        }
         @include screen-size('m') {
           font-size: 0.7em;
           bottom: 15px;

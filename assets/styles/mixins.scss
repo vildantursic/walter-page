@@ -14,25 +14,28 @@
 }
 
 @mixin screen-size($size) {
-
-  @if ($size == l) {
-    @media (max-width: 1440px) {
-       @content;
+  @if ($size == xl) {
+    @media (max-width: 1600px) {
+      @content;
     }
-  } @else if ($size == m) {
-    @media (max-width: 1024px) {
-       @content;
-    }
-  } @else if ($size == s) {
-    @media (max-width: 768px) {
-       @content;
-    }
-  } @else if ($size == xs) {
-    @media (max-width: 425px) {
-       @content;
+    }  @else if ($size == l) {
+      @media (max-width: 1440px) {
+        @content;
+      }
+    } @else if ($size == m) {
+      @media (max-width: 1024px) {
+        @content;
+      }
+    } @else if ($size == s) {
+      @media (max-width: 768px) {
+        @content;
+      }
+    } @else if ($size == xs) {
+      @media (max-width: 425px) {
+        @content;
+      }
     }
   }
-}
 
 @mixin default-spacing($size){
   padding: 0 20%;

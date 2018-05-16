@@ -9,13 +9,13 @@
         <div class="member">
           <div>
             <h3>{{item.title.rendered}}</h3>
+            <p>{{item.acf.position}}</p>
           </div>
-          <p>{{item.acf.position}}</p>
         </div>
         <div class="divider"></div>
         <div class="social">
           <div class="linkedin">
-            <a class="link" :href="item.acf.linkedin"><i class="fab fa-linkedin"></i></a>
+            <a :href="item.acf.linkedin"><i class="fab fa-linkedin"></i></a>
           </div>
           <div class="phone">
             <i class="fas fa-phone"></i>
@@ -42,8 +42,6 @@
   @import "../assets/styles/variables";
   @import "../assets/styles/mixins";
   .card {
-    display: flex;
-    flex-direction: column;
     height: auto;
     overflow: hidden;
 
@@ -51,9 +49,6 @@
       width: 100%;
       height: 70%;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       background: $secondary-color;
 
       img {
@@ -72,6 +67,9 @@
         margin-bottom: 0;
         font-size: 1.5em;
         font-weight: bolder;
+        @include screen-size('l') {
+          font-size: 1.3em;
+        }
         @include screen-size('m') {
           font-size: 1em;
         }
@@ -79,6 +77,9 @@
       p{
         margin-top: 0;
         font-size: 0.9em;
+        @include screen-size('l') {
+          font-size: 0.8em;
+        }
         @include screen-size('m') {
           font-size: 0.7em;
         }
@@ -86,6 +87,14 @@
     }
     .member {
       margin: 0 0 0 1em;
+      position: relative;
+      height: 65px;
+      @include screen-size('l') {
+        height: 65px;
+      }
+      @include screen-size('m') {
+        height: 55px;
+      }
     }
 
     .divider {
@@ -94,6 +103,12 @@
       height: 3px;
       background-size: cover;
       background: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) fixed center;
+      @include screen-size('l') {
+        margin-bottom: 5px;
+      }
+      @include screen-size('m') {
+        margin-bottom: 0;
+      }
     }
 
     .social {
@@ -102,42 +117,60 @@
       grid-template-rows: 2em 2em;
       grid-template-areas: "linkedin phone" "linkedin email";
 
-      div {
-        display: flex;
-        align-items: center;
-      }
 
       .linkedin {
         grid-area: linkedin;
         justify-content: center;
+        display: flex;
+        align-items: center;
 
         .fa-linkedin {
           color: $dark-grey;
           width: 100%;
           font-size: 3em;
+          @include screen-size('l') {
+            font-size: 2.5em;
+          }
           @include screen-size('m') {
-            font-size: 1.7em;
+            font-size: 1.5em;
           }
         }
       }
       .phone {
         padding-top: 0.5em !important;
         grid-area: phone;
+        @include screen-size('m') {
+          font-size: 0.8em;
+          padding-top: 15px !important;
+        }
       }
       .email {
         padding-bottom: 0.5em !important;
         grid-area: email;
+        @include screen-size('m') {
+          font-size: 0.8em;
+        }
       }
 
       .link {
         text-decoration: none;
         color: $dark-grey;;
+        font-size: 1em;
+        @include screen-size('l') {
+          font-size: 0.8em;
+        }
+        @include screen-size('m') {
+          font-size: 0.7em;
+        }
       }
       .fab, .fas{
         color: $dark-grey;
         width: 30px;
         text-align: center;
         text-decoration: none;
+        @include screen-size('m') {
+          width: 25px;
+        }
       }
     }
   }
