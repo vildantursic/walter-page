@@ -134,8 +134,7 @@
 
 <style lang="scss" scoped>
   @import "../../assets/styles/mixins";
-  @import "../../assets/styles/variables";
-
+@import "../../assets/styles/variables";
   .item {
   }
   .header-news {
@@ -185,7 +184,16 @@
       width: 100%;
     }
   }
-  .post-content {
+  .img-container-bottom
+  {
+    display: flex;
+    max-height: 500px;
+    .img-bottom {
+      width: 100%;
+    }
+  }
+  .post-content
+  {
     display: flex;
     flex-direction: row;
 
@@ -199,12 +207,20 @@
     }
     .post-right {
       margin: 0 3%;
+    .post-right
+    {
+      margin: 0 0 0 3%;
       width: 30%;
 
       .next {
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        .current-year {
+          font-size: 1.2em;
+          font-weight: bold;
+          cursor: pointer;
+        }
         margin: 0 0 1em 0;
         padding-bottom: 1em;
         border-width: 0 0 4px 0;

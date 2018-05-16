@@ -131,7 +131,7 @@
           /*color: gray;*/
         }
         .divider {
-          margin-top: 10vh;
+          margin-top: 5vh;
           border-top: 1px solid gray;
           /*width: 85%;*/
         }
