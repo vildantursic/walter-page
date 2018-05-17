@@ -79,7 +79,7 @@
         <!--<mapbox></mapbox>-->
       </section>
     </div>
-    <div class="section">
+    <div class="section" id="contact-section">
       <section id="contact" class="contact-section">
         <div class="contact">
           <div class="countries">
@@ -90,7 +90,7 @@
             <AppMap/>
           </div>
           <div class="users">
-            <AppContactPerson v-for="(item, index) of page.acf.contact_persons" :key="index" :user="item"></AppContactPerson>
+            <AppContactPerson v-for="(item, index) of this.contactPersons" :key="index" :user="item"></AppContactPerson>
           </div>
         </div>
       </section>
@@ -134,7 +134,8 @@
         currentHistory: 0,
         partners: [],
         boardMembers: [],
-        customers: []
+        customers: [],
+        contactPersons: {}
       }
     },
     watch: {
@@ -156,6 +157,10 @@
       this.getPartners()
       this.getBoardMembers()
       this.getCustomers()
+    },
+    mounted()
+    {
+      this.reverseItems()
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/73?_embed').then((response) => {
@@ -219,6 +224,10 @@
         }).catch((error) => {
           console.log(error)
         });
+      },
+      reverseItems() {
+        this.contactPersons = this.page.acf.contact_persons.reverse()
+        console.log(this.contactPersons)
       }
     }
   }
