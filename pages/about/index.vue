@@ -381,14 +381,16 @@
     top: 150px;
     left: 50px;
     width: 200px;
-
-    @include screen-size('xs') {
-      display: none;
+    @include screen-size('l') {
+      width: 180px;
     }
     @include screen-size('m') {
       top: 120px;
       left: 30px;
-      width: 210px;
+      width: 150px;
+    }
+    @include screen-size('xs') {
+      display: none;
     }
 
     .is-active {
@@ -428,7 +430,15 @@
   // history tabs
   .tabs {
     margin: 0 15%;
-
+    @include screen-size('m') {
+      margin: 0 20%;
+    }
+    @include screen-size('l') {
+      margin: 0 20%;
+    }
+    @include screen-size('xl') {
+      margin: 0 18%;
+    }
     .tabbed-section__selector {
       position: relative;
       height: $main-size*2;
@@ -452,7 +462,9 @@
         color: $dark-grey;
         font-size: 1.2em;
 
-
+        @include screen-size('m') {
+          font-size: 1em;
+        }
         &.active {
           color: $main-color;
         }

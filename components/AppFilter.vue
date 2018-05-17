@@ -100,10 +100,16 @@
         li {
 
           border-bottom: solid 3px lightgrey;
-          padding: 15px 30px;
+          padding: 15px 100px;
           opacity: 0.7;
+          @include screen-size('xl') {
+            padding: 15px 40px;
+          }
+          @include screen-size('l') {
+            padding: 15px 25px;
+          }
           @include screen-size('m') {
-            padding: 10px 20px;
+            padding: 15px 10px;
           }
           &:hover  {
             border-bottom: solid 3px $main-color;
