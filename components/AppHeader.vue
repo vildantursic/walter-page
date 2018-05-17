@@ -60,7 +60,8 @@
       goToPage()
       {
         window.location.href= 'http://localhost:3000/about#contact';
-        console.log(document.getElementsByTagName("a[href='#contact']"))
+        console.log(this.$parent.$refs[6])
+        this.$refs[6].click()
       }
     }
   }
