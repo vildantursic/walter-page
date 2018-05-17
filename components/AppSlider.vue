@@ -149,11 +149,13 @@
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
     background-image: none;
+    outline: none;
   }
   .swiper-button-prev {
     margin-top: auto;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
     background-image: none;
+    outline: none;
   }
 </style>
