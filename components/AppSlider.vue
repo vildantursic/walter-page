@@ -4,8 +4,12 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(image, index) in images" :key="index">
           <img v-if="image" :src="image">
-          <div class="swiper-button-prev" slot="button-prev"></div>
-          <div class="swiper-button-next" slot="button-next"></div>
+          <div class="swiper-button-prev" slot="button-prev">
+            <img src="../static/images/Arrow.svg" alt="">
+          </div>
+          <div class="swiper-button-next" slot="button-next">
+            <img src="../static/images/Arrow.svg" style="transform: rotate(180deg);" alt="">
+          </div>
         </div>
         <!--<div class="swiper-pagination" slot="pagination"></div>-->
         <!--<div class="swiper-button-prev" slot="button-prev"></div>-->
@@ -144,10 +148,12 @@
     margin-top: auto;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
+    background-image: none;
   }
   .swiper-button-prev {
     margin-top: auto;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
+    background-image: none;
   }
 </style>
