@@ -23,10 +23,10 @@
         <div class="text-box">
           <div class="description" v-html="item.content.rendered"></div>
         </div>
-        <div class="divider">
-          <p v-if="item.acf.partners" class="author">In Collaboration with <span
-            v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></p>
-        </div>
+        <!--<div class="divider">-->
+          <!--<p v-if="item.acf.partners" class="author">In Collaboration with <span-->
+            <!--v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></p>-->
+        <!--</div>-->
       </div>
     </div>
   </div>
@@ -67,12 +67,13 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
+      color: $dark-grey;
 
       i {
         display: flex;
         align-items: flex-start;
         justify-content: flex-end;
-        font-size: 2em;
+        font-size: 1.5em;
         margin: 20px;
         cursor: pointer;
         color: $dark-grey;
@@ -113,11 +114,12 @@
         }
 
         .category {
+          font-size: 1em;
           margin-top: 1em;
           font-weight: 300;
         }
         .title {
-          font-size: 2em;
+          font-size: 1.5em;
           font-weight: bold;
           margin: 0;
           color: $dark-grey;
@@ -138,7 +140,7 @@
         .text-box {
           height: 380px;
           overflow: auto;
-          width: 85%;
+          width: 93%;
         }
       }
       .link {
@@ -154,8 +156,8 @@
   .social{
     .fab, .fas{
       padding: 5px 10px;
-      font-size: 30px;
-      width: 40px;
+      font-size: 25px;
+      width: 35px;
       text-align: center;
       text-decoration: none;
       color: $social-icon;

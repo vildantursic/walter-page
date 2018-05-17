@@ -324,10 +324,19 @@
     background: $secondary-dark-color;
     h1{
       color: $dark-grey;
+      @include screen-size('xl') {
+        font-size: 1.2em;
+      }
+      @include screen-size('l') {
+        font-size: 1.2em;
+      }
+      @include screen-size('m') {
+        font-size: 1em;
+      }
     }
     .clients {
       width: 100%;
-      margin-top: 50px;
+      margin-top: 30px;
       @include grid-items(20px, 0, 6, 5, 2);
     }
   }

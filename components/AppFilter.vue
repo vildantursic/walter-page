@@ -7,6 +7,7 @@
       </ul>
       <div class="search">
         <slot></slot>
+        <img src="../static/images/search.svg" alt="">
       </div>
     </div>
     <div class="date-filters" v-if="showDateFilter">
@@ -99,8 +100,8 @@
 
         li {
 
-          border-bottom: solid 3px lightgrey;
-          padding: 15px 100px;
+          border-bottom: solid 1.5px lightgrey;
+          padding: 15px 60px;
           opacity: 0.7;
           @include screen-size('xl') {
             padding: 15px 40px;
@@ -112,11 +113,11 @@
             padding: 15px 10px;
           }
           &:hover  {
-            border-bottom: solid 3px $main-color;
+            border-bottom: solid 2px $main-color;
           }
         }
         .active {
-          border-bottom: solid 3px $main-color;
+          border-bottom: solid 2px $main-color;
           opacity: 1;
         }
       }
@@ -129,15 +130,28 @@
 
         input {
           font-size: 0.8em;
-          padding: 15px 30px;
+          padding: 15px 35px;
           width: 100%;
-          border-bottom: solid 3px lightgrey;
+          border-bottom: solid 1.5px $dark-grey;
 
           &:focus {
             outline: none;
-            border-bottom: solid 3px $main-color;
+            border-bottom: solid 2px $main-color;
             font-weight: bolder;
           }
+        }
+
+      }
+      img{
+        height: 20px;
+        position: absolute;
+        padding: 10px;
+        margin-left: 10%;
+        @include screen-size('xl') {
+          margin-left: 9%;
+        }
+        @include screen-size('m') {
+          margin-left: 8%;
         }
       }
     }
