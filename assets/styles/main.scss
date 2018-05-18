@@ -37,7 +37,6 @@ a.nav-link {
 
 .padded-content {
   @include default-spacing(15)
-
 }
 .footing-space {
   margin-bottom: 100px;
@@ -55,6 +54,11 @@ a.nav-link {
   @media (min-width: 425px) {
     display: none !important;
   }
+}
+.desktop-filter{
+@media (min-width: 425px) {
+  display: block;
+}
 }
 
 .page-enter-active, .page-leave-active {

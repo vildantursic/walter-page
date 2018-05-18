@@ -41,10 +41,10 @@
     @include screen-size('m') {
       height: 370px;
     }
-
-    @include screen-size(xs) {
+    @include screen-size('xs') {
       height: auto;
     }
+
 
     .image {
       height: 200px;
@@ -56,8 +56,9 @@
       cursor: pointer;
       background: $secondary-color;
       @include screen-size('m') {
-        height: 180px;
-        margin: 0 0.5em 0 0.5em
+        width: 240px;
+        height: 154px;
+        margin: auto auto
       }
       img {
         width: 100%;
@@ -73,6 +74,12 @@
       @include screen-size('m') {
         padding: 0 0.5em 0.5em 0.5em
       }
+      @include screen-size('s') {
+        height: auto;
+      }
+      @include screen-size('xs') {
+        height: auto;
+      }
       .title {
         cursor: pointer;
         font-weight: bold;
@@ -81,7 +88,7 @@
         line-height: 1;
         color: $dark-grey;
         @include screen-size('m') {
-          font-size: 1.2em;
+          font-size: 25px;
           margin-top: 10px;
         }
         &:hover {
@@ -109,11 +116,17 @@
         @include screen-size('xl') {
           padding-top: 20px;
         }
-        @include screen-size('xl') {
-          padding-top: 15px;
-        }
         @include screen-size('m') {
-          font-size: 0.8em;
+          font-size: 18px;
+          overflow: auto;
+        }
+        @include screen-size('s') {
+          font-size: 10px;
+          overflow: auto;
+        }
+        @include screen-size('xs') {
+          font-size: 10px;
+          overflow: auto;
         }
       }
 
@@ -126,7 +139,7 @@
         }
         @include screen-size('m') {
           font-size: 0.7em;
-          bottom: 15px;
+          bottom: 16px;
         }
       }
     }

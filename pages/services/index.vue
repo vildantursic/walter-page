@@ -16,6 +16,9 @@
           <a v-for="(item, index) in services" :key="index" :href="`#${item.id}`" :ref="`${item.id}`" class="scrollactive-item">{{item.title.rendered}}</a>
         </scrollactive>
       </div>
+      <div class="tablet-navigation">
+        <p>{{currentPage}}</p>
+      </div>
       <div class="section" v-for="(item, index) in services" :key="index">
         <div style="height: 300px" v-if="index !== 0"></div>
         <section :id="`${item.id}`">
@@ -72,7 +75,8 @@
         activeItem: null,
         lastActiveItem: null,
         oldScroll: 0,
-        once: false
+        once: false,
+        currentPage: 'BIM Consulting and Engineering'
     }
     },
     asyncData({ }) {
@@ -94,6 +98,7 @@
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
         this.activeItem = currentItem
+        this.currentPage = currentItem.textContent
         this.once = false
     },
       fillSubServices () {
@@ -190,6 +195,34 @@
     min-height: 200vh;
     background-image: linear-gradient(90deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
   }
+  .tablet-navigation
+  {
+    position: fixed;
+    display: none;
+    @include screen-size('m')
+    {
+      display: block;
+    }
+
+    @include screen-size('xs') {
+      display: none;
+    }
+    @include screen-size('m') {
+      top: 120px;
+      left: 30px;
+      width: 210px;
+    }
+    p
+    {
+      width: 100%;
+      color: white;
+      margin: 5px 0 20px 0;
+      font-size: 1.6em;
+      font-weight: bolder;
+      line-height: 1em;
+      opacity: 0.7;
+      }
+  }
 
   .navigation {
     position: fixed;
@@ -197,6 +230,10 @@
     top: 150px;
     left: 50px;
     width: 280px;
+    @include screen-size('m')
+    {
+      display: none;
+    }
 
     @include screen-size('xs') {
       display: none;
