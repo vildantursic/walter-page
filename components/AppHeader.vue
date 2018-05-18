@@ -56,12 +56,6 @@
       {
           console.log('ok')
         document.getElementById('menu-drop').setAttribute('visibility','visible')
-      },
-      goToPage()
-      {
-        window.location.href= 'http://localhost:3000/about#contact';
-        console.log(this.$parent.$refs[6])
-        this.$refs[6].click()
       }
     }
   }

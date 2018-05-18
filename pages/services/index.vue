@@ -27,9 +27,7 @@
               <div class="cases-link">
                 <h1 class="hidden-amount">+ {{item.acf.cases.length}}</h1>
                 <nuxt-link :to="`cases?filter=${item.case_categories[0]}`">
-                  <div class="hover">
-                    <h1 class="cases">cases<i class="cases fas fa-caret-right"></i></h1>
-                  </div>
+                  <h1>cases<i class="fas fa-caret-right"></i></h1>
                 </nuxt-link>
               </div>
               <div class="info">
@@ -173,7 +171,6 @@
 
 <style lang="scss" scoped>
   @import "../../assets/styles/mixins";
-  @import "../../assets/styles/variables";
 
   video {
     position: fixed;
@@ -301,10 +298,8 @@
       align-items: flex-end;
       justify-content: flex-end;
       margin-bottom: 20px;
-      color: #ffffff!important;
-      &:hover {
-        color: $main-color !important;
-      }
+
+
       h1 {
         margin: 0;
         font-size: 1.8em;
@@ -393,17 +388,6 @@
         }
         /*justify-content: space-between;*/
       }
-    }
-  }
-  .cases{
-    color: #ffffff!important;
-    &:hover {
-      color: $main-color !important;
-    }
-  }
-  .hover{
-    &:hover {
-      color: $main-color !important;
     }
   }
   /*.services-info{*/
