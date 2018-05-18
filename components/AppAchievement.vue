@@ -8,7 +8,6 @@
     <div class="info">
       <h4 class="title">{{item.title.rendered}}</h4>
     </div>
-    <div class="border"></div>
   </div>
 </template>
 
@@ -47,7 +46,7 @@
     .info {
       height: 40px;
       display: flex;
-      align-items: center;
+      /*align-items: center;*/
       justify-content: center;
       h4{
         font-size: 1em;

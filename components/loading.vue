@@ -33,6 +33,9 @@
     align-items: center;
     justify-content: center;
     animation: hue 10s infinite alternate;
+    img{
+      height: 8em;
+    }
   }
 
   @keyframes hue {
@@ -43,4 +46,5 @@
       filter: hue-rotate(360deg);
     }
   }
+
 </style>

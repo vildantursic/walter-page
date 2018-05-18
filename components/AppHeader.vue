@@ -177,7 +177,10 @@
           a {
             text-decoration: none;
             color: #FFFFFF;
-            padding: 1em 0.5em;
+            padding: 1em 2em;
+            @include screen-size('m') {
+              padding: 1em 1em;
+            }
           }
 
           .nuxt-link-exact-active {

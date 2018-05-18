@@ -38,6 +38,7 @@
   }
 
 @mixin default-spacing($size){
+
   padding: 0 20%;
 
   @media (max-width: 1024px) {
