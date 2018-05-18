@@ -101,13 +101,13 @@
         li {
 
           border-bottom: solid 1.5px lightgrey;
-          padding: 15px 60px;
+          padding: 15px 35px;
           opacity: 0.7;
           @include screen-size('xl') {
-            padding: 15px 40px;
+            padding: 15px 20px;
           }
           @include screen-size('l') {
-            padding: 15px 25px;
+            padding: 15px 10px;
           }
           @include screen-size('m') {
             padding: 15px 10px;
@@ -146,12 +146,12 @@
         height: 20px;
         position: absolute;
         padding: 10px;
-        margin-left: 10%;
+        margin-left: 8%;
         @include screen-size('xl') {
-          margin-left: 9%;
+          margin-left: 8%;
         }
         @include screen-size('m') {
-          margin-left: 8%;
+          margin-left: 7%;
         }
       }
     }

@@ -137,6 +137,13 @@
     background: rgba(0, 0, 0, 0.5);
   }
   .content-fix{
+    padding: 0 17%;
+
+    @include screen-size('l') {
+      padding: 0 15%;
+    }
+  @include screen-size('m') {
     padding: 0 10%;
+  }
   }
 </style>

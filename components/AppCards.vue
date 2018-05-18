@@ -121,11 +121,11 @@
         bottom: 30px;
         font-size: 0.8em;
         @include screen-size('l') {
-          bottom: 20px;
+          bottom: 10px;
         }
         @include screen-size('m') {
           font-size: 0.7em;
-          bottom: 15px;
+          bottom: 10px;
         }
       }
     }
