@@ -136,9 +136,6 @@
 
     .services {
       @include grid-items(5%, 20px, 4, 2);
-      @include screen-size('m') {
-        margin: 0;
-      }
     }
   }
 </style>
