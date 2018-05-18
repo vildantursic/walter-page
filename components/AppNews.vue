@@ -11,7 +11,9 @@
         </p>
         <p class="author">{{item.author.name}}, {{date}}</p>
         <h1 class="title"><nuxt-link class="nav-link" :to="`/news/${item.id}`">{{ item.title.rendered | truncate(100)}}</nuxt-link></h1>
-        <div class="scroll">{{item.acf.description | truncate(400)}}</div>
+        <div class="scroll">
+          <p>{{item.acf.description | truncate(400)}} </p>
+        </div>
         <AppSocial :item="item" :link="$route.path"></AppSocial>
       </div>
     </div>
@@ -62,7 +64,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 45%;
+      width: 70%;
 
       @include screen-size('xs') {
         width: 100%;
@@ -70,14 +72,15 @@
       }
 
       .card-img {
-        height: 100%;
+        height: auto;
+        width: 100%;
       }
     }
 
     .info-card {
       position: relative;
-      width: 40%;
-      padding: 1em 1em;
+      width: 30%;
+      padding: 0 2em 0 2em;
 
       @include screen-size(xs) {
         width: 100%;
@@ -95,6 +98,7 @@
         margin: 0;
         font-weight: 500;
         color: $dark-color;
+        font-size: 1em;
       }
     }
   }
@@ -126,10 +130,21 @@
 
   .title {
     cursor: pointer;
-    font-size: 3em;
+    font-size: 2.5em;
     font-weight: bold;
     margin: 15px 0;
-
+    @include screen-size('xl') {
+      font-size: 2em;
+    }
+    @include screen-size('l') {
+      font-size: 1.7em;
+    }
+    @include screen-size('m') {
+      font-size: 1.5em;
+    }
+    @include screen-size('s') {
+      font-size: 1em;
+    }
     &:hover {
       color: $main-color;
     }

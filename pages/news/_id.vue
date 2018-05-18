@@ -175,7 +175,7 @@
 
   .img-container {
     width: 100%;
-    height: 500px;
+    height: 660px;
     margin: 1em 0;
   }
   .img-container-bottom {
@@ -183,6 +183,7 @@
 
     img {
       width: 100%;
+      height: 660px;
     }
   }
   .img-container-bottom
