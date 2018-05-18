@@ -19,7 +19,9 @@
 @import "../assets/styles/mixins";
   .title-page{
     margin: 15vh 0 10vh 0;
-
+    @include screen-size('m') {
+      margin: 10vh 0 5vh 0;
+    }
     .supertitle {
       font-size: 1.5em;
       font-weight: lighter;
@@ -32,7 +34,7 @@
       font-weight: bold;
       color: $dark-grey;
       @include screen-size('m') {
-        font-size: 3.5em;
+        font-size: 3em;
       }
     }
     .subtitle{

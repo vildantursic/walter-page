@@ -56,8 +56,9 @@
       cursor: pointer;
       background: $secondary-color;
       @include screen-size('m') {
-        height: 180px;
-        margin: 0 0.5em 0 0.5em
+        width: 240px;
+        height: 154px;
+        margin: auto auto
       }
       img {
         width: 100%;
@@ -81,7 +82,7 @@
         line-height: 1;
         color: $dark-grey;
         @include screen-size('m') {
-          font-size: 1.2em;
+          font-size: 25px;
           margin-top: 10px;
         }
         &:hover {
@@ -113,7 +114,8 @@
           padding-top: 15px;
         }
         @include screen-size('m') {
-          font-size: 0.8em;
+          font-size: 18px;
+          overflow: auto;
         }
       }
 
@@ -126,7 +128,7 @@
         }
         @include screen-size('m') {
           font-size: 0.7em;
-          bottom: 15px;
+          bottom: 16px;
         }
       }
     }

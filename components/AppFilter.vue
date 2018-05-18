@@ -92,7 +92,9 @@
       font-size: 1em;
       margin-bottom: 1em;
       @include screen-size('m') {
-        font-size: 0.8em;
+        font-size: 12px;
+      } @include screen-size('s') {
+        font-size: 12px;
       }
       .main-list {
         width: 85%;
