@@ -1,7 +1,7 @@
 <template>
   <div>
     <video id="bgvid" playsinline autoplay muted loop>
-      <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/walter.mp4" type="video/mp4">
+      <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/Video-WEB.mp4" type="video/mp4">
     </video>
 
     <div class="main-section">
@@ -126,8 +126,14 @@
           var res = href.split("#");
           var link = res[0]
           var number = parseInt(res[1])
-          nextId = number + 1;
-
+          if(number === 78)
+          {
+            nextId = number
+          }
+          else
+          {
+            nextId = number + 1;
+          }
           if(!this.once) {
             console.log(this.$refs[nextId][0].click());
             this.once = true;
@@ -141,8 +147,14 @@
           var res = href.split("#");
           var link = res[0]
           var number = parseInt(res[1])
-          nextId = number - 1;
-
+          if(number === 75)
+          {
+            nextId = number
+          }
+          else
+          {
+            nextId = number - 1;
+          }
           if(!this.once) {
             console.log(this.$refs[nextId][0].click());
             this.once = true;

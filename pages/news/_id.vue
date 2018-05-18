@@ -185,6 +185,14 @@
       width: 100%;
     }
   }
+  .img-container-bottom
+  {
+    display: flex;
+    max-height: 500px;
+    .img-bottom {
+      width: 100%;
+    }
+  }
   .post-content {
     display: flex;
     flex-direction: row;
@@ -214,10 +222,10 @@
         font-weight: bold;
         cursor: pointer;
 
-        &:hover {
-          color: $main-color !important;
+          &:hover {
+            color: $main-color !important;
+          }
         }
       }
     }
-  }
 </style>

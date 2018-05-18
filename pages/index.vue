@@ -3,7 +3,7 @@
   <div class="main-section">
     <section class="padded-content full-height">
       <video id="bgvid" playsinline autoplay muted loop>
-        <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/walter.mp4" type="video/mp4">
+        <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/Video-WEB.mp4" type="video/mp4">
       </video>
 
       <div class="services-info">

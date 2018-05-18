@@ -34,6 +34,7 @@
             </ul>
           </li>
           <li><nuxt-link :to="{ name: 'news' }">News</nuxt-link></li>
+          <li><a href="about#contact">Contact us</a></li>
         </ul>
       </div>
     </header>
@@ -55,6 +56,12 @@
       {
           console.log('ok')
         document.getElementById('menu-drop').setAttribute('visibility','visible')
+      },
+      goToPage()
+      {
+        window.location.href= 'http://localhost:3000/about#contact';
+        console.log(this.$parent.$refs[6])
+        this.$refs[6].click()
       }
     }
   }

@@ -49,6 +49,9 @@
 
     @include screen-size('xs') {
       position: relative;
+      left: 17%;
+      margin-top: 4%;
+      bottom: 5%;
     }
     @include screen-size('m') {
       padding: 0.5em 0.5em;

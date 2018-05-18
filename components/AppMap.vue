@@ -102,13 +102,24 @@
 </script>
 
 <style lang="scss" scoped>
+  @import '../assets/styles/mixins.scss';
   .map {
     background: #2e3539;
     width: 100%;
-
     svg {
       height: 100vh;
-
+      @include screen-size('xl')
+      {
+        margin-left: 10%;
+      }
+      @include screen-size('l')
+      {
+        margin-left: 10%;
+      }
+      @include screen-size('m')
+      {
+        margin-left: 10%;
+      }
       path {
         fill:#262d30 !important;
         stroke:#262d30 !important;

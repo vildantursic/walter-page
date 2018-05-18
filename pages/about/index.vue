@@ -8,12 +8,12 @@
                     :duration="800"
                     bezier-easing-value=".5,0,.35,1"
                     v-on:itemchanged="onItemChanged">
-        <a href="#statistics" class="scrollactive-item">Who are we</a>
-        <a href="#history" class="scrollactive-item">Our history</a>
-        <a href="#board-members" class="scrollactive-item">Board Members</a>
-        <a href="#partners" class="scrollactive-item">Our partners</a>
-        <a href="#clients" class="scrollactive-item">Our clients</a>
-        <a href="#contact" class="scrollactive-item">Contact us</a>
+        <a href="#statistics" class="scrollactive-item" :ref="1">Who are we</a>
+        <a href="#history" class="scrollactive-item" :ref="2">Our history</a>
+        <a href="#board-members" class="scrollactive-item" :ref="3">Board Members</a>
+        <a href="#partners" class="scrollactive-item" :ref="4">Our partners</a>
+        <a href="#clients" class="scrollactive-item" :ref="5">Our clients</a>
+        <a href="#contact" class="scrollactive-item" :ref="6">Contact us</a>
       </scrollactive>
     </div>
     <div class="section">
@@ -79,18 +79,20 @@
         <!--<mapbox></mapbox>-->
       </section>
     </div>
-    <div class="section">
+    <div class="section" id="contact-section">
       <section id="contact" class="contact-section">
         <div class="contact">
           <div class="countries">
             <h3 class="text">Stockholm, Sweden</h3>
-            <h3 class="text">Sarajevo, Bosnia and Herzegovina</h3>
+            <h3 class="text">
+              Muhameda Kantardžića 3
+              <br>71000 Sarajevo</h3>
           </div>
           <div class="map">
             <AppMap/>
           </div>
           <div class="users">
-            <AppContactPerson v-for="(item, index) of page.acf.contact_persons" :key="index" :user="item"></AppContactPerson>
+            <AppContactPerson v-for="(item, index) of this.contactPersons" :key="index" :user="item"></AppContactPerson>
           </div>
         </div>
       </section>
@@ -134,7 +136,23 @@
         currentHistory: 0,
         partners: [],
         boardMembers: [],
-        customers: []
+        customers: [],
+        contactPersons: {},
+        activeItem: null,
+        lastActiveItem: null,
+        oldScroll: 0,
+        once: false,
+        activeRef: 1,
+        menuItems:
+          [
+            {ref: 1, href: '#statistics'},
+            {ref: 2, href: '#history'},
+            {ref: 3, href: '#board-members'},
+            {ref: 4, href: '#partners'},
+            {ref: 5, href: '#clients'},
+            {ref: 6, href: '#contact'}
+          ],
+        nextId: 0
       }
     },
     watch: {
@@ -157,6 +175,14 @@
       this.getBoardMembers()
       this.getCustomers()
     },
+    mounted()
+    {
+      this.reverseItems()
+      window.addEventListener('scroll', this.handleScroll);
+    },
+    beforeDestroy () {
+      window.removeEventListener("scroll", this.handleScroll);
+    },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/73?_embed').then((response) => {
         return {page: response.data}
@@ -166,6 +192,8 @@
     },
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
+        this.activeItem = currentItem
+        this.once = false
         this.$refs.scrollactive.$el.className = 'scrollactive-nav nav'
         if (currentItem) {
           const parser = new DOMParser();
@@ -219,9 +247,76 @@
         }).catch((error) => {
           console.log(error)
         });
+      },
+      reverseItems() {
+        this.contactPersons = this.page.acf.contact_persons.reverse()
+        console.log(this.contactPersons)
+      },
+      handleScroll (e) {
+        var top  = window.pageYOffset || document.documentElement.scrollTop
+        console.log(top)
+        if(this.oldScroll < top)
+        {
+          console.log('down')
+          console.log(this.activeItem['href'])
+          var hrefSplit = this.activeItem['href'].split('#')
+          var activeHref = '#' + hrefSplit[1]
+          this.menuItems.forEach((item) =>
+          {
+            if(item.href === activeHref)
+            {
+                this.activeRef = item.ref
+            }
+          })
+          var number = parseInt(this.activeRef)
+          if(number === 6)
+          {
+            this.nextId = number
+          }
+          else
+          {
+            this.nextId = number + 1;
+          }
+          console.log(this.nextId);
+          console.log(this.once)
+          if(!this.once) {
+            console.log('ref' + this.$refs[this.nextId]);
+            this.$refs[this.nextId].click()
+            this.once = true
+          }
+        }
+        else if (this.oldScroll > top)
+        {
+          console.log('top')
+          console.log(this.activeItem['href'])
+          var activeHref = this.activeItem['href']
+          this.menuItems.forEach((item) =>
+          {
+              if(item.href === activeHref)
+              {
+                this.activeRef = item.ref
+              }
+          })
+          console.log(this.activeRef)
+          var number = parseInt(this.activeRef)
+          if(number === 0)
+          {
+            this.nextId = number
+          }
+          else
+          {
+            this.nextId = number - 1;
+          }
+          if(!this.once) {
+            console.log(this.$refs[this.nextId]);
+            this.$refs[this.nextId].click()
+            this.once = true
+          }
+        }
+        this.oldScroll = top
+      }
       }
     }
-  }
 </script>
 
 <style lang="scss" scoped>
