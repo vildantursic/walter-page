@@ -1,7 +1,7 @@
 <template>
   <section class="padded-content footing-space content-fix">
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
-    <AppFilter :filters="filters"
+    <AppFilter :filters="sortedFilters"
                :selectedFilter="selectedFilter"
                :monthActive="2"
                @onFilterSelected="selectFilter">
@@ -25,6 +25,7 @@
   import AppSingle from "~/components/AppSingle";
   import axios from 'axios'
   import { find } from 'lodash'
+  import { sortBy } from 'lodash'
 
   export default {
     components: {
@@ -44,6 +45,7 @@
         tempItems: [],
         item: null,
         filters: [],
+        sortedFilters: [],
         search: '',
         selectedFilter: -1
       }
@@ -88,6 +90,9 @@
       getCategories() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/case_categories').then((response) => {
           this.filters = response.data;
+          console.log(this.filters)
+          this.sortedFilters = _.sortBy(this.filters, 'id')
+          console.log(this.sortedFilters)
           this.items.map((item) => {
             const cats = []
             response.data.forEach(cat => {
