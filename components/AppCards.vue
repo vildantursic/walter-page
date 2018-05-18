@@ -41,10 +41,10 @@
     @include screen-size('m') {
       height: 370px;
     }
-
-    @include screen-size(xs) {
+    @include screen-size('xs') {
       height: auto;
     }
+
 
     .image {
       height: 200px;
@@ -73,6 +73,12 @@
       height: 200px;
       @include screen-size('m') {
         padding: 0 0.5em 0.5em 0.5em
+      }
+      @include screen-size('s') {
+        height: auto;
+      }
+      @include screen-size('xs') {
+        height: auto;
       }
       .title {
         cursor: pointer;

@@ -22,6 +22,12 @@
     @include screen-size('m') {
       margin: 10vh 0 5vh 0;
     }
+    @include screen-size('s') {
+      margin: 10vh 0 1vh 0;
+    }
+    @include screen-size('xs') {
+      margin: 10vh 0 1vh 0;
+    }
     .supertitle {
       font-size: 1.5em;
       font-weight: lighter;

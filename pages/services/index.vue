@@ -17,7 +17,7 @@
         </scrollactive>
       </div>
       <div class="tablet-navigation">
-        <p v-if="this.currentPage != null">{{currentPage}}</p>
+        <p>{{currentPage}}</p>
       </div>
       <div class="section" v-for="(item, index) in services" :key="index">
         <div style="height: 300px" v-if="index !== 0"></div>

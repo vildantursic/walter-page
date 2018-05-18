@@ -74,6 +74,12 @@
     @include screen-size('m') {
      margin: 5vh 0;
     }
+    @include screen-size('s') {
+     margin: 2vh 0;
+    }
+    @include screen-size('xs') {
+     margin: 2vh 0;
+    }
 
     ul {
       list-style: none;
