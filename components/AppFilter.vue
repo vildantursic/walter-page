@@ -1,5 +1,5 @@
 <template>
-  <div class="filter desktop">
+  <div class="filter desktop-filter">
     <div class="main-filters">
       <ul class="main-list">
         <li :class="{ active: -1 === selectedFilter }" @click="selectFilter(-1)">All</li>
@@ -93,13 +93,15 @@
       margin-bottom: 1em;
       @include screen-size('m') {
         font-size: 12px;
-      } @include screen-size('s') {
-        font-size: 12px;
+      } @include screen-size('xs') {
+        font-size: 10px;
       }
       .main-list {
         width: 85%;
         overflow: hidden;
-
+        @include screen-size('xs') {
+          width: 100%;
+        }
         li {
 
           border-bottom: solid 1.5px lightgrey;
@@ -113,6 +115,9 @@
           }
           @include screen-size('m') {
             padding: 15px 10px;
+          }
+          @include screen-size('xs') {
+            padding: 5px 2px;
           }
           &:hover  {
             border-bottom: solid 2px $main-color;
@@ -129,6 +134,10 @@
         display: flex;
         align-items: flex-end;
         margin-left: 5px;
+        @include screen-size('xs')
+        {
+          display: none;
+        }
 
         input {
           font-size: 0.8em;

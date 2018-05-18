@@ -110,11 +110,16 @@
         @include screen-size('xl') {
           padding-top: 20px;
         }
-        @include screen-size('xl') {
-          padding-top: 15px;
-        }
         @include screen-size('m') {
           font-size: 18px;
+          overflow: auto;
+        }
+        @include screen-size('s') {
+          font-size: 10px;
+          overflow: auto;
+        }
+        @include screen-size('xs') {
+          font-size: 10px;
           overflow: auto;
         }
       }

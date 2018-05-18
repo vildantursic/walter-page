@@ -55,6 +55,11 @@ a.nav-link {
     display: none !important;
   }
 }
+.desktop-filter{
+@media (min-width: 425px) {
+  display: block;
+}
+}
 
 .page-enter-active, .page-leave-active {
   transition: opacity .3s;
