@@ -86,10 +86,16 @@
 
     .content {
       display: flex;
+      flex-direction: row;
 
       @include screen-size(xs) {
         flex-direction: column;
+        height: 100%;
+      }@include screen-size(s) {
+        flex-direction: column;
+        height: 100vh;
       }
+
 
       .card-img-container {
         display: flex;

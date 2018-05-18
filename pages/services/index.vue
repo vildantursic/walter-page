@@ -17,7 +17,7 @@
         </scrollactive>
       </div>
       <div class="tablet-navigation">
-        <p v-if="this.activeItem != null">{{currentPage}}</p>
+        <p v-if="this.currentPage != null">{{currentPage}}</p>
       </div>
       <div class="section" v-for="(item, index) in services" :key="index">
         <div style="height: 300px" v-if="index !== 0"></div>
@@ -96,7 +96,7 @@
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
         this.activeItem = currentItem
-        this.currentPage = this.activeItem.textContent
+        this.currentPage = currentItem.textContent
         this.once = false
     },
       fillSubServices () {
