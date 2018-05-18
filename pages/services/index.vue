@@ -17,7 +17,7 @@
         </scrollactive>
       </div>
       <div class="tablet-navigation">
-        <p>{{currentPage}}</p>
+        <p v-if="this.activeItem != null">{{this.activeItem['href']}}</p>
       </div>
       <div class="section" v-for="(item, index) in services" :key="index">
         <div style="height: 300px" v-if="index !== 0"></div>
@@ -96,7 +96,8 @@
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
         this.activeItem = currentItem
-        this.currentPage = currentItem.textContent
+        this.currn
+        console.log(this.activeItem.textContent)
         this.once = false
     },
       fillSubServices () {
@@ -211,7 +212,7 @@
     }
     p
     {
-      width: 100%;
+      width: 80%;
       color: white;
       margin: 5px 0 20px 0;
       font-size: 1.6em;
