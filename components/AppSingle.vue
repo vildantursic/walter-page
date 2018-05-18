@@ -23,10 +23,6 @@
         <div class="text-box">
           <div class="description" v-html="item.content.rendered"></div>
         </div>
-        <!--<div class="divider">-->
-          <!--<p v-if="item.acf.partners" class="author">In Collaboration with <span-->
-            <!--v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></p>-->
-        <!--</div>-->
       </div>
     </div>
   </div>

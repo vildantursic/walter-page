@@ -5,14 +5,7 @@
         <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
       </div>
       <div class="info-card">
-        <div class="social">
-          <!-- Add font awesome icons -->
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fas fa-envelope"></i></a>
-          <a href="#"><i class="fas fa-paperclip"></i></a>
-        </div>
+        <AppSocial :item="item" :link="$route.path"></AppSocial>
         <div>
         <h1 class="title">{{item.title.rendered}}</h1>
         <p>{{item.acf.description | truncate(35 * 3)}}</p>
@@ -30,6 +23,7 @@
 
 <script>
   import moment from 'moment'
+  import AppSocial from '~/components/AppSocial'
 
   export default {
     props: ['item'],
@@ -39,6 +33,7 @@
       }
     },
     components: {
+      AppSocial
     },
     methods: {}
   }

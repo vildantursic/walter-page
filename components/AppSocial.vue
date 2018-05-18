@@ -47,7 +47,7 @@
     color: $social-icon;
   }
   .fab:hover, .fas:hover {
-    opacity: 0.75;
+    color: $main-color;
   }
   .fa-chevron-right {
     padding: 0;

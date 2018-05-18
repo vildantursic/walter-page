@@ -30,6 +30,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import '../assets/styles/variables';
+  @import '../assets/styles/mixins';
   .card {
     width: 150px;
     display: flex;
@@ -54,7 +56,19 @@
       justify-content: space-around;
       border-top: solid 1px white;
       padding: 5% 0;
-      font-size: 1.2em;
+      font-size: 1em;
+    }
+  }
+  .mail{
+    color: #ffffff;
+    &:hover {
+      color: $main-color !important;
+    }
+  }
+  .phone{
+    color: #ffffff;
+    &:hover {
+      color: $main-color !important;
     }
   }
 </style>

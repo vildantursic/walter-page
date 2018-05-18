@@ -15,7 +15,7 @@
         <div class="divider"></div>
         <div class="social">
           <div class="linkedin">
-            <a :href="item.acf.linkedin"><i class="fab fa-linkedin"></i></a>
+            <a target="_blank" :href="item.acf.linkedin"><i class="fab fa-linkedin"></i></a>
           </div>
           <div class="phone">
             <i class="fas fa-phone"></i>
@@ -137,6 +137,9 @@
           @include screen-size('m') {
             font-size: 1.5em;
           }
+        }
+        .fab:hover, .fas:hover {
+          color: $main-color;
         }
       }
       .phone {
