@@ -33,6 +33,9 @@ a {
 }
 a.nav-link {
   color: $dark-grey;
+  &:hover {
+    color: $main-color !important;
+  }
 }
 
 .padded-content {

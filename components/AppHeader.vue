@@ -34,7 +34,7 @@
             </ul>
           </li>
           <li><nuxt-link :to="{ name: 'news' }">News</nuxt-link></li>
-          <li><a href="about#contact">Contact us</a></li>
+          <li><a href="/about#contact">Contact us</a></li>
         </ul>
       </div>
     </header>
