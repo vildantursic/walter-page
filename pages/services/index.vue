@@ -370,7 +370,7 @@
           font-size: 1.1em;
         }
         @include screen-size('l') {
-          font-size: 1em;
+          font-size: 0.9em;
         }
         @include screen-size('m') {
           font-size: 0.8em;
@@ -381,8 +381,11 @@
     .services {
       h2{
         margin: 0;
+        @include screen-size('l') {
+          font-size: 1.1em;
+        }
         @include screen-size('m') {
-          font-size: 1.2em;
+          font-size: 1.1em;
         }
       }
       section {
