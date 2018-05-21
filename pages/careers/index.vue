@@ -110,12 +110,12 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(0px, 2em, 3, 2);
+    @include grid-items(0px, 2em, 3, 2, 1);
     margin-bottom: 2em;
   }
   .items-bellow
   {
-    @include grid-items(0px, 2em, 1, 1);
+    @include grid-items(0px, 2em, 1, 1, 1);
     margin-bottom: 2em;
   }
 </style>

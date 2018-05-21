@@ -170,10 +170,10 @@
     },
     mounted() {
       this.reverseItems()
-      window.addEventListener('scroll', this.handleScroll);
+      // window.addEventListener('scroll', this.handleScroll);
     },
     beforeDestroy() {
-      window.removeEventListener("scroll", this.handleScroll);
+      // window.removeEventListener("scroll", this.handleScroll);
     },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/73?_embed').then((response) => {
@@ -329,7 +329,7 @@
     }
     .statistics {
       width: 100%;
-      @include grid-items(10%, 20px, 3, 2);
+      @include grid-items(10%, 20px, 3, 2, 1);
     }
   }
 
@@ -371,7 +371,7 @@
 
     .board-members {
       width: 100%;
-      @include grid-items(5%, 20px, 3, 3);
+      @include grid-items(5%, 20px, 3, 3, 2);
     }
   }
 
@@ -382,7 +382,7 @@
 
     .partners {
       width: 100%;
-      @include grid-items(10%, 30px, 2, 1);
+      @include grid-items(10%, 30px, 2, 1, 1);
     }
   }
 

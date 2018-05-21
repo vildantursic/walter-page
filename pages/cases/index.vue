@@ -137,7 +137,7 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(10%, 30px, 3, 2);
+    @include grid-items(10%, 30px, 3, 2, 1);
   }
   .v--modal-overlay{
     background: rgba(0, 0, 0, 0.5);
@@ -148,8 +148,8 @@
     @include screen-size('l') {
       padding: 0 15%;
     }
-  @include screen-size('m') {
-    padding: 0 10%;
-  }
+    @include screen-size('m') {
+      padding: 0 10%;
+    }
   }
 </style>

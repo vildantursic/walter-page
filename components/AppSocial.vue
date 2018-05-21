@@ -12,7 +12,7 @@
   export default {
     props: ['item', 'link'],
     methods: {
-      copyOnClick(el) {
+      copyOnClick() {
         let pre = this.item.acf.description + ' ' + this.link;
         let input = document.createElement('input');
         document.body.append(input);

@@ -97,10 +97,10 @@
       console.log(this.users)
     },
     mounted () {
-      window.addEventListener('scroll', this.handleScroll);
+      // window.addEventListener('scroll', this.handleScroll);
     },
     beforeDestroy () {
-      window.removeEventListener("scroll", this.handleScroll);
+      // window.removeEventListener("scroll", this.handleScroll);
     },
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
@@ -193,6 +193,7 @@
 <style lang="scss" scoped>
   @import "../../assets/styles/mixins";
   @import "../../assets/styles/variables";
+
   video {
     position: fixed;
     top: 50%;
@@ -210,6 +211,7 @@
   }
 
   .main-section {
+    overflow: hidden;
     min-height: 200vh;
     background-image: linear-gradient(90deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
   }

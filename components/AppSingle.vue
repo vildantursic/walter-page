@@ -2,8 +2,10 @@
   <div class="card">
     <div class="content">
       <div class="card-img-container">
-        <AppSlider v-if="item.acf.gallery_images" :images="item.acf.gallery_images.split(',')"
-                   :miniSlider="true"></AppSlider>
+        <AppSlider v-if="item.acf.gallery_images"
+                   :images="item.acf.gallery_images.split(',')"
+                   :miniSlider="true"
+                   @showLightBox="showLightBox = !showLightBox"></AppSlider>
         <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>
       <div class="info-card">
@@ -15,6 +17,7 @@
           <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span
             v-if="index < item.case_categories.length - 1">,</span></span>
         </p>
+        <AppImageBox :showLightBox="showLightBox" :images="item.acf.gallery_images.split(',').map(image => { return { thumb: image, src: image } })"></AppImageBox>
         <h4 class="title">{{item.title.rendered}}</h4>
         <p class="customer">
           <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span
@@ -31,12 +34,24 @@
 <script>
   import AppSlider from '~/components/AppSlider'
   import AppSocial from '~/components/AppSocial'
+  import AppImageBox from '~/components/AppImageBox'
 
   export default {
     props: ['item'],
+    data() {
+      return {
+        showLightBox: false
+      }
+    },
+    created () {
+      // this.$refs.lightbox.closeLightBox(() => {
+      //   this.showLightBox = !this.showLightBox
+      // })
+    },
     components: {
       AppSlider,
-      AppSocial
+      AppSocial,
+      AppImageBox
     },
     methods: {
       closeCase() {
@@ -83,6 +98,7 @@
       @include screen-size(xs) {
         flex-direction: column;
         height: 100%;
+        padding: 0 5px;
       }
       @include screen-size(s) {
         flex-direction: column;
@@ -133,9 +149,9 @@
           /*width: 85%;*/
         }
         .text-box {
-          height: 380px;
+          height: 80%;
           overflow: auto;
-          width: 93%;
+          width: 100%;
         }
       }
       .link {

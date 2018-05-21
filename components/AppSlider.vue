@@ -3,7 +3,7 @@
     <div v-swiper:mySwiper="swiperOption" class="my-swiper" :class="{ thumbs: miniSlider }">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(image, index) in images" :key="index">
-          <img v-if="image" :src="image">
+          <img v-if="image" :src="image" @click="showLightBox()">
           <div class="swiper-button-prev" slot="button-prev">
             <img src="../static/images/Arrow.svg" alt="">
           </div>
@@ -11,9 +11,6 @@
             <img src="../static/images/Arrow.svg" style="transform: rotate(180deg);" alt="">
           </div>
         </div>
-        <!--<div class="swiper-pagination" slot="pagination"></div>-->
-        <!--<div class="swiper-button-prev" slot="button-prev"></div>-->
-        <!--<div class="swiper-button-next" slot="button-next"></div>-->
       </div>
     </div>
     <!--<div v-if="miniSlider" v-swiper:mySecondSwiper="swiperThumbOption" class="my-swiper-thumb">-->
@@ -68,6 +65,9 @@
     methods: {
       slideTo(index) {
         this.mySwiper.slideTo(index, 1000, false)
+      },
+      showLightBox() {
+        this.$emit('showLightBox', true)
       }
     }
   }
