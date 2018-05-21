@@ -8,12 +8,9 @@
       <input type="text" placeholder="Search.." v-model="search">
     </AppFilter>
     <div class="items">
-      <AppCards v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onShowCase="showCase($event)"/>
+      <AppCards v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item"/>
       <AppMoreCard v-if="searchedList.length > itemsToShow" :numberOfItems="searchedList.length - itemsToShow" @onShowMore="() => itemsToShow += 9"/>
     </div>
-    <modal name="case-modal" :width="'80%'" :height="'70%'">
-      <AppSingle v-if="item" :item="item" @onCloseCase="hide()"/>
-    </modal>
   </section>
 </template>
 
@@ -22,7 +19,6 @@
   import AppFilter from '~/components/AppFilter'
   import AppPageTitle from '~/components/AppPageTitle'
   import AppMoreCard from '~/components/AppMoreCard'
-  import AppSingle from "~/components/AppSingle";
   import axios from 'axios'
   import { find } from 'lodash'
   import { sortBy } from 'lodash'
@@ -32,8 +28,7 @@
       AppFilter,
       AppCards,
       AppPageTitle,
-      AppMoreCard,
-      AppSingle
+      AppMoreCard
     },
     data() {
       return {

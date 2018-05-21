@@ -54,10 +54,6 @@
     width: 100%;
     height: 100%;
     background: white;
-    -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-    -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-    border-image: linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-    border-image-slice: 1;
 
     .close {
       width: 100%;
@@ -87,18 +83,15 @@
       @include screen-size(xs) {
         flex-direction: column;
         height: 100%;
-      }@include screen-size(s) {
+      }
+      @include screen-size(s) {
         flex-direction: column;
         height: 100vh;
       }
 
 
       .card-img-container {
-        display: flex;
-        justify-content: center;
-        /*align-items: center;*/
         width: 60%;
-        height: 100%;
 
         @include screen-size(xs) {
           width: 100%;
@@ -106,7 +99,7 @@
       }
       .info-card {
         position: relative;
-        width: 100%;
+        width: 40%;
         padding: 1.5em;
 
         @include screen-size(xs) {

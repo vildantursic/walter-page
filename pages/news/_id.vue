@@ -27,8 +27,8 @@
         </div>
       </div>
     </div>
-    <div v-if="page._embedded !== undefined" class="img-container-bottom">
-      <img v-if="page._embedded['wp:featuredmedia'] !== undefined" :src="page._embedded['wp:featuredmedia'][0].source_url" :alt="page._embedded['wp:featuredmedia'][0].alt_text">
+    <div v-if="page.acf.bottom_image !== undefined" class="img-container-bottom">
+      <img :src="page.acf.bottom_image">
     </div>
   </section>
 </template>
@@ -179,11 +179,11 @@
     margin: 1em 0;
   }
   .img-container-bottom {
-    max-height: 500px;
+    max-height: 600px;
 
     img {
       width: 100%;
-      height: 660px;
+      height: 600px;
     }
   }
   .img-container-bottom
