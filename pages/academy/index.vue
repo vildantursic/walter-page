@@ -145,6 +145,6 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(0%, 0px, 3, 1);
+    @include grid-items(0%, 0px, 3, 1, 1);
   }
 </style>

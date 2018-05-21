@@ -12,7 +12,7 @@
   export default {
     props: ['item', 'link'],
     methods: {
-      copyOnClick(el) {
+      copyOnClick() {
         let pre = this.item.acf.description + ' ' + this.link;
         let input = document.createElement('input');
         document.body.append(input);
@@ -33,7 +33,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
-
+  @import "../assets/styles/mixins";
   .social {
     display: flex;
     align-items: center;
@@ -45,6 +45,21 @@
     width: 40px;
     text-decoration: none;
     color: $social-icon;
+    @include screen-size('l') {
+      font-size: 30px;
+      width: 30px;
+      padding: 5px 10px 5px 0;
+    }
+    @include screen-size('m') {
+      font-size: 30px;
+      width: 30px;
+      padding: 5px 10px 5px 0;
+    }
+    @include screen-size('s') {
+      font-size: 20px;
+      width: 20px;
+      padding: 5px 5px 5px 0;
+    }
   }
   .fab:hover, .fas:hover {
     color: $main-color;

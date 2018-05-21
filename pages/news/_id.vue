@@ -27,8 +27,8 @@
         </div>
       </div>
     </div>
-    <div v-if="page._embedded !== undefined" class="img-container-bottom">
-      <img v-if="page._embedded['wp:featuredmedia'] !== undefined" :src="page._embedded['wp:featuredmedia'][0].source_url" :alt="page._embedded['wp:featuredmedia'][0].alt_text">
+    <div v-if="page.acf.bottom_image !== undefined" class="img-container-bottom">
+      <img :src="page.acf.bottom_image">
     </div>
   </section>
 </template>
@@ -146,6 +146,18 @@
     .title {
       font-size: 3em;
       font-weight: bold;
+      @include screen-size('xl') {
+        font-size: 2.5em;
+      }
+      @include screen-size('l') {
+        font-size: 2.5em;
+      }
+      @include screen-size('m') {
+        font-size: 2em;
+      }
+      @include screen-size('s') {
+        font-size: 1.5em;
+      }
       h1{
         color: $dark-grey!important;
       }
@@ -170,20 +182,33 @@
       margin: 0;
       font-weight: 500;
       opacity: 0.8;
+      font-size: 1.2em;
+      @include screen-size('xl') {
+        font-size: 1em;
+      }
+      @include screen-size('l') {
+        font-size: 1em;
+      }
+      @include screen-size('m') {
+        font-size: 0.9em;
+      }
+      @include screen-size('s') {
+        font-size: 0.9em;
+      }
     }
   }
 
   .img-container {
     width: 100%;
-    height: 660px;
+    height:auto;
     margin: 1em 0;
   }
   .img-container-bottom {
-    max-height: 500px;
+    max-height: 600px;
 
     img {
       width: 100%;
-      height: 660px;
+      height: 600px;
     }
   }
   .img-container-bottom
@@ -198,9 +223,17 @@
     display: flex;
     flex-direction: row;
 
+    @include screen-size('xs') {
+      flex-direction: column;
+    }
+
     .post-left {
       width: 70%;
       padding: 0 2% 2% 2%;
+
+      @include screen-size('xs') {
+        width: 100%;
+      }
 
       .header-left {
         font-weight: 800;
@@ -209,6 +242,10 @@
     .post-right {
       margin: 0 3%;
       width: 30%;
+
+      @include screen-size('xs') {
+        width: 100%;
+      }
 
       .next {
         display: flex;
