@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 a {
   text-decoration: none;
-  color: $dark-grey;
+  color: white;
 
   &:hover {
     color: $main-color !important;
@@ -46,13 +46,13 @@ a.nav-link {
 }
 
 .desktop {
-  @media (max-width: 425px) {
+  @media (max-width: 728px) {
     display: none !important;
   }
 }
 .mobile {
-  @media (min-width: 425px) {
-    display: none !important;
+  @media (min-width: 728px) {
+    display: block !important;
   }
 }
 .desktop-filter{
