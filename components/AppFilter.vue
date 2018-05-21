@@ -97,16 +97,19 @@
       display: flex;
       font-size: 1em;
       margin-bottom: 1em;
-      @include screen-size('m') {
-        font-size: 12px;
-      } @include screen-size('xs') {
-        font-size: 10px;
-      }
       .main-list {
         width: 85%;
         overflow: hidden;
         @include screen-size('xs') {
           width: 100%;
+          font-size: 10px;
+        }
+        @include screen-size('m') {
+          font-size: 1em;
+        }
+        @include screen-size('s') {
+          width: 100%;
+          font-size: 12px;
         }
         li {
 
@@ -144,6 +147,15 @@
         {
           display: none;
         }
+        @include screen-size('m') {
+          width: 20%;
+          display: flex;
+          align-items: flex-end;
+          margin-left: 5px;
+        }
+        @include screen-size('s') {
+          display: none;
+        }
 
         input {
           font-size: 0.8em;
@@ -168,7 +180,7 @@
           margin-left: 8%;
         }
         @include screen-size('m') {
-          margin-left: 7%;
+          margin-left: 12%;
         }
       }
     }

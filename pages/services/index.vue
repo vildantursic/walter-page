@@ -17,8 +17,8 @@
         </scrollactive>
       </div>
       <div class="tablet-navigation">
-        <p v-if="this.activeItem != null">{{this.activeItem['href']}}</p>
-      </div>
+        <p v-if="this.activeService!= ''">{{this.activeService}}</p>
+        </div>
       <div class="section" v-for="(item, index) in services" :key="index">
         <div style="height: 300px" v-if="index !== 0"></div>
         <section :id="`${item.id}`">
@@ -43,11 +43,12 @@
               <div class="services-spacing"></div>
             </div>
 
-            <AppContactBox :user="item.acf.contact_person"></AppContactBox>
           </div>
         </section>
       </div>
     </div>
+    <AppContactBox v-if="contact_person" :user="contact_person"></AppContactBox>
+
   </div>
 </template>
 
@@ -71,10 +72,12 @@
         loadedServices: false,
         scrolled: false,
         activeItem: null,
+        activeService: 'BIM Consulting and Engineering',
         lastActiveItem: null,
         oldScroll: 0,
         once: false,
-        currentPage: 'BIM Consulting and Engineering'
+        contact_person: null,
+        users: null
     }
     },
     asyncData({ }) {
@@ -86,6 +89,12 @@
     },
     created () {
       this.fillSubServices()
+      axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/users?_embed`).then((response) => {
+        return { users: response.data }
+      }).catch((error) => {
+        console.log(error)
+      });
+      console.log(this.users)
     },
     mounted () {
       // window.addEventListener('scroll', this.handleScroll);
@@ -96,8 +105,19 @@
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
         this.activeItem = currentItem
-        this.currn
-        console.log(this.activeItem.textContent)
+        var href = this.activeItem['href']
+        var res = href.split("#");
+        var link = res[0]
+        var number = parseInt(res[1])
+        this.services.forEach( (service) => {
+          console.log(service.id)
+          if(service.id === number)
+          {
+              this.contact_person = service.acf.contact_person
+              console.log(this.contact_person)
+          }
+        })
+        this.activeService = currentItem.textContent
         this.once = false
     },
       fillSubServices () {
@@ -139,7 +159,7 @@
             nextId = number + 1;
           }
           if(!this.once) {
-            console.log(this.$refs[nextId][0].click());
+            this.$refs[nextId][0].click();
             this.once = true;
           }
         }
@@ -160,7 +180,7 @@
             nextId = number - 1;
           }
           if(!this.once) {
-            console.log(this.$refs[nextId][0].click());
+            this.$refs[nextId][0].click();
             this.once = true;
           }
         }

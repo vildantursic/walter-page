@@ -29,13 +29,14 @@
   @import "../assets/styles/mixins";
 
   .card{
+
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 420px;
+    min-height: 430px;
     overflow: hidden;
     @include screen-size('m') {
-      height: 370px;
+      min-height: 380px;
     }
     @include screen-size('xs') {
       height: auto;
@@ -43,11 +44,12 @@
 
 
     .image {
-      height: 200px;
+      min-height: 200px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
       margin: 0 1em 0em 1em;
       cursor: pointer;
       background: $secondary-color;
@@ -66,25 +68,27 @@
 
     .info {
       padding: 0 1em 1em 1em;
-      height: 200px;
+      height: 230px;
       @include screen-size('m') {
         padding: 0 0.5em 0.5em 0.5em
       }
       @include screen-size('s') {
-        height: auto;
+        height: 200px;
       }
       @include screen-size('xs') {
-        height: auto;
+        height: 200px;
       }
       .title {
+        max-height: 75px;
         cursor: pointer;
         font-weight: bold;
         margin-bottom: 0;
-        margin-top: 15px;
+        margin-top: 10px;
         line-height: 1;
         color: $dark-grey;
+        font-size: 20px;
         @include screen-size('m') {
-          font-size: 25px;
+          font-size: 20px;
           margin-top: 10px;
         }
         &:hover {
