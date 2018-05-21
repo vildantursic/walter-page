@@ -41,7 +41,8 @@
             <span class="tabbed-section__highlighter"></span>
           </div>
         </div>
-        <AppHistory :items="histories" :currentHistory="currentHistory" @currentHistory="currentHistory = $event"></AppHistory>
+        <AppHistory :items="histories" :currentHistory="currentHistory"
+                    @currentHistory="currentHistory = $event"></AppHistory>
         <div class="achievements" v-if="histories.length !== 0">
           <div v-for="(item, index) in achievements" :key="index">
             <AppAchievement v-if="item.id !== -1" :item="item"></AppAchievement>
@@ -71,12 +72,6 @@
         <div class="clients">
           <AppClient v-for="(item, index) of customers" :key="index" :item="item"/>
         </div>
-        <!--<GmapMap-->
-          <!--:center="{lat:10, lng:10}"-->
-          <!--:zoom="3"-->
-          <!--style="width: 100%; height: 100vh"-->
-        <!--&gt;</GmapMap>-->
-        <!--<mapbox></mapbox>-->
       </section>
     </div>
     <div class="section" id="contact-section">
@@ -109,9 +104,8 @@
   import AppHistory from "~/components/AppHistory"
   import AppContactPerson from "~/components/AppContactPerson"
   import AppAchievement from "~/components/AppAchievement"
-  import Mapbox from 'mapbox-gl-vue';
   import axios from "axios"
-  import { find } from "lodash"
+  import {find} from "lodash"
 
   export default {
     components: {
@@ -122,8 +116,7 @@
       AppNumber,
       AppHistory,
       AppContactPerson,
-      AppAchievement,
-      Mapbox
+      AppAchievement
     },
     data() {
       return {
@@ -159,7 +152,7 @@
       currentHistory: function (newVal, oldVal) {
         if (newVal > oldVal) {
           for (let i = oldVal; i < newVal; i++) {
-            this.achievements = this.achievements.concat({ id: -1 }).concat(this.histories[i + 1].acf.achievements)
+            this.achievements = this.achievements.concat({id: -1}).concat(this.histories[i + 1].acf.achievements)
           }
         } else {
           for (let i = oldVal; i > newVal; i--) {
@@ -175,12 +168,11 @@
       this.getBoardMembers()
       this.getCustomers()
     },
-    mounted()
-    {
+    mounted() {
       this.reverseItems()
       window.addEventListener('scroll', this.handleScroll);
     },
-    beforeDestroy () {
+    beforeDestroy() {
       window.removeEventListener("scroll", this.handleScroll);
     },
     asyncData({}) {
@@ -216,9 +208,8 @@
       getAchievements() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/achievements?_embed').then((response) => {
           this.histories.map(history => {
-            console.log(history.acf.achievements)
             history.acf.achievements = response.data.filter((achievement) => {
-              return find(history.acf.achievements, { ID: achievement.id }) ? achievement : undefined
+              return find(history.acf.achievements, {ID: achievement.id}) ? achievement : undefined
             });
             return history
           })
@@ -250,73 +241,51 @@
       },
       reverseItems() {
         this.contactPersons = this.page.acf.contact_persons.reverse()
-        console.log(this.contactPersons)
       },
-      handleScroll (e) {
-        var top  = window.pageYOffset || document.documentElement.scrollTop
-        console.log(top)
-        if(this.oldScroll < top)
-        {
-          console.log('down')
-          console.log(this.activeItem['href'])
-          var hrefSplit = this.activeItem['href'].split('#')
-          var activeHref = '#' + hrefSplit[1]
-          this.menuItems.forEach((item) =>
-          {
-            if(item.href === activeHref)
-            {
-                this.activeRef = item.ref
+      handleScroll(e) {
+        const top = window.pageYOffset || document.documentElement.scrollTop
+        if (this.oldScroll < top) {
+          const hrefSplit = this.activeItem['href'].split('#')
+          const activeHref = '#' + hrefSplit[1]
+          this.menuItems.forEach((item) => {
+            if (item.href === activeHref) {
+              this.activeRef = item.ref
             }
           })
-          var number = parseInt(this.activeRef)
-          if(number === 6)
-          {
+          const number = parseInt(this.activeRef)
+          if (number === 6) {
             this.nextId = number
-          }
-          else
-          {
+          } else {
             this.nextId = number + 1;
           }
-          console.log(this.nextId);
-          console.log(this.once)
-          if(!this.once) {
-            console.log('ref' + this.$refs[this.nextId]);
+
+          if (!this.once) {
             this.$refs[this.nextId].click()
             this.once = true
           }
-        }
-        else if (this.oldScroll > top)
-        {
-          console.log('top')
-          console.log(this.activeItem['href'])
-          var activeHref = this.activeItem['href']
-          this.menuItems.forEach((item) =>
-          {
-              if(item.href === activeHref)
-              {
-                this.activeRef = item.ref
-              }
+        } else if (this.oldScroll > top) {
+          const activeHref = this.activeItem['href']
+          this.menuItems.forEach((item) => {
+            if (item.href === activeHref) {
+              this.activeRef = item.ref
+            }
           })
-          console.log(this.activeRef)
-          var number = parseInt(this.activeRef)
-          if(number === 0)
-          {
+          const number = parseInt(this.activeRef)
+          if (number === 0) {
             this.nextId = number
-          }
-          else
-          {
+          } else {
             this.nextId = number - 1;
           }
-          if(!this.once) {
-            console.log(this.$refs[this.nextId]);
+
+          if (!this.once) {
             this.$refs[this.nextId].click()
             this.once = true
           }
         }
         this.oldScroll = top
       }
-      }
     }
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -339,9 +308,9 @@
       margin-bottom: 5%;
       color: $dark-grey;
       @include screen-size('xl') {
-      font-size: 1.2em;
-      margin-top: 8%;
-    }
+        font-size: 1.2em;
+        margin-top: 8%;
+      }
       @include screen-size('l') {
         font-size: 1.2em;
         margin-top: 8%;
@@ -354,7 +323,9 @@
         line-height: 35px;
       }
 
-      @include screen-size('xs') { width: 100% }
+      @include screen-size('xs') {
+        width: 100%
+      }
     }
     .statistics {
       width: 100%;
@@ -370,7 +341,9 @@
     justify-content: center;
     flex-direction: column;
 
-    @include screen-size('xs') { display: none }
+    @include screen-size('xs') {
+      display: none
+    }
 
     .history {
       width: 100%;
@@ -417,7 +390,7 @@
     min-height: 100vh;
     padding-top: 50px;
     background: $secondary-dark-color;
-    h1{
+    h1 {
       color: $dark-grey;
       @include screen-size('xl') {
         font-size: 1.2em;
@@ -596,9 +569,8 @@
       transform: translateX(0);
       display: block;
       left: 0;
-      transition: transform .23s ease ;
+      transition: transform .23s ease;
     }
-
 
     .tabbed-section__selector-tab-4.active ~ .tabbed-section__highlighter {
       transform: translateX(300px);
