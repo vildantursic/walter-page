@@ -28,6 +28,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/mixins";
+  @import "../assets/styles/variables";
   .card {
     display: flex;
     flex-direction: column;
@@ -69,6 +70,10 @@
             font-size: 0.8em!important;
           }
       }
+    }
+    &:hover
+    {
+      background: rgba($main-color, 0.8);
     }
   }
 
