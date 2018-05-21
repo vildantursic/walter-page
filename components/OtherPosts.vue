@@ -23,7 +23,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
-
+  @import "../assets/styles/mixins";
   .other-news {
     border-width: 0 0 4px 0;
     border-style: solid;
@@ -50,7 +50,15 @@
       font-size: 2.5em;
       font-weight: bold;
       margin: 15px 0;
-
+      @include screen-size('l') {
+        font-size: 2em;
+      }
+      @include screen-size('m') {
+         font-size: 2em;
+       }
+      @include screen-size('s') {
+        font-size: 1.5em;
+      }
       &:hover {
         color: $main-color;
       }

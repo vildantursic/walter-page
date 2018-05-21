@@ -79,9 +79,10 @@
 
   .swiper {
     position: relative;
-    height: 660px;
-    width: 1160px;
+    height: auto;
+    width: 100%;
   }
+
   .my-swiper {
     width: 100%;
     height: 100%;

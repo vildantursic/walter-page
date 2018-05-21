@@ -172,7 +172,7 @@
 
 <style lang="scss" scoped>
   @import "../../assets/styles/mixins";
-
+  @import "../../assets/styles/variables";
   video {
     position: fixed;
     top: 50%;
@@ -302,8 +302,12 @@
 
 
       h1 {
+        color: #ffffff;
         margin: 0;
         font-size: 1.8em;
+        &:hover {
+          color: $main-color;
+        }
         @include screen-size('m') {
           font-size: 1.3em;
         }
