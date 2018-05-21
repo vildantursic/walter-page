@@ -55,7 +55,7 @@ a.nav-link {
 }
 .mobile {
   @media (min-width: 425px) {
-    display: block !important;
+    display: none !important;
   }
 }
 .desktop-filter{
