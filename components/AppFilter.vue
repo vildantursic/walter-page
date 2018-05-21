@@ -105,7 +105,6 @@
           font-size: 10px;
         }
         @include screen-size('m') {
-          width: 100%;
           font-size: 1em;
         }
         @include screen-size('s') {

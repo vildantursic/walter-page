@@ -62,15 +62,14 @@
       font-weight: lighter;
       opacity: 0.70;
     }
-    .search
-    {
-      display: none;
-      @include screen-size('m') {
-        display: block;
-      }
-    }
     .search {
       display: none;
+      @include screen-size('l') {
+        display: none;
+      }
+      @include screen-size('xl') {
+        display: none;
+      }
       @include screen-size('s') {
         display: flex;
         margin: 10px 0 10px 15%;
@@ -82,19 +81,18 @@
           width: 100%;
           border-bottom: solid 1.5px $dark-grey;
           outline: none;
-          border:none;
+          border: none;
           &:focus {
             outline: none;
             border-bottom: solid 2px $main-color;
             font-weight: bolder;
           }
         }
-        .search-image
-        {
+        .search-image {
           width: 100%;
           height: 100%;
         }
       }
     }
-  }
+    }
 </style>
