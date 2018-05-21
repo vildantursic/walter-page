@@ -92,7 +92,6 @@
         padding-top: 10px;
 
         .read {
-          color: $dark-grey;
           font-size: 1.5em;
           font-weight: bold;
           letter-spacing: 1px;

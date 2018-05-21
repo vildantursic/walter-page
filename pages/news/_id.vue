@@ -223,9 +223,17 @@
     display: flex;
     flex-direction: row;
 
+    @include screen-size('xs') {
+      flex-direction: column;
+    }
+
     .post-left {
       width: 70%;
       padding: 0 2% 2% 2%;
+
+      @include screen-size('xs') {
+        width: 100%;
+      }
 
       .header-left {
         font-weight: 800;
@@ -234,6 +242,10 @@
     .post-right {
       margin: 0 3%;
       width: 30%;
+
+      @include screen-size('xs') {
+        width: 100%;
+      }
 
       .next {
         display: flex;
