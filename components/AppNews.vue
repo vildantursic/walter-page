@@ -161,6 +161,9 @@
   }
   .news{
     font-size: 1.2em;
+    @include screen-size('xl') {
+      font-size: 1em;
+    }
     @include screen-size('l') {
       font-size: 1em;
     }
