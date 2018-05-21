@@ -49,12 +49,12 @@ a.nav-link {
 }
 
 .desktop {
-  @media (max-width: 728px) {
+  @media (max-width: 425px) {
     display: none !important;
   }
 }
 .mobile {
-  @media (min-width: 728px) {
+  @media (min-width: 425px) {
     display: block !important;
   }
 }
