@@ -382,10 +382,10 @@
       h2{
         margin: 0;
         @include screen-size('l') {
-          font-size: 1.1em;
+          font-size: 1.2em;
         }
         @include screen-size('m') {
-          font-size: 1.1em;
+          font-size: 1em;
         }
       }
       section {
