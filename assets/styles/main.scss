@@ -49,17 +49,17 @@ a.nav-link {
 }
 
 .desktop {
-  @media (max-width: 425px) {
+  @media (max-width: 728px) {
     display: none !important;
   }
 }
 .mobile {
-  @media (min-width: 425px) {
+  @media (min-width: 728px) {
     display: none !important;
   }
 }
 .desktop-filter{
-@media (min-width: 425px) {
+@media (min-width: 728px) {
   display: block;
 }
 }

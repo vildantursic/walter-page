@@ -33,7 +33,7 @@
   @import "../assets/styles/mixins";
 
   .card {
-    position: absolute;
+    position: fixed;
     bottom: 2%;
     right: 2%;
     display: flex;
