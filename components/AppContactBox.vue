@@ -46,10 +46,10 @@
     padding: 1.5em 1em;
     width: 363px;
     box-shadow: 8px 8px 8px 0 rgba(57, 60, 61, 0.8);
+    z-index: 10000;
 
     @include screen-size('xs') {
-      position: relative;
-      left: 17%;
+      position: fixed;
       margin-top: 4%;
       bottom: 5%;
     }
