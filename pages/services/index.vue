@@ -96,7 +96,6 @@
     },
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
-        console.log('inside')
         this.activeItem = currentItem
         this.activeService = currentItem.textContent
         this.once = false

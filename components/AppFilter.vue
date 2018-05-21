@@ -148,7 +148,10 @@
           display: none;
         }
         @include screen-size('m') {
-          display: none;
+          width: 20%;
+          display: flex;
+          align-items: flex-end;
+          margin-left: 5px;
         }
         @include screen-size('s') {
           display: none;
@@ -177,7 +180,7 @@
           margin-left: 8%;
         }
         @include screen-size('m') {
-          margin-left: 7%;
+          margin-left: 12%;
         }
       }
     }
