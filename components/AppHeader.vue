@@ -10,7 +10,7 @@
         <div class="mobile-nav" :class="{show: showMenu}">
           <i class="fas fa-times close" @click="showMenu = !showMenu"></i>
           <ul>
-            <li @click="showMenu = !showMenu"><nuxt-link :to="{ name: 'index' }">Services</nuxt-link></li>
+            <li @click="showMenu = !showMenu"><nuxt-link :to="{ name: 'services' }">Services</nuxt-link></li>
             <li @click="showMenu = !showMenu"><nuxt-link :to="{ name: 'cases' }">Cases</nuxt-link></li>
             <li @click="showMenu = !showMenu"><nuxt-link :to="{ name: 'about' }">About us</nuxt-link></li>
             <li @click="showMenu = !showMenu"><nuxt-link :to="{ name: 'careers' }">Open positions</nuxt-link></li>
@@ -22,7 +22,12 @@
       </div>
       <div class="navigation-bar desktop">
         <ul>
-          <li><nuxt-link :to="{ name: 'index' }">Services</nuxt-link></li>
+          <li @mouseover="upHere2 = true" @mouseleave="upHere2 = false">
+            <nuxt-link :to="{ name: 'services' }">Services</nuxt-link>
+            <ul class="dropdown-menu" id="menu-drop-2" v-show="upHere2">
+              <li v-for="(service, index) of services" :key="index"><nuxt-link :to="`/services#${service.id}`">{{service.title.rendered}}</nuxt-link></li>
+            </ul>
+          </li>
           <li><nuxt-link :to="{ name: 'cases' }">Cases</nuxt-link></li>
           <li><nuxt-link :to="{ name: 'about' }">About us</nuxt-link></li>
           <li @mouseover="upHere = true" @mouseleave="upHere = false">
@@ -40,22 +45,30 @@
     </header>
   </section>
 </template>
+
 <script>
+  import axios from 'axios'
 
   export default {
     data() {
       return {
         upHere:false,
-        showMenu: false
+        upHere2:false,
+        showMenu: false,
+        services: []
       }
     },
-    components: {
+    created() {
+      this.getServices()
     },
     methods: {
-      openDropdown()
-      {
-          console.log('ok')
-        document.getElementById('menu-drop').setAttribute('visibility','visible')
+      getServices() {
+        axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/services`).then((response) => {
+          console.log(response.data)
+          this.services = response.data
+        }).catch((error) => {
+          console.log(error)
+        });
       }
     }
   }

@@ -45,14 +45,16 @@
 
     .image {
       min-height: 200px;
+      max-height: 200px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      margin: 0 1em 0em 1em;
+      margin: 0 1em 0 1em;
       cursor: pointer;
       background: $secondary-color;
+
       @include screen-size('m') {
         width: 240px;
         height: 154px;
