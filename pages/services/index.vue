@@ -17,8 +17,8 @@
         </scrollactive>
       </div>
       <div class="tablet-navigation">
-        <p v-if="this.activeItem != null">{{this.activeItem['href']}}</p>
-      </div>
+        <p v-if="this.activeService!= ''">{{this.activeService}}</p>
+        </div>
       <div class="section" v-for="(item, index) in services" :key="index">
         <div style="height: 300px" v-if="index !== 0"></div>
         <section :id="`${item.id}`">
@@ -71,6 +71,7 @@
         loadedServices: false,
         scrolled: false,
         activeItem: null,
+        activeService: 'BIM Consulting and Engineering',
         lastActiveItem: null,
         oldScroll: 0,
         once: false,
@@ -95,9 +96,9 @@
     },
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
+        console.log('inside')
         this.activeItem = currentItem
-        this.currn
-        console.log(this.activeItem.textContent)
+        this.activeService = currentItem.textContent
         this.once = false
     },
       fillSubServices () {
@@ -139,7 +140,7 @@
             nextId = number + 1;
           }
           if(!this.once) {
-            console.log(this.$refs[nextId][0].click());
+            this.$refs[nextId][0].click();
             this.once = true;
           }
         }
@@ -160,7 +161,7 @@
             nextId = number - 1;
           }
           if(!this.once) {
-            console.log(this.$refs[nextId][0].click());
+            this.$refs[nextId][0].click();
             this.once = true;
           }
         }
