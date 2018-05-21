@@ -97,16 +97,20 @@
       display: flex;
       font-size: 1em;
       margin-bottom: 1em;
-      @include screen-size('m') {
-        font-size: 12px;
-      } @include screen-size('xs') {
-        font-size: 10px;
-      }
       .main-list {
         width: 85%;
         overflow: hidden;
         @include screen-size('xs') {
           width: 100%;
+          font-size: 10px;
+        }
+        @include screen-size('m') {
+          width: 100%;
+          font-size: 1em;
+        }
+        @include screen-size('s') {
+          width: 100%;
+          font-size: 12px;
         }
         li {
 
@@ -142,6 +146,12 @@
         margin-left: 5px;
         @include screen-size('xs')
         {
+          display: none;
+        }
+        @include screen-size('m') {
+          display: none;
+        }
+        @include screen-size('s') {
           display: none;
         }
 

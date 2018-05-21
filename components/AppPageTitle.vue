@@ -3,6 +3,10 @@
     <p class="supertitle">{{supertitle}}</p>
     <h1 class="title">{{title}}</h1>
     <p class="subtitle">{{subtitle}}</p>
+    <div class="search" v-on:click="hideSearch">
+      <slot></slot>
+      <img id="search-image" src="../static/images/search.svg" alt="">
+    </div>
   </div>
 </template>
 
@@ -10,17 +14,26 @@
   export default {
     components: {
     },
-    props: ['supertitle', 'title', 'subtitle']
+    props: ['supertitle', 'title', 'subtitle'],
+    methods: {
+      hideSearch(){
+        console.log('inside')
+        document.getElementById('search-image').style.display = 'none';
+        document.getElementById('search').focus()
+      }
+    }
   }
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables";
 @import "../assets/styles/mixins";
-  .title-page{
+  .title-page {
     margin: 15vh 0 10vh 0;
     @include screen-size('m') {
-      margin: 10vh 0 5vh 0;
+      margin: 10vh 0 0vh 0;
+      display: flex;
+      flex-direction: row;
     }
     @include screen-size('s') {
       margin: 10vh 0 1vh 0;
@@ -43,11 +56,45 @@
         font-size: 3em;
       }
     }
-    .subtitle{
+    .subtitle {
       font-size: 1.5em;
       font-style: italic;
       font-weight: lighter;
       opacity: 0.70;
+    }
+    .search
+    {
+      display: none;
+      @include screen-size('m') {
+        display: block;
+      }
+    }
+    .search {
+      display: none;
+      @include screen-size('s') {
+        display: flex;
+        margin: 10px 0 10px 15%;
+        height: 3em;
+        width: 85%;
+        input {
+          font-size: 0.8em;
+          padding: 10px 35px;
+          width: 100%;
+          border-bottom: solid 1.5px $dark-grey;
+          outline: none;
+          border:none;
+          &:focus {
+            outline: none;
+            border-bottom: solid 2px $main-color;
+            font-weight: bolder;
+          }
+        }
+        .search-image
+        {
+          width: 100%;
+          height: 100%;
+        }
+      }
     }
   }
 </style>
