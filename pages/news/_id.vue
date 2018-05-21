@@ -146,6 +146,18 @@
     .title {
       font-size: 3em;
       font-weight: bold;
+      @include screen-size('xl') {
+        font-size: 2.5em;
+      }
+      @include screen-size('l') {
+        font-size: 2.5em;
+      }
+      @include screen-size('m') {
+        font-size: 2em;
+      }
+      @include screen-size('s') {
+        font-size: 1.5em;
+      }
       h1{
         color: $dark-grey!important;
       }
@@ -170,12 +182,25 @@
       margin: 0;
       font-weight: 500;
       opacity: 0.8;
+      font-size: 1.2em;
+      @include screen-size('xl') {
+        font-size: 1em;
+      }
+      @include screen-size('l') {
+        font-size: 1em;
+      }
+      @include screen-size('m') {
+        font-size: 0.9em;
+      }
+      @include screen-size('s') {
+        font-size: 0.9em;
+      }
     }
   }
 
   .img-container {
     width: 100%;
-    height: 660px;
+    height:auto;
     margin: 1em 0;
   }
   .img-container-bottom {

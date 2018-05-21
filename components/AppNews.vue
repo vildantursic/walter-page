@@ -13,7 +13,7 @@
         <p class="author">{{item.author.name}}, {{date}}</p>
         <h1 class="title"><nuxt-link class="nav-link" :to="`/news/${item.id}`">{{ item.title.rendered | truncate(100)}}</nuxt-link></h1>
         <div class="scroll">
-          <p>{{item.acf.description | truncate(400)}} </p>
+          <p class="news">{{item.acf.description | truncate(400)}} </p>
         </div>
         <AppSocial :item="item" :link="$route.path"></AppSocial>
       </div>
@@ -90,16 +90,22 @@
 
       .category {
         margin: 0;
-        font-size: 1.3em;
+        font-size: 1.2em;
         font-weight: 700;
         color: $main-color;
         letter-spacing: 2px;
+        @include screen-size('s') {
+          font-size: 0.8em;
+        }
       }
       .author {
         margin: 0;
         font-weight: 500;
         color: $dark-color;
-        font-size: 1em;
+        font-size: 0.9em;
+        @include screen-size('s') {
+          font-size: 0.9em;
+        }
       }
     }
   }
@@ -153,4 +159,17 @@
   img{
     cursor: pointer;
   }
+  .news{
+    font-size: 1.2em;
+    @include screen-size('l') {
+      font-size: 1em;
+    }
+    @include screen-size('m') {
+      font-size: 0.9em;
+    }
+    @include screen-size('s') {
+      font-size: 0.9em;
+    }
+  }
+
 </style>
