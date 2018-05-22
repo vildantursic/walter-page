@@ -61,7 +61,13 @@
       font-weight: bold;
       color: $dark-grey;
       @include screen-size('m') {
-        font-size: 3em;
+        font-size: 2.5em;
+      }
+      @include screen-size('s') {
+        font-size: 2em;
+      }
+      @include screen-size('xs') {
+        font-size: 2em;
       }
     }
     .subtitle {
@@ -93,11 +99,60 @@
         width: 85%;
         input {
           font-size: 0.8em;
-          padding: 10px 35px;
+          padding: 10px 10px;
           width: 100%;
           border-bottom: solid 1.5px $dark-grey;
           outline: none;
           border: none;
+
+          &:focus {
+            outline: none;
+            border-bottom: solid 2px $main-color;
+            font-weight: bolder;
+          }
+        }
+        .search-image {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      @include screen-size('m') {
+        display: flex;
+        margin: 10px 0 10px 15%;
+        height: 3em;
+        width: 85%;
+        input {
+          font-size: 0.8em;
+          padding: 10px 10px;
+          width: 100%;
+          border-bottom: solid 1.5px $dark-grey;
+          outline: none;
+          border: none;
+
+          &:focus {
+            outline: none;
+            border-bottom: solid 2px $main-color;
+            font-weight: bolder;
+          }
+        }
+        .search-image {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      @include screen-size('xs') {
+        display: flex;
+        margin: 10px 0 10px 15%;
+        height: 3em;
+        width: 85%;
+        input {
+          font-size: 0.8em;
+          padding: 10px 10px;
+          width: 100%;
+          border-bottom: solid 1.5px $dark-grey;
+          outline: none;
+          border: none;
+
           &:focus {
             outline: none;
             border-bottom: solid 2px $main-color;

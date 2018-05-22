@@ -45,7 +45,18 @@
     width: 100%;
     height: 450px;
     overflow: hidden;
-
+    @include screen-size('m')
+    {
+      height: 400px;
+    }
+   @include screen-size('xs')
+    {
+      height: 400px;
+    }
+   @include screen-size('s')
+    {
+      height: 400px;
+    }
     .position {
       color: $dark-grey;
       margin: 0;
