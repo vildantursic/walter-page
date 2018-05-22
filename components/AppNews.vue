@@ -150,7 +150,7 @@
       font-size: 1.5em;
     }
     @include screen-size('s') {
-      font-size: 1.2em;
+      font-size: 1.4em;
     }
     &:hover {
       color: $main-color;
