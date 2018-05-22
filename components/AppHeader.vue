@@ -209,6 +209,12 @@
           color: #FFFFFF;
           padding: 1em 1em;
           background-color:#47494e;
+          @include screen-size('l') {
+            padding: 0.7em 0.7em;
+          }
+          @include screen-size('m') {
+            padding: 0.7em 0.7em;
+          }
         }
       }
     }

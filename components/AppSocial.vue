@@ -60,6 +60,11 @@
       width: 30px;
       padding: 5px 5px 5px 0;
     }
+    @include screen-size('xs') {
+      font-size: 15px;
+      width: 15px;
+      padding: 5px 5px 5px 0;
+    }
   }
   .fab:hover, .fas:hover {
     color: $main-color;
