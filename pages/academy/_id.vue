@@ -85,6 +85,13 @@
     flex-direction: row;
     justify-content: space-between;
 
+    @include screen-size('s') {
+      flex-direction: column;
+    }
+    @include screen-size('xs') {
+      flex-direction: column;
+    }
+
     .title {
       font-size: 3em;
       font-weight: bold;
