@@ -72,6 +72,7 @@
         <h1 v-html="page.acf.clients_text"></h1>
         <div class="clients">
           <AppClient v-for="(item, index) of customers" :key="index" :item="item"/>
+          <AppMoreCard :numberOfItems="100"/>
         </div>
       </section>
     </div>
@@ -105,8 +106,9 @@
   import AppHistory from "~/components/AppHistory"
   import AppContactPerson from "~/components/AppContactPerson"
   import AppAchievement from "~/components/AppAchievement"
+  import AppMoreCard from "~/components/AppMoreCard"
   import axios from "axios"
-  import {find} from "lodash"
+  import { find } from "lodash"
 
   export default {
     components: {
@@ -117,7 +119,8 @@
       AppNumber,
       AppHistory,
       AppContactPerson,
-      AppAchievement
+      AppAchievement,
+      AppMoreCard
     },
     data() {
       return {
@@ -157,7 +160,7 @@
           }
         } else {
           for (let i = oldVal; i > newVal; i--) {
-            this.histories[i].acf.achievements.forEach(el => this.achievements.pop())
+            this.histories[i].acf.achievements.forEach(() => this.achievements.pop())
             this.achievements.pop()
           }
         }
@@ -348,14 +351,12 @@
 
   .history-section {
     min-height: 100vh;
-    width: auto;
-    overflow: hidden;
     display: flex;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
 
     .history {
-      width: 100%;
     }
 
     .achievements {
@@ -387,7 +388,7 @@
 
     .board-members {
       width: 100%;
-      @include grid-items(5%, 20px, 3, 3, 1);
+      @include grid-items(5%, 20px, 3, 2, 1);
     }
   }
 
@@ -433,8 +434,22 @@
       display: flex;
       height: 100%;
 
+      @include screen-size(s) {
+        flex-direction: column;
+      }
+      @include screen-size(xs) {
+        flex-direction: column;
+      }
+
       .map {
         overflow: hidden;
+
+        @include screen-size(s) {
+          display: none;
+        }
+        @include screen-size(xs) {
+          display: none;
+        }
       }
 
       .users {
@@ -444,6 +459,15 @@
         align-items: center;
         justify-content: space-around;
         flex-direction: column;
+
+        @include screen-size(s) {
+          width: 100%;
+          height: 100vh;
+        }
+        @include screen-size(xs) {
+          width: 100%;
+          height: 100vh;
+        }
 
         .card {
         }
@@ -458,6 +482,15 @@
         align-items: center;
         justify-content: space-around;
         flex-direction: column;
+
+        @include screen-size(s) {
+          width: 100%;
+          display: none;
+        }
+        @include screen-size(xs) {
+          width: 100%;
+          display: none;
+        }
 
         .text {
           color: $main-color;
@@ -542,10 +575,8 @@
     .tabbed-section__selector {
       position: relative;
       height: $main-size*2;
-      top: -$main-size*1.95;
-      left: -$main-size;
       padding: 0;
-      margin: 0;
+      margin: 20px 0 60px 0;
       width: 100%;
       float: left;
 
