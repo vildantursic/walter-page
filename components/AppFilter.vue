@@ -189,6 +189,14 @@
     .date-filters {
       display: flex;
       align-items: flex-end;
+      @include screen-size('s')
+      {
+        display: none;
+      }
+      @include screen-size('xs')
+      {
+        display: none;
+      }
 
       .year {
         width: 12%;

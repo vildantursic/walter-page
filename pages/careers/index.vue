@@ -1,6 +1,8 @@
 <template>
   <section class="padded-content footing-space">
-    <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
+    <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" >
+      <input id="search" type="text" placeholder="" v-model="search" @blur="showSearch">
+    </AppPageTitle>
     <!--<AppFilter :filters="filters"-->
                <!--:selectedFilter="selectedFilter"-->
                <!--:showDateFilter="true"-->
@@ -101,6 +103,10 @@
         } else {
           return orderBy(this.tempItems, ['date'], [this.selectedFilter === 1 ? 'desc' : 'asc']);
         }
+      },
+      showSearch(){
+        console.log('inside')
+        document.getElementById('search-image').style.display = 'block';
       }
     }
   }
