@@ -19,12 +19,18 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
+
   .card {
     margin-right: 1em;
     display: flex;
     flex-direction: column;
     width: 130px;
     /*overflow: hidden;*/
+
+    @include screen-size(xs) {
+      margin: 0;
+    }
 
     .image {
       min-height: 100px;

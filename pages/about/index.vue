@@ -48,6 +48,7 @@
             <AppAchievement v-if="item.id !== -1" :item="item"></AppAchievement>
             <div class="plus" v-if="item.id === -1">+</div>
           </div>
+          <AppAchievement :item="employeeItem()"></AppAchievement>
         </div>
 
       </section>
@@ -183,6 +184,18 @@
       });
     },
     methods: {
+      employeeItem() {
+        return {
+          _embedded: {
+            'wp:featuredmedia': [
+              { source_url: 'http://walter.hotelsnjesko.ba/wp-content/uploads/History-employees.png' }
+            ]
+          },
+          title: {
+            rendered: `${this.histories[this.currentHistory].acf.employees} ${this.histories[this.currentHistory].acf.employees > 50 ? '+' : ''} Employees`
+          }
+        }
+      },
       onItemChanged(event, currentItem, lastActiveItem) {
         this.activeItem = currentItem
         this.once = false
@@ -350,6 +363,13 @@
       align-items: center;
       justify-content: center;
 
+      @include screen-size(s) {
+        flex-direction: column;
+      }
+      @include screen-size(xs) {
+        flex-direction: column;
+      }
+
       .plus {
         font-size: 1.5em;
         font-weight: bolder;
@@ -401,7 +421,7 @@
     .clients {
       width: 100%;
       margin-top: 30px;
-      @include grid-items(20px, 0, 6, 5, 2);
+      @include grid-items(20px, 0, 6, 4, 2);
     }
   }
 
@@ -503,6 +523,7 @@
   // history tabs
   .tabs {
     margin: 0 15%;
+
     @include screen-size('m') {
       margin: 0 20%;
     }
@@ -512,6 +533,12 @@
     @include screen-size('xl') {
       margin: 0 18%;
     }
+    @include screen-size('xs') {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .tabbed-section__selector {
       position: relative;
       height: $main-size*2;
@@ -521,6 +548,12 @@
       margin: 0;
       width: 100%;
       float: left;
+
+      @include screen-size('xs') {
+        top: 0;
+        left: 0;
+        margin: 50px 0;
+      }
 
       [class*="-tab-"] {
         float: left;
@@ -566,6 +599,16 @@
       display: block;
       left: 0;
       transition: transform .23s ease;
+
+      @include screen-size('m') {
+        display: none;
+      }
+      @include screen-size('s') {
+        display: none;
+      }
+      @include screen-size('xs') {
+        display: none;
+      }
     }
 
     .tabbed-section__selector-tab-4.active ~ .tabbed-section__highlighter {
