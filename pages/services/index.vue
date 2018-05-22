@@ -392,10 +392,16 @@
           font-size: 1.1em;
         }
         @include screen-size('l') {
-          font-size: 0.9em;
+          font-size: 1em;
         }
         @include screen-size('m') {
-          font-size: 0.8em;
+          font-size: 1em;
+        }
+        @include screen-size('s') {
+          font-size: 1em;
+        }
+        @include screen-size('xs') {
+          font-size: 1em;
         }
       }
     }
@@ -413,7 +419,11 @@
       section {
         padding-top: 20px;
         display: flex;
+        @include grid-items(10%, 40px, 3, 2);
         @include screen-size('m') {
+          padding-top: 10px;
+        }
+        @include screen-size('s') {
           padding-top: 10px;
         }
         /*justify-content: space-between;*/

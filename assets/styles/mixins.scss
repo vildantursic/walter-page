@@ -23,7 +23,7 @@
         @content;
       }
     } @else if ($size == m) {
-      @media (max-width: 1024px) {
+      @media (max-width: 1025px) {
         @content;
       }
     } @else if ($size == s) {
@@ -42,13 +42,13 @@
   padding: 0 20%;
 
   @media (max-width: 1024px) {
-    padding: 0 25%;
+    padding: 35px 25%;
   }
   @media (max-width: 768px) {
-    padding: 0 20%;
+    padding: 35px 20%;
   }
   @media (max-width: 425px) {
-    padding: 0 35px;
+    padding: 35px 35px 75px 35px;
   }
 }
 
