@@ -59,9 +59,10 @@ a.nav-link {
   }
 }
 .desktop-filter{
-@media (min-width: 1024px) {
+@media (min-width: 1030px) {
   display: block;
 }
+  display: none;
 }
 
 .page-enter-active, .page-leave-active {
