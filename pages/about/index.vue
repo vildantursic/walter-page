@@ -341,10 +341,6 @@
     justify-content: center;
     flex-direction: column;
 
-    @include screen-size('xs') {
-      display: none
-    }
-
     .history {
       width: 100%;
     }

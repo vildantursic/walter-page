@@ -1,5 +1,5 @@
 <template>
-  <div class="filter desktop-filter">
+  <div class="filter">
     <div class="main-filters">
       <ul class="main-list">
         <li :class="{ active: -1 === selectedFilter }" @click="selectFilter(-1)">All</li>
@@ -87,6 +87,10 @@
       display: flex;
       margin: 0;
       padding: 0;
+
+      @include screen-size(xs) {
+        flex-direction: column;
+      }
 
       li {
         cursor: pointer;
