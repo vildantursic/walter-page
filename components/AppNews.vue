@@ -95,7 +95,7 @@
         color: $main-color;
         letter-spacing: 2px;
         @include screen-size('s') {
-          font-size: 0.8em;
+          font-size: 0.9em;
         }
       }
       .author {
@@ -104,7 +104,7 @@
         color: $dark-color;
         font-size: 0.9em;
         @include screen-size('s') {
-          font-size: 0.9em;
+          font-size: 1em;
         }
       }
     }
@@ -150,7 +150,7 @@
       font-size: 1.5em;
     }
     @include screen-size('s') {
-      font-size: 1em;
+      font-size: 1.2em;
     }
     &:hover {
       color: $main-color;
@@ -168,10 +168,10 @@
       font-size: 1em;
     }
     @include screen-size('m') {
-      font-size: 0.9em;
+      font-size: 1em;
     }
     @include screen-size('s') {
-      font-size: 0.9em;
+      font-size: 1em;
     }
   }
 
