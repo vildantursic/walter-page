@@ -118,7 +118,7 @@
 
       .text
       {
-        height: 100px;
+        height: 150px;
         .title {
           font-size: 3em;
           font-weight: bold;
