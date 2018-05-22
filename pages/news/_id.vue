@@ -143,6 +143,13 @@
     flex-direction: row;
     justify-content: space-between;
 
+    @include screen-size('s') {
+      flex-direction: column;
+    }
+    @include screen-size('xs') {
+      flex-direction: column;
+    }
+
     .title {
       font-size: 3em;
       font-weight: bold;
@@ -208,13 +215,13 @@
 
     img {
       width: 100%;
-      height: 600px;
     }
   }
   .img-container-bottom
   {
     display: flex;
     max-height: 500px;
+
     .img-bottom {
       width: 100%;
     }

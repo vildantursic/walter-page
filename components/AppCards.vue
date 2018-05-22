@@ -1,9 +1,11 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
-    <div v-if="item._embedded !== undefined" class="image">
-      <nuxt-link class="nav-link" :to="`/cases/${item.id}`">
+    <div class="image">
+      <nuxt-link v-if="item._embedded !== undefined" class="nav-link" :to="`/cases/${item.id}`">
         <img v-if="item._embedded ['wp:featuredmedia']!== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
-        <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
+      </nuxt-link>
+      <nuxt-link v-if="item._embedded === undefined" class="nav-link" :to="`/cases/${item.id}`">
+        <img class="no-image" src="~/static/images/walter-logo.png" alt="">
       </nuxt-link>
     </div>
     <div class="info">
@@ -64,7 +66,7 @@
         width: 100%;
       }
       .no-image {
-        width: auto;
+        width: 30%;
       }
     }
 

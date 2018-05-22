@@ -59,6 +59,11 @@
       padding: 0;
       height: auto;
     }
+    @include screen-size(s) {
+      flex-direction: column;
+      padding: 0;
+      height: auto;
+    }
 
     .card-img-container {
       overflow: hidden;
@@ -68,6 +73,10 @@
       width: 70%;
 
       @include screen-size('xs') {
+        width: 100%;
+        height: 300px;
+      }
+      @include screen-size('s') {
         width: 100%;
         height: 300px;
       }
@@ -84,6 +93,10 @@
       padding: 0 2em 0 2em;
 
       @include screen-size(xs) {
+        width: 100%;
+        padding: 1em 0;
+      }
+      @include screen-size(s) {
         width: 100%;
         padding: 1em 0;
       }
@@ -140,6 +153,7 @@
     font-size: 2.5em;
     font-weight: bold;
     margin: 15px 0;
+
     @include screen-size('xl') {
       font-size: 2em;
     }
@@ -148,9 +162,6 @@
     }
     @include screen-size('m') {
       font-size: 1.5em;
-    }
-    @include screen-size('s') {
-      font-size: 1em;
     }
     &:hover {
       color: $main-color;

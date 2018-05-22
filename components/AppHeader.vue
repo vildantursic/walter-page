@@ -39,7 +39,7 @@
             </ul>
           </li>
           <li><nuxt-link :to="{ name: 'news' }">News</nuxt-link></li>
-          <li><a href="/about#contact">Contact us</a></li>
+          <li><nuxt-link :to="`/about#contact`">Contact us</nuxt-link></li>
         </ul>
       </div>
     </header>
@@ -64,7 +64,6 @@
     methods: {
       getServices() {
         axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/services`).then((response) => {
-          console.log(response.data)
           this.services = response.data
         }).catch((error) => {
           console.log(error)
