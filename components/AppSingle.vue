@@ -102,7 +102,8 @@
       }
       @include screen-size(s) {
         flex-direction: column;
-        height: 100vh;
+        height: 100%;
+        padding: 0 5px;
       }
 
 
@@ -112,6 +113,9 @@
         @include screen-size(xs) {
           width: 100%;
         }
+        @include screen-size(s) {
+          width: 100%;
+        }
       }
       .info-card {
         position: relative;
@@ -119,6 +123,11 @@
         padding: 1.5em;
 
         @include screen-size(xs) {
+          margin-top: 50px;
+          width: 100%;
+          padding: 0;
+        }
+        @include screen-size(s) {
           margin-top: 50px;
           width: 100%;
           padding: 0;
@@ -149,7 +158,7 @@
           /*width: 85%;*/
         }
         .text-box {
-          height: 80%;
+          height: 500px;
           overflow: auto;
           width: 100%;
         }

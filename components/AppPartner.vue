@@ -23,15 +23,11 @@
 <style lang="scss" scoped="">
   @import "../assets/styles/variables";
   @import "../assets/styles/mixins";
-  a{
-    color: #000!important;
-  }
   .card {
     display: flex;
     flex-direction: column;
     height: auto;
     overflow: hidden;
-
     p {
       font-size: 0.875rem;
     }
@@ -59,6 +55,9 @@
     }
     @include screen-size('m') {
       font-size: 0.75em;
+    }
+    a{
+      color: #000!important;
     }
   }
 </style>

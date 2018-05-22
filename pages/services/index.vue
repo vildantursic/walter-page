@@ -77,7 +77,7 @@
         oldScroll: 0,
         once: false,
         contact_person: null,
-        users: null
+        users: {}
     }
     },
     asyncData({ }) {
@@ -89,14 +89,10 @@
     },
     created () {
       this.fillSubServices()
-      axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/users?_embed`).then((response) => {
-        return { users: response.data }
-      }).catch((error) => {
-        console.log(error)
-      });
-      console.log(this.users)
     },
     mounted () {
+      this.contact_person = this.services[0].acf.contact_person
+      console.log(this.contact_person)
       // window.addEventListener('scroll', this.handleScroll);
     },
     beforeDestroy () {
@@ -185,6 +181,10 @@
           }
         }
         this.oldScroll = top
+      },
+      showSearch(){
+        console.log('inside')
+        document.getElementById('search-image').style.display = 'block';
       }
     }
   }
