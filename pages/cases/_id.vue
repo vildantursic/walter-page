@@ -26,7 +26,7 @@
     },
     methods: {
       goBack() {
-        this.$router.go(-1)
+        this.$router.push('/cases')
       }
     }
   }

@@ -17,6 +17,5 @@
   img {
     cursor: pointer;
     width: 100%;
-    /*filter: grayscale(100%);*/
   }
 </style>
