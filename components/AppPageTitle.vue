@@ -45,6 +45,14 @@
       font-size: 1.5em;
       font-weight: lighter;
       opacity: 0.70;
+      @include screen-size('s')
+      {
+        display: none;
+      }
+      @include screen-size('xs')
+      {
+        display: none;
+      }
     }
     .title {
       font-size: 4.5em;
@@ -61,6 +69,14 @@
       font-style: italic;
       font-weight: lighter;
       opacity: 0.70;
+      @include screen-size('s')
+      {
+        display: none;
+      }
+      @include screen-size('xs')
+      {
+        display: none;
+      }
     }
     .search {
       display: none;

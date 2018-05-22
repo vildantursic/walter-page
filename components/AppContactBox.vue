@@ -46,18 +46,18 @@
     padding: 1.5em 1em;
     width: 363px;
     box-shadow: 8px 8px 8px 0 rgba(57, 60, 61, 0.8);
+    z-index: 10000;
 
     @include screen-size('xs') {
-      position: relative;
-      left: 17%;
+      position: fixed;
       margin-top: 4%;
-      bottom: 5%;
+      bottom: 4%;
     }
     @include screen-size('m') {
       padding: 0.5em 0.5em;
       width: 260px;
-      bottom: 5%;
-    }
+      bottom: 4%;
+      }
 
     .image {
       overflow: hidden;
