@@ -161,6 +161,7 @@
         }
 
         .more-container {
+          float: right;
           display: flex;
           align-items: center;
           align-self: flex-end;
