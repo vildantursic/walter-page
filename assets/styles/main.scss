@@ -37,6 +37,10 @@ a.nav-link {
 .padded-content {
   @include default-spacing(15);
 }
+.padded-content-services
+{
+  @include default-spacing-services(15);
+}
 
 .footing-space {
   margin-bottom: 100px;

@@ -23,7 +23,7 @@
         <div style="height: 300px" v-if="index !== 0"></div>
         <section :id="`${item.id}`">
           <div class="services-info services-spacing">
-            <div class="padded-content center-more">
+            <div class="padded-content-services center-more">
               <div class="cases-link">
                 <h1 class="hidden-amount">+ {{item.acf.cases.length}}</h1>
                 <nuxt-link :to="`cases?filter=${item.case_categories[0]}`">
