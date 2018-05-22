@@ -371,7 +371,7 @@
 
     .board-members {
       width: 100%;
-      @include grid-items(5%, 20px, 3, 3, 2);
+      @include grid-items(5%, 20px, 3, 3, 1);
     }
   }
 

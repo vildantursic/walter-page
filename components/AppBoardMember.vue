@@ -71,17 +71,17 @@
           font-size: 1.3em;
         }
         @include screen-size('m') {
-          font-size: 1em;
+          font-size: 1.3em;
         }
       }
       p{
         margin-top: 0;
-        font-size: 0.9em;
+        font-size: 1em;
         @include screen-size('l') {
-          font-size: 0.8em;
+          font-size: 0.9em;
         }
         @include screen-size('m') {
-          font-size: 0.7em;
+          font-size: 0.8em;
         }
       }
     }
@@ -130,12 +130,12 @@
         .fa-linkedin {
           color: $dark-grey;
           width: 100%;
-          font-size: 3em;
+          font-size: 3.5em;
           @include screen-size('l') {
-            font-size: 2.5em;
+            font-size: 3em;
           }
           @include screen-size('m') {
-            font-size: 1.5em;
+            font-size: 2.5em;
           }
         }
         .fab:hover, .fas:hover {
@@ -146,15 +146,15 @@
         padding-top: 0.5em !important;
         grid-area: phone;
         @include screen-size('m') {
-          font-size: 0.8em;
-          padding-top: 15px !important;
+          font-size: 1.3em;
+          padding-top: 10px !important;
         }
       }
       .email {
-        padding-bottom: 0.5em !important;
+        padding-bottom: 0em !important;
         grid-area: email;
         @include screen-size('m') {
-          font-size: 0.8em;
+          font-size: 1.3em;
         }
       }
 
@@ -163,7 +163,7 @@
         color: $dark-grey;;
         font-size: 1em;
         @include screen-size('xl') {
-          font-size: 0.9em;
+          font-size: 1em;
         }
         @include screen-size('l') {
           font-size: 0.8em;

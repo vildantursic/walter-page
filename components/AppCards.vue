@@ -116,18 +116,18 @@
         padding-top: 15px;
         font-size: 0.9em;
         @include screen-size('xl') {
-          padding-top: 20px;
+          padding-top: 1.4em;
         }
         @include screen-size('m') {
-          font-size: 18px;
+          font-size: 1.2em;
           overflow: auto;
         }
         @include screen-size('s') {
-          font-size: 10px;
+          font-size: 1.1em;
           overflow: auto;
         }
         @include screen-size('xs') {
-          font-size: 10px;
+          font-size: 1.1em;
           overflow: auto;
         }
       }

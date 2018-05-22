@@ -51,10 +51,10 @@
   }
   .about{
     @include screen-size('l') {
-      font-size: 0.8em;
+      font-size: 1.2em;
     }
     @include screen-size('m') {
-      font-size: 0.75em;
+      font-size: 1em;
     }
     a{
       color: #000!important;
