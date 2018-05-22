@@ -31,6 +31,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/mixins";
+  @import "../assets/styles/variables";
 
   .card {
     position: fixed;
@@ -47,17 +48,27 @@
     width: 363px;
     box-shadow: 8px 8px 8px 0 rgba(57, 60, 61, 0.8);
     z-index: 10000;
-
-    @include screen-size('xs') {
-      position: fixed;
-      margin-top: 4%;
+    @include screen-size('xl') {
+      padding: 1em 1em;
+      width: 300px;
+      bottom: 4%;
+    }
+    @include screen-size('l') {
+      padding: 0.9em 0.9em;
+      width: 300px;
       bottom: 4%;
     }
     @include screen-size('m') {
       padding: 0.5em 0.5em;
       width: 260px;
       bottom: 4%;
-      }
+    }
+
+    @include screen-size('xs') {
+      position: fixed;
+      margin-top: 4%;
+      bottom: 4%;
+    }
 
     .image {
       overflow: hidden;
@@ -73,6 +84,12 @@
         font-size: 1.25em;
         font-weight: 900;
         color: white;
+        @include screen-size('xl') {
+        font-size: 1.1em;
+      }
+        @include screen-size('l') {
+          font-size: 1em;
+        }
         @include screen-size('m') {
           font-size: 1em;
         }
@@ -81,6 +98,12 @@
         font-size: 0.8em;
         font-weight: 500;
         color: white;
+        @include screen-size('xl') {
+          font-size: 0.7em;
+        }
+        @include screen-size('l') {
+          font-size: 0.6em;
+        }
         @include screen-size('m') {
           font-size: 0.6em;
         }
@@ -95,6 +118,14 @@
         font-size: 1.5em;
         color: white;
         padding-left: 1.5em;
+        @include screen-size('xl') {
+          font-size: 1.3em;
+          padding-left: 1.2em;
+        }
+        @include screen-size('l') {
+          font-size: 1.2em;
+          padding-left: 1em;
+        }
         @include screen-size('m') {
           font-size: 1em;
           padding-left: 0.5em;
@@ -104,6 +135,14 @@
         font-size: 1.5em;
         color: white;
         padding-left: 1.5em;
+        @include screen-size('xl') {
+          font-size: 1.3em;
+          padding-left: 1.2em;
+        }
+        @include screen-size('l') {
+          font-size: 1em;
+          padding-left: 0.5em;
+        }
         @include screen-size('m') {
           font-size: 1em;
           padding-left: 0.5em;
