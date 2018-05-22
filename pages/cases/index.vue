@@ -87,8 +87,10 @@
       getCategories() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/case_categories').then((response) => {
           this.filters = response.data;
+          console.log('filters')
           console.log(this.filters)
           this.sortedFilters = _.sortBy(this.filters, 'id')
+          console.log('sorted filters')
           console.log(this.sortedFilters)
           this.items.map((item) => {
             const cats = []
