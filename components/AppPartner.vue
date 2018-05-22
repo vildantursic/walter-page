@@ -60,4 +60,7 @@
       color: #000!important;
     }
   }
+  a{
+    color: #000!important;
+  }
 </style>
