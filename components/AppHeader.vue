@@ -17,6 +17,7 @@
             <li @click="showMenu = !showMenu"><nuxt-link :to="{ name: 'academy' }">BIM Academy</nuxt-link></li>
             <li @click="showMenu = !showMenu"><nuxt-link :to="{ name: 'scholarships' }">Scholarships</nuxt-link></li>
             <li @click="showMenu = !showMenu"><nuxt-link :to="{ name: 'news' }">News</nuxt-link></li>
+            <li @click="showMenu = !showMenu"><nuxt-link :to="`/about#contact`">Contact us</nuxt-link></li>
           </ul>
         </div>
       </div>
