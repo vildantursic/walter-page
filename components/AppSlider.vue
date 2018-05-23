@@ -32,10 +32,10 @@
           slidesPerView: 1,
           spaceBetween: 0,
           loop: false,
-          autoplay: {
-            delay: 4500,
-            disableOnInteraction: false
-          },
+//          autoplay: {
+//            delay: 4500,
+//            disableOnInteraction: true
+//          },
           pagination: {
             el: '.swiper-pagination',
             clickable: true
@@ -105,6 +105,7 @@
         img {
           width: 100%;
           height: auto;
+          cursor: pointer;
         }
       }
     }
@@ -151,6 +152,8 @@
     filter: grayscale(100%);
     background-image: none;
     outline: none;
+    width: 44px;
+    height: 44px;
   }
   .swiper-button-prev {
     margin-top: auto;
@@ -158,5 +161,7 @@
     filter: grayscale(100%);
     background-image: none;
     outline: none;
+    width: 44px;
+    height: 44px;
   }
 </style>
