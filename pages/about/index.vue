@@ -72,7 +72,7 @@
         <h1 v-html="page.acf.clients_text"></h1>
         <div class="clients">
           <AppClient v-for="(item, index) of customers" :key="index" :item="item"/>
-          <AppMoreCard :numberOfItems="100"/>
+          <!--<AppMoreCard :numberOfItems="100"/>-->
         </div>
       </section>
     </div>

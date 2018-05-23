@@ -42,13 +42,13 @@
   padding: 0 20%;
 
   @media (max-width: 1024px) {
-    padding: 0 25%;
+    padding: 0 13%;
   }
   @media (max-width: 768px) {
-    padding: 0 20%;
+    padding: 0 13%;
   }
   @media (max-width: 425px) {
-    padding: 0px 35px;
+    padding: 0 35px;
   }
 }
 @mixin default-spacing-services($size){

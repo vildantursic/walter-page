@@ -22,8 +22,7 @@
   import AppPageTitle from '~/components/AppPageTitle'
   import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
-  import { find } from 'lodash'
-  import { sortBy } from 'lodash'
+  import { find, sortBy } from 'lodash'
 
   export default {
     components: {
@@ -87,7 +86,7 @@
       getCategories() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/case_categories').then((response) => {
           this.filters = response.data;
-          this.sortedFilters = _.sortBy(this.filters, 'id')
+          this.sortedFilters = sortBy(this.filters, 'id')
           this.items.map((item) => {
             const cats = []
             response.data.forEach(cat => {

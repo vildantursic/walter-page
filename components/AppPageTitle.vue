@@ -17,7 +17,6 @@
     props: ['supertitle', 'title', 'subtitle'],
     methods: {
       hideSearch(){
-        console.log('inside')
         document.getElementById('search-image').style.display = 'none';
         document.getElementById('search').focus()
       }
@@ -31,9 +30,9 @@
   .title-page {
     margin: 15vh 0 10vh 0;
     @include screen-size('m') {
-      margin: 10vh 0 0vh 0;
+      margin: 10vh 0 0 0;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
     }
     @include screen-size('s') {
       margin: 10vh 0 1vh 0;
@@ -45,14 +44,6 @@
       font-size: 1.5em;
       font-weight: lighter;
       opacity: 0.70;
-      @include screen-size('s')
-      {
-        display: none;
-      }
-      @include screen-size('xs')
-      {
-        display: none;
-      }
     }
     .title {
       font-size: 4.5em;

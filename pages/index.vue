@@ -61,6 +61,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/mixins";
+  @import "../assets/styles/variables";
 
   video {
     position: fixed;

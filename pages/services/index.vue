@@ -92,7 +92,6 @@
     },
     mounted () {
       this.contact_person = this.services[0].acf.contact_person
-      console.log(this.contact_person)
       // window.addEventListener('scroll', this.handleScroll);
     },
     beforeDestroy () {
@@ -101,16 +100,13 @@
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
         this.activeItem = currentItem
-        var href = this.activeItem['href']
-        var res = href.split("#");
-        var link = res[0]
-        var number = parseInt(res[1])
-        this.services.forEach( (service) => {
-          console.log(service.id)
-          if(service.id === number)
-          {
-              this.contact_person = service.acf.contact_person
-              console.log(this.contact_person)
+        const href = this.activeItem['href']
+        const res = href.split("#");
+        const link = res[0]
+        const number = parseInt(res[1])
+        this.services.forEach((service) => {
+          if (service.id === number) {
+            this.contact_person = service.acf.contact_person
           }
         })
         this.activeService = currentItem.textContent
@@ -135,47 +131,34 @@
         this.$router.push({ path: 'services' })
       },
       handleScroll (e) {
-        var top  = window.pageYOffset || document.documentElement.scrollTop
-        console.log(top)
-        var nextId = 0
-        if(this.oldScroll < top)
-        {
-          console.log('down')
-          console.log(this.activeItem['href'])
-          var href = this.activeItem['href']
-          var res = href.split("#");
-          var link = res[0]
-          var number = parseInt(res[1])
-          if(number === 78)
-          {
+        const top  = window.pageYOffset || document.documentElement.scrollTop
+        let nextId = 0
+        if (this.oldScroll < top) {
+          const href = this.activeItem['href']
+          const res = href.split("#");
+          const link = res[0]
+          const number = parseInt(res[1])
+          if (number === 78) {
             nextId = number
-          }
-          else
-          {
+          } else {
             nextId = number + 1;
           }
-          if(!this.once) {
+          if (!this.once) {
             this.$refs[nextId][0].click();
             this.once = true;
           }
-        }
-        else if (this.oldScroll > top)
-        {
-          console.log('top')
-          console.log(this.activeItem['href'])
-          var href = this.activeItem['href']
-          var res = href.split("#");
-          var link = res[0]
-          var number = parseInt(res[1])
-          if(number === 75)
-          {
+        } else if (this.oldScroll > top) {
+          const href = this.activeItem['href']
+          const res = href.split("#");
+          const link = res[0]
+          const number = parseInt(res[1])
+
+          if (number === 75) {
             nextId = number
-          }
-          else
-          {
+          } else {
             nextId = number - 1;
           }
-          if(!this.once) {
+          if (!this.once) {
             this.$refs[nextId][0].click();
             this.once = true;
           }
@@ -183,7 +166,6 @@
         this.oldScroll = top
       },
       showSearch(){
-        console.log('inside')
         document.getElementById('search-image').style.display = 'block';
       }
     }

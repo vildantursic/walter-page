@@ -3,15 +3,15 @@
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" >
       <input id="search" type="text" placeholder="" v-model="search" @blur="showSearch">
     </AppPageTitle>
-    <!--<AppFilter :filters="filters"-->
-               <!--:selectedFilter="selectedFilter"-->
-               <!--:showDateFilter="true"-->
-               <!--:monthActive="2"-->
-               <!--@onFilterSelected="selectFilter"-->
-               <!--@onYearSelected="selectYear"-->
-               <!--@onMonthSelected="selectMonth">-->
-      <!--<input type="text" placeholder="Search.." v-model="search">-->
-    <!--</AppFilter>-->
+    <AppFilter :filters="filters"
+               :selectedFilter="selectedFilter"
+               :showDateFilter="false"
+               :monthActive="2"
+               @onFilterSelected="selectFilter"
+               @onYearSelected="selectYear"
+               @onMonthSelected="selectMonth">
+      <input type="text" placeholder="Search.." v-model="search">
+    </AppFilter>
     <div class="items">
       <AppScholarship v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
     </div>
@@ -77,9 +77,6 @@
     goToPost (id) {
       this.$router.push({ path: `news/${id}`})
     },
-    getImageSource(item) {
-      console.log(item.content )
-    },
     getItems() {
       axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/scholarships?per_page=100&_embed').then((response) => {
         this.items = response.data
@@ -141,7 +138,6 @@
       }
     },
     showSearch(){
-      console.log('inside')
       document.getElementById('search-image').style.display = 'block';
     }
   }

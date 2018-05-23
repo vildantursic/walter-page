@@ -22,7 +22,9 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 a {
+  color: $main-color;
   text-decoration: none;
+
   &:hover {
     color: $main-color !important;
   }
@@ -37,8 +39,7 @@ a.nav-link {
 .padded-content {
   @include default-spacing(15);
 }
-.padded-content-services
-{
+.padded-content-services {
   @include default-spacing-services(15);
 }
 

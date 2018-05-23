@@ -44,6 +44,7 @@
   .card {
     height: auto;
     overflow: hidden;
+    margin: 25px 0;
 
     .card-img {
       overflow: hidden;
@@ -101,17 +102,11 @@
     }
 
     .divider {
-      margin-bottom: 15px;
+      margin: 15px 0;
       width: 100%;
       height: 3px;
       background-size: cover;
       background: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) fixed center;
-      @include screen-size('l') {
-        margin-bottom: 5px;
-      }
-      @include screen-size('m') {
-        margin-bottom: 0;
-      }
     }
 
     .social {
@@ -131,44 +126,27 @@
           color: $dark-grey;
           width: 100%;
           font-size: 3.5em;
-          @include screen-size('l') {
-            font-size: 3em;
-          }
-          @include screen-size('m') {
-            font-size: 2.5em;
-          }
         }
         .fab:hover, .fas:hover {
           color: $main-color;
         }
       }
       .phone {
-        padding-top: 0.5em !important;
         grid-area: phone;
-        @include screen-size('l') {
-          font-size: 0.8em;
-          padding-top: 15px !important;
-        }
-        @include screen-size('m') {
-          font-size: 1.3em;
-          padding-top: 10px !important;
-        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
       }
       .email {
-        padding-bottom: 0em !important;
         grid-area: email;
         text-overflow: ellipsis;
         width: 100%;
         display: flex;
         align-items: center;
+        justify-content: center;
         overflow: hidden;
 
-        @include screen-size('l') {
-          font-size: 0.8em;
-        }
-        @include screen-size('m') {
-          font-size: 1.3em;
-        }
       }
 
       .link {
@@ -179,15 +157,6 @@
         width: 80%;
         overflow: hidden;
 
-        @include screen-size('xl') {
-          font-size: 1em;
-        }
-        @include screen-size('l') {
-          font-size: 0.8em;
-        }
-        @include screen-size('m') {
-          font-size: 0.7em;
-        }
       }
       .fab, .fas{
         color: $dark-grey;

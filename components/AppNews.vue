@@ -70,7 +70,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 70%;
+      width: 60%;
 
       @include screen-size('xs') {
         width: 100%;
@@ -89,7 +89,7 @@
 
     .info-card {
       position: relative;
-      width: 30%;
+      width: 40%;
       padding: 0 2em 0 2em;
 
       @include screen-size(xs) {

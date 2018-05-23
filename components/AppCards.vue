@@ -90,9 +90,8 @@
         margin-top: 10px;
         line-height: 1;
         color: $dark-grey;
-        font-size: 20px;
+
         @include screen-size('m') {
-          font-size: 20px;
           margin-top: 10px;
         }
         &:hover {
@@ -121,15 +120,15 @@
           padding-top: 1.4em;
         }
         @include screen-size('m') {
-          font-size: 1.2em;
+          font-size: 1em;
           overflow: auto;
         }
         @include screen-size('s') {
-          font-size: 1.1em;
+          font-size: 1em;
           overflow: auto;
         }
         @include screen-size('xs') {
-          font-size: 1.1em;
+          font-size: 1em;
           overflow: auto;
         }
       }

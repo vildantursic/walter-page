@@ -20,35 +20,44 @@
   }
 </script>
 
-<style lang="scss" scoped="">
+<style lang="scss" scoped>
   @import "../assets/styles/variables";
   @import "../assets/styles/mixins";
+
+  a {
+    color: $main-color !important;
+  }
+
   .card {
     display: flex;
     flex-direction: column;
     height: auto;
     overflow: hidden;
+    margin: 25px 0;
+
+    .card-img {
+      width: 100%;
+      height: 100px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $secondary-color;
+
+      img {
+        width: 100%;
+      }
+
+      .no-image {
+        width: auto;
+      }
+    }
+
     p {
       font-size: 0.875rem;
     }
   }
-  .card-img {
-    width: 100%;
-    height: 100px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: $secondary-color;
 
-    img {
-      width: 100%;
-    }
-
-    .no-image {
-      width: auto;
-    }
-  }
   .about{
     @include screen-size('l') {
       font-size: 1.2em;
@@ -56,11 +65,5 @@
     @include screen-size('m') {
       font-size: 1em;
     }
-    a{
-      color: #000!important;
-    }
-  }
-  a{
-    color: #000!important;
   }
 </style>

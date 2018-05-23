@@ -94,12 +94,14 @@
     .bottom {
       position: absolute;
       bottom: 0;
+      right: 0;
       width: 100%;
       margin-bottom: 2em;
 
       .more-container {
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         padding-top: 10px;
 
         .read {
