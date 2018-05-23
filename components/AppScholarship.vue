@@ -1,12 +1,14 @@
 <template>
     <div class="card animated fadeIn" data-aos="slide-up">
       <div v-if="item._embedded !== undefined" class="card-img-container">
-        <img  v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
-        <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
+        <nuxt-link class="nav-link" :to="`/scholarships/${item.id}`">
+          <img class="card-img" v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+          <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
+        </nuxt-link>
       </div>
       <div class="info-card">
         <AppSocial :item="item" :link="$route.path"></AppSocial>
-        <div>
+        <div class="text">
         <h1 class="title">{{item.title.rendered}}</h1>
         <p>{{item.acf.description | truncate(35 * 3)}}</p>
         </div>
@@ -18,6 +20,7 @@
         </nuxt-link>
         </div>
       </div>
+      <div class="border"></div>
     </div>
 </template>
 
@@ -49,17 +52,16 @@
     flex-direction: row;
     height: 400px;
     padding-bottom: 2em;
-    border-width: 0 0 2px 0;
-    border-style: solid;
-    -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-    -webkit-border-image: -webkit-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-    border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-    border-image-slice: 1;
 
-    @include screen-size(xs) {
+    @include screen-size('xs') {
       flex-direction: column;
       padding: 0;
-      height: auto;
+      height: 400px;
+    }
+    @include screen-size('s') {
+      flex-direction: column;
+      padding: 0;
+      height: 400px;
     }
 
     .card-img-container {
@@ -67,26 +69,35 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 45%;
+      width: 60%;
 
       @include screen-size('xs') {
         width: 100%;
-        height: 300px;
+        height: 150px;
+      }
+      @include screen-size('s') {
+        width: 100%;
+        height: 150px;
       }
 
       .card-img {
-        height: 100%;
+        height: auto;
+        width: 100%;
       }
     }
     .info-card {
       position: relative;
-      width: 55%;
+      width: 40%;
       padding: 1em 1em;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
 
-      @include screen-size(xs) {
+      @include screen-size('xs') {
+        width: 100%;
+        padding: 1em 0;
+      }
+      @include screen-size('s') {
         width: 100%;
         padding: 1em 0;
       }
@@ -103,31 +114,67 @@
         letter-spacing: 2px;
       }
 
-      .title {
-        font-size: 3em;
-        font-weight: bold;
-        margin: 15px 0;
+      .text {
+        height: 150px;
+        .title {
+          font-size: 3em;
+          font-weight: bold;
+          margin: 15px 0;
+          @include screen-size('xs') {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0px 0;
+          }
+          @include screen-size('s') {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0px 0;
+          }
+        }
       }
 
       .bottom-group {
         position: absolute;
         bottom: 0;
-        width: 95%;
+        right: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
 
         .published {
           font-size: 0.8em;
           font-weight: 500;
           color: gray;
-          float: left;
+
+          @include screen-size('xs') {
+            font-size: 0.8em;
+            font-weight: 500;
+            color: gray;
+            float: left;
+          }
+          @include screen-size('s') {
+            font-size: 0.8em;
+            font-weight: 500;
+            color: gray;
+            float: left;
+          }
         }
 
         .more-container {
-          float: right;
+          margin-top: 2em;
           display: flex;
           align-items: center;
-          align-self: flex-end;
-          margin-top: 2em;
+          justify-content: flex-end;
+          width: auto;
 
+          @include screen-size('xs') {
+           margin-top: 2em;
+           font-size: 0.6em;
+          }
+          @include screen-size('s') {
+            font-size: 0.6em;
+            margin-top: 2em;
+          }
           .read {
             font-size: 1.5em;
             font-weight: bold;
@@ -145,5 +192,14 @@
         }
       }
     }
+  }
+
+  .border {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background-size: cover;
+    background: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) fixed center;
   }
 </style>

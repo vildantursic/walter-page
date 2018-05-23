@@ -101,22 +101,24 @@
       display: flex;
       font-size: 1em;
       margin-bottom: 1em;
+
       .main-list {
         width: 85%;
         overflow: hidden;
-        @include screen-size('xs') {
-          width: 100%;
-          font-size: 10px;
-        }
+
         @include screen-size('m') {
           font-size: 1em;
         }
         @include screen-size('s') {
           width: 100%;
-          font-size: 12px;
+          font-size: 1em;
         }
-        li {
+        @include screen-size('xs') {
+          width: 100%;
+          font-size: 1em;
+        }
 
+        li {
           border-bottom: solid 1.5px lightgrey;
           padding: 15px 35px;
           opacity: 0.7;
@@ -147,8 +149,8 @@
         display: flex;
         align-items: flex-end;
         margin-left: 5px;
-        @include screen-size('xs')
-        {
+
+        @include screen-size('xs') {
           display: none;
         }
         @include screen-size('m') {
@@ -193,12 +195,11 @@
     .date-filters {
       display: flex;
       align-items: flex-end;
-      @include screen-size('s')
-      {
+
+      @include screen-size('s') {
         display: none;
       }
-      @include screen-size('xs')
-      {
+      @include screen-size('xs') {
         display: none;
       }
 

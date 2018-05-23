@@ -56,9 +56,14 @@
       padding: 5px 10px 5px 0;
     }
     @include screen-size('s') {
-      font-size: 20px;
-      width: 20px;
-      padding: 5px 5px 5px 0;
+      font-size: 30px;
+      width: 30px;
+      padding: 5px 10px 5px 0;
+    }
+    @include screen-size('xs') {
+      font-size: 30px;
+      width: 30px;
+      padding: 5px 10px 5px 0;
     }
   }
   .fab:hover, .fas:hover {

@@ -44,11 +44,12 @@
   .card {
     height: auto;
     overflow: hidden;
+    margin: 25px 0;
 
     .card-img {
+      overflow: hidden;
       width: 100%;
       height: 70%;
-      overflow: hidden;
       background: $secondary-color;
 
       img {
@@ -71,17 +72,17 @@
           font-size: 1.3em;
         }
         @include screen-size('m') {
-          font-size: 1em;
+          font-size: 1.3em;
         }
       }
       p{
         margin-top: 0;
-        font-size: 0.9em;
+        font-size: 1em;
         @include screen-size('l') {
-          font-size: 0.8em;
+          font-size: 0.9em;
         }
         @include screen-size('m') {
-          font-size: 0.7em;
+          font-size: 0.8em;
         }
       }
     }
@@ -101,17 +102,11 @@
     }
 
     .divider {
-      margin-bottom: 15px;
+      margin: 15px 0;
       width: 100%;
       height: 3px;
       background-size: cover;
       background: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) fixed center;
-      @include screen-size('l') {
-        margin-bottom: 5px;
-      }
-      @include screen-size('m') {
-        margin-bottom: 0;
-      }
     }
 
     .social {
@@ -130,47 +125,38 @@
         .fa-linkedin {
           color: $dark-grey;
           width: 100%;
-          font-size: 3em;
-          @include screen-size('l') {
-            font-size: 2.5em;
-          }
-          @include screen-size('m') {
-            font-size: 1.5em;
-          }
+          font-size: 3.5em;
         }
         .fab:hover, .fas:hover {
           color: $main-color;
         }
       }
       .phone {
-        padding-top: 0.5em !important;
         grid-area: phone;
-        @include screen-size('m') {
-          font-size: 0.8em;
-          padding-top: 15px !important;
-        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
       }
       .email {
-        padding-bottom: 0.5em !important;
         grid-area: email;
-        @include screen-size('m') {
-          font-size: 0.8em;
-        }
+        text-overflow: ellipsis;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
       }
 
       .link {
         text-decoration: none;
         color: $dark-grey;;
         font-size: 1em;
-        @include screen-size('xl') {
-          font-size: 0.9em;
-        }
-        @include screen-size('l') {
-          font-size: 0.8em;
-        }
-        @include screen-size('m') {
-          font-size: 0.7em;
-        }
+        text-overflow: ellipsis;
+        width: 80%;
+        overflow: hidden;
+
       }
       .fab, .fas{
         color: $dark-grey;

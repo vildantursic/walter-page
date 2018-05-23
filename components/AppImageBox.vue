@@ -11,13 +11,6 @@
     props: ['images', 'showLightBox'],
     components: {
       Lightbox
-    },
-    methods: {
-      onClose() {
-        this.$refs.lightbox.lightBoxOn(() => {
-          console.log('hit')
-        })
-      }
     }
   }
 </script>

@@ -33,7 +33,15 @@
     width: 180px;
     padding-right: 4em;
     @include screen-size('m') {
-      padding-right: 2em;
+      padding-right: 1em;
+    }
+    @include screen-size('s') {
+      padding-right: 0em;
+      width: 145px;
+    }
+    @include screen-size('xs') {
+      padding-right: 0em;
+      width: 125px;
     }
     /*overflow: hidden;*/
 
@@ -65,9 +73,9 @@
 
       .title {
         text-align: center;
-        font-size: 0.8em;
+        font-size: 0.9em;
         @include screen-size('m') {
-          font-size: 0.7em;
+          font-size: 0.8em;
         }
       }
     }

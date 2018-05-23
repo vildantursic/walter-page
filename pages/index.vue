@@ -1,7 +1,7 @@
 <template>
 
   <div class="main-section">
-    <section class="padded-content full-height">
+    <section class="padded-content-services full-height">
       <video id="bgvid" playsinline autoplay muted loop>
         <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/Video-WEB.mp4" type="video/mp4">
       </video>
@@ -61,6 +61,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/mixins";
+  @import "../assets/styles/variables";
 
   video {
     position: fixed;
@@ -136,6 +137,9 @@
 
     .services {
       @include grid-items(5%, 20px, 4, 2);
+      @include screen-size('m') {
+        @include grid-items(10%, 40px, 2, 2);
+      }
     }
   }
 </style>

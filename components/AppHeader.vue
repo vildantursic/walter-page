@@ -17,6 +17,7 @@
             <li @click="showMenu = !showMenu"><nuxt-link :to="{ name: 'academy' }">BIM Academy</nuxt-link></li>
             <li @click="showMenu = !showMenu"><nuxt-link :to="{ name: 'scholarships' }">Scholarships</nuxt-link></li>
             <li @click="showMenu = !showMenu"><nuxt-link :to="{ name: 'news' }">News</nuxt-link></li>
+            <li @click="showMenu = !showMenu"><nuxt-link :to="`/about#contact`">Contact us</nuxt-link></li>
           </ul>
         </div>
       </div>
@@ -209,6 +210,12 @@
           color: #FFFFFF;
           padding: 1em 1em;
           background-color:#47494e;
+          @include screen-size('l') {
+            padding: 0.7em 0.7em;
+          }
+          @include screen-size('m') {
+            padding: 0.7em 0.7em;
+          }
         }
       }
     }

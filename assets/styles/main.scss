@@ -8,7 +8,7 @@ html, body {
   font-family: 'Roboto', sans-serif;
 
   @media (max-width: 425px) {
-    font-size: 0.9em;
+    font-size: 1em;
   }
 }
 
@@ -22,37 +22,50 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 a {
+  color: $main-color;
   text-decoration: none;
+
   &:hover {
     color: $main-color !important;
   }
 }
+
 a.nav-link {
   color: $dark-grey;
   &:hover {
     color: $main-color !important;
   }
 }
-
 .padded-content {
-  @include default-spacing(15)
+  @include default-spacing(15);
 }
+.padded-content-services {
+  @include default-spacing-services(15);
+}
+
 .footing-space {
   margin-bottom: 100px;
 }
+
 .full-height {
   height: 100%;
 }
 
 .desktop {
-  @media (max-width: 728px) {
+  @media (max-width: 1024px) {
     display: none !important;
   }
 }
 .mobile {
-  @media (min-width: 728px) {
+  @media (min-width: 1028px) {
     display: none !important;
   }
+}
+.desktop-filter{
+@media (min-width: 1024px) {
+  display: block;
+}
+  display: none;
 }
 
 .page-enter-active, .page-leave-active {
