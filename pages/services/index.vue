@@ -357,19 +357,30 @@
 
       }
       h1 {
-        font-size: 2.7em;
+        font-size: 3em;
+        width: 80%;
+
         @include screen-size('xl') {
-        font-size: 2.4em;
-      }
+          font-size: 2.4em;
+        }
         @include screen-size('l') {
           font-size: 2.3em;
         }
         @include screen-size('m') {
           font-size: 2em;
+          width: 100%;
+        }
+        @include screen-size('s') {
+          width: 100%;
+        }
+        @include screen-size('xs') {
+          width: 100%;
         }
       }
       div {
         font-size: 1.2em;
+        width: 80%;
+
         @include screen-size('xl') {
           font-size: 1.1em;
         }
@@ -378,17 +389,29 @@
         }
         @include screen-size('m') {
           font-size: 1em;
+          width: 100%;
         }
         @include screen-size('s') {
           font-size: 1em;
+          width: 100%;
         }
         @include screen-size('xs') {
           font-size: 1em;
+          width: 100%;
         }
       }
     }
 
     .services {
+      width: 80%;
+
+      @include screen-size('s') {
+        width: 100%;
+      }
+      @include screen-size('xs') {
+        width: 100%;
+      }
+
       h2{
         margin: 0;
         @include screen-size('l') {
