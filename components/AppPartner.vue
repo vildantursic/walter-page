@@ -1,5 +1,5 @@
 <template>
-  <div class="card animated fadeIn" data-aos="slide-up">
+  <div class="card animated fadeIn" data-aos="fade">
     <div class="card-img" v-if="item._embedded !== undefined">
       <a target="_blank" :href="item.acf.description">
         <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">

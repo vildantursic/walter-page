@@ -195,7 +195,7 @@
             ]
           },
           title: {
-            rendered: `${this.histories[this.currentHistory].acf.employees} ${this.histories[this.currentHistory].acf.employees > 50 ? '+' : ''} Employees`
+            rendered: `${this.histories[this.currentHistory].acf.employees} ${this.histories[this.currentHistory].acf.employees > 40 ? '+' : ''} Employees`
           }
         }
       },

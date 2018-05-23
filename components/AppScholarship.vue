@@ -9,11 +9,11 @@
       <div class="info-card">
         <AppSocial :item="item" :link="$route.path"></AppSocial>
         <div class="text">
-        <h1 class="title">{{item.title.rendered}}</h1>
-        <p>{{item.acf.description | truncate(35 * 3)}}</p>
+          <p class="published">Deadline: {{deadline}}</p>
+          <h1 class="title">{{item.title.rendered}}</h1>
+          <p>{{item.acf.description | truncate(35 * 3)}}</p>
         </div>
         <div class="bottom-group">
-        <p class="published">Deadline: {{deadline}}</p>
         <nuxt-link :to="`/scholarships/${item.id}`" class="more-container nav-link">
           <div class="plus">+</div>
           <div class="read"> Read <span class="more">more</span></div>
@@ -116,6 +116,25 @@
 
       .text {
         height: 150px;
+
+        .published {
+          font-size: 0.8em;
+          font-weight: 500;
+          color: gray;
+
+          @include screen-size('xs') {
+            font-size: 0.8em;
+            font-weight: 500;
+            color: gray;
+            float: left;
+          }
+          @include screen-size('s') {
+            font-size: 0.8em;
+            font-weight: 500;
+            color: gray;
+            float: left;
+          }
+        }
         .title {
           font-size: 3em;
           font-weight: bold;
@@ -141,24 +160,6 @@
         display: flex;
         flex-direction: column;
 
-        .published {
-          font-size: 0.8em;
-          font-weight: 500;
-          color: gray;
-
-          @include screen-size('xs') {
-            font-size: 0.8em;
-            font-weight: 500;
-            color: gray;
-            float: left;
-          }
-          @include screen-size('s') {
-            font-size: 0.8em;
-            font-weight: 500;
-            color: gray;
-            float: left;
-          }
-        }
 
         .more-container {
           margin-top: 2em;

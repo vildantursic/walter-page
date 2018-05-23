@@ -1,5 +1,5 @@
 <template>
-  <div class="card animated fadeIn" data-aos="slide-up">
+  <div class="card animated fadeIn" data-aos="fade">
     <nuxt-link class="nav-link card-img-container" :to="`/academy/${item.id}`">
       <div v-if="item._embedded !== undefined" >
         <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">

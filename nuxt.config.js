@@ -8,7 +8,7 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Walter, Your strategic BIM partner' },
-      { name: 'keywords', content: 'Walter, BIM, Sarajevo' },
+      { name: 'keywords', content: 'Walter, BIM, Sarajevo, Europe' },
       { itemprop: 'name', content: 'Walter, Your strategic BIM partner' },
       { itemprop: 'description', content: 'Your strategic BIM partner' },
       { itemprop: 'image', content: '/walter.png' },
@@ -64,6 +64,35 @@ module.exports = {
       'lodash'
     ]
   },
+  modules: [
+    '@nuxtjs/pwa',
+    '@nuxtjs/manifest',
+    '@nuxtjs/icon',
+    '@nuxtjs/workbox'
+  ],
+  workbox: {
+    runtimeCaching: [
+      {
+        // Should be a regex string. Compiles into new RegExp('https://my-cdn.com/.*')
+        urlPattern: 'https://my-cdn.com/.*',
+        // Defaults to `networkFirst` if omitted
+        handler: 'cacheFirst',
+        // Defaults to `GET` if omitted
+        method: 'GET'
+      }
+    ]
+  },
+  manifest: {
+    'name': 'Walter',
+    'short_name': 'Walter',
+    'theme_color': '#469fc1',
+    'background_color': '#ffffff',
+    'display': 'standalone',
+    'Scope': '/',
+    'start_url': '/',
+    'splash_pages': null
+  },
+  icon: {},
   css: [
     'animate.css/animate.min.css',
     'swiper/dist/css/swiper.css',
