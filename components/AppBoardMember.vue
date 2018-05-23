@@ -46,9 +46,9 @@
     overflow: hidden;
 
     .card-img {
+      overflow: hidden;
       width: 100%;
       height: 70%;
-      overflow: hidden;
       background: $secondary-color;
 
       img {
@@ -157,6 +157,12 @@
       .email {
         padding-bottom: 0em !important;
         grid-area: email;
+        text-overflow: ellipsis;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+
         @include screen-size('l') {
           font-size: 0.8em;
         }
@@ -169,6 +175,10 @@
         text-decoration: none;
         color: $dark-grey;;
         font-size: 1em;
+        text-overflow: ellipsis;
+        width: 80%;
+        overflow: hidden;
+
         @include screen-size('xl') {
           font-size: 1em;
         }

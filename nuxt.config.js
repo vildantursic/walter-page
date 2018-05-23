@@ -78,6 +78,7 @@ module.exports = {
     {src: '~plugins/scroll.js', ssr: true},
     {src: '~/plugins/aos.js', ssr: false},
     {src: '~plugins/lightbox.js', ssr: false},
+    {src: '~plugins/analytics.js', ssr: false},
     '~/plugins/vue2-filters.js',
     '~plugins/filters.js'
   ]

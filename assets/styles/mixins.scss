@@ -74,7 +74,7 @@
                        "space main main main main space"
                        "footer footer footer footer footer footer";
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     grid-template-columns: 5% auto 5%;
   }
 }
@@ -89,7 +89,7 @@
   @media (max-width: 1024px) {
     grid-template-columns: repeat($column-size-md, 1fr);
   }
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     grid-template-columns: repeat($column-size-sm, 1fr);
   }
 }
