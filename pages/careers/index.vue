@@ -105,7 +105,6 @@
         }
       },
       showSearch(){
-        console.log('inside')
         document.getElementById('search-image').style.display = 'block';
       }
     }

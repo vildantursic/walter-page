@@ -27,6 +27,7 @@
     align-items: flex-end;
     justify-content: flex-end;
     flex-direction: column;
+
     &:hover {
       color: $main-color;
     }
@@ -35,6 +36,8 @@
       font-size: 4em;
       margin: 0;
       cursor: pointer;
+      font-weight: bolder;
+
       &:hover {
         color: $main-color;
       }
@@ -45,6 +48,7 @@
       margin: 0;
       color: $main-color;
       cursor: pointer;
+      font-weight: bolder;
     }
   }
   onhover{

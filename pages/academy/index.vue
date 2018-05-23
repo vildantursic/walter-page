@@ -66,9 +66,6 @@
       goToPost (id) {
         this.$router.push({ path: `news/${id}`})
       },
-      getImageSource(item) {
-        console.log(item.content )
-      },
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/bim_academy_posts?per_page=100&_embed').then((response) => {
           this.items = response.data
@@ -130,7 +127,6 @@
         }
       },
       showSearch(){
-        console.log('inside')
         document.getElementById('search-image').style.display = 'block';
      }
     },

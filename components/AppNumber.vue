@@ -63,7 +63,7 @@
       opacity: 0.5;
       margin: 10px 0;
       @include screen-size('m') {
-        font-size: 0.9em;
+        font-size: 1em;
       }
     }
 

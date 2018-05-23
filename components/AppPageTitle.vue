@@ -17,7 +17,6 @@
     props: ['supertitle', 'title', 'subtitle'],
     methods: {
       hideSearch(){
-        console.log('inside')
         document.getElementById('search-image').style.display = 'none';
         document.getElementById('search').focus()
       }
@@ -31,9 +30,9 @@
   .title-page {
     margin: 15vh 0 10vh 0;
     @include screen-size('m') {
-      margin: 10vh 0 0vh 0;
+      margin: 10vh 0 0 0;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
     }
     @include screen-size('s') {
       margin: 10vh 0 1vh 0;
@@ -45,14 +44,6 @@
       font-size: 1.5em;
       font-weight: lighter;
       opacity: 0.70;
-      @include screen-size('s')
-      {
-        display: none;
-      }
-      @include screen-size('xs')
-      {
-        display: none;
-      }
     }
     .title {
       font-size: 4.5em;
@@ -61,7 +52,13 @@
       font-weight: bold;
       color: $dark-grey;
       @include screen-size('m') {
-        font-size: 3em;
+        font-size: 2.5em;
+      }
+      @include screen-size('s') {
+        font-size: 2em;
+      }
+      @include screen-size('xs') {
+        font-size: 2em;
       }
     }
     .subtitle {
@@ -93,11 +90,60 @@
         width: 85%;
         input {
           font-size: 0.8em;
-          padding: 10px 35px;
+          padding: 10px 10px;
           width: 100%;
           border-bottom: solid 1.5px $dark-grey;
           outline: none;
           border: none;
+
+          &:focus {
+            outline: none;
+            border-bottom: solid 2px $main-color;
+            font-weight: bolder;
+          }
+        }
+        .search-image {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      @include screen-size('m') {
+        display: flex;
+        margin: 10px 0 10px 15%;
+        height: 3em;
+        width: 85%;
+        input {
+          font-size: 0.8em;
+          padding: 10px 10px;
+          width: 100%;
+          border-bottom: solid 1.5px $dark-grey;
+          outline: none;
+          border: none;
+
+          &:focus {
+            outline: none;
+            border-bottom: solid 2px $main-color;
+            font-weight: bolder;
+          }
+        }
+        .search-image {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      @include screen-size('xs') {
+        display: flex;
+        margin: 10px 0 10px 15%;
+        height: 3em;
+        width: 85%;
+        input {
+          font-size: 0.8em;
+          padding: 10px 10px;
+          width: 100%;
+          border-bottom: solid 1.5px $dark-grey;
+          outline: none;
+          border: none;
+
           &:focus {
             outline: none;
             border-bottom: solid 2px $main-color;

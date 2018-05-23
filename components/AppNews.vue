@@ -70,7 +70,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 70%;
+      width: 60%;
 
       @include screen-size('xs') {
         width: 100%;
@@ -89,7 +89,7 @@
 
     .info-card {
       position: relative;
-      width: 30%;
+      width: 40%;
       padding: 0 2em 0 2em;
 
       @include screen-size(xs) {
@@ -108,7 +108,7 @@
         color: $main-color;
         letter-spacing: 2px;
         @include screen-size('s') {
-          font-size: 0.8em;
+          font-size: 0.9em;
         }
       }
       .author {
@@ -117,7 +117,7 @@
         color: $dark-color;
         font-size: 0.9em;
         @include screen-size('s') {
-          font-size: 0.9em;
+          font-size: 1em;
         }
       }
     }
@@ -163,6 +163,9 @@
     @include screen-size('m') {
       font-size: 1.5em;
     }
+    @include screen-size('s') {
+      font-size: 1.4em;
+    }
     &:hover {
       color: $main-color;
     }
@@ -179,10 +182,10 @@
       font-size: 1em;
     }
     @include screen-size('m') {
-      font-size: 0.9em;
+      font-size: 1em;
     }
     @include screen-size('s') {
-      font-size: 0.9em;
+      font-size: 1em;
     }
   }
 

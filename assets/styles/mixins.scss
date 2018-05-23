@@ -23,7 +23,7 @@
         @content;
       }
     } @else if ($size == m) {
-      @media (max-width: 1024px) {
+      @media (max-width: 1025px) {
         @content;
       }
     } @else if ($size == s) {
@@ -42,13 +42,27 @@
   padding: 0 20%;
 
   @media (max-width: 1024px) {
-    padding: 0 20%;
+    padding: 0 13%;
   }
   @media (max-width: 768px) {
-    padding: 0 20%;
+    padding: 0 13%;
   }
   @media (max-width: 425px) {
     padding: 0 35px;
+  }
+}
+@mixin default-spacing-services($size){
+
+  padding: 0 20%;
+
+  @media (max-width: 1024px) {
+    padding: 35px 25%;
+  }
+  @media (max-width: 768px) {
+    padding: 35px 20%;
+  }
+  @media (max-width: 425px) {
+    padding: 35px 35px 75px 35px;
   }
 }
 
@@ -60,7 +74,7 @@
                        "space main main main main space"
                        "footer footer footer footer footer footer";
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     grid-template-columns: 5% auto 5%;
   }
 }
@@ -72,10 +86,10 @@
   grid-column-gap: $gap-col;
   grid-row-gap: $gap-row;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     grid-template-columns: repeat($column-size-md, 1fr);
   }
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     grid-template-columns: repeat($column-size-sm, 1fr);
   }
 }

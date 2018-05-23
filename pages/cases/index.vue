@@ -22,8 +22,7 @@
   import AppPageTitle from '~/components/AppPageTitle'
   import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
-  import { find } from 'lodash'
-  import { sortBy } from 'lodash'
+  import { find, sortBy } from 'lodash'
 
   export default {
     components: {
@@ -87,9 +86,7 @@
       getCategories() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/case_categories').then((response) => {
           this.filters = response.data;
-          console.log(this.filters)
-          this.sortedFilters = _.sortBy(this.filters, 'id')
-          console.log(this.sortedFilters)
+          this.sortedFilters = sortBy(this.filters, 'id')
           this.items.map((item) => {
             const cats = []
             response.data.forEach(cat => {
@@ -111,7 +108,6 @@
       selectFilter (id) {
         if (id) {
           this.selectedFilter = +id
-          console.log(this.selectedFilter)
           this.items = this.filterItems(+id)
         }
       },
@@ -126,7 +122,6 @@
         }
       },
       showSearch(){
-        console.log('inside')
         document.getElementById('search-image').style.display = 'block';
       }
     }

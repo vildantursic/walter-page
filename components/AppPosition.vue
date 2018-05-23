@@ -45,7 +45,18 @@
     width: 100%;
     height: 450px;
     overflow: hidden;
-
+    @include screen-size('m')
+    {
+      height: 400px;
+    }
+   @include screen-size('xs')
+    {
+      height: 400px;
+    }
+   @include screen-size('s')
+    {
+      height: 400px;
+    }
     .position {
       color: $dark-grey;
       margin: 0;
@@ -83,12 +94,14 @@
     .bottom {
       position: absolute;
       bottom: 0;
+      right: 0;
       width: 100%;
       margin-bottom: 2em;
 
       .more-container {
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         padding-top: 10px;
 
         .read {
