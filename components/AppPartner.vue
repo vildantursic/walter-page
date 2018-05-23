@@ -50,6 +50,7 @@
     }
   }
   .about{
+    letter-spacing: 0.5px;
     @include screen-size('l') {
       font-size: 0.8em;
     }
@@ -59,8 +60,5 @@
     a{
       color: #000!important;
     }
-  }
-  a{
-    color: #000!important;
   }
 </style>
