@@ -145,6 +145,10 @@
       .phone {
         padding-top: 0.5em !important;
         grid-area: phone;
+        @include screen-size('l') {
+          font-size: 0.8em;
+          padding-top: 15px !important;
+        }
         @include screen-size('m') {
           font-size: 1.3em;
           padding-top: 10px !important;
@@ -153,6 +157,9 @@
       .email {
         padding-bottom: 0em !important;
         grid-area: email;
+        @include screen-size('l') {
+          font-size: 0.8em;
+        }
         @include screen-size('m') {
           font-size: 1.3em;
         }
