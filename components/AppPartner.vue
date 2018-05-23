@@ -59,6 +59,7 @@
   }
 
   .about{
+    letter-spacing: 0.5px;
     @include screen-size('l') {
       font-size: 1.2em;
     }
