@@ -1,18 +1,18 @@
 <template>
   <div class="card animated fadeIn" data-aos="fade">
     <nuxt-link class="nav-link card-img-container" :to="`/academy/${item.id}`">
-      <div v-if="item._embedded !== undefined" >
-        <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
-        <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
+      <div v-if="item._embedded !== undefined">
+        <img v-if="item._embedded['wp:featuredmedia'] !== undefined"
+             :src="item._embedded['wp:featuredmedia'][0].source_url"
+             :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+        <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined"
+             src="~/static/images/walter-logo.png" alt="">
       </div>
     </nuxt-link>
     <div class="info">
       <nuxt-link class="nav-link" :to="`/academy/${item.id}`">
         <h1 class="title">{{item.title.rendered}}</h1>
       </nuxt-link>
-      <!--<div class="author">-->
-        <!--{{item["_embedded"]["wp:featuredmedia"][0]["author"]}}-->
-      <!--</div>-->
       <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>
       <div class="published">Deadline: {{deadline}}</div>
     </div>
@@ -26,11 +26,10 @@
     props: ['item'],
     data() {
       return {
-          deadline: moment(this.item.acf.deadline ? this.item.acf.deadline : this.item.date).format('DD-MM-YYYY')
+        deadline: moment(this.item.acf.deadline ? this.item.acf.deadline : this.item.date).format('DD-MM-YYYY')
       }
     },
-    components: {
-    },
+    components: {},
     methods: {}
   }
 </script>
@@ -64,23 +63,23 @@
         height: 100%;
       }
     }
+
     .info {
       display: flex;
       flex-direction: column;
-      .title
-      {
+
+      .title {
         font-weight: 600;
         font-size: 1.5em;
         padding-bottom: 1em;
       }
-      .author
-      {
+      .author {
         font-size: 1em;
         font-weight: 600;
         padding-bottom: 1em;
       }
-      .published
-      {
+
+      .published {
         position: absolute;
         bottom: 0;
         font-size: 0.8em;

@@ -9,16 +9,15 @@
 <script>
   export default {
     props: ['number', 'text'],
-    components: {
-    },
+    components: {},
     methods: {
       nFormatter(num, digits) {
         let si = [
-          { value: 1, symbol: "" },
-          { value: 1E3, symbol: "k" },
-          { value: 1E6, symbol: "M" },
-          { value: 1E9, symbol: "G" },
-          { value: 1E12, symbol: "T" }
+          {value: 1, symbol: ""},
+          {value: 1E3, symbol: "k"},
+          {value: 1E6, symbol: "M"},
+          {value: 1E9, symbol: "G"},
+          {value: 1E12, symbol: "T"}
         ];
         let rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
         let i;
@@ -36,7 +35,8 @@
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
   @import "../assets/styles/mixins";
-  .card{
+
+  .card {
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -44,7 +44,6 @@
     .number {
       font-size: 4.5em;
       margin: 10px 0;
-      /*opacity: 0.8;*/
       font-weight: bolder;
       color: $dark-grey;
       @include screen-size('xl') {

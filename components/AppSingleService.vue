@@ -1,9 +1,12 @@
 <template>
   <div class="card animated fadeIn" data-aos="fade" v-on:click="clickService()">
     <div v-if="item._embedded !== undefined" class="image">
-      <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+      <img v-if="item._embedded['wp:featuredmedia'] !== undefined"
+           :src="item._embedded['wp:featuredmedia'][0].source_url"
+           :alt="item._embedded['wp:featuredmedia'][0].alt_text">
 
-      <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
+      <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined"
+           src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
       <h4 class="title">{{item.title.rendered}}</h4>
@@ -15,10 +18,9 @@
 <script>
   export default {
     props: ['item'],
-    components: {
-    },
+    components: {},
     methods: {
-      clickService () {
+      clickService() {
         this.$emit('onServiceClicked')
       }
     }
@@ -27,6 +29,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/mixins";
+
   .card {
     display: flex;
     flex-direction: column;
@@ -43,10 +46,8 @@
       padding-right: 0;
       width: 125px;
     }
-    /*overflow: hidden;*/
 
     .image {
-      /*min-height: 100px;*/
       max-height: 100px;
       overflow: hidden;
       display: flex;
@@ -67,7 +68,6 @@
     .info {
       height: 50px;
       display: flex;
-      /*align-items: center;*/
       justify-content: center;
       color: white;
 

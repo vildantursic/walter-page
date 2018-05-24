@@ -51,7 +51,8 @@
       font-weight: bolder;
     }
   }
-  .on-hover{
+
+  .on-hover {
     &:hover {
       color: $main-color;
     }
