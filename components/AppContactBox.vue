@@ -78,7 +78,7 @@
       padding-left: 1em;
     }
     .info {
-      padding: 0em 1em;
+      padding: 0 1em;
 
       .name {
         font-size: 1.25em;

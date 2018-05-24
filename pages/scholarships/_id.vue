@@ -1,9 +1,5 @@
 <template>
   <section>
-    <!--<div v-if="item._embedded !== undefined" class="card-img-container">-->
-      <!--<img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">-->
-      <!--<img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">-->
-    <!--</div>-->
     <div class="header-news padded-content">
       <h1 class="title">{{page.title.rendered}}</h1>
       <AppSocial :item="page" :link="$route.path"></AppSocial>
@@ -47,7 +43,7 @@
       AppSocial
     },
     asyncData({ route }) {
-      return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/scholarships/${route.params.id}?_embed`).then((response) => {
+      return axios.get(`http://cms.walter.ba/wp-json/wp/v2/scholarships/${route.params.id}?_embed`).then((response) => {
         return {
           page: response.data,
           date: moment(response.data.date).format('MMM YYYY [at] LT')
@@ -61,7 +57,7 @@
         this.$router.push({ path: `/news/${id}`})
       },
       getItems() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/scholarships?_embed').then((response) => {
+        axios.get('http://cms.walter.ba/wp-json/wp/v2/scholarships?_embed').then((response) => {
           this.items = response.data
         }).catch((error) => {
           console.log(error);

@@ -50,7 +50,7 @@
       this.getItems()
     },
     asyncData({}) {
-      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/60').then((response) => {
+      return axios.get('http://cms.walter.ba/wp-json/wp/v2/pages/60').then((response) => {
         return { page: response.data }
       }).catch((error) => {
         console.log(error)
@@ -72,7 +72,7 @@
         this.$modal.hide('case-modal');
       },
       getItems() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases?per_page=100&_embed').then((response) => {
+        axios.get('http://cms.walter.ba/wp-json/wp/v2/cases?per_page=100&_embed').then((response) => {
           this.items = response.data
           this.tempItems = this.items
           this.getCategories()
@@ -84,7 +84,7 @@
         });
       },
       getCategories() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/case_categories').then((response) => {
+        axios.get('http://cms.walter.ba/wp-json/wp/v2/case_categories').then((response) => {
           this.filters = response.data;
           this.sortedFilters = sortBy(this.filters, 'id')
           this.items.map((item) => {

@@ -1,6 +1,6 @@
 <template>
   <div class="more">
-    <div class="onhover">
+    <div class="on-hover">
       <h1 @click="showMore()">{{numberOfItems}} <span>+</span></h1>
       <h3 @click="showMore()">more</h3>
     </div>
@@ -51,7 +51,7 @@
       font-weight: bolder;
     }
   }
-  onhover{
+  .on-hover{
     &:hover {
       color: $main-color;
     }

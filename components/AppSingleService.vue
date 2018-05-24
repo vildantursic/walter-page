@@ -36,11 +36,11 @@
       padding-right: 1em;
     }
     @include screen-size('s') {
-      padding-right: 0em;
+      padding-right: 0;
       width: 145px;
     }
     @include screen-size('xs') {
-      padding-right: 0em;
+      padding-right: 0;
       width: 125px;
     }
     /*overflow: hidden;*/

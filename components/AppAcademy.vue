@@ -48,10 +48,9 @@
     margin: 1em;
     border-width: 0 0 3px 0;
     border-style: solid;
-    -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-    -webkit-border-image: -webkit-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-    border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-    border-image-slice: 1;
+    -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%) 1;
+    -webkit-border-image: -webkit-linear-gradient(45deg, #0093c8 0%, #faaf40 100%) 1;
+    border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%) 1;
 
     .card-img-container {
       background-color: $secondary-color;

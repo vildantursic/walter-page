@@ -92,7 +92,6 @@
           font-size: 0.8em;
           padding: 10px 10px;
           width: 100%;
-          border-bottom: solid 1.5px $dark-grey;
           outline: none;
           border: none;
 
@@ -116,7 +115,6 @@
           font-size: 0.8em;
           padding: 10px 10px;
           width: 100%;
-          border-bottom: solid 1.5px $dark-grey;
           outline: none;
           border: none;
 
@@ -140,7 +138,6 @@
           font-size: 0.8em;
           padding: 10px 10px;
           width: 100%;
-          border-bottom: solid 1.5px $dark-grey;
           outline: none;
           border: none;
 

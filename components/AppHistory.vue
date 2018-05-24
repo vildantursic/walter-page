@@ -77,7 +77,7 @@
     props: ['items', 'currentHistory'],
     watch: {
       currentHistory: function (newVal, oldVal) {
-        this.oldCurrentHistory = oldVal
+        this.oldCurrentHistory = oldVal;
         this.slideTo(newVal)
       }
     },
@@ -217,15 +217,15 @@
 
   @keyframes write-left {
     0% {
-      stroke-dashoffset: 5045;
+      stroke-dashoffset: 5045px;
     }
     100% {
-      stroke-dashoffset: 10090;
+      stroke-dashoffset: 10090px;
     }
   }
   @keyframes write-right {
     0% {
-      stroke-dashoffset: 5045;
+      stroke-dashoffset: 5045px;
     }
     100% {
       stroke-dashoffset: 0;

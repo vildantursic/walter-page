@@ -64,7 +64,7 @@
     },
     methods: {
       getServices() {
-        axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/services`).then((response) => {
+        axios.get(`http://cms.walter.ba/wp-json/wp/v2/services`).then((response) => {
           this.services = response.data
         }).catch((error) => {
           console.log(error)

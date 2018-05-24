@@ -2,7 +2,7 @@
   <div class="filter">
     <div class="main-filters">
       <ul class="main-list">
-        <li :class="{ active: -1 === selectedFilter }" @click="selectFilter(-1)">All</li>
+        <li :class="{ active: -1 === +selectedFilter }" @click="selectFilter(-1)">All</li>
         <li v-for="(filter, index) of filters" :key="index" :class="{ active: filter.id === selectedFilter }" @click="selectFilter(filter.id)">{{filter.name}}</li>
       </ul>
       <div class="search">
@@ -48,16 +48,16 @@
     },
     methods: {
       selectFilter(id) {
-        this.date.month = -1
+        this.date.month = -1;
         this.$emit('onFilterSelected', id)
       },
       setMonth(id) {
-        this.date.month = id
+        this.date.month = id;
         this.$emit('onMonthSelected', this.date.month)
       },
       setYear(direction) {
-        this.date.month = -1
-        direction === 1 ? this.date.year++ : this.date.year--
+        this.date.month = -1;
+        direction === 1 ? this.date.year++ : this.date.year--;
         this.$emit('onYearSelected', this.date.year)
       }
     }

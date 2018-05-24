@@ -67,7 +67,7 @@
       this.getItems()
     },
     asyncData({}) {
-      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/68').then((response) => {
+      return axios.get('http://cms.walter.ba/wp-json/wp/v2/pages/68').then((response) => {
         return { page: response.data }
       }).catch((error) => {
         console.log(error)
@@ -78,7 +78,7 @@
       this.$router.push({ path: `news/${id}`})
     },
     getItems() {
-      axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/scholarships?per_page=100&_embed').then((response) => {
+      axios.get('http://cms.walter.ba/wp-json/wp/v2/scholarships?per_page=100&_embed').then((response) => {
         this.items = response.data
         this.tempItems = response.data
         this.fillUser()
@@ -88,7 +88,7 @@
       });
     },
     fillUser() {
-      axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
+      axios.get('http://cms.walter.ba/wp-json/wp/v2/users').then((response) => {
         this.items.map((item) => {
           if (find(response.data[0].id, { id: item["_embedded"]["wp:featuredmedia"][0]["author"]})) {
             item["_embedded"]["wp:featuredmedia"][0]["author"] = response.data[0].name
@@ -100,7 +100,7 @@
       });
     },
     fillCategories() {
-      axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
+      axios.get('http://cms.walter.ba/wp-json/wp/v2/categories').then((response) => {
         this.items.map((item) => {
           const cats = []
           response.data.forEach(cat => {

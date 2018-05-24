@@ -142,12 +142,12 @@
           @include screen-size('xs') {
             font-size: 1.5em;
             font-weight: bold;
-            margin: 0px 0;
+            margin: 0;
           }
           @include screen-size('s') {
             font-size: 1.5em;
             font-weight: bold;
-            margin: 0px 0;
+            margin: 0;
           }
         }
       }

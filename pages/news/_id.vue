@@ -64,7 +64,7 @@
       AppSocial
     },
     asyncData({ route }) {
-      return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts/${route.params.id}?_embed`).then((response) => {
+      return axios.get(`http://cms.walter.ba/wp-json/wp/v2/posts/${route.params.id}?_embed`).then((response) => {
         return {
           page: response.data,
           date: moment(response.data.date).format('MMM YYYY [at] LT')
@@ -84,7 +84,7 @@
         this.$router.push({ path: `/news/${id}`})
       },
       getItems() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
+        axios.get('http://cms.walter.ba/wp-json/wp/v2/posts?_embed').then((response) => {
           this.items = response.data
           this.fillUser()
           this.fillCategories()
@@ -93,7 +93,7 @@
         });
       },
       fillUser() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/users').then((response) => {
+        axios.get('http://cms.walter.ba/wp-json/wp/v2/users').then((response) => {
           this.authors = response.data
           this.items.map((item) => {
             if (find(response.data, { id: item.author })) {
@@ -106,7 +106,7 @@
         });
       },
       fillCategories() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/categories').then((response) => {
+        axios.get('http://cms.walter.ba/wp-json/wp/v2/categories').then((response) => {
           this.categories = response.data
           this.page.categories = this.page.categories.map(cat => {
             return find(this.categories, (o) => o.id === cat)

@@ -70,10 +70,8 @@
     .border {
       width: 100%;
       height: 3px;
-      background-image: linear-gradient(90deg, #0093c8 0%, #faaf40 100%);
       background-size: cover;
-      background-position: center;
-      background-attachment: fixed;  /* <- here it is */
+      background: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) fixed center;
     }
   }
 </style>
