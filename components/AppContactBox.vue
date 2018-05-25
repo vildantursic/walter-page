@@ -46,27 +46,31 @@
     padding: 1.5em 1em;
     width: 363px;
     box-shadow: 8px 8px 8px 0 rgba(57, 60, 61, 0.8);
-    z-index: 10000;
+    z-index: 1;
     @include screen-size('xl') {
       padding: 1em 1em;
       width: 300px;
       bottom: 4%;
+      z-index: 2;
     }
     @include screen-size('l') {
       padding: 0.9em 0.9em;
       width: 300px;
       bottom: 4%;
+      z-index: 2;
     }
     @include screen-size('m') {
       padding: 0.5em 0.5em;
       width: 260px;
       bottom: 4%;
+      z-index: 2;
     }
 
     @include screen-size('xs') {
       position: fixed;
       margin-top: 4%;
       bottom: 4%;
+      z-index: 2;
     }
 
     .image {

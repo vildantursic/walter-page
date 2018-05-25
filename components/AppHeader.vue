@@ -133,6 +133,7 @@
       align-items: center;
       height: 4em;
       margin-right: 10%;
+      z-index: 1000000;
 
       .open {
         color: white;
@@ -147,6 +148,7 @@
         width: 100vw;
         height: 100vh;
         background: $dark-color;
+        z-index: -10;
 
         .close {
           color: white;
