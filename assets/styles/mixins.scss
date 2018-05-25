@@ -92,6 +92,9 @@
   @media (max-width: 768px) {
     grid-template-columns: repeat($column-size-sm, 1fr);
   }
+  @media (max-width: 425px) {
+    grid-template-columns: repeat($column-size-sm, 1fr);
+  }
 }
 @mixin modal-grid($size){
   display: grid;
