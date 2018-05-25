@@ -10,10 +10,10 @@
       loading: false
     }),
     methods: {
-      start () {
+      start() {
         this.loading = true
       },
-      finish () {
+      finish() {
         this.loading = false
       }
     }
@@ -33,7 +33,7 @@
     align-items: center;
     justify-content: center;
     animation: hue 10s infinite alternate;
-    img{
+    img {
       height: 8em;
     }
   }
@@ -46,5 +46,4 @@
       filter: hue-rotate(360deg);
     }
   }
-
 </style>

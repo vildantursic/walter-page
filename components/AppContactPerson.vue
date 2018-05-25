@@ -63,6 +63,7 @@
 
   .mail {
     color: #ffffff;
+
     &:hover {
       color: $main-color !important;
     }

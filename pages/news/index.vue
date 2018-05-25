@@ -56,7 +56,8 @@
     computed: {
       searchedList() {
         return this.items.filter(item => {
-          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase())
+          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase()) ||
+            item.acf.description.toLowerCase().includes(this.search.toLowerCase())
         })
       }
     },

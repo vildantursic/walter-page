@@ -40,7 +40,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    /*justify-content: space-around;*/
     overflow: hidden;
     background-color: #393c3d;
     border-radius: 5px;
@@ -78,15 +77,15 @@
       padding-left: 1em;
     }
     .info {
-      padding: 0em 1em;
+      padding: 0 1em;
 
       .name {
         font-size: 1.25em;
         font-weight: 900;
         color: white;
         @include screen-size('xl') {
-        font-size: 1.1em;
-      }
+          font-size: 1.1em;
+        }
         @include screen-size('l') {
           font-size: 1em;
         }

@@ -77,11 +77,11 @@
     props: ['items', 'currentHistory'],
     watch: {
       currentHistory: function (newVal, oldVal) {
-        this.oldCurrentHistory = oldVal
+        this.oldCurrentHistory = oldVal;
         this.slideTo(newVal)
       }
     },
-    data () {
+    data() {
       return {
         oldCurrentHistory: this.currentHistory,
         swiperOption: {
@@ -106,7 +106,7 @@
       },
       moveToNext() {
         if (this.historySwiper.realIndex++ < 4)
-        this.$emit('currentHistory', this.historySwiper.realIndex++)
+          this.$emit('currentHistory', this.historySwiper.realIndex++)
       }
     }
   }
@@ -115,6 +115,7 @@
 <style lang="scss" scoped>
   @import "../assets/styles/mixins";
   @import "../assets/styles/variables";
+
   .swiper {
     width: 100%;
     height: 100%;
@@ -123,6 +124,7 @@
       width: 100vw;
     }
   }
+
   .my-swiper {
     height: 100%;
     width: 100%;
@@ -183,6 +185,7 @@
           top: calc(50% + 70px);
           cursor: pointer;
           height: 45px;
+
           @include screen-size('xl') {
             top: calc(50% + 55px);
           }
@@ -210,6 +213,7 @@
     stroke-dasharray: 5045;
     animation: 5s write-left;
   }
+
   .line-draw-right {
     stroke-dasharray: 5045;
     animation: 5s write-right;
@@ -217,15 +221,16 @@
 
   @keyframes write-left {
     0% {
-      stroke-dashoffset: 5045;
+      stroke-dashoffset: 5045px;
     }
     100% {
-      stroke-dashoffset: 10090;
+      stroke-dashoffset: 10090px;
     }
   }
+
   @keyframes write-right {
     0% {
-      stroke-dashoffset: 5045;
+      stroke-dashoffset: 5045px;
     }
     100% {
       stroke-dashoffset: 0;

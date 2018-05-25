@@ -99,17 +99,17 @@
     },
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
-        this.activeItem = currentItem
-        const href = this.activeItem['href']
+        this.activeItem = currentItem;
+        const href = this.activeItem['href'];
         const res = href.split("#");
-        const link = res[0]
-        const number = parseInt(res[1])
+        const link = res[0];
+        const number = parseInt(res[1]);
         this.services.forEach((service) => {
           if (service.id === number) {
             this.contact_person = service.acf.contact_person
           }
         })
-        this.activeService = currentItem.textContent
+        this.activeService = currentItem.textContent;
         this.once = false
     },
       fillSubServices () {
@@ -118,7 +118,7 @@
             this.services = this.services.map(service => {
               service.acf.sub_services = service.acf.sub_services.map(subService => {
                 return find(response.data, { id: subService.ID })
-              })
+              });
               return service
             })
           }
@@ -132,12 +132,12 @@
       },
       handleScroll (e) {
         const top  = window.pageYOffset || document.documentElement.scrollTop
-        let nextId = 0
+        let nextId = 0;
         if (this.oldScroll < top) {
-          const href = this.activeItem['href']
+          const href = this.activeItem['href'];
           const res = href.split("#");
-          const link = res[0]
-          const number = parseInt(res[1])
+          const link = res[0];
+          const number = parseInt(res[1]);
           if (number === 78) {
             nextId = number
           } else {
@@ -148,10 +148,10 @@
             this.once = true;
           }
         } else if (this.oldScroll > top) {
-          const href = this.activeItem['href']
+          const href = this.activeItem['href'];
           const res = href.split("#");
-          const link = res[0]
-          const number = parseInt(res[1])
+          const link = res[0];
+          const number = parseInt(res[1]);
 
           if (number === 75) {
             nextId = number
