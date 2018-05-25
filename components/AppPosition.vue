@@ -1,5 +1,5 @@
 <template>
-  <div class="info-card animated fadeIn" data-aos="slide-up">
+  <div class="info-card animated fadeIn" data-aos="fade">
     <h1 class="position">{{ item.title.rendered | truncate(25)}}</h1>
     <p class="published">Published: {{date}}</p>
     <h1 class="description">Job description</h1>
@@ -43,20 +43,19 @@
   .info-card {
     position: relative;
     width: 100%;
-    height: 450px;
+    height: 400px;
     overflow: hidden;
-    @include screen-size('m')
-    {
+
+    @include screen-size('m') {
       height: 400px;
     }
-   @include screen-size('xs')
-    {
+    @include screen-size('xs') {
       height: 400px;
     }
-   @include screen-size('s')
-    {
+    @include screen-size('s') {
       height: 400px;
     }
+
     .position {
       color: $dark-grey;
       margin: 0;
@@ -71,7 +70,7 @@
     }
 
     .description {
-      margin: 1.5em 0;
+      margin: 1em 0;
       font-size: 1em;
       font-weight: 600;
       color: $main-color;
@@ -79,6 +78,7 @@
     }
 
     .data {
+      width: 70%;
       margin: 0;
       height: 70px;
       overflow: hidden;
@@ -86,7 +86,7 @@
 
     .number {
       color: $dark-grey;
-      margin: 1.5em 0;
+      margin: 1em 0;
       font-size: 1.2em;
       font-weight: 700;
     }
@@ -102,7 +102,6 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        padding-top: 10px;
 
         .read {
           font-size: 1.5em;

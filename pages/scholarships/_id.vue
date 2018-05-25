@@ -1,9 +1,5 @@
 <template>
   <section>
-    <!--<div v-if="item._embedded !== undefined" class="card-img-container">-->
-      <!--<img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">-->
-      <!--<img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">-->
-    <!--</div>-->
     <div class="header-news padded-content">
       <h1 class="title">{{page.title.rendered}}</h1>
       <AppSocial :item="page" :link="$route.path"></AppSocial>
@@ -139,6 +135,21 @@
     .post-left {
       width: 70%;
       padding: 0 2% 2% 2%;
+      @include screen-size('s')
+      {
+        width: 100%;
+      }
+      @include screen-size('m')
+      {
+        width: 100%;
+      }
+      @include screen-size('xs')
+      {
+        width: 100%;
+      }
+      .header-left {
+        font-weight: 800;
+      }
 
       .header-left {
         font-weight: 800;

@@ -12,6 +12,10 @@
                <!--@onMonthSelected="selectMonth">-->
       <!--<input type="text" placeholder="Search.." v-model="search">-->
     <!--</AppFilter>-->
+    <div class="no-items">
+      <h1 v-if="searchedList.length === 0 && !loading">Currently there is nothing to show, please come back later.</h1>
+      <h1 v-if="loading">Loading ...</h1>
+    </div>
     <div class="items">
       <AppPosition v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item"/>
     </div>
@@ -32,6 +36,7 @@
   export default {
     data() {
       return {
+        loading: true,
         items: [],
         itemsLenght: null,
         itemsToShow: null,
@@ -78,6 +83,7 @@
           this.items = response.data
           this.itemsToShow = this.items.length - 1
           this.tempItems = response.data
+          this.loading = false
         }).catch((error) => {
           console.log(error);
         });
@@ -115,7 +121,7 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(0px, 2em, 3, 2, 1);
+    @include grid-items(5%, 2em, 3, 2, 1);
     margin-bottom: 2em;
   }
   .items-bellow

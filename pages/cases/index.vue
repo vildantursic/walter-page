@@ -9,6 +9,10 @@
                @onFilterSelected="selectFilter">
       <input type="text" placeholder="Search.." v-model="search">
     </AppFilter>
+    <div class="no-items">
+      <h1 v-if="searchedList.length === 0 && !loading">Currently there is nothing to show, please come back later.</h1>
+      <h1 v-if="loading">Loading ...</h1>
+    </div>
     <div class="items">
       <AppCards v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item"/>
       <AppMoreCard v-if="searchedList.length > itemsToShow" :numberOfItems="searchedList.length - itemsToShow" @onShowMore="() => itemsToShow += 9"/>
@@ -33,6 +37,7 @@
     },
     data() {
       return {
+        loading: true,
         itemsToShow: 8,
         page: {
           acf: {}
@@ -76,6 +81,7 @@
           this.items = response.data
           this.tempItems = this.items
           this.getCategories()
+          this.loading = false
           setTimeout(() => {
             this.selectFilter(this.$route.query.filter)
           }, 1000)

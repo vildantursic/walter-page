@@ -1,8 +1,10 @@
 <template>
-  <div class="card animated fadeIn" data-aos="slide-up">
+  <div class="card animated fadeIn" data-aos="fade">
     <div class="image">
       <nuxt-link v-if="item._embedded !== undefined" class="nav-link" :to="`/cases/${item.id}`">
-        <img v-if="item._embedded ['wp:featuredmedia']!== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+        <img v-if="item._embedded ['wp:featuredmedia']!== undefined"
+             :src="item._embedded['wp:featuredmedia'][0].source_url"
+             :alt="item._embedded['wp:featuredmedia'][0].alt_text">
       </nuxt-link>
       <nuxt-link v-if="item._embedded === undefined" class="nav-link" :to="`/cases/${item.id}`">
         <img class="no-image" src="~/static/images/walter-logo.png" alt="">
@@ -12,9 +14,11 @@
       <nuxt-link class="nav-link" :to="`/cases/${item.id}`">
         <h1 class="title">{{item.title.rendered | truncate(30)}}</h1>
       </nuxt-link>
-      <i class="clients" v-for="(customer, index) of item.acf.customers" :key="index">{{customer.post_title}}<span v-if="index < item.acf.customers.length - 1"></span></i>
+      <i class="clients" v-for="(customer, index) of item.acf.customers" :key="index">{{customer.post_title}}<span
+        v-if="index < item.acf.customers.length - 1"></span></i>
       <div class="content">{{item.acf.description | truncate(30 * 4)}}</div>
-      <i class="partner" v-if="item.acf.partners">In Collaboration with <span v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></i>
+      <i class="partner" v-if="item.acf.partners">In Collaboration with <span
+        v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></i>
     </div>
     <div class="border"></div>
   </div>
@@ -30,8 +34,7 @@
   @import "../assets/styles/variables";
   @import "../assets/styles/mixins";
 
-  .card{
-
+  .card {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -43,7 +46,6 @@
     @include screen-size('xs') {
       height: auto;
     }
-
 
     .image {
       min-height: 200px;
@@ -73,6 +75,7 @@
     .info {
       padding: 0 1em 1em 1em;
       height: 230px;
+
       @include screen-size('m') {
         padding: 0 2em 0.5em 2em
       }
@@ -139,6 +142,7 @@
         position: absolute;
         bottom: 30px;
         font-size: 0.8em;
+
         @include screen-size('xl') {
           font-size: 0.7em;
           bottom: 10px;

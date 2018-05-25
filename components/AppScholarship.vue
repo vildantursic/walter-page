@@ -1,27 +1,30 @@
 <template>
-    <div class="card animated fadeIn" data-aos="slide-up">
-      <div v-if="item._embedded !== undefined" class="card-img-container">
-        <nuxt-link class="nav-link" :to="`/scholarships/${item.id}`">
-          <img class="card-img" v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
-          <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
-        </nuxt-link>
-      </div>
-      <div class="info-card">
-        <AppSocial :item="item" :link="$route.path"></AppSocial>
-        <div class="text">
+  <div class="card animated fadeIn" data-aos="slide-up">
+    <div v-if="item._embedded !== undefined" class="card-img-container">
+      <nuxt-link class="nav-link" :to="`/scholarships/${item.id}`">
+        <img class="card-img" v-if="item._embedded['wp:featuredmedia'] !== undefined"
+             :src="item._embedded['wp:featuredmedia'][0].source_url"
+             :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+        <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined"
+             src="~/static/images/walter-logo.png" alt="">
+      </nuxt-link>
+    </div>
+    <div class="info-card">
+      <AppSocial :item="item" :link="$route.path"></AppSocial>
+      <div class="text">
+        <p class="published">Deadline: {{deadline}}</p>
         <h1 class="title">{{item.title.rendered}}</h1>
         <p>{{item.acf.description | truncate(35 * 3)}}</p>
-        </div>
-        <div class="bottom-group">
-        <p class="published">Deadline: {{deadline}}</p>
+      </div>
+      <div class="bottom-group">
         <nuxt-link :to="`/scholarships/${item.id}`" class="more-container nav-link">
           <div class="plus">+</div>
           <div class="read"> Read <span class="more">more</span></div>
         </nuxt-link>
-        </div>
       </div>
-      <div class="border"></div>
     </div>
+    <div class="border"></div>
+  </div>
 </template>
 
 <script>
@@ -123,10 +126,12 @@
         height: 150px;
         display: flex;
         flex-direction: column;
+
         .title {
           font-size: 3em;
           font-weight: bold;
           margin: 15px 0;
+
           @include screen-size('xs') {
             font-size: 1.5em;
             font-weight: bold;
@@ -173,8 +178,8 @@
           width: auto;
 
           @include screen-size('xs') {
-           margin-top: 2em;
-           font-size: 0.6em;
+            margin-top: 2em;
+            font-size: 0.6em;
           }
           @include screen-size('s') {
             font-size: 0.6em;
