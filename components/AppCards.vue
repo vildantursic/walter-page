@@ -130,7 +130,7 @@
           overflow: auto;
         }
         @include screen-size('xs') {
-          font-size: 0.9em;
+          font-size: 0.8em;
           overflow: auto;
         }
       }
