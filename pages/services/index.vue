@@ -283,10 +283,6 @@
     }
   }
 
-  .center-more {
-  }
-  .services-spacing:not(last-child) {
-  }
   .services-info {
     position: relative;
     min-height: calc(100vh - 80px);
@@ -302,7 +298,6 @@
       justify-content: flex-end;
       margin-bottom: 20px;
 
-
       h1 {
         color: #ffffff;
         margin: 0;
@@ -314,7 +309,7 @@
           font-size: 1.3em;
         }
         i{
-          padding-top-top: 0.5em;
+          padding-top: 0.5em;
           padding-left: 0.3em;
         }
       }
@@ -356,7 +351,7 @@
       }
       h1 {
         font-size: 3em;
-        width: 80%;
+        width: 90%;
 
         @include screen-size('xl') {
           font-size: 2.4em;
@@ -377,7 +372,7 @@
       }
       div {
         font-size: 1.2em;
-        width: 80%;
+        width: 90%;
 
         @include screen-size('xl') {
           font-size: 1.1em;
@@ -401,7 +396,7 @@
     }
 
     .services {
-      width: 80%;
+      width: 90%;
 
       @include screen-size('s') {
         width: 100%;
