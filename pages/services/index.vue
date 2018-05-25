@@ -5,6 +5,9 @@
     </video>
 
     <div class="main-section">
+      <div class="tablet-navigation">
+        <p v-if="activeService !== ''">{{activeService}}</p>
+      </div>
       <div class="navigation">
         <scrollactive ref="scrollactive"
                       class="nav"
@@ -16,11 +19,8 @@
           <a v-for="(item, index) in services" :key="index" :href="`#${item.id}`" :ref="`${item.id}`" class="scrollactive-item">{{item.title.rendered}}</a>
         </scrollactive>
       </div>
-      <div class="tablet-navigation">
-        <p v-if="this.activeService!= ''">{{this.activeService}}</p>
-        </div>
       <div class="section" v-for="(item, index) in services" :key="index">
-        <div style="height: 300px" v-if="index !== 0"></div>
+        <div style="height: 100px" v-if="index !== 0"></div>
         <section :id="`${item.id}`">
           <div class="services-info services-spacing">
             <div class="padded-content-services center-more">
@@ -197,33 +197,31 @@
     min-height: 200vh;
     background-image: linear-gradient(90deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
   }
-  .tablet-navigation
-  {
+  .tablet-navigation {
     position: fixed;
+    top: 0;
+    left: calc(50% - 57px);
+    width: 150px;
+    height: 80px;
+    z-index: 11;
     display: none;
-    @include screen-size('m')
-    {
-      display: block;
+    align-items: center;
+    justify-content: center;
+
+    @include screen-size('m') {
+      display: flex;
+    }
+    @include screen-size('xs') {
+      display: flex;
     }
 
-    @include screen-size('xs') {
-      display: none;
-    }
-    @include screen-size('m') {
-      top: 120px;
-      left: 30px;
-      width: 210px;
-    }
-    p
-    {
-      width: 80%;
+    p {
       color: white;
-      margin: 5px 0 20px 0;
-      font-size: 1.6em;
+      font-size: 1em;
       font-weight: bolder;
       line-height: 1em;
       opacity: 0.7;
-      }
+    }
   }
 
   .navigation {

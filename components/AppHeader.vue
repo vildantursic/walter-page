@@ -142,6 +142,7 @@
       .mobile-nav {
         transition: ease .3s;
         position: fixed;
+        z-index: 12;
         top: 0;
         right: -100vw;
         width: 100vw;
@@ -169,7 +170,7 @@
               font-size: 2em;
               text-decoration: none;
               color: #FFFFFF;
-              padding: 1em 0.5em;
+              margin: 1em 0.5em;
             }
 
             .nuxt-link-exact-active {
