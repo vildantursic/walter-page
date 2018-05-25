@@ -70,7 +70,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 60%;
+      width: 70%;
 
       @include screen-size('xs') {
         width: 100%;
@@ -89,8 +89,8 @@
 
     .info-card {
       position: relative;
-      width: 40%;
-      padding: 0 2em 0 2em;
+      width: 30%;
+      padding: 1em 1em 0 2em;
 
       @include screen-size(xs) {
         width: 100%;
@@ -176,16 +176,16 @@
   .news{
     font-size: 1.2em;
     @include screen-size('xl') {
-      font-size: 1em;
+      font-size: 0.9em;
     }
     @include screen-size('l') {
-      font-size: 1em;
+      font-size: 0.9em;
     }
     @include screen-size('m') {
-      font-size: 1em;
+      font-size: 0.8em;
     }
     @include screen-size('s') {
-      font-size: 1em;
+      font-size: 0.8em;
     }
   }
 

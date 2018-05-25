@@ -132,7 +132,10 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(10%, 30px, 3, 2, 1);
+    @include grid-items(10%, 30px, 3, 2);
+    @include screen-size('xs') {
+      @include grid-items(10%, 30px, 3, 2, 1);
+    }
   }
   .v--modal-overlay{
     background: rgba(0, 0, 0, 0.5);

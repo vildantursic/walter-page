@@ -126,11 +126,11 @@
           overflow: auto;
         }
         @include screen-size('s') {
-          font-size: 1em;
+          font-size: 0.9em;
           overflow: auto;
         }
         @include screen-size('xs') {
-          font-size: 1em;
+          font-size: 0.9em;
           overflow: auto;
         }
       }
