@@ -74,6 +74,7 @@
       @include screen-size('xs') {
         width: 100%;
         height: 150px;
+
       }
       @include screen-size('s') {
         width: 100%;
@@ -129,12 +130,12 @@
           @include screen-size('xs') {
             font-size: 1.5em;
             font-weight: bold;
-            margin: 0px 0;
+            margin: 15px 0 0 0;
           }
           @include screen-size('s') {
             font-size: 1.5em;
             font-weight: bold;
-            margin: 0px 0;
+            margin: 15px 0 0 0;
           }
         }
       }
