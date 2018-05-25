@@ -7,7 +7,7 @@
         border-radius: 50%;
       }
     </style>
-    <div class="mobile-button" @click="showContactBox = !showContactBox">
+    <div class="mobile-button" @click="showContact">
       <div class="image" v-html="user.user_avatar"></div>
     </div>
     <div :class="{show: showContactBox}" class="mobile-card">
@@ -25,7 +25,6 @@
       <div class="icons">
         <a class="mail" :href="`mailto:${user.user_email}`"><i class="fas fa-envelope"></i></a>
         <a class="phone" :href="`tel:${user.user_description.split(',')[1]}`"><i class="fas fa-phone"></i></a>
-        <a class="phone" @click="showContactBox = !showContactBox"><i class="fas fa-times"></i></a>
       </div>
     </div>
     <div class="card">
@@ -48,10 +47,10 @@
 
 <script>
   export default {
-    props: ['user'],
-    data() {
-      return {
-        showContactBox: false
+    props: ['user', 'showContactBox'],
+    methods: {
+      showContact() {
+        this.$emit('showContact')
       }
     }
   }

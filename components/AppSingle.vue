@@ -153,6 +153,10 @@
           height: 500px;
           overflow: auto;
           width: 90%;
+
+          @include screen-size(xs) {
+            height: auto;
+          }
         }
       }
       .link {

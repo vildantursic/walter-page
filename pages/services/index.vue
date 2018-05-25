@@ -4,10 +4,10 @@
       <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/Video-WEB.mp4" type="video/mp4">
     </video>
 
-    <div class="main-section">
-      <div class="tablet-navigation">
-        <p v-if="activeService !== ''">{{activeService}}</p>
-      </div>
+    <div class="tablet-navigation">
+      <p v-if="activeService !== ''">{{activeService}}</p>
+    </div>
+    <div class="main-section" @click="showContactBox = !showContactBox">
       <div class="navigation">
         <scrollactive ref="scrollactive"
                       class="nav"
@@ -47,8 +47,7 @@
         </section>
       </div>
     </div>
-    <AppContactBox v-if="contact_person" :user="contact_person"></AppContactBox>
-
+    <AppContactBox v-if="contact_person" :user="contact_person" :showContactBox="showContactBox" @showContact="showContactBox = !showContactBox"></AppContactBox>
   </div>
 </template>
 
@@ -77,7 +76,8 @@
         oldScroll: 0,
         once: false,
         contact_person: null,
-        users: {}
+        users: {},
+        showContactBox: false
     }
     },
     asyncData({ }) {
@@ -203,7 +203,7 @@
     left: calc(50% - 57px);
     width: 150px;
     height: 80px;
-    z-index: 15;
+    z-index: 10;
     display: none;
     align-items: center;
     justify-content: center;
