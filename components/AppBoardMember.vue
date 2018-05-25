@@ -1,8 +1,11 @@
 <template>
   <div class="card animated fadeIn" data-aos="fade">
     <div class="card-img" v-if="item._embedded !== undefined">
-      <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
-      <img v-if="item._embedded['wp:featuredmedia'] === undefined" class="no-image" src="~/static/images/walter-logo.png" alt="">
+      <img v-if="item._embedded['wp:featuredmedia'] !== undefined"
+           :src="item._embedded['wp:featuredmedia'][0].source_url"
+           :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+      <img v-if="item._embedded['wp:featuredmedia'] === undefined" class="no-image"
+           src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info-card">
       <div class="about">
@@ -41,6 +44,7 @@
 <style lang="scss" scoped="">
   @import "../assets/styles/variables";
   @import "../assets/styles/mixins";
+
   .card {
     height: auto;
     overflow: hidden;
@@ -63,7 +67,7 @@
 
     .about {
 
-      h3{
+      h3 {
         color: $dark-grey;
         margin-bottom: 0;
         font-size: 1.5em;
@@ -75,7 +79,7 @@
           font-size: 1.3em;
         }
       }
-      p{
+      p {
         margin-top: 0;
         font-size: 1em;
         @include screen-size('l') {
@@ -91,8 +95,8 @@
       position: relative;
       height: 65px;
       @include screen-size('xl') {
-      height: 70px;
-    }
+        height: 70px;
+      }
       @include screen-size('l') {
         height: 65px;
       }
@@ -114,7 +118,6 @@
       grid-template-columns: 25% 75%;
       grid-template-rows: 2em 2em;
       grid-template-areas: "linkedin phone" "linkedin email";
-
 
       .linkedin {
         grid-area: linkedin;
@@ -158,7 +161,7 @@
         overflow: hidden;
 
       }
-      .fab, .fas{
+      .fab, .fas {
         color: $dark-grey;
         width: 30px;
         text-align: center;

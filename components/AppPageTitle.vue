@@ -12,11 +12,10 @@
 
 <script>
   export default {
-    components: {
-    },
+    components: {},
     props: ['supertitle', 'title', 'subtitle'],
     methods: {
-      hideSearch(){
+      hideSearch() {
         document.getElementById('search-image').style.display = 'none';
         document.getElementById('search').focus()
       }
@@ -25,8 +24,9 @@
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/styles/variables";
-@import "../assets/styles/mixins";
+  @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
+
   .title-page {
     margin: 15vh 0 10vh 0;
     @include screen-size('m') {
@@ -66,12 +66,10 @@
       font-style: italic;
       font-weight: lighter;
       opacity: 0.70;
-      @include screen-size('s')
-      {
+      @include screen-size('s') {
         display: none;
       }
-      @include screen-size('xs')
-      {
+      @include screen-size('xs') {
         display: none;
       }
     }
@@ -92,7 +90,6 @@
           font-size: 0.8em;
           padding: 10px 10px;
           width: 100%;
-          border-bottom: solid 1.5px $dark-grey;
           outline: none;
           border: none;
 
@@ -116,7 +113,6 @@
           font-size: 0.8em;
           padding: 10px 10px;
           width: 100%;
-          border-bottom: solid 1.5px $dark-grey;
           outline: none;
           border: none;
 
@@ -140,7 +136,6 @@
           font-size: 0.8em;
           padding: 10px 10px;
           width: 100%;
-          border-bottom: solid 1.5px $dark-grey;
           outline: none;
           border: none;
 
@@ -156,5 +151,5 @@
         }
       }
     }
-    }
+  }
 </style>

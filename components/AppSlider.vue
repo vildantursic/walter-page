@@ -13,29 +13,18 @@
         </div>
       </div>
     </div>
-    <!--<div v-if="miniSlider" v-swiper:mySecondSwiper="swiperThumbOption" class="my-swiper-thumb">-->
-      <!--<div class="swiper-wrapper">-->
-        <!--<div class="swiper-slide" v-for="(image, index) in images" :key="index">-->
-          <!--<img v-if="image" :src="image" @click="slideTo(index)">-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
   </div>
 </template>
 
 <script>
   export default {
     props: ['images', 'miniSlider'],
-    data () {
+    data() {
       return {
         swiperOption: {
           slidesPerView: 1,
           spaceBetween: 0,
           loop: false,
-//          autoplay: {
-//            delay: 4500,
-//            disableOnInteraction: true
-//          },
           pagination: {
             el: '.swiper-pagination',
             clickable: true
@@ -49,10 +38,6 @@
           slidesPerView: 6,
           spaceBetween: 30,
           loop: false,
-//          autoplay: {
-//            delay: 4500,
-//            disableOnInteraction: false
-//          },
           pagination: {
             el: '.swiper-pagination',
             clickable: true
@@ -116,6 +101,7 @@
       }
     }
   }
+
   .my-swiper-thumb {
     position: absolute;
     z-index: 50;
@@ -127,26 +113,9 @@
     @include screen-size('xs') {
       width: 100vw;
     }
-
-    /*.swiper-wrapper {*/
-      /*display: flex;*/
-      /*justify-content: center;*/
-      /*align-items: center;*/
-
-      /*.swiper-slide {*/
-        /*width: auto!important;*/
-        /*text-align: center;*/
-        /*background: transparent;*/
-        /*overflow: hidden;*/
-
-        /*img {*/
-          /*cursor: pointer;*/
-          /*height: 60%;*/
-        /*}*/
-      /*}*/
-    /*}*/
   }
-  .swiper-button-next{
+
+  .swiper-button-next {
     margin-top: auto;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
@@ -155,6 +124,7 @@
     width: 44px;
     height: 44px;
   }
+
   .swiper-button-prev {
     margin-top: auto;
     -webkit-filter: grayscale(100%);

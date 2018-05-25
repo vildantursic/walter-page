@@ -138,7 +138,18 @@
     .post-left {
       width: 70%;
       padding: 0 2% 2% 2%;
-
+      @include screen-size('s')
+      {
+        width: 100%;
+      }
+      @include screen-size('m')
+      {
+        width: 100%;
+      }
+      @include screen-size('xs')
+      {
+        width: 100%;
+      }
       .header-left {
         font-weight: 800;
       }

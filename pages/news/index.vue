@@ -12,6 +12,10 @@
                @onMonthSelected="selectMonth">
       <input type="text" placeholder="Search.." v-model="search">
     </AppFilter>
+    <div class="no-items">
+      <h1 v-if="searchedList.length === 0 && !loading">Currently there is nothing to show, please come back later.</h1>
+      <h1 v-if="loading">Loading ...</h1>
+    </div>
     <div class="items">
       <AppNews v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
       <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += 9"/>
@@ -32,6 +36,7 @@
   export default {
     data() {
       return {
+        loading: true,
         itemsToShow: 3,
         id: null,
         page: {
@@ -56,7 +61,8 @@
     computed: {
       searchedList() {
         return this.items.filter(item => {
-          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase())
+          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase()) ||
+            item.acf.description.toLowerCase().includes(this.search.toLowerCase())
         })
       }
     },
@@ -70,6 +76,7 @@
           this.tempItems = this.items
           this.fillUser()
           this.fillCategories()
+          this.loading = false
         }).catch((error) => {
           console.log(error);
         });

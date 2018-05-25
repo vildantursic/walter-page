@@ -1,23 +1,29 @@
 <template>
-    <div class="card animated fadeIn" data-aos="fade">
-      <div v-if="item._embedded !== undefined" class="card-img-container">
-        <nuxt-link class="nav-link" :to="`/news/${item.id}`">
-          <img class="card-img" v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
-          <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
-        </nuxt-link>
-      </div>
-      <div class="info-card">
-        <p class="category">
-          <span v-for="(category, index) of item.categories" :key="index"> {{category.name}}<span v-if="index < item.categories.length - 1">,</span></span>
-        </p>
-        <p class="author">{{item.author.name}}, {{date}}</p>
-        <h1 class="title"><nuxt-link class="nav-link" :to="`/news/${item.id}`">{{ item.title.rendered | truncate(100)}}</nuxt-link></h1>
-        <div class="scroll">
-          <p class="news">{{item.acf.description | truncate(400)}} </p>
-        </div>
-        <AppSocial :item="item" :link="$route.path"></AppSocial>
-      </div>
+  <div class="card animated fadeIn" data-aos="fade">
+    <div v-if="item._embedded !== undefined" class="card-img-container">
+      <nuxt-link class="nav-link" :to="`/news/${item.id}`">
+        <img class="card-img" v-if="item._embedded['wp:featuredmedia'] !== undefined"
+             :src="item._embedded['wp:featuredmedia'][0].source_url"
+             :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+        <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined"
+             src="~/static/images/walter-logo.png" alt="">
+      </nuxt-link>
     </div>
+    <div class="info-card">
+      <p class="category">
+        <span v-for="(category, index) of item.categories" :key="index"> {{category.name}}<span
+          v-if="index < item.categories.length - 1">,</span></span>
+      </p>
+      <p class="author">{{item.author.name}}, {{date}}</p>
+      <h1 class="title">
+        <nuxt-link class="nav-link" :to="`/news/${item.id}`">{{ item.title.rendered | truncate(100)}}</nuxt-link>
+      </h1>
+      <div class="scroll">
+        <p class="news">{{item.acf.description | truncate(400)}} </p>
+      </div>
+      <AppSocial :item="item" :link="$route.path"></AppSocial>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -49,10 +55,9 @@
     padding-bottom: 2em;
     border-width: 0 0 2px 0;
     border-style: solid;
-    -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-    -webkit-border-image: -webkit-linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-    border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%);
-    border-image-slice: 1;
+    -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%) 1;
+    -webkit-border-image: -webkit-linear-gradient(45deg, #0093c8 0%, #faaf40 100%) 1;
+    border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%) 1;
 
     @include screen-size(xs) {
       flex-direction: column;
@@ -70,7 +75,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 60%;
+      width: 70%;
 
       @include screen-size('xs') {
         width: 100%;
@@ -89,8 +94,8 @@
 
     .info-card {
       position: relative;
-      width: 40%;
-      padding: 0 2em 0 2em;
+      width: 30%;
+      padding: 1em 1em 0 2em;
 
       @include screen-size(xs) {
         width: 100%;
@@ -122,7 +127,8 @@
       }
     }
   }
-  .fab, .fas{
+
+  .fab, .fas {
     padding: 5px 10px;
     font-size: 25px;
     width: 30px;
@@ -170,22 +176,24 @@
       color: $main-color;
     }
   }
-  img{
+
+  img {
     cursor: pointer;
   }
-  .news{
+
+  .news {
     font-size: 1.2em;
     @include screen-size('xl') {
-      font-size: 1em;
+      font-size: 0.9em;
     }
     @include screen-size('l') {
-      font-size: 1em;
+      font-size: 0.9em;
     }
     @include screen-size('m') {
-      font-size: 1em;
+      font-size: 0.8em;
     }
     @include screen-size('s') {
-      font-size: 1em;
+      font-size: 0.8em;
     }
   }
 

@@ -17,7 +17,8 @@
           <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span
             v-if="index < item.case_categories.length - 1">,</span></span>
         </p>
-        <AppImageBox :showLightBox="showLightBox" :images="item.acf.gallery_images.split(',').map(image => { return { thumb: image, src: image } })"></AppImageBox>
+        <AppImageBox :showLightBox="showLightBox"
+                     :images="item.acf.gallery_images.split(',').map(image => { return { thumb: image, src: image } })"></AppImageBox>
         <h4 class="title">{{item.title.rendered}}</h4>
         <p class="customer">
           <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span
@@ -42,11 +43,6 @@
       return {
         showLightBox: false
       }
-    },
-    created () {
-      // this.$refs.lightbox.closeLightBox(() => {
-      //   this.showLightBox = !this.showLightBox
-      // })
     },
     components: {
       AppSlider,
@@ -106,7 +102,6 @@
         padding: 0 5px;
       }
 
-
       .card-img-container {
         width: 60%;
 
@@ -120,7 +115,7 @@
       .info-card {
         position: relative;
         width: 40%;
-        padding: 1.5em;
+        padding: 1.5em 1.5em 1.5em 2.5em;
 
         @include screen-size(xs) {
           margin-top: 50px;
@@ -146,21 +141,22 @@
         }
         .author {
           font-weight: 500;
-          /*color: gray;*/
           font-style: italic;
         }
         .description {
-          /*color: gray;*/
         }
         .divider {
           margin-top: 10vh;
           border-top: 1px solid gray;
-          /*width: 85%;*/
         }
         .text-box {
           height: 500px;
           overflow: auto;
-          width: 100%;
+          width: 90%;
+
+          @include screen-size(xs) {
+            height: auto;
+          }
         }
       }
       .link {
@@ -173,8 +169,9 @@
   .right-content {
     width: 85%;
   }
-  .social{
-    .fab, .fas{
+
+  .social {
+    .fab, .fas {
       padding: 5px 10px;
       font-size: 25px;
       width: 35px;

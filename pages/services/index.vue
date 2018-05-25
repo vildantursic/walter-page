@@ -4,7 +4,10 @@
       <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/Video-WEB.mp4" type="video/mp4">
     </video>
 
-    <div class="main-section">
+    <div class="tablet-navigation">
+      <p v-if="activeService !== ''">{{activeService}}</p>
+    </div>
+    <div class="main-section" @click="showContactBox = !showContactBox">
       <div class="navigation">
         <scrollactive ref="scrollactive"
                       class="nav"
@@ -16,11 +19,8 @@
           <a v-for="(item, index) in services" :key="index" :href="`#${item.id}`" :ref="`${item.id}`" class="scrollactive-item">{{item.title.rendered}}</a>
         </scrollactive>
       </div>
-      <div class="tablet-navigation">
-        <p v-if="this.activeService!= ''">{{this.activeService}}</p>
-        </div>
       <div class="section" v-for="(item, index) in services" :key="index">
-        <div style="height: 300px" v-if="index !== 0"></div>
+        <div style="height: 100px" v-if="index !== 0"></div>
         <section :id="`${item.id}`">
           <div class="services-info services-spacing">
             <div class="padded-content-services center-more">
@@ -47,8 +47,7 @@
         </section>
       </div>
     </div>
-    <AppContactBox v-if="contact_person" :user="contact_person"></AppContactBox>
-
+    <AppContactBox v-if="contact_person" :user="contact_person" :showContactBox="showContactBox" @showContact="showContactBox = !showContactBox"></AppContactBox>
   </div>
 </template>
 
@@ -77,7 +76,8 @@
         oldScroll: 0,
         once: false,
         contact_person: null,
-        users: {}
+        users: {},
+        showContactBox: false
     }
     },
     asyncData({ }) {
@@ -99,17 +99,17 @@
     },
     methods: {
       onItemChanged(event, currentItem, lastActiveItem) {
-        this.activeItem = currentItem
-        const href = this.activeItem['href']
+        this.activeItem = currentItem;
+        const href = this.activeItem['href'];
         const res = href.split("#");
-        const link = res[0]
-        const number = parseInt(res[1])
+        const link = res[0];
+        const number = parseInt(res[1]);
         this.services.forEach((service) => {
           if (service.id === number) {
             this.contact_person = service.acf.contact_person
           }
         })
-        this.activeService = currentItem.textContent
+        this.activeService = currentItem.textContent;
         this.once = false
     },
       fillSubServices () {
@@ -118,7 +118,7 @@
             this.services = this.services.map(service => {
               service.acf.sub_services = service.acf.sub_services.map(subService => {
                 return find(response.data, { id: subService.ID })
-              })
+              });
               return service
             })
           }
@@ -132,12 +132,12 @@
       },
       handleScroll (e) {
         const top  = window.pageYOffset || document.documentElement.scrollTop
-        let nextId = 0
+        let nextId = 0;
         if (this.oldScroll < top) {
-          const href = this.activeItem['href']
+          const href = this.activeItem['href'];
           const res = href.split("#");
-          const link = res[0]
-          const number = parseInt(res[1])
+          const link = res[0];
+          const number = parseInt(res[1]);
           if (number === 78) {
             nextId = number
           } else {
@@ -148,10 +148,10 @@
             this.once = true;
           }
         } else if (this.oldScroll > top) {
-          const href = this.activeItem['href']
+          const href = this.activeItem['href'];
           const res = href.split("#");
-          const link = res[0]
-          const number = parseInt(res[1])
+          const link = res[0];
+          const number = parseInt(res[1]);
 
           if (number === 75) {
             nextId = number
@@ -197,33 +197,31 @@
     min-height: 200vh;
     background-image: linear-gradient(90deg, rgba(#0093c8, 0.5) 0%, rgba(#faaf40, 0.5) 100%);
   }
-  .tablet-navigation
-  {
+  .tablet-navigation {
     position: fixed;
+    top: 0;
+    left: calc(50% - 57px);
+    width: 150px;
+    height: 80px;
+    z-index: 10;
     display: none;
-    @include screen-size('m')
-    {
-      display: block;
+    align-items: center;
+    justify-content: center;
+
+    @include screen-size('m') {
+      display: flex;
+    }
+    @include screen-size('xs') {
+      display: flex;
     }
 
-    @include screen-size('xs') {
-      display: none;
-    }
-    @include screen-size('m') {
-      top: 120px;
-      left: 30px;
-      width: 210px;
-    }
-    p
-    {
-      width: 80%;
+    p {
       color: white;
-      margin: 5px 0 20px 0;
-      font-size: 1.6em;
+      font-size: 1em;
       font-weight: bolder;
       line-height: 1em;
       opacity: 0.7;
-      }
+    }
   }
 
   .navigation {
@@ -251,7 +249,6 @@
       font-size: 1.6em !important;
       font-weight: bolder !important;
       line-height: 1em;
-      /*opacity: 1;*/
       @include screen-size('m') {
         font-size: 1.3em !important;
       }
@@ -267,10 +264,7 @@
         color: white;
         margin: 5px 0 20px 0;
         font-size: 1em;
-        /*opacity: 0.2;*/
-        /*.is-active{*/
-          /*opacity: 1;*/
-        /*}*/
+
         @include screen-size('m') {
           margin: 0 0 10px 0;
           font-size: 0.8em;
@@ -285,10 +279,6 @@
     }
   }
 
-  .center-more {
-  }
-  .services-spacing:not(last-child) {
-  }
   .services-info {
     position: relative;
     min-height: calc(100vh - 80px);
@@ -304,7 +294,6 @@
       justify-content: flex-end;
       margin-bottom: 20px;
 
-
       h1 {
         color: #ffffff;
         margin: 0;
@@ -316,7 +305,7 @@
           font-size: 1.3em;
         }
         i{
-          padding-top-top: 0.5em;
+          padding-top: 0.5em;
           padding-left: 0.3em;
         }
       }
@@ -336,7 +325,16 @@
     }
 
     .info {
-      width: 100%;
+      width: 90%;
+      @include screen-size('xl') {
+        width: 93%;
+      }
+      @include screen-size('l') {
+        width: 95%;
+      }
+      @include screen-size('m') {
+        width: 100%;
+      }
 
       @media (max-width: 768px) {
         width: 100%;
@@ -358,7 +356,7 @@
       }
       h1 {
         font-size: 3em;
-        width: 80%;
+        width: 90%;
 
         @include screen-size('xl') {
           font-size: 2.4em;
@@ -379,7 +377,7 @@
       }
       div {
         font-size: 1.2em;
-        width: 80%;
+        width: 90%;
 
         @include screen-size('xl') {
           font-size: 1.1em;
@@ -403,7 +401,7 @@
     }
 
     .services {
-      width: 80%;
+      width: 90%;
 
       @include screen-size('s') {
         width: 100%;
@@ -424,21 +422,14 @@
       section {
         padding-top: 20px;
         display: flex;
-        @include grid-items(10%, 40px, 3, 2);
         @include screen-size('m') {
           padding-top: 10px;
         }
         @include screen-size('s') {
           padding-top: 10px;
+          @include grid-items(10%, 40px, 3, 2);
         }
-        /*justify-content: space-between;*/
       }
     }
   }
-  /*.services-info{*/
-    /*.padded-content{*/
-      /*padding-left: 310px;*/
-      /*padding-right: 15%;*/
-    /*}*/
-  /*}*/
 </style>

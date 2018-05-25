@@ -15,7 +15,7 @@
 
 @mixin screen-size($size) {
   @if ($size == xl) {
-    @media (max-width: 1600px) {
+    @media (max-width: 1660px) {
       @content;
     }
     }  @else if ($size == l) {
@@ -23,7 +23,7 @@
         @content;
       }
     } @else if ($size == m) {
-      @media (max-width: 1025px) {
+      @media (max-width: 1024px) {
         @content;
       }
     } @else if ($size == s) {
@@ -90,6 +90,9 @@
     grid-template-columns: repeat($column-size-md, 1fr);
   }
   @media (max-width: 768px) {
+    grid-template-columns: repeat($column-size-sm, 1fr);
+  }
+  @media (max-width: 425px) {
     grid-template-columns: repeat($column-size-sm, 1fr);
   }
 }
