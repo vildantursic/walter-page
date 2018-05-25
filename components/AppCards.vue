@@ -60,9 +60,9 @@
       background: $secondary-color;
 
       @include screen-size('m') {
-        width: 240px;
-        height: 154px;
-        margin: auto auto
+        /*width: 240px;*/
+        /*height: 154px;*/
+        /*margin: auto auto*/
       }
       img {
         width: 100%;
@@ -77,13 +77,15 @@
       height: 230px;
 
       @include screen-size('m') {
-        padding: 0 0.5em 0.5em 0.5em
+        padding: 0 2em 0.5em 2em
       }
       @include screen-size('s') {
         height: 200px;
+        padding: 0 1em 1em 1em;
       }
       @include screen-size('xs') {
         height: 200px;
+        padding: 0 1em 1em 1em;
       }
       .title {
         max-height: 75px;
@@ -127,11 +129,11 @@
           overflow: auto;
         }
         @include screen-size('s') {
-          font-size: 1em;
+          font-size: 0.9em;
           overflow: auto;
         }
         @include screen-size('xs') {
-          font-size: 1em;
+          font-size: 0.8em;
           overflow: auto;
         }
       }

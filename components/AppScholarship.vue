@@ -77,6 +77,7 @@
       @include screen-size('xs') {
         width: 100%;
         height: 150px;
+
       }
       @include screen-size('s') {
         width: 100%;
@@ -99,10 +100,14 @@
       @include screen-size('xs') {
         width: 100%;
         padding: 1em 0;
+        display: flex;
+        flex-direction: column;
       }
       @include screen-size('s') {
         width: 100%;
         padding: 1em 0;
+        display: flex;
+        flex-direction: column;
       }
 
       .social {
@@ -122,24 +127,6 @@
         display: flex;
         flex-direction: column;
 
-        .published {
-          font-size: 0.8em;
-          font-weight: 500;
-          color: gray;
-
-          @include screen-size('xs') {
-            font-size: 0.8em;
-            font-weight: 500;
-            color: gray;
-            float: left;
-          }
-          @include screen-size('s') {
-            font-size: 0.8em;
-            font-weight: 500;
-            color: gray;
-            float: left;
-          }
-        }
         .title {
           font-size: 3em;
           font-weight: bold;
@@ -148,12 +135,12 @@
           @include screen-size('xs') {
             font-size: 1.5em;
             font-weight: bold;
-            margin: 0;
+            margin: 15px 0 0 0;
           }
           @include screen-size('s') {
             font-size: 1.5em;
             font-weight: bold;
-            margin: 0;
+            margin: 15px 0 0 0;
           }
         }
       }
@@ -165,6 +152,23 @@
         width: 100%;
         display: flex;
         flex-direction: column;
+
+        .published {
+          font-size: 0.8em;
+          font-weight: 500;
+          color: gray;
+
+          @include screen-size('xs') {
+            font-size: 0.8em;
+            font-weight: 500;
+            color: gray;
+          }
+          @include screen-size('s') {
+            font-size: 0.8em;
+            font-weight: 500;
+            color: gray;
+          }
+        }
 
         .more-container {
           margin-top: 2em;
