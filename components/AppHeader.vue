@@ -184,7 +184,7 @@
           a {
             text-decoration: none;
             color: #FFFFFF;
-            padding: 1em 2em;
+            padding: 2em 2em;
             @include screen-size('m') {
               padding: 1em 1em;
             }
@@ -199,7 +199,7 @@
         list-style: none;
         justify-content: space-around;
         position: absolute;
-        top: 60px;
+        top: 80px;
         display: flex;
         flex-direction: column;
 

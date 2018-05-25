@@ -54,7 +54,7 @@
       bottom: 4%;
     }
     @include screen-size('l') {
-      padding: 0.9em 0.9em;
+      padding: 1em 0.7em;
       width: 300px;
       bottom: 4%;
     }
@@ -140,8 +140,8 @@
           padding-left: 1.2em;
         }
         @include screen-size('l') {
-          font-size: 1em;
-          padding-left: 0.5em;
+          font-size: 1.2em;
+          padding-left: 1em;
         }
         @include screen-size('m') {
           font-size: 1em;
