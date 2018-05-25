@@ -47,7 +47,7 @@
       AppSocial
     },
     asyncData({ route }) {
-      return axios.get(`http://cms.walter.ba/wp-json/wp/v2/bim_academy_posts/${route.params.id}?_embed`).then((response) => {
+      return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/bim_academy_posts/${route.params.id}?_embed`).then((response) => {
         return {
           page: response.data,
           date: moment(response.data.date).format('MMM YYYY [at] LT')
@@ -61,7 +61,7 @@
         this.$router.push({ path: `/news/${id}`})
       },
       getItems() {
-        axios.get('http://cms.walter.ba/wp-json/wp/v2/bim_academy_posts?_embed').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/bim_academy_posts?_embed').then((response) => {
           this.items = response.data
         }).catch((error) => {
           console.log(error);

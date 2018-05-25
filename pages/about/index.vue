@@ -180,7 +180,7 @@
       // window.removeEventListener("scroll", this.handleScroll);
     },
     asyncData({}) {
-      return axios.get('http://cms.walter.ba/wp-json/wp/v2/pages/73?_embed').then((response) => {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/73?_embed').then((response) => {
         return {page: response.data}
       }).catch((error) => {
         console.log(error)
@@ -191,7 +191,7 @@
         return {
           _embedded: {
             'wp:featuredmedia': [
-              { source_url: 'http://cms.walter.ba/wp-content/uploads/History-employees.png' }
+              { source_url: 'http://walter.hotelsnjesko.ba/wp-content/uploads/History-employees.png' }
             ]
           },
           title: {
@@ -214,7 +214,7 @@
         }
       },
       getHistories() {
-        axios.get('http://cms.walter.ba/wp-json/wp/v2/histories?_embed').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/histories?_embed').then((response) => {
           this.histories = response.data.reverse()
           this.getAchievements()
         }).catch((error) => {
@@ -222,7 +222,7 @@
         });
       },
       getAchievements() {
-        axios.get('http://cms.walter.ba/wp-json/wp/v2/achievements?_embed').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/achievements?_embed').then((response) => {
           this.histories.map(history => {
             history.acf.achievements = response.data.filter((achievement) => {
               return find(history.acf.achievements, {ID: achievement.id}) ? achievement : undefined
@@ -235,21 +235,21 @@
         });
       },
       getPartners() {
-        axios.get('http://cms.walter.ba/wp-json/wp/v2/partners?_embed').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/partners?_embed').then((response) => {
           this.partners = response.data
         }).catch((error) => {
           console.log(error)
         });
       },
       getBoardMembers() {
-        axios.get('http://cms.walter.ba/wp-json/wp/v2/board_members?_embed').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/board_members?_embed').then((response) => {
           this.boardMembers = response.data
         }).catch((error) => {
           console.log(error)
         });
       },
       getCustomers() {
-        axios.get('http://cms.walter.ba/wp-json/wp/v2/customers?per_page=100&_embed').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/customers?per_page=100&_embed').then((response) => {
           this.customers = response.data
         }).catch((error) => {
           console.log(error)

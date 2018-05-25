@@ -66,7 +66,7 @@
       this.getItems()
     },
     asyncData({}) {
-      return axios.get('http://cms.walter.ba/wp-json/wp/v2/pages/64').then((response) => {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/64').then((response) => {
         return { page: response.data }
       }).catch((error) => {
         console.log(error)
@@ -74,7 +74,7 @@
     },
     methods: {
       getItems () {
-        axios.get('http://cms.walter.ba/wp-json/wp/v2/careers?per_page=100&_embed').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?per_page=100&_embed').then((response) => {
           this.items = response.data
           this.itemsToShow = this.items.length - 1
           this.tempItems = response.data
