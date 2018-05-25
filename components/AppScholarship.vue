@@ -96,10 +96,14 @@
       @include screen-size('xs') {
         width: 100%;
         padding: 1em 0;
+        display: flex;
+        flex-direction: column;
       }
       @include screen-size('s') {
         width: 100%;
         padding: 1em 0;
+        display: flex;
+        flex-direction: column;
       }
 
       .social {
@@ -116,6 +120,8 @@
 
       .text {
         height: 150px;
+        display: flex;
+        flex-direction: column;
         .title {
           font-size: 3em;
           font-weight: bold;
@@ -150,13 +156,11 @@
             font-size: 0.8em;
             font-weight: 500;
             color: gray;
-            float: left;
           }
           @include screen-size('s') {
             font-size: 0.8em;
             font-weight: 500;
             color: gray;
-            float: left;
           }
         }
 
