@@ -15,7 +15,7 @@
 
 @mixin screen-size($size) {
   @if ($size == xl) {
-    @media (max-width: 1600px) {
+    @media (max-width: 1660px) {
       @content;
     }
     }  @else if ($size == l) {

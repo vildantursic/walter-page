@@ -115,7 +115,7 @@
       .info-card {
         position: relative;
         width: 40%;
-        padding: 1.5em;
+        padding: 1.5em 1.5em 1.5em 2.5em;
 
         @include screen-size(xs) {
           margin-top: 50px;
@@ -152,7 +152,7 @@
         .text-box {
           height: 500px;
           overflow: auto;
-          width: 100%;
+          width: 90%;
         }
       }
       .link {

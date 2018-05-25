@@ -329,7 +329,16 @@
     }
 
     .info {
-      width: 100%;
+      width: 90%;
+      @include screen-size('xl') {
+        width: 93%;
+      }
+      @include screen-size('l') {
+        width: 95%;
+      }
+      @include screen-size('m') {
+        width: 100%;
+      }
 
       @media (max-width: 768px) {
         width: 100%;
@@ -417,12 +426,12 @@
       section {
         padding-top: 20px;
         display: flex;
-        @include grid-items(10%, 40px, 3, 2);
         @include screen-size('m') {
           padding-top: 10px;
         }
         @include screen-size('s') {
           padding-top: 10px;
+          @include grid-items(10%, 40px, 3, 2);
         }
         /*justify-content: space-between;*/
       }

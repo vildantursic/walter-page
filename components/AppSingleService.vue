@@ -35,6 +35,12 @@
     flex-direction: column;
     width: 180px;
     padding-right: 4em;
+    @include screen-size('xl') {
+      padding-right: 0;
+    }
+    @include screen-size('l') {
+      padding-right: 1em;
+    }
     @include screen-size('m') {
       padding-right: 1em;
     }
