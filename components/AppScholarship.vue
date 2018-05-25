@@ -119,6 +119,8 @@
 
       .text {
         height: 150px;
+        display: flex;
+        flex-direction: column;
 
         .published {
           font-size: 0.8em;

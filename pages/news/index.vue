@@ -12,6 +12,10 @@
                @onMonthSelected="selectMonth">
       <input type="text" placeholder="Search.." v-model="search">
     </AppFilter>
+    <div class="no-items">
+      <h1 v-if="searchedList.length === 0 && !loading">Currently there is nothing to show, please come back later.</h1>
+      <h1 v-if="loading">Loading ...</h1>
+    </div>
     <div class="items">
       <AppNews v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
       <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += 9"/>
@@ -32,6 +36,7 @@
   export default {
     data() {
       return {
+        loading: true,
         itemsToShow: 3,
         id: null,
         page: {
@@ -67,10 +72,11 @@
       },
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?per_page=100&_embed').then((response) => {
-          this.items = response.data
+          this.items = []
           this.tempItems = this.items
           this.fillUser()
           this.fillCategories()
+          this.loading = false
         }).catch((error) => {
           console.log(error);
         });

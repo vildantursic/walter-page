@@ -89,7 +89,7 @@
             <AppMap/>
           </div>
           <div class="users">
-            <AppContactPerson v-for="(item, index) of this.contactPersons" :key="index" :user="item"></AppContactPerson>
+            <AppContactPerson v-for="(item, index) of contactPersons" :key="index" :user="item"></AppContactPerson>
           </div>
         </div>
       </section>

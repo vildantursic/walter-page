@@ -203,7 +203,7 @@
     left: calc(50% - 57px);
     width: 150px;
     height: 80px;
-    z-index: 11;
+    z-index: 15;
     display: none;
     align-items: center;
     justify-content: center;
@@ -249,7 +249,6 @@
       font-size: 1.6em !important;
       font-weight: bolder !important;
       line-height: 1em;
-      /*opacity: 1;*/
       @include screen-size('m') {
         font-size: 1.3em !important;
       }
@@ -265,10 +264,7 @@
         color: white;
         margin: 5px 0 20px 0;
         font-size: 1em;
-        /*opacity: 0.2;*/
-        /*.is-active{*/
-          /*opacity: 1;*/
-        /*}*/
+
         @include screen-size('m') {
           margin: 0 0 10px 0;
           font-size: 0.8em;
@@ -433,14 +429,7 @@
           padding-top: 10px;
           @include grid-items(10%, 40px, 3, 2);
         }
-        /*justify-content: space-between;*/
       }
     }
   }
-  /*.services-info{*/
-    /*.padded-content{*/
-      /*padding-left: 310px;*/
-      /*padding-right: 15%;*/
-    /*}*/
-  /*}*/
 </style>

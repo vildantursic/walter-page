@@ -31,7 +31,7 @@
             <nuxt-link :to="{ name: 'news' }">News</nuxt-link>
           </li>
           <li @click="showMenu = !showMenu">
-            <nuxt-link :to="`/about#contact`">Contact us</nuxt-link>
+            <nuxt-link :to="{ name: 'contact' }">Contact us</nuxt-link>
           </li>
         </ul>
       </div>
@@ -70,7 +70,7 @@
           <nuxt-link :to="{ name: 'news' }">News</nuxt-link>
         </li>
         <li>
-          <nuxt-link :to="`/about#contact`">Contact us</nuxt-link>
+          <nuxt-link :to="{ name: 'contact' }">Contact us</nuxt-link>
         </li>
       </ul>
     </div>
@@ -112,6 +112,47 @@
     right: 0 !important;
   }
 
+  .mobile-nav {
+    transition: ease .3s;
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    right: -100vw;
+    width: 100vw;
+    height: 100vh;
+    background: $dark-color;
+
+    .close {
+      color: white;
+      font-size: 1.6em;
+      margin: 30px 0 0 30px;
+    }
+
+    ul {
+      height: 80vh;
+      -webkit-padding-start: 10px;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+
+      li {
+
+        a {
+          font-size: 2em;
+          text-decoration: none;
+          color: #FFFFFF;
+          margin: 1em 0.5em;
+        }
+
+        .nuxt-link-exact-active {
+          color: $main-color;
+        }
+      }
+    }
+  }
+
   header {
     width: 100%;
     height: 80px;
@@ -133,54 +174,12 @@
       align-items: center;
       height: 4em;
       margin-right: 10%;
-      z-index: 1000000;
 
       .open {
         color: white;
         font-size: 1.6em;
       }
 
-      .mobile-nav {
-        transition: ease .3s;
-        position: fixed;
-        z-index: 12;
-        top: 0;
-        right: -100vw;
-        width: 100vw;
-        height: 100vh;
-        background: $dark-color;
-        z-index: -10;
-
-        .close {
-          color: white;
-          font-size: 1.6em;
-          margin: 30px 0 0 30px;
-        }
-
-        ul {
-          height: 80vh;
-          -webkit-padding-start: 10px;
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: space-around;
-
-          li {
-
-            a {
-              font-size: 2em;
-              text-decoration: none;
-              color: #FFFFFF;
-              margin: 1em 0.5em;
-            }
-
-            .nuxt-link-exact-active {
-              color: $main-color;
-            }
-          }
-        }
-      }
       .dropdown-menu {
         list-style: none;
         justify-content: space-around;

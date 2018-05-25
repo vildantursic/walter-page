@@ -67,6 +67,16 @@
     bottom: 1%;
     right: 5%;
     display: none;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    border: solid 4px #393c3d;
+
+    * {
+      width: 100%;
+      height: 100%;
+    }
 
     @include screen-size('xs') {
       display: flex;
@@ -134,19 +144,16 @@
       padding: 1em 1em;
       width: 300px;
       bottom: 4%;
-      z-index: 2;
     }
     @include screen-size('l') {
       padding: 1em 0.7em;
       width: 300px;
       bottom: 4%;
-      z-index: 2;
     }
     @include screen-size('m') {
       padding: 0.5em 0.5em;
       width: 260px;
       bottom: 4%;
-      z-index: 2;
     }
 
     @include screen-size('xs') {
