@@ -11,6 +11,7 @@
     <div class="item animated fadeIn padded-content">
       <div class="post-content">
         <div class="post-left" v-html="page.content.rendered"></div>
+        <button @click="contactForm()">Contact</button>
       </div>
     </div>
   </section>
@@ -62,6 +63,18 @@
       },
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?_embed').then((response) => {
+          this.items = response.data
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      contactForm() {
+        axios.post('http://walter.hotelsnjesko.ba/career.php', JSON.stringify({
+          "name": 'vildan',
+          "email": 'tursicvildan@gmail.com',
+          "subject": 'test',
+          "message": 'test'
+        })).then((response) => {
           this.items = response.data
         }).catch((error) => {
           console.log(error);

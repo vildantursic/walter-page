@@ -16,7 +16,11 @@
                       :duration="800"
                       bezier-easing-value=".5,0,.35,1"
                       v-on:itemchanged="onItemChanged">
-          <a v-for="(item, index) in services" :key="index" :href="`#${item.id}`" :ref="`${item.id}`" class="scrollactive-item">{{item.title.rendered}}</a>
+          <a v-for="(item, index) in services"
+             :key="index"
+             :href="`#${item.id}`"
+             :ref="`${item.id}`"
+             class="scrollactive-item" @click="showContact(item.id)">{{item.title.rendered}}</a>
         </scrollactive>
       </div>
       <div class="section" v-for="(item, index) in services" :key="index">
@@ -98,6 +102,13 @@
       // window.removeEventListener("scroll", this.handleScroll);
     },
     methods: {
+      showContact(id) {
+        this.services.forEach((service) => {
+          if (service.id === id) {
+            this.contact_person = service.acf.contact_person
+          }
+        })
+      },
       onItemChanged(event, currentItem, lastActiveItem) {
         this.activeItem = currentItem;
         const href = this.activeItem['href'];

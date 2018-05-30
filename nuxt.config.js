@@ -68,7 +68,8 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/manifest',
     '@nuxtjs/icon',
-    '@nuxtjs/workbox'
+    '@nuxtjs/workbox',
+    '~/modules/helpers'
   ],
   workbox: {
     runtimeCaching: [
