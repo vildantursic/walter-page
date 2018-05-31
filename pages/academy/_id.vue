@@ -26,6 +26,7 @@
   import axios from 'axios'
   import { find } from 'lodash'
   import moment from 'moment'
+  import { parseData } from '~/plugins/parse'
 
   export default {
     data() {
@@ -49,7 +50,7 @@
     asyncData({ route }) {
       return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/bim_academy_posts/${route.params.id}?_embed`).then((response) => {
         return {
-          page: response.data,
+          page: parseData(response.data),
           date: moment(response.data.date).format('MMM YYYY [at] LT')
         }
       }).catch((error) => {
@@ -62,7 +63,7 @@
       },
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/bim_academy_posts?_embed').then((response) => {
-          this.items = response.data
+          this.items = parseData(response.data)
         }).catch((error) => {
           console.log(error);
         });

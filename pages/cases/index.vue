@@ -27,6 +27,7 @@
   import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
   import { find, sortBy } from 'lodash'
+  import { parseData } from '~/plugins/parse'
 
   export default {
     components: {

@@ -69,12 +69,16 @@
         });
       },
       contactForm() {
-        axios.post('http://walter.hotelsnjesko.ba/career.php', JSON.stringify({
-          "name": 'vildan',
-          "email": 'tursicvildan@gmail.com',
-          "subject": 'test',
-          "message": 'test'
-        })).then((response) => {
+        axios({
+          method: 'post',
+          url: 'http://walter.hotelsnjesko.ba',
+          data: JSON.stringify({
+            "name": 'vildan',
+            "email": 'tursicvildan@gmail.com',
+            "subject": 'test',
+            "message": 'test'
+          }),
+        }).then((response) => {
           this.items = response.data
         }).catch((error) => {
           console.log(error);

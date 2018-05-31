@@ -43,6 +43,7 @@
   import axios from 'axios'
   import { find } from 'lodash'
   import moment from 'moment'
+  import { parseData } from '~/plugins/parse'
 
   export default {
     data() {
@@ -85,7 +86,7 @@
       },
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
-          this.items = response.data
+          this.items = parseData(response.data)
           this.fillUser()
           this.fillCategories()
         }).catch((error) => {

@@ -13,7 +13,9 @@
       <!--<input type="text" placeholder="Search.." v-model="search">-->
     <!--</AppFilter>-->
     <div class="no-items">
-      <h1 v-if="searchedList.length === 0 && !loading">Currently there is nothing to show, please come back later.</h1>
+      <h1 v-if="searchedList.length === 0 && !loading">
+        There are no open positions right now but keep in touch on Facebook and LinkedIn https://www.facebook.com/walterBIM/ , https://www.linkedin.com/company/walter-bim-solutions/ , we will maybe need your skills soon.
+      </h1>
       <h1 v-if="loading">Loading ...</h1>
     </div>
     <div class="items">
@@ -32,6 +34,7 @@
   import axios from 'axios'
   import moment from 'moment'
   import { orderBy, find } from 'lodash'
+  import { parseData } from '~/plugins/parse'
 
   export default {
     data() {
@@ -80,7 +83,7 @@
     methods: {
       getItems () {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?per_page=100&_embed').then((response) => {
-          this.items = response.data
+          this.items = parseData(response.data)
           this.itemsToShow = this.items.length - 1
           this.tempItems = response.data
           this.loading = false
