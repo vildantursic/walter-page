@@ -62,8 +62,9 @@
   @import '../assets/styles/mixins';
 
   .card {
+    /*overflow: hidden;*/
     width: 100%;
-    height: 100%;
+    height: 95%;
     background: white;
 
     .close {

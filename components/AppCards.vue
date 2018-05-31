@@ -164,4 +164,7 @@
       background: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) fixed center;
     }
   }
+  .nav-link{
+    width: 100%;
+  }
 </style>

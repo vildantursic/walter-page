@@ -64,7 +64,7 @@
 
   .swiper {
     position: relative;
-    height: auto;
+    height: calc(100vh - 80px);
     width: 100%;
   }
 
@@ -89,7 +89,7 @@
 
         img {
           width: 100%;
-          height: auto;
+          height: 100%;
           cursor: pointer;
         }
       }

@@ -71,7 +71,7 @@
     }
 
     .card-img-container {
-      overflow: hidden;
+      /*overflow: hidden;*/
       display: flex;
       justify-content: center;
       align-items: center;
