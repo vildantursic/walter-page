@@ -8,12 +8,12 @@
                     :duration="800"
                     bezier-easing-value=".5,0,.35,1"
                     v-on:itemchanged="onItemChanged">
-        <a href="#statistics" class="scrollactive-item">Statistics</a>
-        <a href="#history" class="scrollactive-item">History</a>
-        <a href="#board-members" class="scrollactive-item">Board Members</a>
-        <a href="#partners" class="scrollactive-item">Partners</a>
-        <a href="#clients" class="scrollactive-item">Clients</a>
-        <a href="#contact" class="scrollactive-item">Contact</a>
+        <a href="#statistics" class="scrollactive-item" :ref="1" @click="notLast()">Who are we</a>
+        <a href="#history" class="scrollactive-item" :ref="2" @click="notLast()">Our history</a>
+        <a href="#board-members" class="scrollactive-item" :ref="3" @click="notLast()">Board Members</a>
+        <a href="#partners" class="scrollactive-item" :ref="4" @click="notLast()">Our partners</a>
+        <a href="#clients" class="scrollactive-item" :ref="5" @click="notLast()">Clients</a>
+        <a href="#contact" class="scrollactive-item" :ref="6" @click="last()">Contact us</a>
       </scrollactive>
     </div>
     <div class="section">
@@ -22,8 +22,8 @@
         <div class="statistics">
           <AppNumber :number="page.acf.engineers" :text="'Engineers'"/>
           <AppNumber :number="page.acf.experience_bim" :text="'Years of gathered BIM experience'"/>
-          <AppNumber :number="page.acf.projects" :text="'Projects'"/>
           <AppNumber :number="page.acf.clients" :text="'Clients'"/>
+          <AppNumber :number="page.acf.projects" :text="'Projects'"/>
           <AppNumber :number="page.acf.revit_families" :text="'Revit families'"/>
           <AppNumber :number="page.acf.digitalized_sqm" :text="'sqm digitized'"/>
         </div>
@@ -35,18 +35,19 @@
           <div class="tabbed-section__selector">
             <a :class="[index === currentHistory ? 'active': '', `tabbed-section__selector-tab-${currentHistory + 1}`]"
                v-for="(obj, index) in histories"
-               :key="index" @click="currentHistory = index">
-              {{obj.title.rendered}}
+               :key="index" @click="currentHistory = index" v-html="obj.title.rendered">
             </a>
             <span class="tabbed-section__highlighter"></span>
           </div>
         </div>
-        <AppHistory :items="histories" :currentHistory="currentHistory" @currentHistory="currentHistory = $event"></AppHistory>
+        <AppHistory :items="histories" :currentHistory="currentHistory"
+                    @currentHistory="currentHistory = $event"></AppHistory>
         <div class="achievements" v-if="histories.length !== 0">
           <div v-for="(item, index) in achievements" :key="index">
             <AppAchievement v-if="item.id !== -1" :item="item"></AppAchievement>
             <div class="plus" v-if="item.id === -1">+</div>
           </div>
+          <AppAchievement :item="employeeItem()"></AppAchievement>
         </div>
 
       </section>
@@ -67,20 +68,28 @@
     </div>
     <div class="section">
       <section id="clients" class="clients-section padded-content">
-        <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci aliquid consequatur dolore
-          doloribus eaque</h1>
+        <h1 v-html="page.acf.clients_text"></h1>
         <div class="clients">
           <AppClient v-for="(item, index) of customers" :key="index" :item="item"/>
+          <!--<AppMoreCard :numberOfItems="100"/>-->
         </div>
       </section>
     </div>
-    <div class="section">
+    <div class="section" id="contact-section">
       <section id="contact" class="contact-section">
         <div class="contact">
-          <div class="users">
-            <AppContactPerson v-for="(item, index) of page.acf.contact_persons" :key="index" :user="item"></AppContactPerson>
+          <div class="countries">
+            <h3 class="text">Stockholm, Sweden</h3>
+            <h3 class="text">
+              Muhameda Kantardžića 3
+              <br>71000 Sarajevo</h3>
           </div>
-          <AppMap/>
+          <div class="map">
+            <AppMap/>
+          </div>
+          <div class="users">
+            <AppContactPerson v-for="(item, index) of contactPersons" :key="index" :user="item"></AppContactPerson>
+          </div>
         </div>
       </section>
     </div>
@@ -96,6 +105,7 @@
   import AppHistory from "~/components/AppHistory"
   import AppContactPerson from "~/components/AppContactPerson"
   import AppAchievement from "~/components/AppAchievement"
+  import AppMoreCard from "~/components/AppMoreCard"
   import axios from "axios"
   import { find } from "lodash"
 
@@ -108,15 +118,11 @@
       AppNumber,
       AppHistory,
       AppContactPerson,
-      AppAchievement
+      AppAchievement,
+      AppMoreCard
     },
     data() {
       return {
-        options: {
-          navigation: true,
-          anchors: ['page1', 'page2', 'page3', 'page4'],
-          sectionsColor: ['#41b883', '#ff5f45', '#0798ec', '#fec401', '#1bcee6', '#ee1a59', '#2c3e4f', '#ba5be9', '#b4b8ab']
-        },
         items: [],
         page: {
           acf: {}
@@ -126,16 +132,36 @@
         currentHistory: 0,
         partners: [],
         boardMembers: [],
-        customers: []
+        customers: [],
+        contactPersons: {},
+        activeItem: null,
+        lastActiveItem: null,
+        oldScroll: 0,
+        once: false,
+        activeRef: 1,
+        menuItems:
+          [
+            {ref: 1, href: '#statistics'},
+            {ref: 2, href: '#history'},
+            {ref: 3, href: '#board-members'},
+            {ref: 4, href: '#partners'},
+            {ref: 5, href: '#clients'},
+            {ref: 6, href: '#contact'}
+          ],
+        nextId: 0
       }
     },
     watch: {
       currentHistory: function (newVal, oldVal) {
         if (newVal > oldVal) {
-          this.achievements = this.achievements.concat({ id: -1 }).concat(this.histories[newVal].acf.achievements)
+          for (let i = oldVal; i < newVal; i++) {
+            this.achievements = this.achievements.concat({id: -1}).concat(this.histories[i + 1].acf.achievements)
+          }
         } else {
-          this.histories[oldVal].acf.achievements.forEach(el => this.achievements.pop())
-          this.achievements.pop()
+          for (let i = oldVal; i > newVal; i--) {
+            this.histories[i].acf.achievements.forEach(() => this.achievements.pop())
+            this.achievements.pop()
+          }
         }
       }
     },
@@ -145,6 +171,13 @@
       this.getBoardMembers()
       this.getCustomers()
     },
+    mounted() {
+      this.reverseItems()
+      // window.addEventListener('scroll', this.handleScroll);
+    },
+    beforeDestroy() {
+      // window.removeEventListener("scroll", this.handleScroll);
+    },
     asyncData({}) {
       return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/73?_embed').then((response) => {
         return {page: response.data}
@@ -153,7 +186,22 @@
       });
     },
     methods: {
+      employeeItem() {
+        return {
+          _embedded: {
+            'wp:featuredmedia': [
+              { source_url: 'http://walter.hotelsnjesko.ba/wp-content/uploads/History-employees.png' }
+            ]
+          },
+          title: {
+            rendered: `${this.histories[this.currentHistory].acf.employees} ${this.histories[this.currentHistory].acf.employees > 40 ? '+' : ''} Employees`
+          }
+        }
+      },
       onItemChanged(event, currentItem, lastActiveItem) {
+        this.activeItem = currentItem
+        this.once = false
+        this.$refs.scrollactive.$el.className = 'scrollactive-nav nav'
         if (currentItem) {
           const parser = new DOMParser();
           let htmlDoc = parser.parseFromString('<a data-v-5357e832="" href="#contact" class="scrollactive-item is-active">Contact</a>', "text/html");
@@ -163,6 +211,12 @@
             this.$refs.scrollactive.$el.className = 'scrollactive-nav nav'
           }
         }
+      },
+      notLast() {
+        this.$refs.scrollactive.$el.className = 'scrollactive-nav nav'
+      },
+      last() {
+        this.$refs.scrollactive.$el.className = 'scrollactive-nav nav last-section'
       },
       getHistories() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/histories?_embed').then((response) => {
@@ -176,9 +230,8 @@
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/achievements?_embed').then((response) => {
           this.histories.map(history => {
             history.acf.achievements = response.data.filter((achievement) => {
-              return find(history.acf.achievements, { ID: achievement.id }) ? achievement : undefined
+              return find(history.acf.achievements, {ID: achievement.id}) ? achievement : undefined
             });
-            console.log(history)
             return history
           })
           this.achievements = this.achievements.concat(this.histories[this.currentHistory].acf.achievements)
@@ -206,6 +259,51 @@
         }).catch((error) => {
           console.log(error)
         });
+      },
+      reverseItems() {
+        this.contactPersons = this.page.acf.contact_persons.reverse()
+      },
+      handleScroll(e) {
+        const top = window.pageYOffset || document.documentElement.scrollTop
+        if (this.oldScroll < top) {
+          const hrefSplit = this.activeItem['href'].split('#')
+          const activeHref = '#' + hrefSplit[1]
+          this.menuItems.forEach((item) => {
+            if (item.href === activeHref) {
+              this.activeRef = item.ref
+            }
+          })
+          const number = parseInt(this.activeRef)
+          if (number === 6) {
+            this.nextId = number
+          } else {
+            this.nextId = number + 1;
+          }
+
+          if (!this.once) {
+            this.$refs[this.nextId].click()
+            this.once = true
+          }
+        } else if (this.oldScroll > top) {
+          const activeHref = this.activeItem['href']
+          this.menuItems.forEach((item) => {
+            if (item.href === activeHref) {
+              this.activeRef = item.ref
+            }
+          })
+          const number = parseInt(this.activeRef)
+          if (number === 0) {
+            this.nextId = number
+          } else {
+            this.nextId = number - 1;
+          }
+
+          if (!this.once) {
+            this.$refs[this.nextId].click()
+            this.once = true
+          }
+        }
+        this.oldScroll = top
       }
     }
   }
@@ -217,41 +315,71 @@
 
   .statistics-section {
     min-height: 100vh;
-    background: $secondary-color;
+    background: $secondary-dark-color;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
 
     h2 {
-      width: 65%;
+      width: 75%;
       font-weight: 300;
+      font-size: 1.4em;
+      opacity: 1;
+      margin-top: 5%;
+      margin-bottom: 5%;
+      color: $dark-grey;
+      @include screen-size('xl') {
+        font-size: 1.2em;
+        margin-top: 8%;
+      }
+      @include screen-size('l') {
+        font-size: 1.2em;
+        margin-top: 8%;
+      }
+      @include screen-size('m') {
+        width: 90%;
+        font-size: 1em;
+      }
+      * {
+        line-height: 35px;
+      }
+
+      @include screen-size('xs') {
+        width: 100%
+      }
     }
     .statistics {
       width: 100%;
-      @include grid-items(10%, 20px, 3, 2);
+      @include grid-items(10%, 20px, 3, 2, 1);
     }
   }
 
   .history-section {
     min-height: 100vh;
-    overflow: hidden;
     display: flex;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
 
     .history {
-      width: 100%;
     }
 
     .achievements {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 50px 15%;
+
+      @include screen-size(s) {
+        flex-direction: column;
+      }
+      @include screen-size(xs) {
+        flex-direction: column;
+      }
 
       .plus {
-        font-size: 2em;
+        font-size: 1.5em;
         font-weight: bolder;
+        color: $dark-grey;
       }
     }
   }
@@ -261,10 +389,11 @@
     background: $secondary-color;
     display: flex;
     align-items: center;
+    background: $secondary-dark-color;
 
     .board-members {
       width: 100%;
-      @include grid-items(10%, 30px, 3, 3);
+      @include grid-items(5%, 20px, 3, 2, 1);
     }
   }
 
@@ -275,39 +404,104 @@
 
     .partners {
       width: 100%;
-      @include grid-items(10%, 30px, 2, 1);
+      @include grid-items(10%, 30px, 2, 1, 1);
     }
   }
 
   .clients-section {
     min-height: 100vh;
-    background: $secondary-color;
     padding-top: 50px;
-
+    background: $secondary-dark-color;
+    h1 {
+      color: $dark-grey;
+      @include screen-size('xl') {
+        font-size: 1.2em;
+      }
+      @include screen-size('l') {
+        font-size: 1.2em;
+      }
+      @include screen-size('m') {
+        font-size: 1em;
+      }
+    }
     .clients {
       width: 100%;
-      margin-top: 50px;
-      @include grid-items(20px, 50px, 10, 5);
+      margin-top: 30px;
+      @include grid-items(20px, 0, 6, 4, 2);
     }
   }
 
-  .contact {
-    position: relative;
-    display: grid;
-    grid-auto-columns: 100%;
+  .contact-section {
+    height: 100vh;
 
-    .users {
-      position: absolute;
-      left: 0;
-      height: 100vh;
-      width: 70%;
+    .contact {
+      position: relative;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+      height: 100%;
 
-      .card {
-        margin: 50px 0;
+      @include screen-size(s) {
+        flex-direction: column;
+      }
+      @include screen-size(xs) {
+        flex-direction: column;
+      }
+
+      .map {
+        overflow: hidden;
+
+        @include screen-size(s) {
+          display: none;
+        }
+        @include screen-size(xs) {
+          display: none;
+        }
+      }
+
+      .users {
+        width: 60%;
+        background: #262d30;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+
+        @include screen-size(s) {
+          width: 100%;
+          height: 100vh;
+        }
+        @include screen-size(xs) {
+          width: 100%;
+          height: 100vh;
+        }
+
+        .card {
+        }
+      }
+
+      .countries {
+        position: absolute;
+        left: 0;
+        height: 100%;
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+
+        @include screen-size(s) {
+          width: 100%;
+          display: none;
+        }
+        @include screen-size(xs) {
+          width: 100%;
+          display: none;
+        }
+
+        .text {
+          color: $main-color;
+          opacity: 1;
+          font-weight: bolder;
+        }
       }
     }
   }
@@ -317,21 +511,43 @@
     z-index: 200;
     top: 150px;
     left: 50px;
+    width: 200px;
+    @include screen-size('l') {
+      width: 180px;
+    }
+    @include screen-size('m') {
+      top: 120px;
+      left: 30px;
+      width: 150px;
+    }
+    @include screen-size('xs') {
+      display: none;
+    }
 
     .is-active {
-      font-size: 3em !important;
+      font-size: 1.6em !important;
       font-weight: bolder !important;
+      line-height: 1em;
+      /*opacity: 1;*/
+      @include screen-size('m') {
+        font-size: 1.3em !important;
+      }
     }
 
     .nav {
       display: flex;
       flex-direction: column;
+      width: 100%;
 
       a {
-        width: 5px;
-        color: black;
+        width: 100%;
+        color: $dark-grey;
         margin: 5px 0;
         font-size: 1em;
+        @include screen-size('m') {
+          margin: 0 0 10px 0;
+          font-size: 0.8em;
+        }
       }
     }
     .last-section {
@@ -344,17 +560,36 @@
 
   // history tabs
   .tabs {
-    margin: 0 0 100px 15%;
+    margin: 0 15%;
+
+    @include screen-size('m') {
+      margin: 0 20%;
+    }
+    @include screen-size('l') {
+      margin: 0 20%;
+    }
+    @include screen-size('xl') {
+      margin: 0 18%;
+    }
+    @include screen-size('xs') {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     .tabbed-section__selector {
       position: relative;
       height: $main-size*2;
-      top: -$main-size*1.95;
-      left: -$main-size;
       padding: 0;
-      margin: 0;
+      margin: 20px 0 60px 0;
       width: 100%;
       float: left;
+
+      @include screen-size('xs') {
+        top: 0;
+        left: 0;
+        margin: 50px 0;
+      }
 
       [class*="-tab-"] {
         float: left;
@@ -366,10 +601,12 @@
         background: #fff;
         font-weight: bold;
         text-decoration: none;
-        color: black;
-        font-size: 14px;
+        color: $dark-grey;
+        font-size: 1.2em;
 
-
+        @include screen-size('m') {
+          font-size: 1em;
+        }
         &.active {
           color: $main-color;
         }
@@ -397,9 +634,18 @@
       transform: translateX(0);
       display: block;
       left: 0;
-      transition: transform .23s ease ;
-    }
+      transition: transform .23s ease;
 
+      @include screen-size('m') {
+        display: none;
+      }
+      @include screen-size('s') {
+        display: none;
+      }
+      @include screen-size('xs') {
+        display: none;
+      }
+    }
 
     .tabbed-section__selector-tab-4.active ~ .tabbed-section__highlighter {
       transform: translateX(300px);

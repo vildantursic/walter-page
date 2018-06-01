@@ -1,10 +1,13 @@
 <template>
   <div class="other-news">
     <p class="category">
-      <span v-for="(category, index) of item.categories" :key="index"> {{category.name}}<span v-if="index < item.categories.length - 1">,</span></span>
+      <span v-for="(category, index) of item.categories" :key="index"> {{category.name}}<span
+        v-if="index < item.categories.length - 1">,</span></span>
     </p>
     <p class="author">{{item.author.name}}, {{date}}</p>
-    <h1 class="title"><nuxt-link class="nav-link" :to="`/news/${item.id}`">{{ item.title.rendered | truncate(50)}}</nuxt-link></h1>
+    <h1 class="title">
+      <nuxt-link class="nav-link" :to="`/news/${item.id}`" v-html="item.title.rendered.split('').slice(0, 50).join('').concat(item.title.rendered.length > 50 ? '...' : '')"></nuxt-link>
+    </h1>
   </div>
 </template>
 
@@ -23,6 +26,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
 
   .other-news {
     border-width: 0 0 4px 0;
@@ -30,16 +34,14 @@
     border-image: linear-gradient(90deg, #0093c8 0%, #faaf40 100%) 1;
     margin: 0 0 1.5em 0;
 
-    .category
-    {
+    .category {
       margin: 0;
       font-size: 1em;
       font-weight: 700;
       color: orange;
       letter-spacing: 2px;
     }
-    .author
-    {
+    .author {
       margin: 0;
       font-size: 0.8em;
       font-weight: 500;
@@ -51,6 +53,15 @@
       font-weight: bold;
       margin: 15px 0;
 
+      @include screen-size('l') {
+        font-size: 2em;
+      }
+      @include screen-size('m') {
+        font-size: 2em;
+      }
+      @include screen-size('s') {
+        font-size: 1.5em;
+      }
       &:hover {
         color: $main-color;
       }

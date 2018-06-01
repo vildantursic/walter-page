@@ -1,19 +1,28 @@
 <template>
   <section class="padded-content footing-space">
-    <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
-    <!--<AppFilter :filters="filters"-->
-               <!--:selectedFilter="selectedFilter"-->
-               <!--:showDateFilter="true"-->
-               <!--:monthActive="2"-->
-               <!--@onFilterSelected="selectFilter"-->
-               <!--@onYearSelected="selectYear"-->
-               <!--@onMonthSelected="selectMonth">-->
-      <!--<input type="text" placeholder="Search.." v-model="search">-->
-    <!--</AppFilter>-->
+    <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" >
+      <input id="search" type="text" placeholder="" v-model="search" @blur="showSearch">
+    </AppPageTitle>
+    <AppFilter :filters="filters"
+               :selectedFilter="selectedFilter"
+               :showDateFilter="false"
+               :monthActive="2"
+               @onFilterSelected="selectFilter"
+               @onYearSelected="selectYear"
+               @onMonthSelected="selectMonth">
+      <input type="text" placeholder="Search.." v-model="search">
+    </AppFilter>
+    <div class="no-items">
+      <h1 v-if="searchedList.length === 0 && !loading">
+        There are no open applications fo the moment but we will reach out for new talents soon. Keep in touch on Facebook and LinkedIn
+        <a href="https://www.facebook.com/walterBIM/">Facebook</a>, <a href="https://www.linkedin.com/company/walter-bim-solutions/">Linkedin</a> and be the first one to get informed.
+      </h1>
+      <h1 v-if="loading">Loading ...</h1>
+    </div>
     <div class="items">
       <AppScholarship v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
     </div>
-    <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
+    <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += 9"/>
   </section>
 </template>
 
@@ -22,14 +31,15 @@
   import AppAcademy from '~/components/AppAcademy'
   import AppPageTitle from '~/components/AppPageTitle'
   import AppMoreCard from '~/components/AppMoreCard'
+  import AppScholarship from '~/components/AppScholarship'
   import axios from 'axios'
   import moment from 'moment'
   import { orderBy, find } from 'lodash'
-  import AppScholarship from '~/components/AppScholarship'
 
   export default {
     data() {
       return {
+        loading: true,
         itemsToShow: 3,
         id: null,
         items: [],
@@ -75,15 +85,13 @@
     goToPost (id) {
       this.$router.push({ path: `news/${id}`})
     },
-    getImageSource(item) {
-      console.log(item.content )
-    },
     getItems() {
       axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/scholarships?per_page=100&_embed').then((response) => {
         this.items = response.data
         this.tempItems = response.data
         this.fillUser()
         this.fillCategories()
+        this.loading = false
       }).catch((error) => {
         console.log(error);
       });
@@ -137,6 +145,9 @@
       } else {
         return orderBy(this.tempItems, ['date'], [this.selectedFilter === 1 ? 'desc' : 'asc']);
       }
+    },
+    showSearch(){
+      document.getElementById('search-image').style.display = 'block';
     }
   }
 }
@@ -146,6 +157,6 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(0px, 20px, 1, 1);
+    @include grid-items(0px, 20px, 1, 1, 1);
   }
 </style>

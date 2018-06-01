@@ -1,8 +1,8 @@
 <template>
   <section>
     <div class="header-news padded-content">
-      <h1 class="title">{{page.title.rendered}}</h1>
-      <AppSocial></AppSocial>
+      <h1 class="title" v-html="page.title.rendered"></h1>
+      <AppSocial :item="page" :link="$route.path"></AppSocial>
     </div>
     <div class="item animated fadeIn padded-content">
       <div class="img-header">
@@ -27,8 +27,8 @@
         </div>
       </div>
     </div>
-    <div v-if="page._embedded !== undefined" class="img-container-bottom">
-      <img v-if="page._embedded['wp:featuredmedia'] !== undefined" :src="page._embedded['wp:featuredmedia'][0].source_url" :alt="page._embedded['wp:featuredmedia'][0].alt_text">
+    <div v-if="page.acf.bottom_image !== undefined" class="img-container-bottom">
+      <img :src="page.acf.bottom_image">
     </div>
   </section>
 </template>
@@ -143,9 +143,31 @@
     flex-direction: row;
     justify-content: space-between;
 
+    @include screen-size('s') {
+      flex-direction: column;
+    }
+    @include screen-size('xs') {
+      flex-direction: column;
+    }
+
     .title {
       font-size: 3em;
       font-weight: bold;
+      @include screen-size('xl') {
+        font-size: 2.5em;
+      }
+      @include screen-size('l') {
+        font-size: 2.5em;
+      }
+      @include screen-size('m') {
+        font-size: 2em;
+      }
+      @include screen-size('s') {
+        font-size: 1.5em;
+      }
+      h1{
+        color: $dark-grey!important;
+      }
     }
 
     .social {
@@ -167,18 +189,40 @@
       margin: 0;
       font-weight: 500;
       opacity: 0.8;
+      font-size: 1.2em;
+      @include screen-size('xl') {
+        font-size: 1em;
+      }
+      @include screen-size('l') {
+        font-size: 1em;
+      }
+      @include screen-size('m') {
+        font-size: 0.9em;
+      }
+      @include screen-size('s') {
+        font-size: 0.9em;
+      }
     }
   }
 
   .img-container {
     width: 100%;
-    height: 500px;
+    height: auto;
     margin: 1em 0;
   }
   .img-container-bottom {
-    max-height: 500px;
+    max-height: 600px;
 
     img {
+      width: 100%;
+    }
+  }
+  .img-container-bottom
+  {
+    display: flex;
+    max-height: 500px;
+
+    .img-bottom {
       width: 100%;
     }
   }
@@ -186,9 +230,17 @@
     display: flex;
     flex-direction: row;
 
+    @include screen-size('xs') {
+      flex-direction: column;
+    }
+
     .post-left {
       width: 70%;
       padding: 0 2% 2% 2%;
+
+      @include screen-size('xs') {
+        width: 100%;
+      }
 
       .header-left {
         font-weight: 800;
@@ -197,6 +249,10 @@
     .post-right {
       margin: 0 3%;
       width: 30%;
+
+      @include screen-size('xs') {
+        width: 100%;
+      }
 
       .next {
         display: flex;
@@ -211,10 +267,10 @@
         font-weight: bold;
         cursor: pointer;
 
-        &:hover {
-          color: $main-color !important;
+          &:hover {
+            color: $main-color !important;
+          }
         }
       }
     }
-  }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <section class="padded-content full-height">
     <video id="bgvid" playsinline autoplay muted loop>
-      <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/walter.mp4" type="video/mp4">
+      <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/Video-WEB.mp4" type="video/mp4">
     </video>
     <div class="video-cover"></div>
 
@@ -133,6 +133,9 @@
     justify-content: center;
     color: white;
     margin: 0 10%;
+    @include screen-size('m') {
+      margin: 0 5% 0 0%;
+    }
 
     .navigation {
       position: relative;
@@ -156,7 +159,7 @@
     }
 
     .info {
-      width: 80%;
+      width: 100%;
 
       @media (max-width: 768px) {
         width: 100%;
@@ -178,7 +181,7 @@
 
       section {
         display: flex;
-        justify-content: space-around;
+        /*justify-content: space-between;*/
         // for switching to grid system
         // @include grid-items(5%, 5%, 7, 2);
       }

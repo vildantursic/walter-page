@@ -1,7 +1,9 @@
 <template>
   <div class="more">
-    <h1>{{numberOfItems}} <span>+</span></h1>
-    <h4 @click="showMore()">more</h4>
+    <div class="on-hover">
+      <h1 @click="showMore()">{{numberOfItems}} <span>+</span></h1>
+      <h3 @click="showMore()">more</h3>
+    </div>
   </div>
 </template>
 
@@ -26,17 +28,33 @@
     justify-content: flex-end;
     flex-direction: column;
 
+    &:hover {
+      color: $main-color;
+    }
     h1 {
+      color: $dark-grey;
       font-size: 4em;
       margin: 0;
+      cursor: pointer;
+      font-weight: bolder;
 
+      &:hover {
+        color: $main-color;
+      }
       span {
       }
     }
-    h4 {
+    h3 {
       margin: 0;
       color: $main-color;
       cursor: pointer;
+      font-weight: bolder;
+    }
+  }
+
+  .on-hover {
+    &:hover {
+      color: $main-color;
     }
   }
 </style>

@@ -1,14 +1,16 @@
 <template>
-  <div class="card animated fadeIn" data-aos="slide-up">
+  <div class="card animated fadeIn" data-aos="fade">
     <div v-if="item._embedded !== undefined" class="image">
-      <img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">
+      <img v-if="item._embedded['wp:featuredmedia'] !== undefined"
+           :src="item._embedded['wp:featuredmedia'][0].source_url"
+           :alt="item._embedded['wp:featuredmedia'][0].alt_text">
 
-      <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">
+      <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined"
+           src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
-      <h4 class="title">{{item.title.rendered}}</h4>
+      <h4 class="title" v-html="item.title.rendered"></h4>
     </div>
-    <div class="border"></div>
   </div>
 </template>
 
@@ -19,11 +21,18 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
+
   .card {
+    margin-right: 1em;
     display: flex;
     flex-direction: column;
-    width: 100px;
-    /*overflow: hidden;*/
+    width: 130px;
+
+    @include screen-size(xs) {
+      margin: 0;
+    }
 
     .image {
       min-height: 100px;
@@ -43,11 +52,16 @@
     }
 
     .info {
-      height: 50px;
+      height: 40px;
       display: flex;
-      align-items: center;
       justify-content: center;
 
+      h4 {
+        font-size: 1em;
+        margin: 0;
+        font-weight: 400;
+        color: #595959;
+      }
       .title {
         text-align: center;
       }

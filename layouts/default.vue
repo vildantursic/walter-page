@@ -40,4 +40,5 @@ export default {
   .footer {
     grid-area: footer;
   }
+
 </style>

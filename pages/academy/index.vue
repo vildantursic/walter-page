@@ -1,6 +1,8 @@
 <template>
   <section class="padded-content footing-space">
-    <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" ></AppPageTitle>
+    <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" >
+      <input id="search" type="text" placeholder="" v-model="search" @blur="showSearch">
+    </AppPageTitle>
     <AppFilter :filters="filters"
                :selectedFilter="selectedFilter"
                :showDateFilter="true"
@@ -10,10 +12,16 @@
                @onMonthSelected="selectMonth">
       <input type="text" placeholder="Search.." v-model="search">
     </AppFilter>
+    <div class="no-items">
+      <h1 v-if="searchedList.length === 0 && !loading">
+        There are no open courses right now but there certainly are some in the making. Keep in touch on Facebook and LinkedIn <a href="https://www.facebook.com/walterBIM/">Facebook</a>, <a href="https://www.linkedin.com/company/walter-bim-solutions/">Linkedin</a> and be the first to know when they are ready.
+      </h1>
+      <h1 v-if="loading">Loading ...</h1>
+    </div>
     <div class="items">
       <AppAcademy v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item" @onPostClicked="goToPost(item.id)"/>
     </div>
-    <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += itemsToShow"/>
+    <AppMoreCard v-if="items.length > itemsToShow" :numberOfItems="items.length - itemsToShow" @onShowMore="() => itemsToShow += 9"/>
   </section>
 </template>
 
@@ -29,6 +37,7 @@
   export default {
     data() {
       return {
+        loading: true,
         itemsToShow: 3,
         id: null,
         items: [],
@@ -64,15 +73,13 @@
       goToPost (id) {
         this.$router.push({ path: `news/${id}`})
       },
-      getImageSource(item) {
-        console.log(item.content )
-      },
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/bim_academy_posts?per_page=100&_embed').then((response) => {
           this.items = response.data
           this.tempItems = response.data
           this.fillUser()
           this.fillCategories()
+          this.loading = false
         }).catch((error) => {
           console.log(error);
         });
@@ -126,14 +133,17 @@
         } else {
           return orderBy(this.tempItems, ['date'], [this.selectedFilter === 1 ? 'desc' : 'asc']);
         }
-      }
+      },
+      showSearch(){
+        document.getElementById('search-image').style.display = 'block';
+     }
     },
     created () {
         this.getItems()
       },
       asyncData({}) {
         return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/70').then((response) => {
-          return {page: response.data}
+          return { page: response.data }
         }).catch((error) => {
           console.log(error)
         });
@@ -145,6 +155,6 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(0%, 0px, 3, 1);
+    @include grid-items(0%, 0px, 3, 1, 1);
   }
 </style>

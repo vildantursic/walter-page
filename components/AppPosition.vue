@@ -1,6 +1,6 @@
 <template>
-  <div class="info-card animated fadeIn" data-aos="slide-up">
-    <h1 class="position">{{ item.title.rendered | truncate(25)}}</h1>
+  <div class="info-card animated fadeIn" data-aos="fade">
+    <h1 class="position" v-html="item.title.rendered.split('').slice(0, 25).join('').concat(item.title.rendered.length > 50 ? '...' : '')"></h1>
     <p class="published">Published: {{date}}</p>
     <h1 class="description">Job description</h1>
     <p class="data">{{ item.acf.description | truncate(250)}}</p>
@@ -38,14 +38,26 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
 
   .info-card {
     position: relative;
     width: 100%;
-    height: 450px;
+    height: 400px;
     overflow: hidden;
 
+    @include screen-size('m') {
+      height: 400px;
+    }
+    @include screen-size('xs') {
+      height: 400px;
+    }
+    @include screen-size('s') {
+      height: 400px;
+    }
+
     .position {
+      color: $dark-grey;
       margin: 0;
       font-size: 2em;
       font-weight: bold;
@@ -58,7 +70,7 @@
     }
 
     .description {
-      margin: 1.5em 0;
+      margin: 1em 0;
       font-size: 1em;
       font-weight: 600;
       color: $main-color;
@@ -66,13 +78,15 @@
     }
 
     .data {
+      width: 70%;
       margin: 0;
       height: 70px;
       overflow: hidden;
     }
 
     .number {
-      margin: 1.5em 0;
+      color: $dark-grey;
+      margin: 1em 0;
       font-size: 1.2em;
       font-weight: 700;
     }
@@ -80,13 +94,14 @@
     .bottom {
       position: absolute;
       bottom: 0;
+      right: 0;
       width: 100%;
       margin-bottom: 2em;
 
       .more-container {
         display: flex;
         align-items: center;
-        padding-top: 10px;
+        justify-content: flex-end;
 
         .read {
           font-size: 1.5em;

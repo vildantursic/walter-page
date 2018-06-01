@@ -2,30 +2,30 @@
   <div class="card">
     <div class="content">
       <div class="card-img-container">
-        <AppSlider v-if="item.acf.gallery_images" :images="item.acf.gallery_images.split(',')"
-                   :miniSlider="true"></AppSlider>
+        <AppSlider v-if="item.acf.gallery_images"
+                   :images="item.acf.gallery_images.split(',')"
+                   :cases="true"
+                   @showLightBox="showLightBox = !showLightBox"></AppSlider>
         <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>
       <div class="info-card">
         <div class="close">
-          <AppSocial></AppSocial>
+          <AppSocial :item="item" :link="$route.path"></AppSocial>
           <i class="fas fa-times" @click="closeCase"></i>
         </div>
         <p class="category">
           <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span
             v-if="index < item.case_categories.length - 1">,</span></span>
         </p>
-        <h4 class="title">{{item.title.rendered}}</h4>
+        <AppImageBox :showLightBox="showLightBox"
+                     :images="item.acf.gallery_images.split(',').map(image => { return { thumb: image, src: image } })"></AppImageBox>
+        <h4 class="title" v-html="item.title.rendered"></h4>
         <p class="customer">
           <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span
             v-if="index < item.acf.customers.length - 1">,</span></span>
         </p>
         <div class="text-box">
           <div class="description" v-html="item.content.rendered"></div>
-        </div>
-        <div class="divider">
-          <p v-if="item.acf.partners" class="author">In Collaboration with <span
-            v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></p>
         </div>
       </div>
     </div>
@@ -35,12 +35,19 @@
 <script>
   import AppSlider from '~/components/AppSlider'
   import AppSocial from '~/components/AppSocial'
+  import AppImageBox from '~/components/AppImageBox'
 
   export default {
     props: ['item'],
+    data() {
+      return {
+        showLightBox: false
+      }
+    },
     components: {
       AppSlider,
-      AppSocial
+      AppSocial,
+      AppImageBox
     },
     methods: {
       closeCase() {
@@ -55,32 +62,25 @@
   @import '../assets/styles/mixins';
 
   .card {
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 0;
+    /*overflow: hidden;*/
     width: 100%;
-    height: 100%;
-    padding-top: 50px;
+    height: 95%;
     background: white;
-    overflow: scroll;
-    -moz-border-image: -moz-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-    -webkit-border-image: -webkit-linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-    border-image: linear-gradient(45deg, #405dce 0%, #8b20c0 100%);
-    border-image-slice: 1;
 
     .close {
       width: 100%;
       display: flex;
       justify-content: space-between;
+      color: $dark-grey;
 
       i {
         display: flex;
         align-items: flex-start;
         justify-content: flex-end;
-        font-size: 2em;
+        font-size: 1.5em;
         margin: 20px;
         cursor: pointer;
+        color: $dark-grey;
 
         &:hover {
           color: $main-color;
@@ -90,57 +90,74 @@
 
     .content {
       display: flex;
+      flex-direction: row;
 
       @include screen-size(xs) {
         flex-direction: column;
+        height: 100%;
+        padding: 0 5px;
+      }
+      @include screen-size(s) {
+        flex-direction: column;
+        height: 100%;
+        padding: 0 5px;
       }
 
       .card-img-container {
-        display: flex;
-        justify-content: center;
-        /*align-items: center;*/
         width: 60%;
-        height: 70vh;
 
         @include screen-size(xs) {
+          width: 100%;
+        }
+        @include screen-size(s) {
           width: 100%;
         }
       }
       .info-card {
         position: relative;
-        width: 35%;
-        padding: 0 0 0 3em;
+        width: 40%;
+        padding: 1.5em 1.5em 1.5em 2.5em;
 
         @include screen-size(xs) {
+          margin-top: 50px;
           width: 100%;
+          padding: 0;
+        }
+        @include screen-size(s) {
+          margin-top: 50px;
+          width: 100%;
+          padding: 0;
         }
 
         .category {
+          font-size: 1em;
           margin-top: 1em;
           font-weight: 300;
         }
         .title {
-          font-size: 2em;
+          font-size: 1.5em;
           font-weight: bold;
           margin: 0;
+          color: $dark-grey;
         }
         .author {
           font-weight: 500;
-          color: gray;
           font-style: italic;
         }
         .description {
-          color: gray;
         }
         .divider {
           margin-top: 10vh;
           border-top: 1px solid gray;
-          /*width: 85%;*/
         }
         .text-box {
-          height: 50vh;
+          height: 500px;
           overflow: auto;
-          /*width: 85%;*/
+          width: 90%;
+
+          @include screen-size(xs) {
+            height: auto;
+          }
         }
       }
       .link {
@@ -153,4 +170,17 @@
   .right-content {
     width: 85%;
   }
+
+  .social {
+    .fab, .fas {
+      padding: 5px 10px;
+      font-size: 25px;
+      width: 35px;
+      text-align: center;
+      text-decoration: none;
+      color: $social-icon;
+    }
+  }
+
+
 </style>

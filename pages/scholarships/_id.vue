@@ -1,9 +1,5 @@
 <template>
   <section>
-    <!--<div v-if="item._embedded !== undefined" class="card-img-container">-->
-      <!--<img v-if="item._embedded['wp:featuredmedia'] !== undefined" :src="item._embedded['wp:featuredmedia'][0].source_url" :alt="item._embedded['wp:featuredmedia'][0].alt_text">-->
-      <!--<img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">-->
-    <!--</div>-->
     <div class="header-news padded-content">
       <h1 class="title" v-html="page.title.rendered"></h1>
       <AppSocial :item="page" :link="$route.path"></AppSocial>
@@ -12,7 +8,6 @@
       <div class="post-content">
         <div class="post-left" v-html="page.content.rendered"></div>
       </div>
-
       <AppContactForm :contactPerson="contactPerson" :subject="subject"></AppContactForm>
     </div>
   </section>
@@ -40,7 +35,7 @@
           acf: {}
         },
         contactPerson: 'aida.omanovic@walter.ba',
-        subject: 'Careers'
+        subject: 'Scholarships'
       }
     },
     components: {
@@ -53,11 +48,11 @@
       AppContactForm
     },
     asyncData({ route }) {
-      return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers/${route.params.id}?_embed`).then((response) => {
+      return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/scholarships/${route.params.id}?_embed`).then((response) => {
         return {
           page: response.data,
           date: moment(response.data.date).format('MMM YYYY [at] LT'),
-          subject: `Careers - ${response.data.title.rendered}`
+          subject: `Scholarships - ${response.data.title.rendered}`
         }
       }).catch((error) => {
         console.log(error)
@@ -68,7 +63,7 @@
         this.$router.push({ path: `/news/${id}`})
       },
       getItems() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?_embed').then((response) => {
+        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/scholarships?_embed').then((response) => {
           this.items = response.data
         }).catch((error) => {
           console.log(error);
@@ -91,11 +86,12 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
-    @include screen-size('s') {
+    @include screen-size('s')
+    {
       flex-direction: column;
     }
-    @include screen-size('xs') {
+    @include screen-size('xs')
+    {
       flex-direction: column;
     }
 
@@ -157,6 +153,10 @@
       {
         width: 100%;
       }
+      .header-left {
+        font-weight: 800;
+      }
+
       .header-left {
         font-weight: 800;
       }
