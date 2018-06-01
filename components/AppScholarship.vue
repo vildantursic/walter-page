@@ -13,7 +13,7 @@
       <AppSocial :item="item" :link="$route.path"></AppSocial>
       <div class="text">
         <p class="published">Deadline: {{deadline}}</p>
-        <h1 class="title">{{item.title.rendered}}</h1>
+        <h1 class="title" v-html="item.title.rendered"></h1>
         <p>{{item.acf.description | truncate(35 * 3)}}</p>
       </div>
       <div class="bottom-group">

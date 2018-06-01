@@ -17,7 +17,7 @@
     components: {
       AppSingle
     },
-    asyncData({ route }) {
+    async asyncData({ route }) {
       return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases/${route.params.id}?_embed`).then((response) => {
         return { page: response.data }
       }).catch((error) => {

@@ -11,7 +11,7 @@
       <div class="about">
         <div class="member">
           <div>
-            <h3>{{item.title.rendered}}</h3>
+            <h3 v-html="item.title.rendered"></h3>
             <p>{{item.acf.position}}</p>
           </div>
         </div>

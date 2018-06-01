@@ -11,7 +11,7 @@
     </nuxt-link>
     <div class="info">
       <nuxt-link class="nav-link" :to="`/academy/${item.id}`">
-        <h1 class="title">{{item.title.rendered}}</h1>
+        <h1 class="title" v-html="item.title.rendered"></h1>
       </nuxt-link>
       <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>
       <div class="published">Deadline: {{deadline}}</div>

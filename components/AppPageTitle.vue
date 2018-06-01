@@ -1,7 +1,7 @@
 <template>
   <div class="title-page">
     <p class="supertitle">{{supertitle}}</p>
-    <h1 class="title">{{title}}</h1>
+    <h1 class="title" v-html="title"></h1>
     <p class="subtitle">{{subtitle}}</p>
     <div class="search" v-on:click="hideSearch">
       <slot></slot>

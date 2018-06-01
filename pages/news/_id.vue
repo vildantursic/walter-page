@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="header-news padded-content">
-      <h1 class="title">{{page.title.rendered}}</h1>
+      <h1 class="title" v-html="page.title.rendered"></h1>
       <AppSocial :item="page" :link="$route.path"></AppSocial>
     </div>
     <div class="item animated fadeIn padded-content">
@@ -207,7 +207,7 @@
 
   .img-container {
     width: 100%;
-    height:auto;
+    height: auto;
     margin: 1em 0;
   }
   .img-container-bottom {

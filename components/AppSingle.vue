@@ -4,7 +4,7 @@
       <div class="card-img-container">
         <AppSlider v-if="item.acf.gallery_images"
                    :images="item.acf.gallery_images.split(',')"
-                   :miniSlider="true"
+                   :cases="true"
                    @showLightBox="showLightBox = !showLightBox"></AppSlider>
         <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>
@@ -19,7 +19,7 @@
         </p>
         <AppImageBox :showLightBox="showLightBox"
                      :images="item.acf.gallery_images.split(',').map(image => { return { thumb: image, src: image } })"></AppImageBox>
-        <h4 class="title">{{item.title.rendered}}</h4>
+        <h4 class="title" v-html="item.title.rendered"></h4>
         <p class="customer">
           <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span
             v-if="index < item.acf.customers.length - 1">,</span></span>
@@ -62,8 +62,9 @@
   @import '../assets/styles/mixins';
 
   .card {
+    /*overflow: hidden;*/
     width: 100%;
-    height: 100%;
+    height: 95%;
     background: white;
 
     .close {

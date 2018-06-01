@@ -13,7 +13,9 @@
       <input type="text" placeholder="Search.." v-model="search">
     </AppFilter>
     <div class="no-items">
-      <h1 v-if="searchedList.length === 0 && !loading">Currently there is nothing to show, please come back later.</h1>
+      <h1 v-if="searchedList.length === 0 && !loading">
+        There are no open courses right now but there certainly are some in the making. Keep in touch on Facebook and LinkedIn <a href="https://www.facebook.com/walterBIM/">Facebook</a>, <a href="https://www.linkedin.com/company/walter-bim-solutions/">Linkedin</a> and be the first to know when they are ready.
+      </h1>
       <h1 v-if="loading">Loading ...</h1>
     </div>
     <div class="items">
@@ -141,7 +143,7 @@
       },
       asyncData({}) {
         return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/pages/70').then((response) => {
-          return {page: response.data}
+          return { page: response.data }
         }).catch((error) => {
           console.log(error)
         });

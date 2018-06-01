@@ -13,7 +13,10 @@
       <input type="text" placeholder="Search.." v-model="search">
     </AppFilter>
     <div class="no-items">
-      <h1 v-if="searchedList.length === 0 && !loading">Currently there is nothing to show, please come back later.</h1>
+      <h1 v-if="searchedList.length === 0 && !loading">
+        There are no open applications fo the moment but we will reach out for new talents soon. Keep in touch on Facebook and LinkedIn
+        <a href="https://www.facebook.com/walterBIM/">Facebook</a>, <a href="https://www.linkedin.com/company/walter-bim-solutions/">Linkedin</a> and be the first one to get informed.
+      </h1>
       <h1 v-if="loading">Loading ...</h1>
     </div>
     <div class="items">
@@ -28,10 +31,10 @@
   import AppAcademy from '~/components/AppAcademy'
   import AppPageTitle from '~/components/AppPageTitle'
   import AppMoreCard from '~/components/AppMoreCard'
+  import AppScholarship from '~/components/AppScholarship'
   import axios from 'axios'
   import moment from 'moment'
   import { orderBy, find } from 'lodash'
-  import AppScholarship from '~/components/AppScholarship'
 
   export default {
     data() {

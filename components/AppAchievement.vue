@@ -9,7 +9,7 @@
            src="~/static/images/walter-logo.png" alt="">
     </div>
     <div class="info">
-      <h4 class="title">{{item.title.rendered}}</h4>
+      <h4 class="title" v-html="item.title.rendered"></h4>
     </div>
   </div>
 </template>

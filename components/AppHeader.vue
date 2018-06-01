@@ -210,6 +210,9 @@
         list-style: none;
         display: flex;
         justify-content: space-around;
+        margin: 0 auto ;
+        /*display:table;*/
+        padding: 0;
 
         li {
 

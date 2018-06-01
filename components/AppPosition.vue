@@ -1,6 +1,6 @@
 <template>
   <div class="info-card animated fadeIn" data-aos="fade">
-    <h1 class="position">{{ item.title.rendered | truncate(25)}}</h1>
+    <h1 class="position" v-html="item.title.rendered.split('').slice(0, 25).join('').concat(item.title.rendered.length > 50 ? '...' : '')"></h1>
     <p class="published">Published: {{date}}</p>
     <h1 class="description">Job description</h1>
     <p class="data">{{ item.acf.description | truncate(250)}}</p>

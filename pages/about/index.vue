@@ -8,12 +8,12 @@
                     :duration="800"
                     bezier-easing-value=".5,0,.35,1"
                     v-on:itemchanged="onItemChanged">
-        <a href="#statistics" class="scrollactive-item" :ref="1">Who are we</a>
-        <a href="#history" class="scrollactive-item" :ref="2">Our history</a>
-        <a href="#board-members" class="scrollactive-item" :ref="3">Board Members</a>
-        <a href="#partners" class="scrollactive-item" :ref="4">Our partners</a>
-        <a href="#clients" class="scrollactive-item" :ref="5">Our clients</a>
-        <a href="#contact" class="scrollactive-item" :ref="6">Contact us</a>
+        <a href="#statistics" class="scrollactive-item" :ref="1" @click="notLast()">Who are we</a>
+        <a href="#history" class="scrollactive-item" :ref="2" @click="notLast()">Our history</a>
+        <a href="#board-members" class="scrollactive-item" :ref="3" @click="notLast()">Board Members</a>
+        <a href="#partners" class="scrollactive-item" :ref="4" @click="notLast()">Our partners</a>
+        <a href="#clients" class="scrollactive-item" :ref="5" @click="notLast()">Clients</a>
+        <a href="#contact" class="scrollactive-item" :ref="6" @click="last()">Contact us</a>
       </scrollactive>
     </div>
     <div class="section">
@@ -35,8 +35,7 @@
           <div class="tabbed-section__selector">
             <a :class="[index === currentHistory ? 'active': '', `tabbed-section__selector-tab-${currentHistory + 1}`]"
                v-for="(obj, index) in histories"
-               :key="index" @click="currentHistory = index">
-              {{obj.title.rendered}}
+               :key="index" @click="currentHistory = index" v-html="obj.title.rendered">
             </a>
             <span class="tabbed-section__highlighter"></span>
           </div>
@@ -212,6 +211,12 @@
             this.$refs.scrollactive.$el.className = 'scrollactive-nav nav'
           }
         }
+      },
+      notLast() {
+        this.$refs.scrollactive.$el.className = 'scrollactive-nav nav'
+      },
+      last() {
+        this.$refs.scrollactive.$el.className = 'scrollactive-nav nav last-section'
       },
       getHistories() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/histories?_embed').then((response) => {
