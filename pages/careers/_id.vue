@@ -13,7 +13,7 @@
         <div class="post-left" v-html="page.content.rendered"></div>
       </div>
 
-      <AppContactForm :contactPerson="contactPerson" :subject="subject"></AppContactForm>
+      <AppContactForm :contactPerson="contactPerson" :subject="subject" :uploadFiles="uploadFiles"></AppContactForm>
     </div>
   </section>
 </template>
@@ -40,7 +40,8 @@
           acf: {}
         },
         contactPerson: 'aida.omanovic@walter.ba',
-        subject: 'Careers'
+        subject: 'Careers',
+        uploadFiles: 'CV'
       }
     },
     components: {

@@ -8,7 +8,7 @@
       <div class="post-content">
         <div class="post-left" v-html="page.content.rendered"></div>
       </div>
-      <AppContactForm :contactPerson="contactPerson" :subject="subject"></AppContactForm>
+      <AppContactForm :contactPerson="contactPerson" :subject="subject" :uploadFiles="uploadFiles"></AppContactForm>
     </div>
   </section>
 </template>
@@ -35,7 +35,8 @@
           acf: {}
         },
         contactPerson: 'aida.omanovic@walter.ba',
-        subject: 'Scholarships'
+        subject: 'Scholarships',
+        uploadFiles: 'CV, transcript of grades, copy of student ID verifying the last registered semester'
       }
     },
     components: {
