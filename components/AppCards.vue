@@ -12,7 +12,7 @@
     </div>
     <div class="info">
       <nuxt-link class="nav-link" :to="`/cases/${item.id}`">
-        <h1 class="title">{{item.title.rendered | truncate(30)}}</h1>
+        <h1 class="title" v-html="item.title.rendered.split('').slice(0, 50).join('').concat(item.title.rendered.length > 50 ? '...' : '')"></h1>
       </nuxt-link>
       <i class="clients" v-for="(customer, index) of item.acf.customers" :key="index">{{customer.post_title}}<span
         v-if="index < item.acf.customers.length - 1"></span></i>

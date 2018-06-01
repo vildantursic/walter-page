@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="header-news padded-content">
-      <h1 class="title">{{page.title.rendered}}</h1>
+      <h1 class="title" v-html="page.title.rendered"></h1>
       <AppSocial :item="page" :link="$route.path"></AppSocial>
     </div>
     <div class="item animated fadeIn padded-content">
@@ -43,7 +43,6 @@
   import axios from 'axios'
   import { find } from 'lodash'
   import moment from 'moment'
-  import { parseData } from '~/plugins/parse'
 
   export default {
     data() {
@@ -86,7 +85,7 @@
       },
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts?_embed').then((response) => {
-          this.items = parseData(response.data)
+          this.items = response.data
           this.fillUser()
           this.fillCategories()
         }).catch((error) => {

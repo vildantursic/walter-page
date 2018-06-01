@@ -34,7 +34,6 @@
   import axios from 'axios'
   import moment from 'moment'
   import { orderBy, find } from 'lodash'
-  import { parseData } from '~/plugins/parse'
 
   export default {
     data() {
@@ -83,7 +82,7 @@
     methods: {
       getItems () {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?per_page=100&_embed').then((response) => {
-          this.items = parseData(response.data)
+          this.items = response.data
           this.itemsToShow = this.items.length - 1
           this.tempItems = response.data
           this.loading = false

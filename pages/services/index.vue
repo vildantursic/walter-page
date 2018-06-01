@@ -20,7 +20,7 @@
              :key="index"
              :href="`#${item.id}`"
              :ref="`${item.id}`"
-             class="scrollactive-item" @click="showContact(item.id)">{{item.title.rendered}}</a>
+             class="scrollactive-item" @click="showContact(item.id)" v-html="item.title.rendered"></a>
         </scrollactive>
       </div>
       <div class="section" v-for="(item, index) in services" :key="index">

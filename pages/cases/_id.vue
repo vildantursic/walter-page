@@ -5,7 +5,6 @@
 <script>
   import AppSingle from "~/components/AppSingle";
   import axios from 'axios'
-  import { parseData } from '~/plugins/parse'
 
   export default {
     data() {

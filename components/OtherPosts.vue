@@ -6,7 +6,7 @@
     </p>
     <p class="author">{{item.author.name}}, {{date}}</p>
     <h1 class="title">
-      <nuxt-link class="nav-link" :to="`/news/${item.id}`">{{ item.title.rendered | truncate(50)}}</nuxt-link>
+      <nuxt-link class="nav-link" :to="`/news/${item.id}`" v-html="item.title.rendered | truncate(50)"></nuxt-link>
     </h1>
   </div>
 </template>

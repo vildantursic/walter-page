@@ -1,13 +1,14 @@
 <template>
   <section>
     <div class="header-news padded-content">
-      <h1 class="title">{{page.title.rendered}}</h1>
+      <h1 class="title" v-html="page.title.rendered"></h1>
       <AppSocial :item="page" :link="$route.path"></AppSocial>
     </div>
     <div class="item animated fadeIn padded-content">
       <div class="post-content">
         <div class="post-left" v-html="page.content.rendered"></div>
       </div>
+      <AppContactForm :contactPerson="contactPerson" :subject="subject"></AppContactForm>
     </div>
   </section>
 </template>
@@ -19,10 +20,10 @@
   import OtherPosts from '~/components/OtherPosts'
   import AppSlider from '~/components/AppSlider'
   import AppSocial from '~/components/AppSocial'
+  import AppContactForm from '~/components/AppContactForm'
   import axios from 'axios'
   import { find } from 'lodash'
   import moment from 'moment'
-  import { parseData } from '~/plugins/parse'
 
   export default {
     data() {
@@ -33,6 +34,8 @@
         page: {
           acf: {}
         },
+        contactPerson: 'aida.omanovic@walter.ba',
+        subject: 'Scholarships'
       }
     },
     components: {
@@ -41,13 +44,15 @@
       AppPageTitle,
       OtherPosts,
       AppSlider,
-      AppSocial
+      AppSocial,
+      AppContactForm
     },
     asyncData({ route }) {
       return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/scholarships/${route.params.id}?_embed`).then((response) => {
         return {
-          page: parseData(response.data),
-          date: moment(response.data.date).format('MMM YYYY [at] LT')
+          page: response.data,
+          date: moment(response.data.date).format('MMM YYYY [at] LT'),
+          subject: `Scholarships - ${response.data.title.rendered}`
         }
       }).catch((error) => {
         console.log(error)

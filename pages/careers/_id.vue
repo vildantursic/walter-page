@@ -5,14 +5,15 @@
       <!--<img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined" src="~/static/images/walter-logo.png" alt="">-->
     <!--</div>-->
     <div class="header-news padded-content">
-      <h1 class="title">{{page.title.rendered}}</h1>
+      <h1 class="title" v-html="page.title.rendered"></h1>
       <AppSocial :item="page" :link="$route.path"></AppSocial>
     </div>
     <div class="item animated fadeIn padded-content">
       <div class="post-content">
         <div class="post-left" v-html="page.content.rendered"></div>
-        <button @click="contactForm()">Contact</button>
       </div>
+
+      <AppContactForm :contactPerson="contactPerson" :subject="subject"></AppContactForm>
     </div>
   </section>
 </template>
@@ -24,6 +25,7 @@
   import OtherPosts from '~/components/OtherPosts'
   import AppSlider from '~/components/AppSlider'
   import AppSocial from '~/components/AppSocial'
+  import AppContactForm from '~/components/AppContactForm'
   import axios from 'axios'
   import { find } from 'lodash'
   import moment from 'moment'
@@ -37,6 +39,8 @@
         page: {
           acf: {}
         },
+        contactPerson: 'aida.omanovic@walter.ba',
+        subject: 'Careers'
       }
     },
     components: {
@@ -45,13 +49,15 @@
       AppPageTitle,
       OtherPosts,
       AppSlider,
-      AppSocial
+      AppSocial,
+      AppContactForm
     },
     asyncData({ route }) {
       return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers/${route.params.id}?_embed`).then((response) => {
         return {
           page: response.data,
-          date: moment(response.data.date).format('MMM YYYY [at] LT')
+          date: moment(response.data.date).format('MMM YYYY [at] LT'),
+          subject: `Careers - ${response.data.title.rendered}`
         }
       }).catch((error) => {
         console.log(error)
@@ -63,22 +69,6 @@
       },
       getItems() {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?_embed').then((response) => {
-          this.items = response.data
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      contactForm() {
-        axios({
-          method: 'post',
-          url: 'http://walter.hotelsnjesko.ba',
-          data: JSON.stringify({
-            "name": 'vildan',
-            "email": 'tursicvildan@gmail.com',
-            "subject": 'test',
-            "message": 'test'
-          }),
-        }).then((response) => {
           this.items = response.data
         }).catch((error) => {
           console.log(error);

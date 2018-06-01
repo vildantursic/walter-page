@@ -35,8 +35,7 @@
           <div class="tabbed-section__selector">
             <a :class="[index === currentHistory ? 'active': '', `tabbed-section__selector-tab-${currentHistory + 1}`]"
                v-for="(obj, index) in histories"
-               :key="index" @click="currentHistory = index">
-              {{obj.title.rendered}}
+               :key="index" @click="currentHistory = index" v-html="obj.title.rendered">
             </a>
             <span class="tabbed-section__highlighter"></span>
           </div>
