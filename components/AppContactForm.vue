@@ -67,7 +67,7 @@
         if (this.email && this.name && this.message && this.file) {
           const form = new FormData();
           form.append("from", `"${this.name}" <${this.email}>`);
-          form.append("to", 'vildantursic@hotmail.com');
+          form.append("to", this.contactPerson);
           form.append("subject", this.subject);
           form.append("text", this.subject);
           form.append("html", this.message);
@@ -108,12 +108,20 @@
 
 <style lang="scss" scoped>
   @import "../assets/styles/variables";
+  @import "../assets/styles/mixins";
 
   .contact-form {
     width: 50%;
     display: flex;
     flex-direction: column;
     margin: 70px 0;
+
+    @include screen-size(s) {
+      width: 100%;
+    }
+    @include screen-size(xs) {
+      width: 100%;
+    }
 
     * {
       width: 100%;
@@ -150,6 +158,13 @@
       height: 40px;
       width: 50%;
       cursor: pointer;
+
+      @include screen-size(s) {
+        width: 100%;
+      }
+      @include screen-size(xs) {
+        width: 100%;
+      }
 
       &:hover {
         background: #3e88a7;

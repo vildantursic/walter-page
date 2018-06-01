@@ -13,7 +13,7 @@
       <input type="text" placeholder="Search.." v-model="search">
     </AppFilter>
     <div class="no-items">
-      <h1 v-if="searchedList.length === 0 && !loading">Currently there is nothing to show, please come back later.</h1>
+      <h1 v-if="searchedList.length === 0 && !loading">No items to show!</h1>
       <h1 v-if="loading">Loading ...</h1>
     </div>
     <div class="items">

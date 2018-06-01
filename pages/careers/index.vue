@@ -14,7 +14,7 @@
     <!--</AppFilter>-->
     <div class="no-items">
       <h1 v-if="searchedList.length === 0 && !loading">
-        There are no open positions right now but keep in touch on Facebook and LinkedIn https://www.facebook.com/walterBIM/ , https://www.linkedin.com/company/walter-bim-solutions/ , we will maybe need your skills soon.
+        There are no open positions right now but keep in touch on Facebook and LinkedIn <a href="https://www.facebook.com/walterBIM/">Facebook</a>, <a href="https://www.linkedin.com/company/walter-bim-solutions/">Linkedin</a>, we will maybe need your skills soon.
       </h1>
       <h1 v-if="loading">Loading ...</h1>
     </div>

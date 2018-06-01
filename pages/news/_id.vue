@@ -207,7 +207,7 @@
 
   .img-container {
     width: 100%;
-    height:auto;
+    height: auto;
     margin: 1em 0;
   }
   .img-container-bottom {

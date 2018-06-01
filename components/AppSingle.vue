@@ -4,7 +4,7 @@
       <div class="card-img-container">
         <AppSlider v-if="item.acf.gallery_images"
                    :images="item.acf.gallery_images.split(',')"
-                   :miniSlider="true"
+                   :cases="true"
                    @showLightBox="showLightBox = !showLightBox"></AppSlider>
         <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>

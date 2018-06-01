@@ -1,6 +1,6 @@
 <template xmlns:v-swiper="http://www.w3.org/1999/xhtml">
   <div class="swiper">
-    <div v-swiper:mySwiper="swiperOption" class="my-swiper" :class="{ thumbs: miniSlider }">
+    <div v-swiper:mySwiper="swiperOption" class="my-swiper" :class="{ cases: cases }">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(image, index) in images" :key="index">
           <img v-if="image" :src="image" @click="showLightBox()">
@@ -18,7 +18,7 @@
 
 <script>
   export default {
-    props: ['images', 'miniSlider'],
+    props: ['images', 'cases'],
     data() {
       return {
         swiperOption: {
@@ -64,7 +64,7 @@
 
   .swiper {
     position: relative;
-    height: calc(100vh - 80px);
+    height: 100%;
     width: 100%;
   }
 
@@ -133,5 +133,9 @@
     outline: none;
     width: 44px;
     height: 44px;
+  }
+
+  .cases {
+    height: calc(100vh - 80px);
   }
 </style>
