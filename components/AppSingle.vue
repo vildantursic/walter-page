@@ -19,7 +19,7 @@
         </p>
         <AppImageBox :showLightBox="showLightBox"
                      :images="item.acf.gallery_images.split(',').map(image => { return { thumb: image, src: image } })"></AppImageBox>
-        <h4 class="title" v-html="item.title.rendered"></h4>
+        <h1 class="title" v-html="item.title.rendered"></h1>
         <p class="customer">
           <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span
             v-if="index < item.acf.customers.length - 1">,</span></span>
@@ -135,7 +135,7 @@
           font-weight: 300;
         }
         .title {
-          font-size: 1.5em;
+          font-size: 2em;
           font-weight: bold;
           margin: 0;
           color: $dark-grey;
@@ -153,7 +153,8 @@
         .text-box {
           height: 500px;
           overflow: auto;
-          width: 90%;
+          width: 100%;
+          padding: 0 10px;
 
           @include screen-size(xs) {
             height: auto;

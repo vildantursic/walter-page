@@ -17,7 +17,7 @@
       <i class="clients" v-for="(customer, index) of item.acf.customers" :key="index">{{customer.post_title}}<span
         v-if="index < item.acf.customers.length - 1"></span></i>
       <div class="content">{{item.acf.description | truncate(30 * 4)}}</div>
-      <i class="partner" v-if="item.acf.partners">In Collaboration with <span
+      <i class="partner" v-if="item.acf.partners">for <span
         v-for="(partner, index) of item.acf.partners" :key="index">{{partner.post_title}}</span></i>
     </div>
     <div class="border"></div>
