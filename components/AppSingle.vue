@@ -1,5 +1,9 @@
 <template>
   <div class="card">
+    <div class="close">
+      <AppSocial :item="item" :link="$route.path"></AppSocial>
+      <i class="fas fa-times" @click="closeCase"></i>
+    </div>
     <div class="content">
       <div class="card-img-container">
         <AppSlider v-if="item.acf.gallery_images"
@@ -9,10 +13,6 @@
         <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>
       <div class="info-card">
-        <div class="close">
-          <AppSocial :item="item" :link="$route.path"></AppSocial>
-          <i class="fas fa-times" @click="closeCase"></i>
-        </div>
         <p class="category">
           <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span
             v-if="index < item.case_categories.length - 1">,</span></span>
