@@ -10,7 +10,6 @@
       class="fab fa-twitter"></i></a>
     <a :href="`mailto:youremail@gmail.com?subject=shared link&body=${item.acf.description} ${link}`"><i
       class="fas fa-envelope"></i></a>
-    <a @click="copyOnClick()"><i class="fas fa-paperclip"></i></a>
   </div>
 </template>
 

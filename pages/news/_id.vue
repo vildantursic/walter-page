@@ -235,6 +235,7 @@
     }
 
     .post-left {
+      line-height: 1.8;
       width: 70%;
       padding: 0 2% 2% 2%;
 

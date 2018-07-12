@@ -116,7 +116,7 @@
       .info-card {
         position: relative;
         width: 40%;
-        padding: 1.5em 1.5em 1.5em 2.5em;
+        padding: 1.5em 2.5em 1.5em 2.5em;
 
         @include screen-size(xs) {
           margin-top: 50px;
@@ -135,6 +135,9 @@
           font-weight: 300;
         }
         .title {
+          @include screen-size(xs) {
+            padding: 0 10px 0 10px;
+          }
           font-size: 2em;
           font-weight: bold;
           margin: 0;
@@ -145,6 +148,7 @@
           font-style: italic;
         }
         .description {
+          line-height: 1.5;
         }
         .divider {
           margin-top: 10vh;
@@ -154,10 +158,11 @@
           height: 500px;
           overflow: auto;
           width: 100%;
-          padding: 0 10px;
+          padding: 0 40px 0 0px;
 
           @include screen-size(xs) {
             height: auto;
+            padding: 0 10px 0 10px;
           }
         }
       }
@@ -173,6 +178,7 @@
   }
 
   .social {
+    padding: 0 20px;
     .fab, .fas {
       padding: 5px 10px;
       font-size: 25px;
