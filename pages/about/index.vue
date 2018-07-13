@@ -390,7 +390,9 @@
     display: flex;
     align-items: center;
     background: $secondary-dark-color;
-
+    @include screen-size('xs') {
+      margin-bottom: 50px;
+    }
     .board-members {
       width: 100%;
       @include grid-items(5%, 20px, 3, 2, 1);
@@ -472,6 +474,7 @@
         @include screen-size(xs) {
           width: 100%;
           height: 100vh;
+          justify-content: unset;
         }
 
         .card {

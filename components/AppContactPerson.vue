@@ -5,6 +5,7 @@
         width: 70px;
         height: 70px;
         border-radius: 50%;
+        margin-bottom: 15px;
       }
     </style>
     <div class="image" v-html="user.user_avatar"></div>
@@ -34,30 +35,49 @@
   @import '../assets/styles/mixins';
 
   .card {
-    width: 150px;
+    width: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     color: white;
-
-    div {
-      margin-bottom: 10px;
-      text-align: center;
+    @include screen-size('xs') {
+      width: 200px;
+      padding-top: 3em;
     }
+
+    /*div {*/
+      /*margin-bottom: 10px;*/
+      /*text-align: center;*/
+    /*}*/
 
     .name {
+      text-align: center;
       font-weight: bolder;
-      font-size: 1.2em;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      @include screen-size('xs') {
+        font-size: 1.4em;
+      }
     }
-
+      .role{
+        text-align: center;
+        margin-bottom: 10px;
+        @include screen-size('xs') {
+          margin-bottom: 15px;
+        }
+      }
     .icons {
       width: 100%;
       display: flex;
       justify-content: space-around;
       border-top: solid 1px white;
-      padding: 5% 0;
-      font-size: 1em;
+      padding: 6% 0;
+      font-size: 1.4em;
+      @include screen-size('xs') {
+        font-size: 1.5em;
+        margin: 0;
+      }
     }
   }
 

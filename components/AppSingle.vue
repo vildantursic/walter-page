@@ -8,6 +8,10 @@
         <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>
       <div class="info-card">
+        <p class="category">
+          <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span
+            v-if="index < item.case_categories.length - 1">,</span></span>
+        </p>
         <div class="close">
           <AppSocial :item="item" :link="$route.path"></AppSocial>
           <i class="fas fa-times" @click="closeCase"></i>
@@ -60,9 +64,8 @@
   @import '../assets/styles/mixins';
 
   .card {
-    /*overflow: hidden;*/
     width: 100%;
-    height: 95%;
+    height: 100%;
     background: white;
 
     .close {
@@ -87,13 +90,17 @@
     }
 
     .content {
-      display: flex;
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: 60% 40%;
+      grid-template-areas: "card-img-container info-card";
 
       @include screen-size(xs) {
         flex-direction: column;
         height: 100%;
         padding: 0 5px;
+        grid-template-columns: 100%;
+        grid-template-areas: "info-card"
+                             "card-img-container";
       }
       @include screen-size(s) {
         flex-direction: column;
@@ -102,7 +109,6 @@
       }
 
       .card-img-container {
-        width: 60%;
 
         @include screen-size(xs) {
           width: 100%;
@@ -113,29 +119,31 @@
       }
       .info-card {
         position: relative;
-        width: 40%;
-        padding: 1.5em 1.5em 1.5em 2.5em;
+        padding: 0 1.5em;
 
         @include screen-size(xs) {
-          margin-top: 50px;
+          margin-top: 20px;
           width: 100%;
           padding: 0;
         }
         @include screen-size(s) {
-          margin-top: 50px;
+          margin-top: 20px;
           width: 100%;
           padding: 0;
         }
 
         .category {
           font-size: 1em;
-          margin-top: 1em;
+          margin-top: 0.5em;
           font-weight: 300;
         }
         .title {
+          width: 90%;
+          @include screen-size(xs) {
+            padding: 0 10px 0 10px;
+          }
           font-size: 2em;
           font-weight: bold;
-          margin: 0;
           color: $dark-grey;
         }
         .author {
@@ -143,6 +151,10 @@
           font-style: italic;
         }
         .description {
+          line-height: 1.5;
+          @include screen-size(xs) {
+            padding: 0 10px;
+          }
         }
         .divider {
           margin-top: 10vh;
@@ -151,11 +163,11 @@
         .text-box {
           height: 500px;
           overflow: auto;
-          width: 100%;
-          /*padding: 0 10px;*/
+          width: 85%;
 
           @include screen-size(xs) {
             height: auto;
+            width: 100%;
           }
         }
       }
@@ -171,6 +183,7 @@
   }
 
   .social {
+    padding: 0 20px;
     .fab, .fas {
       padding: 5px 10px;
       font-size: 25px;
@@ -180,6 +193,11 @@
       color: $social-icon;
     }
   }
-
+  .card-img-container{
+    grid-area: card-img-container;
+  }
+  .info-card{
+    grid-area: info-card;
+  }
 
 </style>
