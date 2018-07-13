@@ -53,7 +53,7 @@
           <nuxt-link :to="{ name: 'about' }">About us</nuxt-link>
         </li>
         <li @mouseover="upHere = true" @mouseleave="upHere = false">
-          <a>Careers</a>
+          <a style="cursor: pointer">Careers</a>
           <ul class="dropdown-menu" id="menu-drop" v-show="upHere">
             <li>
               <nuxt-link :to="{ name: 'careers' }">Open positions</nuxt-link>
@@ -149,6 +149,9 @@
         .nuxt-link-exact-active {
           color: $main-color;
         }
+        .nuxt-link-active {
+          color: $main-color;
+        }
       }
     }
   }
@@ -226,6 +229,9 @@
           }
 
           .nuxt-link-exact-active {
+            color: $main-color;
+          }
+          .nuxt-link-active {
             color: $main-color;
           }
         }

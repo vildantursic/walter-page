@@ -46,7 +46,7 @@
     data() {
       return {
         loading: true,
-        itemsToShow: 8,
+        itemsToShow: this.$route.query.itemsToShow || 8,
         page: {
           acf: {}
         },
@@ -57,6 +57,12 @@
         sortedFilters: [],
         search: '',
         selectedFilter: -1
+      }
+    },
+    watch: {
+      itemsToShow: function (val) {
+        console.log(val)
+        this.$router.push({ query: { itemsToShow: val } })
       }
     },
     created () {
@@ -73,7 +79,7 @@
       searchedList() {
         return this.items.filter(item => {
           return item.title.rendered.toLowerCase().includes(this.search.toLowerCase()) ||
-          item.acf.description.toLowerCase().includes(this.search.toLowerCase())
+                 item.acf.description.toLowerCase().includes(this.search.toLowerCase())
         })
       }
     },
@@ -109,7 +115,7 @@
             return item
           })
         }).then(() => {
-          this.selectFilter(this.$route.query.filter)
+          this.selectFilter(this.$route.query.filterID)
         }).catch((error) => {
           console.log(error);
         });
@@ -120,8 +126,9 @@
       },
       selectFilter (id) {
         if (id) {
-          this.selectedFilter = +id
-          this.items = this.filterItems()
+          this.selectedFilter = +id;
+          this.items = this.filterItems();
+          this.$router.replace({ name: "cases", query: {filterID: id} });
         }
       },
       filterItems () {

@@ -1,7 +1,7 @@
 <template xmlns:v-swiper="http://www.w3.org/1999/xhtml">
   <div class="swiper">
     <div v-swiper:mySwiper="swiperOption" class="my-swiper" :class="{ cases: cases }">
-      <div class="swiper-wrapper" v-viewer="{movable: false}">
+      <div class="swiper-wrapper" v-viewer="{ title: false, movable: false }">
         <div class="swiper-slide" v-for="(image, index) in images" :key="index">
           <img v-if="image" :src="image" class="swiper-lazy">
           <div class="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
