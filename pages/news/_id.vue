@@ -244,6 +244,7 @@
 
       @include screen-size('xs') {
         width: 100%;
+        line-height: 1.5;
       }
 
       .header-left {

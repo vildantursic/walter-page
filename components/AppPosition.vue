@@ -82,6 +82,10 @@
       margin: 0;
       height: 70px;
       overflow: hidden;
+      @include screen-size('xs') {
+        width: 100%;
+        height: auto;
+      }
     }
 
     .number {
