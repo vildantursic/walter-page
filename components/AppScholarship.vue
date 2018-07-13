@@ -128,7 +128,7 @@
         flex-direction: column;
 
         @include screen-size('xs') {
-          height: 200px;
+          height: 250px;
         }
 
         .title {
@@ -183,10 +183,10 @@
 
           @include screen-size('xs') {
             margin-top: 2em;
-            font-size: 0.6em;
+            font-size: 0.8em;
           }
           @include screen-size('s') {
-            font-size: 0.6em;
+            font-size: 0.8em;
             margin-top: 2em;
           }
           .read {
