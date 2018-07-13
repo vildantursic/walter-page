@@ -127,6 +127,10 @@
         display: flex;
         flex-direction: column;
 
+        @include screen-size('xs') {
+          height: 200px;
+        }
+
         .title {
           font-size: 3em;
           font-weight: bold;

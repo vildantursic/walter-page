@@ -374,12 +374,17 @@
       }
       @include screen-size(xs) {
         flex-direction: column;
+        width: 100%;
+        margin-bottom: 10%;
       }
 
       .plus {
         font-size: 1.5em;
         font-weight: bolder;
         color: $dark-grey;
+        @include screen-size(xs) {
+          display: none;
+        }
       }
     }
   }
@@ -550,6 +555,12 @@
         @include screen-size('m') {
           margin: 0 0 10px 0;
           font-size: 0.8em;
+          @include screen-size('xs') {
+            margin: 0 0 10px 0;
+            font-size: 0.8em;
+            display: flex;
+            justify-content: center;
+          }
         }
       }
     }
@@ -575,6 +586,7 @@
       margin: 0 18%;
     }
     @include screen-size('xs') {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -591,7 +603,10 @@
       @include screen-size('xs') {
         top: 0;
         left: 0;
-        margin: 50px 0;
+        margin: 40px 0 20px 0;
+        display: flex;
+        justify-content: center;
+
       }
 
       [class*="-tab-"] {
@@ -609,6 +624,11 @@
 
         @include screen-size('m') {
           font-size: 1em;
+        }
+        @include screen-size('xs') {
+          display: flex;
+          width: 80px;
+          justify-content: center;
         }
         &.active {
           color: $main-color;
@@ -646,7 +666,7 @@
         display: none;
       }
       @include screen-size('xs') {
-        display: none;
+        /*display: none;*/
       }
     }
 
@@ -663,4 +683,5 @@
       transform: translateX(0);
     }
   }
+
 </style>

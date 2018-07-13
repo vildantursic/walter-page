@@ -32,6 +32,10 @@
 
     @include screen-size(xs) {
       margin: 0;
+      display: flex;
+      flex-direction: row;
+      align-items:center;
+      width: 100%;
     }
 
     .image {
@@ -41,10 +45,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      @include screen-size('xs') {
+        min-height: 40px;
+        max-height: 40px;
+        width: 25%;
+      }
 
       img {
         width: 50%;
         filter: invert(90);
+        @include screen-size('xs') {
+          width: 40%;
+        }
       }
       .no-image {
         width: auto;
@@ -55,7 +67,8 @@
       height: 40px;
       display: flex;
       justify-content: center;
-
+      @include screen-size('xs') {
+        height: 20px;      }
       h4 {
         font-size: 1em;
         margin: 0;

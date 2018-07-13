@@ -84,7 +84,7 @@
       margin: 2vh 0;
     }
     @include screen-size('xs') {
-      margin: 2vh 0;
+      margin: 1.5em 0 3em 0 ;
     }
 
     ul {
