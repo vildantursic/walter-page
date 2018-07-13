@@ -15,7 +15,7 @@
     <div class="no-items">
       <h1 v-if="searchedList.length === 0 && search.length === 0 && !loading">
         There are no open courses right now but there certainly are some in the making. Keep in touch on
-        <a href="https://www.facebook.com/walterBIM/">Facebook</a> and <a href="https://www.linkedin.com/company/walter-bim-solutions/">Linkedin</a> and be the first to know when they are ready.
+        <a target="_blank" href="https://www.facebook.com/Walter-BIM-Academy-193294058066551/">Facebook</a> and <a target="_blank" href="https://www.linkedin.com/company/walter-bim-solutions/">Linkedin</a> and be the first to know when they are ready.
       </h1>
       <h1 v-if="searchedList.length === 0 && search.length !== 0 && !loading">
         Thing you searched does not exist!
@@ -157,7 +157,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/styles/mixins";
+  @import "../../../assets/styles/mixins";
 
   .items {
     @include grid-items(0%, 0px, 3, 1, 1);

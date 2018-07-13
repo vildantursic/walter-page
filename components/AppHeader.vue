@@ -19,13 +19,13 @@
             <nuxt-link :to="{ name: 'about' }">About us</nuxt-link>
           </li>
           <li @click="showMenu = !showMenu">
-            <nuxt-link :to="{ name: 'careers' }">Open positions</nuxt-link>
+            <nuxt-link to="/careers/jobs">Open positions</nuxt-link>
           </li>
           <li @click="showMenu = !showMenu">
-            <nuxt-link :to="{ name: 'academy' }">BIM Academy</nuxt-link>
+            <nuxt-link to="/careers/academy">BIM Academy</nuxt-link>
           </li>
           <li @click="showMenu = !showMenu">
-            <nuxt-link :to="{ name: 'scholarships' }">Scholarships</nuxt-link>
+            <nuxt-link to="/careers/scholarships">Scholarships</nuxt-link>
           </li>
           <li @click="showMenu = !showMenu">
             <nuxt-link :to="{ name: 'news' }">News</nuxt-link>
@@ -53,16 +53,16 @@
           <nuxt-link :to="{ name: 'about' }">About us</nuxt-link>
         </li>
         <li @mouseover="upHere = true" @mouseleave="upHere = false">
-          <a style="cursor: pointer">Careers</a>
+          <nuxt-link :to="{ name: 'careers' }">Careers</nuxt-link>
           <ul class="dropdown-menu" id="menu-drop" v-show="upHere">
             <li>
-              <nuxt-link :to="{ name: 'careers' }">Open positions</nuxt-link>
+              <nuxt-link to="/careers/jobs">Open positions</nuxt-link>
             </li>
             <li>
-              <nuxt-link :to="{ name: 'academy' }">BIM Academy</nuxt-link>
+              <nuxt-link to="/careers/academy">BIM Academy</nuxt-link>
             </li>
             <li>
-              <nuxt-link :to="{ name: 'scholarships' }">Scholarships</nuxt-link>
+              <nuxt-link to="/careers/scholarships">Scholarships</nuxt-link>
             </li>
           </ul>
         </li>

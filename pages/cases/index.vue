@@ -10,7 +10,7 @@
       <input type="text" placeholder="Search.." v-model="search">
     </AppFilter>
     <div class="no-items">
-      <h1 v-if="searchedList.length === 0 && !loading">No items to show!</h1>
+      <h1 v-if="searchedList.length === 0 && !loading">Thing you searched does not exist!</h1>
       <h1 v-if="loading">Loading ...</h1>
     </div>
     <div class="items">
@@ -46,7 +46,7 @@
     data() {
       return {
         loading: true,
-        itemsToShow: this.$route.query.itemsToShow || 8,
+        itemsToShow: +this.$route.query.itemsToShow || 8,
         page: {
           acf: {}
         },
@@ -61,8 +61,8 @@
     },
     watch: {
       itemsToShow: function (val) {
-        console.log(val)
-        this.$router.push({ query: { itemsToShow: val } })
+        const newQuery = {itemsToShow: val, filterID: this.$route.query.filterID | -1}
+        this.$router.replace({ name: "cases", query: newQuery});
       }
     },
     created () {
@@ -128,7 +128,8 @@
         if (id) {
           this.selectedFilter = +id;
           this.items = this.filterItems();
-          this.$router.replace({ name: "cases", query: {filterID: id} });
+          const newQuery = {itemsToShow: this.$route.query.itemsToShow | 8, filterID: id }
+          this.$router.replace({ name: "cases", query: newQuery});
         }
       },
       filterItems () {

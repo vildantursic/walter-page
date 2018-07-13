@@ -15,7 +15,7 @@
     <div class="no-items">
       <h1 v-if="searchedList.length === 0 && search.length === 0 && !loading">
         There are no open applications fo the moment but we will reach out for new talents soon. Keep in touch on
-        <a href="https://www.facebook.com/walterBIM/">Facebook</a> and <a href="https://www.linkedin.com/company/walter-bim-solutions/">Linkedin</a> and be the first one to get informed.
+        <a target="_blank" href="https://www.facebook.com/walterBIM/">Facebook</a> and <a target="_blank" href="https://www.linkedin.com/company/walter-bim-solutions/">Linkedin</a> and be the first one to get informed.
       </h1>
       <h1 v-if="searchedList.length === 0 && search.length !== 0 && !loading">
         Thing you searched does not exist!
@@ -158,7 +158,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/styles/mixins";
+  @import "../../../assets/styles/mixins";
 
   .items {
     @include grid-items(0px, 20px, 1, 1, 1);

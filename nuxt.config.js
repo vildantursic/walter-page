@@ -65,10 +65,10 @@ module.exports = {
     ]
   },
   modules: [
+    '@nuxtjs/workbox',
     '@nuxtjs/pwa',
     '@nuxtjs/manifest',
     '@nuxtjs/icon',
-    '@nuxtjs/workbox'
   ],
   workbox: {
     runtimeCaching: [
