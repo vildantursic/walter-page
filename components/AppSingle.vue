@@ -1,9 +1,6 @@
 <template>
+  <div class="wrapper">
   <div class="card">
-    <div class="close">
-      <AppSocial :item="item" :link="$route.path"></AppSocial>
-      <i class="fas fa-times" @click="closeCase"></i>
-    </div>
     <div class="content">
       <div class="card-img-container">
         <AppSlider v-if="item.acf.gallery_images"
@@ -17,6 +14,10 @@
           <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span
             v-if="index < item.case_categories.length - 1">,</span></span>
         </p>
+        <div class="close">
+          <AppSocial :item="item" :link="$route.path"></AppSocial>
+          <i class="fas fa-times" @click="closeCase"></i>
+        </div>
         <AppImageBox :showLightBox="showLightBox"
                      :images="item.acf.gallery_images.split(',').map(image => { return { thumb: image, src: image } })"></AppImageBox>
         <h1 class="title" v-html="item.title.rendered"></h1>
@@ -29,6 +30,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -188,6 +190,8 @@
       color: $social-icon;
     }
   }
-
+/*.wrapper{*/
+  /*display: grid;*/
+/*}*/
 
 </style>
