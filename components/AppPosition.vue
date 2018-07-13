@@ -118,6 +118,9 @@
           font-size: 2.5em;
           font-weight: bold;
           padding: 0 15px;
+          @include screen-size('s') {
+            display: none;
+          }
         }
       }
     }

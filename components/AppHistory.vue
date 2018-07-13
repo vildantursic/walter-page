@@ -144,11 +144,11 @@
         }
         @include screen-size('s') {
           flex-direction: column;
-          height: 500px;
+          height: 250px;
         }
         @include screen-size('xs') {
           flex-direction: column;
-          height: 500px;
+          height: 220px;
         }
 
         .swiper-text {
@@ -164,11 +164,18 @@
             margin-left: 15px;
           }
           @include screen-size('xs') {
-            margin-left: 15px;
+            margin-left: 40px;
+            right: 15%;
           }
         }
         .image {
           width: 100%;
+          @include screen-size('s') {
+            display: none;
+          }
+          @include screen-size('xs') {
+            display: none;
+          }
 
           path {
             fill: none;
@@ -176,6 +183,9 @@
             stroke-miterlimit: 10;
             stroke-linecap: round;
             stroke-linejoin: round;
+            @include screen-size('xs') {
+              display: none;
+            }
           }
         }
 
