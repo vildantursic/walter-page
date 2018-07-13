@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper padded-content">
   <div class="card">
     <div class="content">
       <div class="card-img-container">
