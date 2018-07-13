@@ -147,7 +147,7 @@
       flex-direction: column;
     }
     @include screen-size('xs') {
-      flex-direction: column;
+      flex-direction: column-reverse;
     }
 
     .title {
@@ -174,6 +174,9 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      @include screen-size('xs') {
+        padding-top: 10px
+      }
     }
   }
   .img-header {

@@ -38,7 +38,7 @@
       margin: 10vh 0 1vh 0;
     }
     @include screen-size('xs') {
-      margin: 10vh 0 1vh 0;
+      margin: 0 0 0 10%;
     }
     .supertitle {
       font-size: 1.5em;
