@@ -78,6 +78,7 @@
 
       .swiper-slide {
         height: 100%;
+        width: 100%;
         text-align: center;
         font-size: 38px;
         font-weight: 700;
