@@ -29,6 +29,14 @@
   import { find, sortBy } from 'lodash'
 
   export default {
+    head () {
+      return {
+        title: 'Cases - Walter',
+        meta: [
+          { hid: 'description', name: 'description', content: 'Our cases' }
+        ]
+      }
+    },
     components: {
       AppFilter,
       AppCards,
@@ -82,9 +90,6 @@
           this.tempItems = this.items
           this.getCategories()
           this.loading = false
-          setTimeout(() => {
-            this.selectFilter(this.$route.query.filter)
-          }, 1000)
         }).catch((error) => {
           console.log(error);
         });
@@ -103,6 +108,8 @@
             item.case_categories = cats
             return item
           })
+        }).then(() => {
+          this.selectFilter(this.$route.query.filter)
         }).catch((error) => {
           console.log(error);
         });
@@ -114,7 +121,7 @@
       selectFilter (id) {
         if (id) {
           this.selectedFilter = +id
-          this.items = this.filterItems(+id)
+          this.items = this.filterItems()
         }
       },
       filterItems () {

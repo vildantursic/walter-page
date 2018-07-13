@@ -1,6 +1,8 @@
 <template>
   <div class="info-card animated fadeIn" data-aos="fade">
-    <h1 class="position" v-html="item.title.rendered.split('').slice(0, 25).join('').concat(item.title.rendered.length > 50 ? '...' : '')"></h1>
+    <nuxt-link class="nav-link" :to="`/careers/${item.id}`">
+      <h1 class="position" v-html="item.title.rendered.split('').slice(0, 25).join('').concat(item.title.rendered.length > 50 ? '...' : '')"></h1>
+    </nuxt-link>
     <p class="published">Published: {{date}}</p>
     <h1 class="description">Job description</h1>
     <p class="data">{{ item.acf.description | truncate(250)}}</p>
@@ -57,7 +59,6 @@
     }
 
     .position {
-      color: $dark-grey;
       margin: 0;
       font-size: 2em;
       font-weight: bold;

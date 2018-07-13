@@ -1,14 +1,15 @@
 <template xmlns:v-swiper="http://www.w3.org/1999/xhtml">
   <div class="swiper">
     <div v-swiper:mySwiper="swiperOption" class="my-swiper" :class="{ cases: cases }">
-      <div class="swiper-wrapper">
+      <div class="swiper-wrapper" v-viewer="{movable: false}">
         <div class="swiper-slide" v-for="(image, index) in images" :key="index">
-          <img v-if="image" :src="image" @click="showLightBox()">
+          <img v-if="image" :src="image" class="swiper-lazy">
+          <div class="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
           <div class="swiper-button-prev" slot="button-prev">
-            <img src="../static/images/Arrow.svg" alt="">
+            <i class="fas fa-arrow-left"></i>
           </div>
           <div class="swiper-button-next" slot="button-next">
-            <img src="../static/images/Arrow.svg" style="transform: rotate(180deg);" alt="">
+            <i class="fas fa-arrow-right"></i>
           </div>
         </div>
       </div>
@@ -24,7 +25,9 @@
         swiperOption: {
           slidesPerView: 1,
           spaceBetween: 0,
-          loop: false,
+          loop: true,
+          effect: 'fade',
+          lazy: true,
           pagination: {
             el: '.swiper-pagination',
             clickable: true
@@ -32,15 +35,6 @@
           navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev'
-          }
-        },
-        swiperThumbOption: {
-          slidesPerView: 6,
-          spaceBetween: 30,
-          loop: false,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true
           }
         }
       }
@@ -50,9 +44,6 @@
     methods: {
       slideTo(index) {
         this.mySwiper.slideTo(index, 1000, false)
-      },
-      showLightBox() {
-        this.$emit('showLightBox', true)
       }
     }
   }
@@ -64,17 +55,12 @@
 
   .swiper {
     position: relative;
-    height: 100%;
-    width: 100%;
   }
 
   .my-swiper {
-    width: 100%;
-    height: 100%;
+    overflow: hidden;
 
     .swiper-wrapper {
-      width: 100%;
-      height: 100%;
 
       .swiper-slide {
         height: 100%;
@@ -89,7 +75,7 @@
 
         img {
           width: 100%;
-          height: 100%;
+          height: auto;
           cursor: pointer;
         }
       }
@@ -136,6 +122,6 @@
   }
 
   .cases {
-    height: calc(100vh - 80px);
+    /*height: calc(100vh - 80px);*/
   }
 </style>

@@ -13,15 +13,17 @@
       <AppSocial :item="item" :link="$route.path"></AppSocial>
       <div class="text">
         <p class="published">Deadline: {{deadline}}</p>
-        <h1 class="title" v-html="item.title.rendered"></h1>
+        <nuxt-link class="nav-link" :to="`/scholarships/${item.id}`">
+          <h1 class="title" v-html="item.title.rendered"></h1>
+        </nuxt-link>
         <p>{{item.acf.description | truncate(35 * 3)}}</p>
       </div>
-      <div class="bottom-group">
-        <nuxt-link :to="`/scholarships/${item.id}`" class="more-container nav-link">
-          <div class="plus">+</div>
-          <div class="read"> Read <span class="more">more</span></div>
-        </nuxt-link>
-      </div>
+      <!--<div class="bottom-group">-->
+        <!--<nuxt-link :to="`/scholarships/${item.id}`" class="more-container nav-link">-->
+          <!--<div class="plus">+</div>-->
+          <!--<div class="read"> Read <span class="more">more</span></div>-->
+        <!--</nuxt-link>-->
+      <!--</div>-->
     </div>
     <div class="border"></div>
   </div>

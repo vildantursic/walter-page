@@ -10,30 +10,12 @@
       class="fab fa-twitter"></i></a>
     <a :href="`mailto:youremail@gmail.com?subject=shared link&body=${item.acf.description} ${link}`"><i
       class="fas fa-envelope"></i></a>
-    <a @click="copyOnClick()"><i class="fas fa-paperclip"></i></a>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['item', 'link'],
-    methods: {
-      copyOnClick() {
-        let pre = this.item.acf.description + ' ' + this.link;
-        let input = document.createElement('input');
-        document.body.append(input);
-        input.setAttribute('value', pre);
-        input.select();
-        let copy = document.execCommand('copy');
-        input.remove();
-
-        if (copy !== '') {
-          console.log('Copied!');
-        } else {
-          console.log('Not copied, please refresh page and try again!');
-        }
-      }
-    }
+    props: ['item', 'link']
   }
 </script>
 

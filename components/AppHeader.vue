@@ -53,7 +53,7 @@
           <nuxt-link :to="{ name: 'about' }">About us</nuxt-link>
         </li>
         <li @mouseover="upHere = true" @mouseleave="upHere = false">
-          <nuxt-link :to="{ name: 'careers' }">Careers</nuxt-link>
+          <a>Careers</a>
           <ul class="dropdown-menu" id="menu-drop" v-show="upHere">
             <li>
               <nuxt-link :to="{ name: 'careers' }">Open positions</nuxt-link>

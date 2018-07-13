@@ -21,9 +21,9 @@
     <div class="items">
       <AppPosition v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item"/>
     </div>
-    <div class="items-bellow">
-      <AppPosition v-if="items[items.length - 1]" :item="items[items.length - 1]"></AppPosition>
-    </div>
+    <!--<div class="items-bellow">-->
+      <!--<AppPosition v-if="items[items.length - 1]" :item="items[items.length - 1]"></AppPosition>-->
+    <!--</div>-->
   </section>
 </template>
 
@@ -65,7 +65,8 @@
     computed: {
       searchedList() {
         return this.items.filter(item => {
-          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase())
+          return item.title.rendered.toLowerCase().includes(this.search.toLowerCase()) ||
+                 item.acf.description.toLowerCase().includes(this.search.toLowerCase())
         })
       }
     },
@@ -83,7 +84,7 @@
       getItems () {
         axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers?per_page=100&_embed').then((response) => {
           this.items = response.data
-          this.itemsToShow = this.items.length - 1
+          this.itemsToShow = this.items.length
           this.tempItems = response.data
           this.loading = false
         }).catch((error) => {

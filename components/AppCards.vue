@@ -1,4 +1,5 @@
 <template>
+  <nuxt-link class="full-link" :to="`/cases/${item.id}`">
   <div class="card animated fadeIn" data-aos="fade">
     <div class="image">
       <nuxt-link v-if="item._embedded !== undefined" class="nav-link" :to="`/cases/${item.id}`">
@@ -11,9 +12,7 @@
       </nuxt-link>
     </div>
     <div class="info">
-      <nuxt-link class="nav-link" :to="`/cases/${item.id}`">
-        <h1 class="title" v-html="item.title.rendered.split('').slice(0, 50).join('').concat(item.title.rendered.length > 50 ? '...' : '')"></h1>
-      </nuxt-link>
+      <h1 class="title" v-html="item.title.rendered.split('').slice(0, 50).join('').concat(item.title.rendered.length > 50 ? '...' : '')"></h1>
       <i class="clients" v-for="(customer, index) of item.acf.customers" :key="index">{{customer.post_title}}<span
         v-if="index < item.acf.customers.length - 1"></span></i>
       <div class="content">{{item.acf.description | truncate(30 * 4)}}</div>
@@ -22,6 +21,7 @@
     </div>
     <div class="border"></div>
   </div>
+  </nuxt-link>
 </template>
 
 <script>
@@ -166,5 +166,12 @@
   }
   .nav-link{
     width: 100%;
+  }
+  .full-link {
+    color: black;
+
+    &:hover {
+      color: black !important;
+    }
   }
 </style>

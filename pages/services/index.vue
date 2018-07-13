@@ -15,7 +15,7 @@
                       :offset="80"
                       :duration="800"
                       bezier-easing-value=".5,0,.35,1"
-                      v-on:itemchanged="onItemChanged">
+                      @itemchanged="onItemChanged">
           <a v-for="(item, index) in services"
              :key="index"
              :href="`#${item.id}`"
@@ -81,8 +81,13 @@
         once: false,
         contact_person: null,
         users: {},
-        showContactBox: false
-    }
+        showContactBox: false,
+      }
+    },
+    watch: {
+      '$route': function (refreshPage) {
+        this.$refs[this.$route.hash.substring(1)][0].click();
+      }
     },
     asyncData({ }) {
       return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/services?_embed`).then((response) => {

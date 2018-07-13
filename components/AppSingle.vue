@@ -4,8 +4,7 @@
       <div class="card-img-container">
         <AppSlider v-if="item.acf.gallery_images"
                    :images="item.acf.gallery_images.split(',')"
-                   :cases="true"
-                   @showLightBox="showLightBox = !showLightBox"></AppSlider>
+                   :cases="true"></AppSlider>
         <h1 v-if="!item.acf.gallery_images">No Images</h1>
       </div>
       <div class="info-card">
@@ -17,8 +16,9 @@
           <span v-for="(category, index) of item.case_categories" :key="index"> {{category.name}}<span
             v-if="index < item.case_categories.length - 1">,</span></span>
         </p>
-        <AppImageBox :showLightBox="showLightBox"
-                     :images="item.acf.gallery_images.split(',').map(image => { return { thumb: image, src: image } })"></AppImageBox>
+        <!--
+        item.acf.gallery_images.split(',').map(image => { return { thumb: image, src: image } })
+        -->
         <h1 class="title" v-html="item.title.rendered"></h1>
         <p class="customer">
           <span v-for="(customer, index) of item.acf.customers" :key="index"> {{customer.post_title}}<span
@@ -35,7 +35,6 @@
 <script>
   import AppSlider from '~/components/AppSlider'
   import AppSocial from '~/components/AppSocial'
-  import AppImageBox from '~/components/AppImageBox'
 
   export default {
     props: ['item'],
@@ -46,12 +45,11 @@
     },
     components: {
       AppSlider,
-      AppSocial,
-      AppImageBox
+      AppSocial
     },
     methods: {
       closeCase() {
-        this.$emit('onCloseCase')
+        window.history.back(-1);
       }
     }
   }
@@ -154,7 +152,7 @@
           height: 500px;
           overflow: auto;
           width: 100%;
-          padding: 0 10px;
+          /*padding: 0 10px;*/
 
           @include screen-size(xs) {
             height: auto;
