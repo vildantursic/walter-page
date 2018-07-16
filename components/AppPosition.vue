@@ -45,14 +45,14 @@
   .info-card {
     position: relative;
     width: 100%;
-    height: 400px;
+    height: 450px;
     overflow: hidden;
 
     @include screen-size('m') {
       height: 400px;
     }
     @include screen-size('xs') {
-      height: 400px;
+      height: 420px;
     }
     @include screen-size('s') {
       height: 400px;
@@ -79,10 +79,14 @@
     }
 
     .data {
-      width: 70%;
+      width: 90%;
       margin: 0;
-      height: 70px;
+      height: auto;
       overflow: hidden;
+      @include screen-size('xs') {
+        width: 100%;
+
+      }
     }
 
     .number {

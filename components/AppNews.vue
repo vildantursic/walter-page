@@ -51,7 +51,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    height: 400px;
+    height: 420px;
     padding-bottom: 2em;
     border-width: 0 0 2px 0;
     border-style: solid;
@@ -79,11 +79,12 @@
 
       @include screen-size('xs') {
         width: 100%;
-        height: 300px;
+        height: auto;
+        padding-bottom: 15px;
       }
       @include screen-size('s') {
         width: 100%;
-        height: 300px;
+        height: auto;
       }
 
       .card-img {
@@ -148,6 +149,9 @@
 
   .scroll {
     height: 200px;
+    @include screen-size(xs) {
+      height: 130px;
+    }
   }
 
   .no-image {
