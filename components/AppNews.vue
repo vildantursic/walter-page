@@ -19,7 +19,9 @@
         <nuxt-link class="nav-link" :to="`/news/${item.id}`" v-html="item.title.rendered.split('').slice(0, 50).join('').concat(item.title.rendered.length > 50 ? '...' : '')"></nuxt-link>
       </h1>
       <div class="scroll">
-        <p class="news">{{item.acf.description | truncate(200)}} </p>
+        <nuxt-link class="nav-link" :to="`/news/${item.id}`">
+          <p class="news">{{item.acf.description | truncate(200)}} </p>
+        </nuxt-link>
       </div>
       <AppSocial :item="item" :link="$route.path"></AppSocial>
     </div>

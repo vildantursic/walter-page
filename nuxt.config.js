@@ -1,3 +1,5 @@
+const axios = require('axios')
+
 module.exports = {
   /*
   ** Headers of the page
@@ -69,12 +71,13 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/manifest',
     '@nuxtjs/icon',
+    '@nuxtjs/sitemap'
   ],
   workbox: {
     runtimeCaching: [
       {
         // Should be a regex string. Compiles into new RegExp('https://my-cdn.com/.*')
-        urlPattern: 'https://my-cdn.com/.*',
+        urlPattern: 'https://walter.ba/.*',
         // Defaults to `networkFirst` if omitted
         handler: 'cacheFirst',
         // Defaults to `GET` if omitted
@@ -93,6 +96,15 @@ module.exports = {
     'splash_pages': null
   },
   icon: {},
+  sitemap: {
+    hostname: 'https://www.walter.com',
+    cacheTime: 1000 * 60 * 15,
+    generate: true,
+    routes () {
+      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases?per_page=100')
+        .then(res => res.data.map(item =>  `/cases/${item.id}`))
+    }
+  },
   css: [
     'animate.css/animate.min.css',
     'swiper/dist/css/swiper.css',

@@ -30,7 +30,7 @@
             <div class="padded-content-services center-more">
               <div class="cases-link">
                 <h1 class="hidden-amount">+ {{item.acf.cases.length}}</h1>
-                <nuxt-link :to="`cases?filter=${item.case_categories[0]}`">
+                <nuxt-link :to="`cases?filterID=${item.case_categories[0]}`">
                   <h1 class="cases">cases<i class="fas fa-caret-right"></i></h1>
                 </nuxt-link>
               </div>
