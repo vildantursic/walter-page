@@ -1,6 +1,6 @@
 <template>
   <div class="card animated fadeIn" data-aos="fade">
-    <nuxt-link class="nav-link card-img-container" :to="`/academy/${item.id}`">
+    <nuxt-link class="nav-link card-img-container" :to="`careers/academy/${item.id}`">
       <div v-if="item._embedded !== undefined">
         <img v-if="item._embedded['wp:featuredmedia'] !== undefined"
              :src="item._embedded['wp:featuredmedia'][0].source_url"
@@ -10,7 +10,7 @@
       </div>
     </nuxt-link>
     <div class="info">
-      <nuxt-link class="nav-link" :to="`/academy/${item.id}`">
+      <nuxt-link class="nav-link" :to="`careers/academy/${item.id}`">
         <h1 class="title" v-html="item.title.rendered"></h1>
       </nuxt-link>
       <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>

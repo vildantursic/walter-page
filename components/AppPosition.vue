@@ -1,6 +1,6 @@
 <template>
   <div class="info-card animated fadeIn" data-aos="fade">
-    <nuxt-link class="nav-link" :to="`/careers/${item.id}`">
+    <nuxt-link class="nav-link" :to="`/careers/jobs/${item.id}`">
       <h1 class="position" v-html="item.title.rendered.split('').slice(0, 25).join('').concat(item.title.rendered.length > 50 ? '...' : '')"></h1>
     </nuxt-link>
     <p class="published">Published: {{date}}</p>
@@ -10,7 +10,7 @@
     <p class="published">Deadline: {{deadline}}</p>
     <div class="bottom">
       <AppSocial></AppSocial>
-      <nuxt-link :to="`/careers/${item.id}`" class="more-container nav-link">
+      <nuxt-link :to="`/careers/jobs/${item.id}`" class="more-container nav-link">
         <div class="plus">+</div>
         <div class="read"> Read <span class="more">more</span></div>
       </nuxt-link>

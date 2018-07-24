@@ -1,7 +1,7 @@
 <template>
   <div class="card animated fadeIn" data-aos="slide-up">
     <div v-if="item._embedded !== undefined" class="card-img-container">
-      <nuxt-link class="nav-link" :to="`/scholarships/${item.id}`">
+      <nuxt-link class="nav-link" :to="`/careers/scholarships/${item.id}`">
         <img class="card-img" v-if="item._embedded['wp:featuredmedia'] !== undefined"
              :src="item._embedded['wp:featuredmedia'][0].source_url"
              :alt="item._embedded['wp:featuredmedia'][0].alt_text">
@@ -13,13 +13,13 @@
       <AppSocial :item="item" :link="$route.path"></AppSocial>
       <div class="text">
         <p class="published">Deadline: {{deadline}}</p>
-        <nuxt-link class="nav-link" :to="`/scholarships/${item.id}`">
+        <nuxt-link class="nav-link" :to="`/careers/scholarships/${item.id}`">
           <h1 class="title" v-html="item.title.rendered"></h1>
         </nuxt-link>
         <p>{{item.acf.description | truncate(35 * 3)}}</p>
       </div>
       <!--<div class="bottom-group">-->
-        <!--<nuxt-link :to="`/scholarships/${item.id}`" class="more-container nav-link">-->
+        <!--<nuxt-link :to="`/careers/scholarships/${item.id}`" class="more-container nav-link">-->
           <!--<div class="plus">+</div>-->
           <!--<div class="read"> Read <span class="more">more</span></div>-->
         <!--</nuxt-link>-->
