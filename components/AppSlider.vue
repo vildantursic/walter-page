@@ -27,7 +27,6 @@
           spaceBetween: 0,
           loop: true,
           effect: 'fade',
-          touchRatio: 0,
           lazy: true,
           pagination: {
             el: '.swiper-pagination',
