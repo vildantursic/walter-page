@@ -12,7 +12,7 @@
       <div class="post-content">
         <div class="post-left" v-html="page.content.rendered"></div>
       </div>
-      <AppContactForm :contactPerson="contactPerson" :subject="subject"></AppContactForm>
+      <AppContactForm :contactPerson="contactPerson" :subject="subject" :uploadFiles="uploadFiles"></AppContactForm>
     </div>
   </section>
 </template>
@@ -39,7 +39,8 @@
           acf: {}
         },
         contactPerson: 'vesna.plakalovic@walter.ba',
-        subject: 'Academy'
+        subject: 'Academy',
+        uploadFiles: 'CV, Motivation Letter, Portfolio'
       }
     },
     components: {
