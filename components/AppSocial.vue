@@ -11,6 +11,7 @@
     <a :href="`mailto:youremail@gmail.com?subject=shared link&body=${item.acf.description} ${link}`"><i
       class="fas fa-envelope"></i></a>
   </div>
+  <!-- link with app_id https://www.facebook.com/dialog/feed?app_id=1389892087910588%20&redirect_uri=https%3A%2F%2Fscotch.io%20&link=https%3A%2F%2Fscotch.io%20&picture=http%3A%2F%2Fplacekitten.com%2F500%2F500%20&caption=This%20is%20the%20caption%20&description=This%20is%20the%20description -->
 </template>
 
 <script>
