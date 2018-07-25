@@ -9,7 +9,7 @@
         <p class="category">
           <span v-for="(category, index) of page.categories" :key="index"> {{category.name}}<span v-if="index < page.categories.length - 1">,</span></span>
         </p>
-        <p class="author" v-if="authors.length !== 0">{{authors[0].name}}, {{date}}</p>
+        <p class="author">{{date}}</p>
       </div>
       <div v-if="page.acf.gallery_images !== ''" class="img-container">
         <AppSlider v-if="page.acf.gallery_images" :images="page.acf.gallery_images.split(',')" :miniSlider="false"></AppSlider>
