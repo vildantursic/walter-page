@@ -1,7 +1,7 @@
 <template xmlns:v-swiper="http://www.w3.org/1999/xhtml">
   <div class="swiper">
     <div v-swiper:mySwiper="swiperOption" class="my-swiper" :class="{ cases: cases }">
-      <div class="swiper-wrapper" v-viewer="{ title: false, movable: false }">
+      <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(image, index) in images" :key="index">
           <img v-if="image" :src="image" class="swiper-lazy">
           <div class="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
@@ -27,6 +27,7 @@
           spaceBetween: 0,
           loop: true,
           effect: 'fade',
+          touchRatio: 0,
           lazy: true,
           pagination: {
             el: '.swiper-pagination',
@@ -40,6 +41,8 @@
       }
     },
     mounted() {
+        this.mySwiper.on('click', (e) => {
+        })
     },
     methods: {
       slideTo(index) {
@@ -104,22 +107,24 @@
 
   .swiper-button-next {
     margin-top: auto;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
     background-image: none;
     outline: none;
     width: 44px;
     height: 44px;
+    i {
+      color: #005fff;
+    }
   }
 
   .swiper-button-prev {
     margin-top: auto;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
     background-image: none;
     outline: none;
     width: 44px;
     height: 44px;
+    i {
+      color: #005fff;
+    }
   }
 
   .cases {
