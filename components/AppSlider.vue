@@ -111,7 +111,7 @@
     width: 44px;
     height: 44px;
     i {
-      color: #005fff;
+      color: rgba(34, 34, 34, .7);
     }
   }
 
@@ -122,7 +122,7 @@
     width: 44px;
     height: 44px;
     i {
-      color: #005fff;
+      color: rgba(34, 34, 34, .7);
     }
   }
 
