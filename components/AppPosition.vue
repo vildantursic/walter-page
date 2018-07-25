@@ -101,7 +101,7 @@
       bottom: 0;
       right: 0;
       width: 100%;
-      margin-bottom: 2em;
+      margin-bottom: 0;
 
       .more-container {
         display: flex;
@@ -109,7 +109,7 @@
         justify-content: flex-end;
 
         .read {
-          font-size: 1.5em;
+          font-size: 1em;
           font-weight: bold;
           letter-spacing: 1px;
 
@@ -119,9 +119,9 @@
         }
 
         .plus {
-          font-size: 2.5em;
+          font-size: 2em;
           font-weight: bold;
-          padding: 0 15px;
+          padding: 0 5px;
           @include screen-size('s') {
             display: none;
           }
