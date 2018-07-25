@@ -240,7 +240,7 @@
     .post-left {
       line-height: 1.8;
       width: 70%;
-      padding: 0 2% 2% 2%;
+      padding: 0 0% 2% 0%;
 
       @include screen-size('xs') {
         width: 100%;
