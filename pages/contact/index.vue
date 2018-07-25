@@ -3,7 +3,7 @@
     <div class="contact">
       <div class="countries">
         <h3 class="text">Stockholm, Sweden</h3>
-        <h3 class="text">Sarajevo, Bosnia and Herzegovina</h3>
+        <h3 class="text">Muhameda Kantardžića 3,<br>Sarajevo, Bosnia and Herzegovina</h3>
       </div>
       <div class="map">
         <AppMap/>
