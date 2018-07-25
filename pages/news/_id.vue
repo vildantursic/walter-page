@@ -67,7 +67,7 @@
       return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/posts/${route.params.id}?_embed`).then((response) => {
         return {
           page: response.data,
-          date: moment(response.data.date).format('MMM YYYY [at] LT')
+          date: moment(response.data.date).format('DD-MM-YYYY')
         }
       }).catch((error) => {
         console.log(error)

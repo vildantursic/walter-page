@@ -18,7 +18,7 @@
     props: ['item'],
     data() {
       return {
-        date: moment(this.item.date).format('MMM YYYY [at] LT')
+        date: moment(this.item.date).format('DD-MM-YYYY')
       }
     }
   }

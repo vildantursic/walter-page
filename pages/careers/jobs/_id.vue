@@ -57,7 +57,7 @@
       return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/careers/${route.params.id}?_embed`).then((response) => {
         return {
           page: response.data,
-          date: moment(response.data.date).format('MMM YYYY [at] LT'),
+          date: moment(response.data.date).format('DD-MM-YYYY'),
           subject: `Careers - ${response.data.title.rendered}`
         }
       }).catch((error) => {

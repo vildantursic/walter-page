@@ -37,7 +37,7 @@
     props: ['item'],
     data() {
       return {
-        deadline: moment(this.item.acf.deadline ? this.item.acf.deadline : this.item.date).format('MMM YYYY [at] LT')
+        deadline: moment(this.item.acf.deadline ? this.item.acf.deadline : this.item.date).format('DD-MM-YYYY')
       }
     },
     components: {
