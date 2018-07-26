@@ -41,7 +41,7 @@
         var title = 'Walter BIM';
         var description = 'Are you lacking BIM information? We offer you a digitization of existing buildings based on paper 2D drawings or sketches and PointClouds. We will create 3D models in Revit or AutoCAD. Our Engineers and Architects will help you out at the lowest cost possible with the highest quality. read more…';
         var image = 'http://www.walter.ba/wp-content/uploads/2013/10/bim_walter_logo1.png';
-        this.shareOverrideOGMeta('http://new.walter.ba',
+        this.shareOverrideOGMeta(window.location.href,
           title,
           description,
           image);
