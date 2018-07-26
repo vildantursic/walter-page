@@ -3,7 +3,7 @@
     <a target="_blank"
        :href="`https://www.linkedin.com/shareArticle?mini=true&url=http://new.walter.ba${link}&title=${item.title.rendered}&summary=${item.acf.description}`"><i
       class="fab fa-linkedin"></i></a>
-    <a target="_blank" :href="`http://www.facebook.com/sharer.php?u=http://new.walter.ba${link}`"><i
+    <a target="_blank" v-on:click="submitAndShare"><i
       class="fab fa-facebook"></i></a>
     <a target="_blank"
        :href="`https://twitter.com/intent/tweet?text=${item.acf.description} http://new.walter.ba${link}`"><i
@@ -16,7 +16,55 @@
 
 <script>
   export default {
-    props: ['item', 'link']
+    props: ['item', 'link'],
+    methods: {
+      shareOverrideOGMeta (overrideLink, overrideTitle, overrideDescription, overrideImage)
+      {
+        FB.ui({
+            method: 'share_open_graph',
+            action_type: 'og.shares',
+            action_properties: JSON.stringify({
+              object: {
+                'og:url': overrideLink,
+                'og:title': overrideTitle,
+                'og:description': overrideDescription,
+                'og:image': overrideImage
+              }
+            })
+          },
+          function (response) {
+            // Action after response
+          });
+      },
+      submitAndShare()
+      {
+        var title = 'Walter BIM';
+        var description = 'Are you lacking BIM information? We offer you a digitization of existing buildings based on paper 2D drawings or sketches and PointClouds. We will create 3D models in Revit or AutoCAD. Our Engineers and Architects will help you out at the lowest cost possible with the highest quality. read more…';
+        var image = 'http://www.walter.ba/wp-content/uploads/2013/10/bim_walter_logo1.png';
+        this.shareOverrideOGMeta('http://new.walter.ba',
+          title,
+          description,
+          image);
+        return false;
+      }
+    },
+    mounted() {
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '2177681459134790',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v3.0'
+        });
+      };
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    }
   }
 </script>
 
