@@ -14,7 +14,7 @@
         <span v-for="(category, index) of item.categories" :key="index"> {{category.name}}<span
           v-if="index < item.categories.length - 1">,</span></span>
       </p>
-      <p class="author">{{item.author.name}}, {{date}}</p>
+      <p class="author">{{date}}</p>
       <h1 class="title">
         <nuxt-link class="nav-link" :to="`/news/${item.id}`" v-html="item.title.rendered.split('').slice(0, 50).join('').concat(item.title.rendered.length > 50 ? '...' : '')"></nuxt-link>
       </h1>
@@ -39,7 +39,7 @@
     },
     data() {
       return {
-        date: moment(this.item.date).format('MMM YYYY [at] LT')
+        date: moment(this.item.date).format('DD-MM-YYYY')
       }
     }
   }

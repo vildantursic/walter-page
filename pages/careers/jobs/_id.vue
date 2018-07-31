@@ -13,7 +13,7 @@
         <div class="post-left" v-html="page.content.rendered"></div>
       </div>
 
-      <AppContactForm :contactPerson="contactPerson" :subject="subject"></AppContactForm>
+      <AppContactForm :contactPerson="contactPerson" :subject="subject" :uploadFiles="uploadFiles"></AppContactForm>
     </div>
   </section>
 </template>
@@ -40,7 +40,8 @@
           acf: {}
         },
         contactPerson: 'aida.omanovic@walter.ba',
-        subject: 'Careers'
+        subject: 'Careers',
+        uploadFiles: 'CV'
       }
     },
     components: {
@@ -56,7 +57,7 @@
       return axios.get(`http://new.walter.ba/cms/wp-json/wp/v2/careers/${route.params.id}?_embed`).then((response) => {
         return {
           page: response.data,
-          date: moment(response.data.date).format('MMM YYYY [at] LT'),
+          date: moment(response.data.date).format('DD-MM-YYYY'),
           subject: `Careers - ${response.data.title.rendered}`
         }
       }).catch((error) => {
@@ -144,7 +145,7 @@
 
     .post-left {
       width: 70%;
-      padding: 0 2% 2% 2%;
+      padding: 0 0% 2% 0%;
       @include screen-size('s')
       {
         width: 100%;

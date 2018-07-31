@@ -12,7 +12,7 @@
       <div class="post-content">
         <div class="post-left" v-html="page.content.rendered"></div>
       </div>
-      <AppContactForm :contactPerson="contactPerson" :subject="subject"></AppContactForm>
+      <AppContactForm :contactPerson="contactPerson" :subject="subject" :uploadFiles="uploadFiles"></AppContactForm>
     </div>
   </section>
 </template>
@@ -39,7 +39,8 @@
           acf: {}
         },
         contactPerson: 'vesna.plakalovic@walter.ba',
-        subject: 'Academy'
+        subject: 'Academy',
+        uploadFiles: 'CV, Motivation Letter, Portfolio'
       }
     },
     components: {
@@ -55,7 +56,7 @@
       return axios.get(`http://new.walter.ba/cms/wp-json/wp/v2/bim_academy_posts/${route.params.id}?_embed`).then((response) => {
         return {
           page: response.data,
-          date: moment(response.data.date).format('MMM YYYY [at] LT'),
+          date: moment(response.data.date).format('DD-MM-YYYY'),
           subject: `Academy - ${response.data.title.rendered}`
         }
       }).catch((error) => {

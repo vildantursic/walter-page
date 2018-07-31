@@ -66,6 +66,9 @@ module.exports = {
       'lodash'
     ]
   },
+  router: {
+    middleware: 'i18n'
+  },
   modules: [
     '@nuxtjs/workbox',
     '@nuxtjs/pwa',
@@ -117,11 +120,15 @@ module.exports = {
   ],
   plugins: [
     {src: '~/plugins/swiper.js', ssr: false},
-    {src: '~plugins/scroll.js', ssr: true},
+    {src: '~/plugins/scroll.js', ssr: true},
     {src: '~/plugins/aos.js', ssr: false},
-    {src: '~plugins/viewer.js', ssr: false},
-    {src: '~plugins/analytics.js', ssr: false},
+    {src: '~/plugins/viewer.js', ssr: false},
+    {src: '~/plugins/analytics.js', ssr: false},
     '~/plugins/vue2-filters.js',
-    '~plugins/filters.js'
-  ]
+    '~/plugins/filters.js',
+    '~/plugins/i18n.js'
+  ],
+  generate: {
+    routes: ['/', '/about', '/ba', '/ba/about']
+  }
 }

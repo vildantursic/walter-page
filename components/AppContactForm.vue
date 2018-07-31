@@ -10,17 +10,20 @@
       </div>
 
       <div v-if="success">
-        <b>Thank you for contacting us!</b>
+        <b>
+          Thank you for your application! We will screen all applicants and select candidates whose qualifications seem to meet our needs.
+          Meanwhile, stay in touch with us on Facebook and LinkedIn and get updated of all the ongoing activities that might be of interest for you.
+        </b>
       </div>
 
       <div v-if="!success">
         <div>
-          <label for="email">Email</label>
+          <label for="email">Email *</label>
           <input class="text-input" type="text" name="email" id="email" v-model="email">
         </div>
 
         <div>
-          <label for="name">Name</label>
+          <label for="name">Name *</label>
           <input class="text-input" type="text" name="name" id="name" v-model="name">
         </div>
 
@@ -30,9 +33,10 @@
         </div>
 
         <div>
+          <p>Files: {{uploadFiles}}</p>
           <div class="upload-btn-wrapper">
-            <button class="button">{{ fileName || 'Upload a file' }}</button>
-            <input type="file" accept=".pdf" @change="onFileChange">
+            <button class="button-upload">{{ fileName || 'Upload a file' }} *</button>
+            <input type="file" accept=".pdf,.jpeg,.jpg,.png,.doc" @change="onFileChange">
           </div>
         </div>
 
@@ -49,7 +53,7 @@
   import axios from 'axios'
 
   export default {
-    props: ['contactPerson', 'subject'],
+    props: ['contactPerson', 'subject', 'uploadFiles'],
     data() {
       return {
         success: false,
@@ -169,6 +173,22 @@
       &:hover {
         background: #3e88a7;
         border: solid 2px #3e88a7;
+      }
+    }
+
+    .button-upload {
+      color: $main-color;
+      background: transparent;
+      border: solid 2px $main-color;
+      height: 40px;
+      width: 50%;
+      cursor: pointer;
+
+      @include screen-size(s) {
+        width: 100%;
+      }
+      @include screen-size(xs) {
+        width: 100%;
       }
     }
 

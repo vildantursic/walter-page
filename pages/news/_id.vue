@@ -9,7 +9,7 @@
         <p class="category">
           <span v-for="(category, index) of page.categories" :key="index"> {{category.name}}<span v-if="index < page.categories.length - 1">,</span></span>
         </p>
-        <p class="author" v-if="authors.length !== 0">{{authors[0].name}}, {{date}}</p>
+        <p class="author">{{date}}</p>
       </div>
       <div v-if="page.acf.gallery_images !== ''" class="img-container">
         <AppSlider v-if="page.acf.gallery_images" :images="page.acf.gallery_images.split(',')" :miniSlider="false"></AppSlider>
@@ -67,7 +67,7 @@
       return axios.get(`http://new.walter.ba/cms/wp-json/wp/v2/posts/${route.params.id}?_embed`).then((response) => {
         return {
           page: response.data,
-          date: moment(response.data.date).format('MMM YYYY [at] LT')
+          date: moment(response.data.date).format('DD-MM-YYYY')
         }
       }).catch((error) => {
         console.log(error)
@@ -240,7 +240,7 @@
     .post-left {
       line-height: 1.8;
       width: 70%;
-      padding: 0 2% 2% 2%;
+      padding: 0 0% 2% 0%;
 
       @include screen-size('xs') {
         width: 100%;

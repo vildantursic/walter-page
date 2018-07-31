@@ -13,10 +13,8 @@
       <input type="text" placeholder="Search.." v-model="search">
     </AppFilter>
     <div class="no-items">
-      <h1 v-if="searchedList.length === 0 && search.length === 0 && !loading">
-        There are no open courses right now but there certainly are some in the making. Keep in touch on
-        <a target="_blank" href="https://www.facebook.com/Walter-BIM-Academy-193294058066551/">Facebook</a> and <a target="_blank" href="https://www.linkedin.com/company/walter-bim-solutions/">Linkedin</a> and be the first to know when they are ready.
-      </h1>
+      <h1 v-if="searchedList.length === 0 && search.length === 0 &&!loading">
+        There are no open courses right now but there certainly are some in the making. Keep in touch on  <a target="_blank" href="https://www.facebook.com/Walter-BIM-Academy-193294058066551/">Facebook</a>and <a target="_blank" href="https://www.linkedin.com/company/walter-bim-solutions/">Linkedin</a> and be the first to know when they are ready.</h1>
       <h1 v-if="searchedList.length === 0 && search.length !== 0 && !loading">
         Thing you searched does not exist!
       </h1>
