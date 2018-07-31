@@ -26,6 +26,7 @@
   .social {
     display: flex;
     align-items: center;
+    padding: 0 !important;
   }
 
   .fab, .fas {

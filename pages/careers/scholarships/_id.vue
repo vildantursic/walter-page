@@ -48,7 +48,7 @@
       AppContactForm
     },
     asyncData({ route }) {
-      return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/scholarships/${route.params.id}?_embed`).then((response) => {
+      return axios.get(`http://new.walter.ba/cms/wp-json/wp/v2/scholarships/${route.params.id}?_embed`).then((response) => {
         return {
           page: response.data,
           date: moment(response.data.date).format('MMM YYYY [at] LT'),
@@ -63,7 +63,7 @@
         this.$router.push({ path: `/news/${id}`})
       },
       getItems() {
-        axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/scholarships?_embed').then((response) => {
+        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/scholarships?_embed').then((response) => {
           this.items = response.data
         }).catch((error) => {
           console.log(error);

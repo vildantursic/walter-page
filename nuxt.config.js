@@ -101,7 +101,7 @@ module.exports = {
     cacheTime: 1000 * 60 * 15,
     generate: true,
     routes () {
-      return axios.get('http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases?per_page=100')
+      return axios.get('http://new.walter.ba/cms/wp-json/wp/v2/cases?per_page=100')
         .then(res => res.data.map(item =>  `/cases/${item.id}`))
     }
   },

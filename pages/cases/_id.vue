@@ -18,7 +18,7 @@
       AppSingle
     },
     async asyncData({ route }) {
-      return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/cases/${route.params.id}?_embed`).then((response) => {
+      return axios.get(`http://new.walter.ba/cms/wp-json/wp/v2/cases/${route.params.id}?_embed`).then((response) => {
         return { page: response.data }
       }).catch((error) => {
         console.log(error);

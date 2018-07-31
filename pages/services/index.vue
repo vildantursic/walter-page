@@ -1,7 +1,7 @@
 <template>
   <div>
     <video id="bgvid" playsinline autoplay muted loop>
-      <source src="http://walter.hotelsnjesko.ba/wp-content/uploads/Video-WEB.mp4" type="video/mp4">
+      <source src="http://new.walter.ba/cms/wp-content/uploads/Video-WEB.mp4" type="video/mp4">
     </video>
 
     <div class="tablet-navigation">
@@ -90,7 +90,7 @@
       }
     },
     asyncData({ }) {
-      return axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/services?_embed`).then((response) => {
+      return axios.get(`http://new.walter.ba/cms/wp-json/wp/v2/services?_embed`).then((response) => {
         return { services: response.data }
       }).catch((error) => {
         console.log(error)
@@ -129,7 +129,7 @@
         this.once = false
     },
       fillSubServices () {
-        axios.get(`http://walter.hotelsnjesko.ba/wp-json/wp/v2/sub_services?per_page=100&_embed`).then((response) => {
+        axios.get(`http://new.walter.ba/cms/wp-json/wp/v2/sub_services?per_page=100&_embed`).then((response) => {
           if (this.services.length !== 0) {
             this.services = this.services.map(service => {
               service.acf.sub_services = service.acf.sub_services.map(subService => {
