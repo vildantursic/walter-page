@@ -79,7 +79,7 @@
       <section id="contact" class="contact-section">
         <div class="contact">
           <div class="countries">
-            <h3 class="text">Stockholm, Sweden</h3>
+            <h3 class="text">Hägerstensvägen 97A,<br> 126 49 Stockholm, Sweden</h3>
             <h3 class="text">Muhameda Kantardžića 3,<br>Sarajevo, Bosnia and Herzegovina</h3>
           </div>
           <div class="map">
@@ -177,7 +177,7 @@
       // window.removeEventListener("scroll", this.handleScroll);
     },
     asyncData({}) {
-      return axios.get('http://new.walter.ba/cms/wp-json/wp/v2/pages/73?_embed').then((response) => {
+      return axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/73?_embed').then((response) => {
         return {page: response.data}
       }).catch((error) => {
         console.log(error)
@@ -188,7 +188,7 @@
         return {
           _embedded: {
             'wp:featuredmedia': [
-              { source_url: 'http://new.walter.ba/cms/wp-content/uploads/History-employees.png' }
+              { source_url: 'https://walter.ba/cms/wp-content/uploads/History-employees.png' }
             ]
           },
           title: {
@@ -217,7 +217,7 @@
         this.$refs.scrollactive.$el.className = 'scrollactive-nav nav last-section'
       },
       getHistories() {
-        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/histories?_embed').then((response) => {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/histories?_embed').then((response) => {
           this.histories = response.data.reverse()
           this.getAchievements()
         }).catch((error) => {
@@ -225,7 +225,7 @@
         });
       },
       getAchievements() {
-        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/achievements?_embed').then((response) => {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/achievements?_embed').then((response) => {
           this.histories.map(history => {
             history.acf.achievements = response.data.filter((achievement) => {
               return find(history.acf.achievements, {ID: achievement.id}) ? achievement : undefined
@@ -238,21 +238,21 @@
         });
       },
       getPartners() {
-        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/partners?_embed').then((response) => {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/partners?_embed').then((response) => {
           this.partners = response.data
         }).catch((error) => {
           console.log(error)
         });
       },
       getBoardMembers() {
-        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/board_members?_embed').then((response) => {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/board_members?_embed').then((response) => {
           this.boardMembers = response.data
         }).catch((error) => {
           console.log(error)
         });
       },
       getCustomers() {
-        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/customers?per_page=100&_embed').then((response) => {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/customers?per_page=100&_embed').then((response) => {
           this.customers = response.data
         }).catch((error) => {
           console.log(error)

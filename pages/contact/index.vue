@@ -2,7 +2,7 @@
   <section id="contact" class="contact-section">
     <div class="contact">
       <div class="countries">
-        <h3 class="text">Stockholm, Sweden</h3>
+        <h3 class="text">Hägerstensvägen 97A,<br> 126 49 Stockholm, Sweden</h3>
         <h3 class="text">Muhameda Kantardžića 3,<br>Sarajevo, Bosnia and Herzegovina</h3>
       </div>
       <div class="map">
@@ -34,7 +34,7 @@
       }
     },
     asyncData({}) {
-      return axios.get('http://new.walter.ba/cms/wp-json/wp/v2/pages/73?_embed').then((response) => {
+      return axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/73?_embed').then((response) => {
         return {page: response.data}
       }).catch((error) => {
         console.log(error)

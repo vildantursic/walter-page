@@ -1,12 +1,12 @@
 <template>
   <div class="social" v-if="item && link">
     <a target="_blank"
-       :href="`https://www.linkedin.com/shareArticle?mini=true&url=http://new.walter.ba${link}&title=${item.title.rendered}&summary=${item.acf.description}`"><i
+       :href="`https://www.linkedin.com/shareArticle?mini=true&url=https://walter.ba${link}&title=${item.title.rendered}&summary=${item.acf.description}`"><i
       class="fab fa-linkedin"></i></a>
     <a target="_blank" v-on:click="submitAndShare"><i
       class="fab fa-facebook"></i></a>
     <a target="_blank"
-       :href="`https://twitter.com/intent/tweet?text=${item.acf.description} http://new.walter.ba${link}`"><i
+       :href="`https://twitter.com/intent/tweet?text=${item.acf.description} https://walter.ba${link}`"><i
       class="fab fa-twitter"></i></a>
     <a :href="`mailto:youremail@gmail.com?subject=shared link&body=${item.acf.description} ${link}`"><i
       class="fas fa-envelope"></i></a>
@@ -38,9 +38,9 @@
       },
       submitAndShare()
       {
-        var title = this.item.title.rendered;
-        var description = this.item.acf.description
-        var image = this.item._embedded['wp:featuredmedia'][0].source_url;
+        const title = this.item.title.rendered;
+        const description = this.item.acf.description
+        const image = this.item._embedded ? this.item._embedded['wp:featuredmedia'][0].source_url : 'https://walter.ba/cms/wp-content/uploads/2018/04/walter.png';
         this.shareOverrideOGMeta(window.location.href,
           title,
           description,
@@ -51,14 +51,14 @@
     mounted() {
       window.fbAsyncInit = function() {
         FB.init({
-          appId            : '2177681459134790',
+          appId            : '294084351009346',
           autoLogAppEvents : true,
           xfbml            : true,
           version          : 'v3.0'
         });
       };
       (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
+        let js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {return;}
         js = d.createElement(s); js.id = id;
         js.src = "https://connect.facebook.net/en_US/sdk.js";

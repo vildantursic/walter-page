@@ -1,39 +1,43 @@
 <template>
   <section>
-    <div class="header-news padded-content">
-      <h1 class="title" v-html="page.title.rendered"></h1>
-      <AppSocial :item="page" :link="$route.path"></AppSocial>
-    </div>
-    <div class="item animated fadeIn padded-content">
-      <div class="img-header">
-        <p class="category">
-          <span v-for="(category, index) of page.categories" :key="index"> {{category.name}}<span v-if="index < page.categories.length - 1">,</span></span>
-        </p>
-        <p class="author">{{date}}</p>
+    <AppLoading v-if="loading"/>
+    <div v-if="!loading">
+      <div class="header-news padded-content">
+        <h1 class="title" v-html="page.title.rendered"></h1>
+        <AppSocial :item="page" :link="$route.path"></AppSocial>
       </div>
-      <div v-if="page.acf.gallery_images !== ''" class="img-container">
-        <AppSlider v-if="page.acf.gallery_images" :images="page.acf.gallery_images.split(',')" :miniSlider="false"></AppSlider>
-      </div>
-      <div class="post-content">
-        <div class="post-left" v-html="page.content.rendered">
+      <div class="item animated fadeIn padded-content">
+        <div class="img-header">
+          <p class="category">
+            <span v-for="(category, index) of page.categories" :key="index"> {{category.name}}<span v-if="index < page.categories.length - 1">,</span></span>
+          </p>
+          <p class="author">{{date}}</p>
         </div>
-        <div class="post-right">
-          <div v-if="items[items.findIndex(el => el.id === page.id) + 1]" class="next">
-            <span @click="generateNextLink">NEXT ARTICLE <i class="fas fa-chevron-right"></i></span>
+        <div v-if="page.acf.gallery_images !== ''" class="img-container">
+          <AppSlider v-if="page.acf.gallery_images" :images="page.acf.gallery_images.split(',')" :miniSlider="false"></AppSlider>
+        </div>
+        <div class="post-content">
+          <div class="post-left" v-html="page.content.rendered">
           </div>
-          <div v-for="item in limitBy(items, 3)" v-bind:key="item.id">
-            <OtherPosts :item="item"></OtherPosts>
+          <div class="post-right">
+            <div v-if="items[items.findIndex(el => el.id === page.id) + 1]" class="next">
+              <span @click="generateNextLink">NEXT ARTICLE <i class="fas fa-chevron-right"></i></span>
+            </div>
+            <div v-for="item in limitBy(items, 3)" v-bind:key="item.id">
+              <OtherPosts :item="item"></OtherPosts>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div v-if="page.acf.bottom_image !== undefined" class="img-container-bottom">
-      <img :src="page.acf.bottom_image">
+      <div v-if="page.acf.bottom_image !== undefined" class="img-container-bottom">
+        <img :src="page.acf.bottom_image">
+      </div>
     </div>
   </section>
 </template>
 
 <script>
+  import AppLoading from '~/components/AppLoading'
   import AppFilter from '~/components/AppFilter'
   import AppNews from '~/components/AppNews'
   import AppPageTitle from '~/components/AppPageTitle'
@@ -45,8 +49,18 @@
   import moment from 'moment'
 
   export default {
+    components: {
+      AppLoading,
+      AppFilter,
+      AppNews,
+      AppPageTitle,
+      OtherPosts,
+      AppSlider,
+      AppSocial
+    },
     data() {
       return {
+        loading: true,
         authors: [],
         categories: [],
         items: [],
@@ -55,23 +69,9 @@
         },
       }
     },
-    components: {
-      AppFilter,
-      AppNews,
-      AppPageTitle,
-      OtherPosts,
-      AppSlider,
-      AppSocial
-    },
-    asyncData({ route }) {
-      return axios.get(`http://new.walter.ba/cms/wp-json/wp/v2/posts/${route.params.id}?_embed`).then((response) => {
-        return {
-          page: response.data,
-          date: moment(response.data.date).format('DD-MM-YYYY')
-        }
-      }).catch((error) => {
-        console.log(error)
-      });
+    created() {
+      this.getArticle();
+      this.getItems();
     },
     methods: {
       generateNextLink () {
@@ -83,8 +83,17 @@
       goToPost (id) {
         this.$router.push({ path: `/news/${id}`})
       },
+      getArticle() {
+        axios.get(`https://walter.ba/cms/wp-json/wp/v2/posts/${this.$route.params.id}?_embed`).then((response) => {
+          this.page = response.data;
+          this.date = moment(response.data.date).format('DD-MM-YYYY');
+          this.loading = false;
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
       getItems() {
-        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/posts?_embed').then((response) => {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/posts?_embed').then((response) => {
           this.items = response.data
           this.fillUser()
           this.fillCategories()
@@ -93,7 +102,7 @@
         });
       },
       fillUser() {
-        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/users').then((response) => {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/users').then((response) => {
           this.authors = response.data
           this.items.map((item) => {
             if (find(response.data, { id: item.author })) {
@@ -106,7 +115,7 @@
         });
       },
       fillCategories() {
-        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/categories').then((response) => {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/categories').then((response) => {
           this.categories = response.data
           this.page.categories = this.page.categories.map(cat => {
             return find(this.categories, (o) => o.id === cat)
@@ -125,9 +134,6 @@
           console.log(error);
         });
       }
-    },
-    mounted() {
-      this.getItems()
     }
   }
 </script>

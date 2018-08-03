@@ -71,7 +71,7 @@
         this.$router.push({ path: `news/${id}`})
       },
       getItems() {
-        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/posts?per_page=100&_embed').then((response) => {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/posts?per_page=100&_embed').then((response) => {
           this.items = response.data
           this.tempItems = this.items
           this.fillUser()
@@ -82,7 +82,7 @@
         });
       },
       fillUser() {
-        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/users').then((response) => {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/users').then((response) => {
           this.items.map((item) => {
             if (find(response.data, { id: item.author })) {
               item.author = find(response.data, { id: item.author })
@@ -94,7 +94,7 @@
         });
       },
       fillCategories() {
-        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/categories').then((response) => {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/categories').then((response) => {
           this.filters = response.data
           this.items.map((item) => {
             const cats = []
@@ -142,7 +142,7 @@
       this.getItems()
     },
     asyncData({}) {
-      return axios.get('http://new.walter.ba/cms/wp-json/wp/v2/pages/66').then((response) => {
+      return axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/66').then((response) => {
         return { page: response.data }
       }).catch((error) => {
         console.log(error)

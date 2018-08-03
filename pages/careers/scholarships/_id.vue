@@ -1,19 +1,23 @@
 <template>
   <section>
-    <div class="header-news padded-content">
-      <h1 class="title" v-html="page.title.rendered"></h1>
-      <AppSocial :item="page" :link="$route.path"></AppSocial>
-    </div>
-    <div class="item animated fadeIn padded-content">
-      <div class="post-content">
-        <div class="post-left" v-html="page.content.rendered"></div>
+    <AppLoading v-if="loading"/>
+    <div v-if="!loading">
+      <div class="header-news padded-content">
+        <h1 class="title" v-html="page.title.rendered"></h1>
+        <AppSocial :item="page" :link="$route.path"></AppSocial>
       </div>
-      <AppContactForm :contactPerson="contactPerson" :subject="subject" :uploadFiles="uploadFiles"></AppContactForm>
+      <div class="item animated fadeIn padded-content">
+        <div class="post-content">
+          <div class="post-left" v-html="page.content.rendered"></div>
+        </div>
+        <AppContactForm :contactPerson="contactPerson" :subject="subject" :uploadFiles="uploadFiles"></AppContactForm>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
+  import AppLoading from '~/components/AppLoading'
   import AppFilter from '~/components/AppFilter'
   import AppNews from '~/components/AppNews'
   import AppPageTitle from '~/components/AppPageTitle'
@@ -26,8 +30,19 @@
   import moment from 'moment'
 
   export default {
+    components: {
+      AppLoading,
+      AppFilter,
+      AppNews,
+      AppPageTitle,
+      OtherPosts,
+      AppSlider,
+      AppSocial,
+      AppContactForm
+    },
     data() {
       return {
+        loading: true,
         authors: [],
         categories: [],
         items: [],
@@ -39,40 +54,31 @@
         uploadFiles: 'CV, transcript of grades, copy of student ID verifying the last registered semester'
       }
     },
-    components: {
-      AppFilter,
-      AppNews,
-      AppPageTitle,
-      OtherPosts,
-      AppSlider,
-      AppSocial,
-      AppContactForm
-    },
-    asyncData({ route }) {
-      return axios.get(`http://new.walter.ba/cms/wp-json/wp/v2/scholarships/${route.params.id}?_embed`).then((response) => {
-        return {
-          page: response.data,
-          date: moment(response.data.date).format('DD-MM-YYYY'),
-          subject: `Scholarships - ${response.data.title.rendered}`
-        }
-      }).catch((error) => {
-        console.log(error)
-      });
+    created() {
+      this.getScholarship();
+      this.getItems();
     },
     methods: {
       goToPost (id) {
         this.$router.push({ path: `/news/${id}`})
       },
       getItems() {
-        axios.get('http://new.walter.ba/cms/wp-json/wp/v2/scholarships?_embed').then((response) => {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/scholarships?_embed').then((response) => {
           this.items = response.data
         }).catch((error) => {
           console.log(error);
         });
+      },
+      getScholarship() {
+        axios.get(`https://walter.ba/cms/wp-json/wp/v2/scholarships/${this.$route.params.id}?_embed`).then((response) => {
+          this.page = response.data;
+          this.date = moment(response.data.date).format('DD-MM-YYYY');
+          this.subject = `Scholarships - ${response.data.title.rendered}`;
+          this.loading = false;
+        }).catch((error) => {
+          console.log(error)
+        });
       }
-    },
-    mounted() {
-      this.getItems()
     }
   }
 </script>

@@ -94,7 +94,7 @@
     },
     methods: {
       getServices() {
-        axios.get(`http://cms.walter.ba/wp-json/wp/v2/services`).then((response) => {
+        axios.get(`https://walter.ba/cms/wp-json/wp/v2/services`).then((response) => {
           this.services = response.data
         }).catch((error) => {
           console.log(error)

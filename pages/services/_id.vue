@@ -1,7 +1,7 @@
 <template>
   <section class="padded-content full-height">
     <video id="bgvid" playsinline autoplay muted loop>
-      <source src="http://new.walter.ba/cms/wp-content/uploads/Video-WEB.mp4" type="video/mp4">
+      <source src="https://walter.ba/cms/wp-content/uploads/Video-WEB.mp4" type="video/mp4">
     </video>
     <div class="video-cover"></div>
 
@@ -56,7 +56,7 @@
       }
     },
     asyncData({ route }) {
-      return axios.get(`http://new.walter.ba/cms/wp-json/wp/v2/services/${route.params.id}`).then((response) => {
+      return axios.get(`https://walter.ba/cms/wp-json/wp/v2/services/${route.params.id}`).then((response) => {
         return { page: response.data }
       }).catch((error) => {
         console.log(error)
@@ -68,14 +68,14 @@
     },
     methods: {
       getServices () {
-        axios.get(`http://new.walter.ba/cms/wp-json/wp/v2/services`).then((response) => {
+        axios.get(`https://walter.ba/cms/wp-json/wp/v2/services`).then((response) => {
           this.links = response.data;
         }).catch((error) => {
           console.log(error)
         });
       },
       getSubServices () {
-        axios.get(`http://new.walter.ba/cms/wp-json/wp/v2/sub_services?per_page=100&_embed`).then((response) => {
+        axios.get(`https://walter.ba/cms/wp-json/wp/v2/sub_services?per_page=100&_embed`).then((response) => {
           this.subServices = response.data.filter((subService) => {
             return find(this.page.acf.sub_services, { ID: subService.id }) ? subService : undefined
           });

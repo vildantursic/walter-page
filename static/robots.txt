@@ -1,5 +1,4 @@
 User-agent: *
 Disallow:
 Crawl-delay: 5
-Disallow: /cgi-bin/
-Sitemap: http://new.walter.ba/sitemap.xml
+Sitemap: https://walter.ba/sitemap.xml

@@ -152,6 +152,7 @@
         }
         .description {
           line-height: 1.5;
+          padding-right: 10px;
           @include screen-size(xs) {
             padding: 0 10px;
           }
@@ -163,7 +164,7 @@
         .text-box {
           height: 500px;
           overflow: auto;
-          width: 85%;
+          width: 90%;
 
           @include screen-size(xs) {
             height: auto;
