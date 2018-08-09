@@ -35,12 +35,13 @@
     },
     mounted() {
       this.getPage()
-      this.reverseItems()
     },
     methods: {
       getPage() {
         axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/73?_embed').then((response) => {
           this.page = response.data
+        }).then(() => {
+          this.reverseItems()
         }).catch((error) => {
           console.log(error)
         });
