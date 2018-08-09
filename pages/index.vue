@@ -35,16 +35,17 @@
       }
     },
     created () {
+      this.getPage()
       this.getItems()
     },
-    asyncData({}) {
-      return axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/79').then((response) => {
-        return { page: response.data }
-      }).catch((error) => {
-        console.log(error)
-      });
-    },
     methods: {
+      getPage() {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/79').then((response) => {
+          this.page = response.data
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
       getItems() {
         axios.get('https://walter.ba/cms/wp-json/wp/v2/services?_embed').then((response) => {
           this.items = response.data

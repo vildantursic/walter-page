@@ -1,5 +1,5 @@
 <template>
-  <div class="info-card animated fadeIn" data-aos="fade">
+  <div class="info-card" data-aos="fade">
     <nuxt-link class="nav-link" :to="`/careers/jobs/${item.id}`">
       <h1 class="position" v-html="item.title.rendered.split('').slice(0, 25).join('').concat(item.title.rendered.length > 50 ? '...' : '')"></h1>
     </nuxt-link>

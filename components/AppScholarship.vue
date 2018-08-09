@@ -2,10 +2,10 @@
   <div class="card animated fadeIn" data-aos="slide-up">
     <div v-if="item._embedded !== undefined" class="card-img-container">
       <nuxt-link class="nav-link" :to="`/careers/scholarships/${item.id}`">
-        <img class="card-img" v-if="item._embedded['wp:featuredmedia'] !== undefined"
+        <img class="card-img" v-if="item._embedded !== undefined"
              :src="item._embedded['wp:featuredmedia'][0].source_url"
              :alt="item._embedded['wp:featuredmedia'][0].alt_text">
-        <img class="no-image" v-if="item._embedded['wp:featuredmedia'] === undefined"
+        <img class="no-image" v-if="item._embedded === undefined"
              src="~/static/images/walter-logo.png" alt="">
       </nuxt-link>
     </div>

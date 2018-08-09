@@ -33,17 +33,18 @@
         contactPersons: {}
       }
     },
-    asyncData({}) {
-      return axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/73?_embed').then((response) => {
-        return {page: response.data}
-      }).catch((error) => {
-        console.log(error)
-      });
-    },
     mounted() {
+      this.getPage()
       this.reverseItems()
     },
     methods: {
+      getPage() {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/73?_embed').then((response) => {
+          this.page = response.data
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
       reverseItems() {
         this.contactPersons = this.page.acf.contact_persons.reverse()
       },

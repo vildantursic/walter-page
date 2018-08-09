@@ -1,6 +1,6 @@
 <template>
   <div class="card animated fadeIn" data-aos="fade">
-    <nuxt-link class="nav-link card-img-container" :to="`careers/academy/${item.id}`">
+    <nuxt-link class="nav-link card-img-container" :to="`/careers/academy/${item.id}`">
       <div v-if="item._embedded !== undefined">
         <img v-if="item._embedded['wp:featuredmedia'] !== undefined"
              :src="item._embedded['wp:featuredmedia'][0].source_url"
@@ -10,7 +10,7 @@
       </div>
     </nuxt-link>
     <div class="info">
-      <nuxt-link class="nav-link" :to="`careers/academy/${item.id}`">
+      <nuxt-link class="nav-link" :to="`/careers/academy/${item.id}`">
         <h1 class="title" v-html="item.title.rendered"></h1>
       </nuxt-link>
       <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>
@@ -42,9 +42,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 450px;
+    min-height: 450px;
     overflow: hidden;
-    margin: 1em;
     border-width: 0 0 3px 0;
     border-style: solid;
     -moz-border-image: -moz-linear-gradient(45deg, #0093c8 0%, #faaf40 100%) 1;
@@ -52,15 +51,21 @@
     border-image: linear-gradient(45deg, #0093c8 0%, #faaf40 100%) 1;
 
     .card-img-container {
-      background-color: $secondary-color;
+      min-height: 200px;
+      max-height: 200px;
       overflow: hidden;
       display: flex;
-      justify-content: center;
       align-items: center;
-      width: 100%;
-      height: 45%;
-      .card-img {
-        height: 100%;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      background: $secondary-color;
+
+      img {
+        width: 100%;
+      }
+      .no-image {
+        width: 30%;
       }
     }
 

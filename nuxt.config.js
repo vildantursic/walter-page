@@ -67,7 +67,6 @@ module.exports = {
     ]
   },
   router: {
-    middleware: 'i18n'
   },
   modules: [
     '@nuxtjs/workbox',
@@ -122,8 +121,7 @@ module.exports = {
     {src: '~/plugins/viewer.js', ssr: false},
     {src: '~/plugins/analytics.js', ssr: false},
     '~/plugins/vue2-filters.js',
-    '~/plugins/filters.js',
-    '~/plugins/i18n.js'
+    '~/plugins/filters.js'
   ],
   generate: {
     routes: ['/', '/about', '/ba', '/ba/about']

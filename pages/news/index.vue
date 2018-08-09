@@ -31,7 +31,7 @@
   import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
   import moment from 'moment'
-  import { find } from 'lodash'
+  import { find, isEqual } from 'lodash'
 
   export default {
     data() {
@@ -42,7 +42,7 @@
         page: {
           acf: {}
         },
-        items: [],
+        items: this.$store.state.posts,
         tempItems: [],
         filters: [],
         categories: [],
@@ -58,6 +58,10 @@
       AppContactBox,
       AppMoreCard
     },
+    created () {
+      this.getPage()
+      this.getItems()
+    },
     computed: {
       searchedList() {
         return this.items.filter(item => {
@@ -70,13 +74,30 @@
       goToPost (id) {
         this.$router.push({ path: `news/${id}`})
       },
+      getPage() {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/66').then((response) => {
+          this.page = response.data
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
       getItems() {
+        if (this.items.length !== 0)
+          this.loading = false;
+
         axios.get('https://walter.ba/cms/wp-json/wp/v2/posts?per_page=100&_embed').then((response) => {
           this.items = response.data
           this.tempItems = this.items
-          this.fillUser()
-          this.fillCategories()
+
+          if (isEqual(this.items, response.data)) {
+            this.$store.commit('SET_POSTS', response.data);
+          }
+
           this.loading = false
+        }).then(() => {
+          this.fillUser()
+        }).then(() => {
+          this.fillCategories()
         }).catch((error) => {
           console.log(error);
         });
@@ -137,16 +158,6 @@
       showSearch(){
         document.getElementById('search-image').style.display = 'block';
       }
-    },
-    created () {
-      this.getItems()
-    },
-    asyncData({}) {
-      return axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/66').then((response) => {
-        return { page: response.data }
-      }).catch((error) => {
-        console.log(error)
-      });
     }
   }
 </script>

@@ -3,15 +3,6 @@
     <AppPageTitle v-if="page.acf" :supertitle="page.acf.tease" :title="page.acf.title" :subtitle="page.acf.description" >
       <input id="search" type="text" placeholder="" v-model="search" @blur="showSearch">
     </AppPageTitle>
-    <!--<AppFilter :filters="filters"-->
-               <!--:selectedFilter="selectedFilter"-->
-               <!--:showDateFilter="true"-->
-               <!--:monthActive="2"-->
-               <!--@onFilterSelected="selectFilter"-->
-               <!--@onYearSelected="selectYear"-->
-               <!--@onMonthSelected="selectMonth">-->
-      <!--<input type="text" placeholder="Search.." v-model="search">-->
-    <!--</AppFilter>-->
     <div class="no-items">
       <h1 v-if="searchedList.length === 0 && !loading">
         There are no open positions right now but keep in touch on
@@ -22,9 +13,6 @@
     <div class="items">
       <AppPosition v-for="(item, index) of limitBy(searchedList, itemsToShow)" :key="index" :item="item"/>
     </div>
-    <!--<div class="items-bellow">-->
-      <!--<AppPosition v-if="items[items.length - 1]" :item="items[items.length - 1]"></AppPosition>-->
-    <!--</div>-->
   </section>
 </template>
 
@@ -34,13 +22,13 @@
   import AppPageTitle from '~/components/AppPageTitle'
   import axios from 'axios'
   import moment from 'moment'
-  import { orderBy, find } from 'lodash'
+  import { orderBy, find, isEqual } from 'lodash'
 
   export default {
     data() {
       return {
         loading: true,
-        items: [],
+        items: this.$store.state.jobs,
         itemsLenght: null,
         itemsToShow: null,
         lastItem: {},
@@ -71,22 +59,31 @@
         })
       }
     },
-    mounted() {
+    created() {
+      this.getPage()
       this.getItems()
     },
-    asyncData({}) {
-      return axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/64').then((response) => {
-        return { page: response.data }
-      }).catch((error) => {
-        console.log(error)
-      });
-    },
     methods: {
+      getPage () {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/64').then((response) => {
+          this.page = response.data;
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
       getItems () {
+        if (this.items.length !== 0)
+          this.loading = false;
+
         axios.get('https://walter.ba/cms/wp-json/wp/v2/careers?per_page=100&_embed').then((response) => {
           this.items = response.data
           this.itemsToShow = this.items.length
           this.tempItems = response.data
+
+          if (isEqual(this.items, response.data)) {
+            this.$store.commit('SET_JOBS', response.data);
+          }
+
           this.loading = false
         }).catch((error) => {
           console.log(error);

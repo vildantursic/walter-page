@@ -31,13 +31,12 @@
 
 <script>
   import AppFilter from '~/components/AppFilter'
-  import AppAcademy from '~/components/AppAcademy'
   import AppPageTitle from '~/components/AppPageTitle'
   import AppMoreCard from '~/components/AppMoreCard'
   import AppScholarship from '~/components/AppScholarship'
   import axios from 'axios'
   import moment from 'moment'
-  import { orderBy, find } from 'lodash'
+  import { orderBy, find, isEqual } from 'lodash'
 
   export default {
     data() {
@@ -45,7 +44,7 @@
         loading: true,
         itemsToShow: 3,
         id: null,
-        items: [],
+        items: this.$store.state.scholarships,
         page: {
           acf: {}
         },
@@ -67,94 +66,105 @@
       AppScholarship,
       AppMoreCard
     },
+    created () {
+      this.getPage()
+      this.getItems()
+    },
     computed: {
       searchedList() {
         return this.items.filter(item => {
           return item.title.rendered.toLowerCase().includes(this.search.toLowerCase()) ||
-                 item.acf.description.toLowerCase().includes(this.search.toLowerCase())
+            item.acf.description.toLowerCase().includes(this.search.toLowerCase())
         })
       }
     },
-    created () {
-      this.getItems()
-    },
-    asyncData({}) {
-      return axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/68').then((response) => {
-        return { page: response.data }
-      }).catch((error) => {
-        console.log(error)
-      });
-    },
-  methods: {
-    goToPost (id) {
-      this.$router.push({ path: `news/${id}`})
-    },
-    getItems() {
-      axios.get('https://walter.ba/cms/wp-json/wp/v2/scholarships?per_page=100&_embed').then((response) => {
-        this.items = response.data
-        this.tempItems = response.data
-        this.fillUser()
-        this.fillCategories()
-        this.loading = false
-      }).catch((error) => {
-        console.log(error);
-      });
-    },
-    fillUser() {
-      axios.get('https://walter.ba/cms/wp-json/wp/v2/users').then((response) => {
-        this.items.map((item) => {
-          if (find(response.data[0].id, { id: item["_embedded"]["wp:featuredmedia"][0]["author"]})) {
-            item["_embedded"]["wp:featuredmedia"][0]["author"] = response.data[0].name
+    methods: {
+      goToPost (id) {
+        this.$router.push({ path: `news/${id}`})
+      },
+      getPage() {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/68').then((response) => {
+          this.page = response.data
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
+      getItems() {
+        if (this.items.length !== 0)
+          this.loading = false;
+
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/scholarships?per_page=100&_embed').then((response) => {
+          this.items = response.data
+          this.tempItems = response.data
+
+          if (isEqual(this.items, response.data)) {
+            this.$store.commit('SET_SCHOLARSHIPS', response.data);
           }
-          return item
-        })
-      }).catch((error) => {
-        console.log(error);
-      });
-    },
-    fillCategories() {
-      axios.get('https://walter.ba/cms/wp-json/wp/v2/categories').then((response) => {
-        this.items.map((item) => {
-          const cats = []
-          response.data.forEach(cat => {
-            if (find(item.categories, (o) => o == cat.id)) {
-              cats.push(cat)
+
+          this.loading = false
+        }).then(() => {
+          this.fillUser()
+        }).then(() => {
+          this.fillCategories()
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      fillUser() {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/users').then((response) => {
+          this.items.map((item) => {
+            if (find(response.data[0].id, { id: item["_embedded"]["wp:featuredmedia"][0]["author"]})) {
+              item["_embedded"]["wp:featuredmedia"][0]["author"] = response.data[0].name
             }
+            return item
           })
-          item.categories = cats
-          return item
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      fillCategories() {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/categories').then((response) => {
+          this.items.map((item) => {
+            const cats = []
+            response.data.forEach(cat => {
+              if (find(item.categories, (o) => o == cat.id)) {
+                cats.push(cat)
+              }
+            })
+            item.categories = cats
+            return item
+          })
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
+      selectFilter (id) {
+        this.selectedFilter = id
+        this.items = this.filterItems()
+      },
+      selectYear (year) {
+        this.items = this.filterItems().filter((item) => {
+          return moment(item.date).year() === year
         })
-      }).catch((error) => {
-        console.log(error);
-      });
-    },
-    selectFilter (id) {
-      this.selectedFilter = id
-      this.items = this.filterItems()
-    },
-    selectYear (year) {
-      this.items = this.filterItems().filter((item) => {
-        return moment(item.date).year() === year
-      })
-    },
-    selectMonth (month) {
-      this.items = this.filterItems().filter((item) => {
-        return moment(item.date).month() + 1 === month
-      })
-    },
-    filterItems () {
-      this.search = ''
-      if (this.selectedFilter === -1) {
-        return this.tempItems;
-      } else {
-        return orderBy(this.tempItems, ['date'], [this.selectedFilter === 1 ? 'desc' : 'asc']);
+      },
+      selectMonth (month) {
+        this.items = this.filterItems().filter((item) => {
+          return moment(item.date).month() + 1 === month
+        })
+      },
+      filterItems () {
+        this.search = ''
+        if (this.selectedFilter === -1) {
+          return this.tempItems;
+        } else {
+          return orderBy(this.tempItems, ['date'], [this.selectedFilter === 1 ? 'desc' : 'asc']);
+        }
+      },
+      showSearch(){
+        document.getElementById('search-image').style.display = 'block';
       }
-    },
-    showSearch(){
-      document.getElementById('search-image').style.display = 'block';
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

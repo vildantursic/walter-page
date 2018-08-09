@@ -34,15 +34,21 @@
   import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
   import moment from 'moment'
-  import { orderBy, find } from 'lodash'
+  import { orderBy, find, isEqual } from 'lodash'
 
   export default {
+    components: {
+      AppFilter,
+      AppPageTitle,
+      AppAcademy,
+      AppMoreCard
+    },
     data() {
       return {
         loading: true,
         itemsToShow: 3,
         id: null,
-        items: [],
+        items: this.$store.state.academy,
         page: {
           acf: {}
         },
@@ -58,11 +64,9 @@
         tempItems: [],
       }
     },
-    components: {
-      AppFilter,
-      AppPageTitle,
-      AppAcademy,
-      AppMoreCard
+    created () {
+      this.getPage()
+      this.getItems()
     },
     computed: {
       searchedList() {
@@ -76,13 +80,30 @@
       goToPost (id) {
         this.$router.push({ path: `news/${id}`})
       },
+      getPage() {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/70').then((response) => {
+          this.page = response.data
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
       getItems() {
+        if (this.items.length !== 0)
+          this.loading = false;
+
         axios.get('https://walter.ba/cms/wp-json/wp/v2/bim_academy_posts?per_page=100&_embed').then((response) => {
           this.items = response.data
           this.tempItems = response.data
-          this.fillUser()
-          this.fillCategories()
+
+          if (isEqual(this.items, response.data)) {
+            this.$store.commit('SET_ACADEMY', response.data);
+          }
+
           this.loading = false
+        }).then(() => {
+          this.fillUser()
+        }).then(() => {
+          this.fillCategories()
         }).catch((error) => {
           console.log(error);
         });
@@ -140,17 +161,7 @@
       showSearch(){
         document.getElementById('search-image').style.display = 'block';
      }
-    },
-    created () {
-        this.getItems()
-      },
-      asyncData({}) {
-        return axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/70').then((response) => {
-          return { page: response.data }
-        }).catch((error) => {
-          console.log(error)
-        });
-      }
+    }
   }
 </script>
 
@@ -158,6 +169,6 @@
   @import "../../../assets/styles/mixins";
 
   .items {
-    @include grid-items(0%, 0px, 3, 1, 1);
+    @include grid-items(5%, 2em, 3, 2, 1);
   }
 </style>

@@ -26,7 +26,7 @@
   import AppPageTitle from '~/components/AppPageTitle'
   import AppMoreCard from '~/components/AppMoreCard'
   import axios from 'axios'
-  import { find, sortBy } from 'lodash'
+  import { find, sortBy, isEqual } from 'lodash'
 
   export default {
     head () {
@@ -50,8 +50,8 @@
         page: {
           acf: {}
         },
-        items: [],
-        tempItems: [],
+        items: this.$store.state.cases,
+        tempItems: this.$store.state.cases,
         item: null,
         filters: [],
         sortedFilters: [],
@@ -66,14 +66,8 @@
       }
     },
     created () {
+      this.getPage()
       this.getItems()
-    },
-    asyncData({}) {
-      return axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/60').then((response) => {
-        return { page: response.data }
-      }).catch((error) => {
-        console.log(error)
-      });
     },
     computed: {
       searchedList() {
@@ -90,12 +84,28 @@
       hide() {
         this.$modal.hide('case-modal');
       },
+      getPage() {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/60').then((response) => {
+          this.page = response.data
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
       getItems() {
+        if (this.items.length !== 0)
+          this.loading = false;
+
         axios.get('https://walter.ba/cms/wp-json/wp/v2/cases?per_page=100&_embed').then((response) => {
           this.items = response.data
           this.tempItems = this.items
-          this.getCategories()
+
+          if (isEqual(this.items, response.data)) {
+            this.$store.commit('SET_CASES', response.data);
+          }
+
           this.loading = false
+        }).then(() => {
+          this.getCategories()
         }).catch((error) => {
           console.log(error);
         });

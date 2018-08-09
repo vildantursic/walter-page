@@ -89,24 +89,19 @@
         this.$refs[this.$route.hash.substring(1)][0].click();
       }
     },
-    asyncData({ }) {
-      return axios.get(`https://walter.ba/cms/wp-json/wp/v2/services?_embed`).then((response) => {
-        return { services: response.data }
-      }).catch((error) => {
-        console.log(error)
-      });
-    },
     created () {
+      this.getServices()
       this.fillSubServices()
     },
-    mounted () {
-      this.contact_person = this.services[0].acf.contact_person
-      // window.addEventListener('scroll', this.handleScroll);
-    },
-    beforeDestroy () {
-      // window.removeEventListener("scroll", this.handleScroll);
-    },
     methods: {
+      getServices() {
+        axios.get(`https://walter.ba/cms/wp-json/wp/v2/services?_embed`).then((response) => {
+          this.services = response.data
+          this.contact_person = this.services[0].acf.contact_person
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
       showContact(id) {
         this.services.forEach((service) => {
           if (service.id === id) {

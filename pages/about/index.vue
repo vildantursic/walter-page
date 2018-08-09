@@ -18,7 +18,7 @@
     </div>
     <div class="section">
       <section id="statistics" class="statistics-section padded-content">
-        <h2 v-html="page.content.rendered"></h2>
+        <h2 v-if="page.content" v-html="page.content.rendered"></h2>
         <div class="statistics">
           <AppNumber :number="page.acf.engineers" :text="'Engineers'"/>
           <AppNumber :number="page.acf.experience_bim" :text="'Years of gathered BIM experience'"/>
@@ -32,7 +32,7 @@
     <div class="section">
       <section id="history" class="history-section">
         <div class="tabs">
-          <div class="tabbed-section__selector">
+          <div class="tabbed-section__selector" v-if="page.title">
             <a :class="[index === currentHistory ? 'active': '', `tabbed-section__selector-tab-${currentHistory + 1}`]"
                v-for="(obj, index) in histories"
                :key="index" @click="currentHistory = index" v-html="obj.title.rendered">
@@ -164,26 +164,22 @@
       }
     },
     created() {
+      this.getPage()
       this.getHistories()
       this.getPartners()
       this.getBoardMembers()
       this.getCustomers()
     },
-    mounted() {
-      this.reverseItems()
-      // window.addEventListener('scroll', this.handleScroll);
-    },
-    beforeDestroy() {
-      // window.removeEventListener("scroll", this.handleScroll);
-    },
-    asyncData({}) {
-      return axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/73?_embed').then((response) => {
-        return {page: response.data}
-      }).catch((error) => {
-        console.log(error)
-      });
-    },
     methods: {
+      getPage() {
+        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/73?_embed').then((response) => {
+          this.page = response.data
+        }).then(() => {
+          this.reverseItems()
+        }).catch((error) => {
+          console.log(error)
+        });
+      },
       employeeItem() {
         return {
           _embedded: {

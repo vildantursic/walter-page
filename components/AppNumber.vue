@@ -12,6 +12,9 @@
     components: {},
     methods: {
       nFormatter(num, digits) {
+        if (!num)
+          num = 0;
+
         let si = [
           {value: 1, symbol: ""},
           {value: 1E3, symbol: "k"},
