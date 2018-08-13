@@ -55,7 +55,6 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      margin: 0 1em 0 1em;
       cursor: pointer;
       background: $secondary-color;
 
@@ -73,22 +72,22 @@
     }
 
     .info {
-      padding: 0 1em 1em 1em;
       height: 230px;
 
       @include screen-size('m') {
-        padding: 0 2em 0.5em 2em
+        /*padding: 0 2em 0.5em 2em*/
       }
       @include screen-size('s') {
         height: 200px;
-        padding: 0 1em 1em 1em;
+        /*padding: 0 1em 1em 1em;*/
       }
       @include screen-size('xs') {
         height: 200px;
-        padding: 0 1em 1em 1em;
+        /*padding: 0 1em 1em 1em;*/
       }
       .title {
-        max-height: 75px;
+        height: 50px;
+        overflow: hidden;
         cursor: pointer;
         font-weight: bold;
         margin-bottom: 0;

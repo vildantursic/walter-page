@@ -71,7 +71,6 @@
         <h1 v-html="page.acf.clients_text"></h1>
         <div class="clients">
           <AppClient v-for="(item, index) of customers" :key="index" :item="item"/>
-          <!--<AppMoreCard :numberOfItems="100"/>-->
         </div>
       </section>
     </div>
@@ -104,7 +103,6 @@
   import AppContactPerson from "~/components/AppContactPerson"
   import AppAchievement from "~/components/AppAchievement"
   import AppMoreCard from "~/components/AppMoreCard"
-  import axios from "axios"
   import { find } from "lodash"
 
   export default {
@@ -149,6 +147,17 @@
         nextId: 0
       }
     },
+    async asyncData({ app }) {
+      const page = await app.$axios.$get('pages/73?_embed');
+      return { page }
+    },
+    created() {
+      this.reverseItems()
+      this.getHistories()
+      this.getPartners()
+      this.getBoardMembers()
+      this.getCustomers()
+    },
     watch: {
       currentHistory: function (newVal, oldVal) {
         if (newVal > oldVal) {
@@ -163,23 +172,7 @@
         }
       }
     },
-    created() {
-      this.getPage()
-      this.getHistories()
-      this.getPartners()
-      this.getBoardMembers()
-      this.getCustomers()
-    },
     methods: {
-      getPage() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/73?_embed').then((response) => {
-          this.page = response.data
-        }).then(() => {
-          this.reverseItems()
-        }).catch((error) => {
-          console.log(error)
-        });
-      },
       employeeItem() {
         return {
           _embedded: {
@@ -212,47 +205,29 @@
       last() {
         this.$refs.scrollactive.$el.className = 'scrollactive-nav nav last-section'
       },
-      getHistories() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/histories?_embed').then((response) => {
-          this.histories = response.data.reverse()
-          this.getAchievements()
-        }).catch((error) => {
-          console.log(error)
-        });
+      async getHistories() {
+        this.histories = await this.$axios.$get('histories?_embed')
+        this.histories.reverse()
+        this.getAchievements()
       },
-      getAchievements() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/achievements?_embed').then((response) => {
-          this.histories.map(history => {
-            history.acf.achievements = response.data.filter((achievement) => {
-              return find(history.acf.achievements, {ID: achievement.id}) ? achievement : undefined
-            });
-            return history
-          })
-          this.achievements = this.achievements.concat(this.histories[this.currentHistory].acf.achievements)
-        }).catch((error) => {
-          console.log(error)
-        });
+      async getAchievements() {
+        const response = await this.$axios.$get('achievements?_embed')
+        this.histories.map(history => {
+          history.acf.achievements = response.filter((achievement) => {
+            return find(history.acf.achievements, {ID: achievement.id}) ? achievement : undefined
+          });
+          return history
+        })
+        this.achievements = this.achievements.concat(this.histories[this.currentHistory].acf.achievements)
       },
-      getPartners() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/partners?_embed').then((response) => {
-          this.partners = response.data
-        }).catch((error) => {
-          console.log(error)
-        });
+      async getPartners() {
+        this.partners = await this.$axios.$get('partners?_embed')
       },
-      getBoardMembers() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/board_members?_embed').then((response) => {
-          this.boardMembers = response.data
-        }).catch((error) => {
-          console.log(error)
-        });
+      async getBoardMembers() {
+        this.boardMembers = await this.$axios.$get('board_members?_embed')
       },
-      getCustomers() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/customers?per_page=100&_embed').then((response) => {
-          this.customers = response.data
-        }).catch((error) => {
-          console.log(error)
-        });
+      async getCustomers() {
+        this.customers = await this.$axios.$get('customers?per_page=100&_embed')
       },
       reverseItems() {
         this.contactPersons = this.page.acf.contact_persons.reverse()

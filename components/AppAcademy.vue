@@ -9,13 +9,11 @@
              src="~/static/images/walter-logo.png" alt="">
       </div>
     </nuxt-link>
-    <div class="info">
-      <nuxt-link class="nav-link" :to="`/careers/academy/${item.id}`">
-        <h1 class="title" v-html="item.title.rendered"></h1>
-      </nuxt-link>
-      <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>
-      <div class="published">Deadline: {{deadline}}</div>
-    </div>
+    <nuxt-link class="nav-link" :to="`/careers/academy/${item.id}`">
+      <h1 class="title" v-html="item.title.rendered"></h1>
+    </nuxt-link>
+    <div class="content">{{item.acf.description | truncate(35 * 3)}}</div>
+    <div class="published"><span>Deadline: {{deadline}}</span></div>
   </div>
 </template>
 
@@ -39,7 +37,6 @@
   @import '../assets/styles/mixins';
 
   .card {
-    position: relative;
     display: flex;
     flex-direction: column;
     min-height: 450px;
@@ -69,30 +66,22 @@
       }
     }
 
-    .info {
+    .title {
+      font-weight: 600;
+      font-size: 1.5em;
+    }
+    .author {
+      font-size: 1em;
+      font-weight: 600;
+    }
+
+    .published {
+      font-size: 0.8em;
+      font-weight: 500;
+      color: gray;
+      height: 50px;
       display: flex;
-      flex-direction: column;
-
-      .title {
-        font-weight: 600;
-        font-size: 1.5em;
-        padding-bottom: 1em;
-      }
-      .author {
-        font-size: 1em;
-        font-weight: 600;
-        padding-bottom: 1em;
-      }
-
-      .published {
-        position: absolute;
-        bottom: 0;
-        font-size: 0.8em;
-        font-weight: 500;
-        color: gray;
-        padding-top: 1em;
-        padding-bottom: 1em;
-      }
+      align-items: center;
     }
   }
 </style>

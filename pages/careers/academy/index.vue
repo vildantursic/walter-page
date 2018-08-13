@@ -32,7 +32,6 @@
   import AppAcademy from '~/components/AppAcademy'
   import AppPageTitle from '~/components/AppPageTitle'
   import AppMoreCard from '~/components/AppMoreCard'
-  import axios from 'axios'
   import moment from 'moment'
   import { orderBy, find, isEqual } from 'lodash'
 
@@ -64,8 +63,11 @@
         tempItems: [],
       }
     },
+    async asyncData({ app }) {
+      const page = await app.$axios.$get('pages/70');
+      return { page }
+    },
     created () {
-      this.getPage()
       this.getItems()
     },
     computed: {
@@ -80,61 +82,43 @@
       goToPost (id) {
         this.$router.push({ path: `news/${id}`})
       },
-      getPage() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/70').then((response) => {
-          this.page = response.data
-        }).catch((error) => {
-          console.log(error)
-        });
-      },
-      getItems() {
+      async getItems() {
         if (this.items.length !== 0)
           this.loading = false;
 
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/bim_academy_posts?per_page=100&_embed').then((response) => {
-          this.items = response.data
-          this.tempItems = response.data
+        this.items = await this.$axios.$get('bim_academy_posts?per_page=100&_embed')
+        this.tempItems = this.items
 
-          if (isEqual(this.items, response.data)) {
-            this.$store.commit('SET_ACADEMY', response.data);
+        if (isEqual(this.items, this.tempItems)) {
+          this.$store.commit('SET_ACADEMY', this.tempItems);
+        }
+
+        this.loading = false
+
+        await this.fillUser()
+        await this.fillCategories()
+      },
+      async fillUser() {
+        const response = await this.$axios.$get('users')
+        this.items.map((item) => {
+          if (find(response[0].id, { id: item["_embedded"]["wp:featuredmedia"][0]["author"]})) {
+            item["_embedded"]["wp:featuredmedia"][0]["author"] = response[0].name
           }
-
-          this.loading = false
-        }).then(() => {
-          this.fillUser()
-        }).then(() => {
-          this.fillCategories()
-        }).catch((error) => {
-          console.log(error);
-        });
+          return item
+        })
       },
-      fillUser() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/users').then((response) => {
-          this.items.map((item) => {
-            if (find(response.data[0].id, { id: item["_embedded"]["wp:featuredmedia"][0]["author"]})) {
-              item["_embedded"]["wp:featuredmedia"][0]["author"] = response.data[0].name
+      async fillCategories() {
+        const response = await this.$axios.$get('categories')
+        this.items.map((item) => {
+          const cats = []
+          response.forEach(cat => {
+            if (find(item.categories, (o) => o == cat.id)) {
+              cats.push(cat)
             }
-            return item
           })
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      fillCategories() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/categories').then((response) => {
-          this.items.map((item) => {
-            const cats = []
-            response.data.forEach(cat => {
-              if (find(item.categories, (o) => o == cat.id)) {
-                cats.push(cat)
-              }
-            })
-            item.categories = cats
-            return item
-          })
-        }).catch((error) => {
-          console.log(error);
-        });
+          item.categories = cats
+          return item
+        })
       },
       selectFilter (id) {
         this.selectedFilter = id

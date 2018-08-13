@@ -59,7 +59,6 @@
   import AppSingleService from '~/components/AppSingleService'
   import AppSideNavigation from "~/components/AppSideNavigation"
   import AppContactBox from "~/components/AppContactBox"
-  import axios from 'axios'
   import { find } from 'lodash'
 
   export default {
@@ -84,24 +83,20 @@
         showContactBox: false,
       }
     },
+    async asyncData({ app }) {
+      const services = await app.$axios.$get('services?_embed');
+      return { services }
+    },
+    created () {
+      this.contact_person = this.services[0].acf.contact_person
+      this.fillSubServices()
+    },
     watch: {
       '$route': function (refreshPage) {
         this.$refs[this.$route.hash.substring(1)][0].click();
       }
     },
-    created () {
-      this.getServices()
-      this.fillSubServices()
-    },
     methods: {
-      getServices() {
-        axios.get(`https://walter.ba/cms/wp-json/wp/v2/services?_embed`).then((response) => {
-          this.services = response.data
-          this.contact_person = this.services[0].acf.contact_person
-        }).catch((error) => {
-          console.log(error)
-        });
-      },
       showContact(id) {
         this.services.forEach((service) => {
           if (service.id === id) {
@@ -122,21 +117,18 @@
         })
         this.activeService = currentItem.textContent;
         this.once = false
-    },
-      fillSubServices () {
-        axios.get(`https://walter.ba/cms/wp-json/wp/v2/sub_services?per_page=100&_embed`).then((response) => {
-          if (this.services.length !== 0) {
-            this.services = this.services.map(service => {
-              service.acf.sub_services = service.acf.sub_services.map(subService => {
-                return find(response.data, { id: subService.ID })
-              });
-              return service
-            })
-          }
-          this.loadedServices = true
-        }).catch((error) => {
-          console.log(error)
-        });
+      },
+      async fillSubServices () {
+        const response = await this.$axios.$get('sub_services?per_page=100&_embed')
+        if (this.services.length !== 0) {
+          this.services = this.services.map(service => {
+            service.acf.sub_services = service.acf.sub_services.map(subService => {
+              return find(response, { id: subService.ID })
+            });
+            return service
+          })
+        }
+        this.loadedServices = true
       },
       goToService () {
         this.$router.push({ path: 'services' })

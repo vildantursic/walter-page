@@ -62,6 +62,8 @@
       margin: 0;
       font-size: 2em;
       font-weight: bold;
+      height: 80px;
+      overflow: hidden;
     }
 
     .published {
@@ -79,9 +81,8 @@
     }
 
     .data {
-      width: 90%;
       margin: 0;
-      height: auto;
+      height: 40%;
       overflow: hidden;
       @include screen-size('xs') {
         width: 100%;

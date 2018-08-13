@@ -18,7 +18,6 @@
 <script>
   import AppMap from "~/components/AppMap"
   import AppContactPerson from "~/components/AppContactPerson"
-  import axios from 'axios'
 
   export default {
     components: {
@@ -37,14 +36,9 @@
       this.getPage()
     },
     methods: {
-      getPage() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/73?_embed').then((response) => {
-          this.page = response.data
-        }).then(() => {
-          this.reverseItems()
-        }).catch((error) => {
-          console.log(error)
-        });
+      async getPage() {
+        this.page = await this.$axios.$get('pages/73?_embed')
+        this.reverseItems()
       },
       reverseItems() {
         this.contactPersons = this.page.acf.contact_persons.reverse()
@@ -98,9 +92,6 @@
         @include screen-size(xs) {
           width: 100%;
           height: 100vh;
-        }
-
-        .card {
         }
       }
 

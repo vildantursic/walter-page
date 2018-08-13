@@ -20,7 +20,6 @@
 
 <script>
   import AppService from '~/components/AppService'
-  import axios from 'axios'
 
   export default {
     components: {
@@ -34,24 +33,16 @@
         }
       }
     },
+    async asyncData({ app }) {
+      const page = await app.$axios.$get('pages/79');
+      return { page }
+    },
     created () {
-      this.getPage()
       this.getItems()
     },
     methods: {
-      getPage() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/79').then((response) => {
-          this.page = response.data
-        }).catch((error) => {
-          console.log(error)
-        });
-      },
-      getItems() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/services?_embed').then((response) => {
-          this.items = response.data
-        }).catch((error) => {
-          console.log(error);
-        });
+      async getItems() {
+        this.items = await this.$axios.$get('services?_embed')
       },
       goToService (id) {
         this.$router.push({ path: `services#${id}`})

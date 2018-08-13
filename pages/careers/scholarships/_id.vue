@@ -25,7 +25,6 @@
   import AppSlider from '~/components/AppSlider'
   import AppSocial from '~/components/AppSocial'
   import AppContactForm from '~/components/AppContactForm'
-  import axios from 'axios'
   import { find } from 'lodash'
   import moment from 'moment'
 
@@ -62,22 +61,14 @@
       goToPost (id) {
         this.$router.push({ path: `/news/${id}`})
       },
-      getItems() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/scholarships?_embed').then((response) => {
-          this.items = response.data
-        }).catch((error) => {
-          console.log(error);
-        });
+      async getItems() {
+        this.items = await this.$axios.$get('scholarships?_embed')
       },
-      getScholarship() {
-        axios.get(`https://walter.ba/cms/wp-json/wp/v2/scholarships/${this.$route.params.id}?_embed`).then((response) => {
-          this.page = response.data;
-          this.date = moment(response.data.date).format('DD-MM-YYYY');
-          this.subject = `Scholarships - ${response.data.title.rendered}`;
-          this.loading = false;
-        }).catch((error) => {
-          console.log(error)
-        });
+      async getScholarship() {
+        this.page = await this.$axios.$get(`https://walter.ba/cms/wp-json/wp/v2/scholarships/${this.$route.params.id}?_embed`)
+        this.date = moment(this.page.date).format('DD-MM-YYYY');
+        this.subject = `Scholarships - ${this.page.title.rendered}`;
+        this.loading = false;
       }
     }
   }

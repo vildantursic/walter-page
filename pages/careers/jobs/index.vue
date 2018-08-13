@@ -20,7 +20,6 @@
   import AppFilter from '~/components/AppFilter'
   import AppPosition from '~/components/AppPosition'
   import AppPageTitle from '~/components/AppPageTitle'
-  import axios from 'axios'
   import moment from 'moment'
   import { orderBy, find, isEqual } from 'lodash'
 
@@ -51,43 +50,35 @@
       AppPageTitle,
       AppPosition
     },
+    async asyncData({ app }) {
+      const page = await app.$axios.$get('pages/64');
+      return { page }
+    },
+    created() {
+      this.getItems()
+    },
     computed: {
       searchedList() {
         return this.items.filter(item => {
           return item.title.rendered.toLowerCase().includes(this.search.toLowerCase()) ||
-                 item.acf.description.toLowerCase().includes(this.search.toLowerCase())
+            item.acf.description.toLowerCase().includes(this.search.toLowerCase())
         })
       }
     },
-    created() {
-      this.getPage()
-      this.getItems()
-    },
     methods: {
-      getPage () {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/64').then((response) => {
-          this.page = response.data;
-        }).catch((error) => {
-          console.log(error)
-        });
-      },
-      getItems () {
+      async getItems () {
         if (this.items.length !== 0)
           this.loading = false;
 
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/careers?per_page=100&_embed').then((response) => {
-          this.items = response.data
-          this.itemsToShow = this.items.length
-          this.tempItems = response.data
+        this.items = await this.$axios.$get('careers?per_page=100&_embed')
+        this.itemsToShow = this.items.length
+        this.tempItems = this.items
 
-          if (isEqual(this.items, response.data)) {
-            this.$store.commit('SET_JOBS', response.data);
-          }
+        if (isEqual(this.items, this.tempItems)) {
+          this.$store.commit('SET_JOBS', this.tempItems);
+        }
 
-          this.loading = false
-        }).catch((error) => {
-          console.log(error);
-        });
+        this.loading = false
       },
       selectFilter (id) {
         this.selectedFilter = id

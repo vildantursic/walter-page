@@ -73,8 +73,12 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/manifest',
     '@nuxtjs/icon',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@nuxtjs/axios',
   ],
+  axios: {
+    baseURL: 'https://walter.ba/cms/wp-json/wp/v2/'
+  },
   workbox: {
     runtimeCaching: [
       {
@@ -97,7 +101,7 @@ module.exports = {
   icon: {},
   sitemap: {
     hostname: 'https://www.walter.com',
-    cacheTime: 1000 * 60 * 15,
+    cacheTime: 1000,
     generate: true,
     routes () {
       return axios.get('https://walter.ba/cms/wp-json/wp/v2/cases?per_page=100')
@@ -122,8 +126,5 @@ module.exports = {
     {src: '~/plugins/analytics.js', ssr: false},
     '~/plugins/vue2-filters.js',
     '~/plugins/filters.js'
-  ],
-  generate: {
-    routes: ['/', '/about', '/ba', '/ba/about']
-  }
+  ]
 }

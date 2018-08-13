@@ -47,7 +47,6 @@
 
   .card {
     height: auto;
-    overflow: hidden;
     margin: 25px 0;
 
     .card-img {

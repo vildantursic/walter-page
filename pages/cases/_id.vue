@@ -10,7 +10,6 @@
 <script>
   import AppLoading from '~/components/AppLoading'
   import AppSingle from "~/components/AppSingle";
-  import axios from 'axios'
 
   export default {
     components: {
@@ -32,18 +31,10 @@
       goBack() {
         this.$router.push('/cases')
       },
-      getCase() {
-        axios.get(`https://walter.ba/cms/wp-json/wp/v2/cases/${this.$route.params.id}?_embed`).then((response) => {
-          this.page = response.data;
-          this.loading = false;
-        }).catch((error) => {
-          console.log(error);
-        });
+      async getCase() {
+        this.page = await this.$axios.$get(`cases/${this.$route.params.id}?_embed`)
+        this.loading = false;
       }
     }
   }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

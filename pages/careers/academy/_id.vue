@@ -25,7 +25,6 @@
   import AppSlider from '~/components/AppSlider'
   import AppSocial from '~/components/AppSocial'
   import AppContactForm from '~/components/AppContactForm'
-  import axios from 'axios'
   import { find } from 'lodash'
   import moment from 'moment'
 
@@ -62,22 +61,14 @@
       goToPost (id) {
         this.$router.push({ path: `/news/${id}`})
       },
-      getItems() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/bim_academy_posts?_embed').then((response) => {
-          this.items = response.data
-        }).catch((error) => {
-          console.log(error);
-        });
+      async getItems() {
+        this.items = await this.$axios.$get('bim_academy_posts?_embed')
       },
-      getAcademy() {
-        axios.get(`https://walter.ba/cms/wp-json/wp/v2/bim_academy_posts/${this.$route.params.id}?_embed`).then((response) => {
-          this.page = response.data;
-          this.date = moment(response.data.date).format('DD-MM-YYYY');
-          this.subject = `Academy - ${response.data.title.rendered}`;
-          this.loading = false;
-        }).catch((error) => {
-          console.log(error)
-        });
+      async getAcademy() {
+        this.page = await this.$axios.$get(`bim_academy_posts/${this.$route.params.id}?_embed`)
+        this.date = moment(this.page.date).format('DD-MM-YYYY');
+        this.subject = `Academy - ${this.page.title.rendered}`;
+        this.loading = false;
       }
     }
   }

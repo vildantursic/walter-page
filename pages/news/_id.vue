@@ -44,7 +44,6 @@
   import OtherPosts from '~/components/OtherPosts'
   import AppSlider from '~/components/AppSlider'
   import AppSocial from '~/components/AppSocial'
-  import axios from 'axios'
   import { find } from 'lodash'
   import moment from 'moment'
 
@@ -83,56 +82,40 @@
       goToPost (id) {
         this.$router.push({ path: `/news/${id}`})
       },
-      getArticle() {
-        axios.get(`https://walter.ba/cms/wp-json/wp/v2/posts/${this.$route.params.id}?_embed`).then((response) => {
-          this.page = response.data;
-          this.date = moment(response.data.date).format('DD-MM-YYYY');
-          this.loading = false;
-        }).catch((error) => {
-          console.log(error)
-        });
+      async getArticle() {
+        this.page = await this.$axios.$get(`posts/${this.$route.params.id}?_embed`)
+        this.date = moment(this.page.date).format('DD-MM-YYYY');
+        this.loading = false;
       },
-      getItems() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/posts?_embed').then((response) => {
-          this.items = response.data
-          this.fillUser()
-          this.fillCategories()
-        }).catch((error) => {
-          console.log(error);
-        });
+      async getItems() {
+        this.items = await this.$axios.$get('https://walter.ba/cms/wp-json/wp/v2/posts?_embed')
+        await this.fillUser()
+        await this.fillCategories()
       },
-      fillUser() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/users').then((response) => {
-          this.authors = response.data
-          this.items.map((item) => {
-            if (find(response.data, { id: item.author })) {
-              item.author = find(response.data, { id: item.author })
+      async fillUser() {
+        this.authors = await this.$axios.$get('https://walter.ba/cms/wp-json/wp/v2/users')
+        this.items.map((item) => {
+          if (find(this.authors, { id: item.author })) {
+            item.author = find(this.authors, { id: item.author })
+          }
+          return item
+        })
+      },
+      async fillCategories() {
+        this.categories = await this.$axios.$get('categories')
+        this.page.categories = this.page.categories.map(cat => {
+          return find(this.categories, (o) => o.id === cat)
+        })
+        this.items.map((item) => {
+          const cats = []
+          this.categories.forEach(cat => {
+            if (find(item.categories, (o) => o === cat.id)) {
+              cats.push(cat)
             }
-            return item
           })
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      fillCategories() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/categories').then((response) => {
-          this.categories = response.data
-          this.page.categories = this.page.categories.map(cat => {
-            return find(this.categories, (o) => o.id === cat)
-          })
-          this.items.map((item) => {
-            const cats = []
-            response.data.forEach(cat => {
-              if (find(item.categories, (o) => o === cat.id)) {
-                cats.push(cat)
-              }
-            })
-            item.categories = cats
-            return item
-          })
-        }).catch((error) => {
-          console.log(error);
-        });
+          item.categories = cats
+          return item
+        })
       }
     }
   }

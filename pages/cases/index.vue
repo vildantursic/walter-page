@@ -25,7 +25,6 @@
   import AppFilter from '~/components/AppFilter'
   import AppPageTitle from '~/components/AppPageTitle'
   import AppMoreCard from '~/components/AppMoreCard'
-  import axios from 'axios'
   import { find, sortBy, isEqual } from 'lodash'
 
   export default {
@@ -59,14 +58,11 @@
         selectedFilter: -1
       }
     },
-    watch: {
-      itemsToShow: function (val) {
-        const newQuery = {itemsToShow: val, filterID: this.$route.query.filterID | -1}
-        this.$router.replace({ name: "cases", query: newQuery});
-      }
+    async asyncData({ app }) {
+      const page = await app.$axios.$get('pages/60');
+      return { page }
     },
     created () {
-      this.getPage()
       this.getItems()
     },
     computed: {
@@ -77,58 +73,41 @@
         })
       }
     },
+    watch: {
+      itemsToShow: function (val) {
+        const newQuery = {itemsToShow: val, filterID: this.$route.query.filterID | -1}
+        this.$router.replace({ name: "cases", query: newQuery});
+      }
+    },
     methods: {
-      show() {
-        this.$modal.show('case-modal');
-      },
-      hide() {
-        this.$modal.hide('case-modal');
-      },
-      getPage() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/60').then((response) => {
-          this.page = response.data
-        }).catch((error) => {
-          console.log(error)
-        });
-      },
-      getItems() {
+      async getItems() {
         if (this.items.length !== 0)
           this.loading = false;
 
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/cases?per_page=100&_embed').then((response) => {
-          this.items = response.data
-          this.tempItems = this.items
+        this.items = await this.$axios.$get('cases?per_page=100&_embed')
+        this.tempItems = this.items
 
-          if (isEqual(this.items, response.data)) {
-            this.$store.commit('SET_CASES', response.data);
-          }
+        if (isEqual(this.items, this.tempItems)) {
+          this.$store.commit('SET_CASES', this.tempItems);
+        }
 
-          this.loading = false
-        }).then(() => {
-          this.getCategories()
-        }).catch((error) => {
-          console.log(error);
-        });
+        this.loading = false
+        await this.getCategories()
       },
-      getCategories() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/case_categories').then((response) => {
-          this.filters = response.data;
-          this.sortedFilters = sortBy(this.filters, 'id')
-          this.items.map((item) => {
-            const cats = []
-            response.data.forEach(cat => {
-              if (find(item.case_categories, (o) => o === cat.id)) {
-                cats.push(cat)
-              }
-            })
-            item.case_categories = cats
-            return item
+      async getCategories() {
+        this.filters = await this.$axios.$get('case_categories')
+        this.sortedFilters = sortBy(this.filters, 'id')
+        this.items.map((item) => {
+          const cats = []
+          this.filters.forEach(cat => {
+            if (find(item.case_categories, (o) => o === cat.id)) {
+              cats.push(cat)
+            }
           })
-        }).then(() => {
-          this.selectFilter(this.$route.query.filterID)
-        }).catch((error) => {
-          console.log(error);
-        });
+          item.case_categories = cats
+          return item
+        })
+        this.selectFilter(this.$route.query.filterID)
       },
       showCase(event) {
         this.item = event
@@ -163,9 +142,9 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(10%, 30px, 3, 2);
+    @include grid-items(10%, 50px, 3, 2);
     @include screen-size('xs') {
-      @include grid-items(10%, 30px, 3, 2, 1);
+      @include grid-items(10%, 50px, 3, 2, 1);
     }
   }
   .v--modal-overlay{

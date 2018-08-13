@@ -29,7 +29,6 @@
   import AppPageTitle from '~/components/AppPageTitle'
   import AppContactBox from '~/components/AppContactBox'
   import AppMoreCard from '~/components/AppMoreCard'
-  import axios from 'axios'
   import moment from 'moment'
   import { find, isEqual } from 'lodash'
 
@@ -58,8 +57,11 @@
       AppContactBox,
       AppMoreCard
     },
+    async asyncData({ app }) {
+      const page = await app.$axios.$get('pages/66');
+      return { page }
+    },
     created () {
-      this.getPage()
       this.getItems()
     },
     computed: {
@@ -74,62 +76,42 @@
       goToPost (id) {
         this.$router.push({ path: `news/${id}`})
       },
-      getPage() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/pages/66').then((response) => {
-          this.page = response.data
-        }).catch((error) => {
-          console.log(error)
-        });
-      },
-      getItems() {
+      async getItems() {
         if (this.items.length !== 0)
           this.loading = false;
 
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/posts?per_page=100&_embed').then((response) => {
-          this.items = response.data
-          this.tempItems = this.items
+        this.items = await this.$axios.$get('posts?per_page=100&_embed')
+        this.tempItems = this.items
 
-          if (isEqual(this.items, response.data)) {
-            this.$store.commit('SET_POSTS', response.data);
+        if (isEqual(this.items, this.tempItems)) {
+          this.$store.commit('SET_POSTS', this.tempItems);
+        }
+
+        this.loading = false
+        await this.fillUser()
+        await this.fillCategories()
+      },
+      async fillUser() {
+        const response = await this.$axios.$get('https://walter.ba/cms/wp-json/wp/v2/users')
+        this.items.map((item) => {
+          if (find(response, { id: item.author })) {
+            item.author = find(response, { id: item.author })
           }
-
-          this.loading = false
-        }).then(() => {
-          this.fillUser()
-        }).then(() => {
-          this.fillCategories()
-        }).catch((error) => {
-          console.log(error);
-        });
+          return item
+        })
       },
-      fillUser() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/users').then((response) => {
-          this.items.map((item) => {
-            if (find(response.data, { id: item.author })) {
-              item.author = find(response.data, { id: item.author })
+      async fillCategories() {
+        this.filters = await this.$axios.$get('https://walter.ba/cms/wp-json/wp/v2/categories')
+        this.items.map((item) => {
+          const cats = []
+          this.filters.forEach(cat => {
+            if (find(item.categories, (o) => o === cat.id)) {
+              cats.push(cat)
             }
-            return item
           })
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      fillCategories() {
-        axios.get('https://walter.ba/cms/wp-json/wp/v2/categories').then((response) => {
-          this.filters = response.data
-          this.items.map((item) => {
-            const cats = []
-            response.data.forEach(cat => {
-              if (find(item.categories, (o) => o == cat.id)) {
-                cats.push(cat)
-              }
-            })
-            item.categories = cats
-            return item
-          })
-        }).catch((error) => {
-          console.log(error);
-        });
+          item.categories = cats
+          return item
+        })
       },
       selectFilter (id) {
         this.selectedFilter = id
