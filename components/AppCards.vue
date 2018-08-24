@@ -49,7 +49,7 @@
 
     .image {
       min-height: 200px;
-      max-height: 200px;
+      /*max-height: 200px;*/
       overflow: hidden;
       display: flex;
       align-items: center;

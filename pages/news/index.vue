@@ -33,6 +33,28 @@
   import { find, isEqual } from 'lodash'
 
   export default {
+    head () {
+      return {
+        title: 'News - Walter',
+        meta: [
+          { hid: 'description', name: 'description', content: this.page.acf.title },
+          { hid: 'image', name: 'image', content: '/walter.png' },
+
+          { hid: 'og:title', property: 'og:title', content: this.page.acf.title  },
+          { hid: 'og:description', property: 'og:description', content: this.page.acf.description },
+          { hid: 'og:url', property: 'og:url', content: 'http://walter.ba/news' },
+          { hid: 'og:image', property: 'og:image', content: '/walter.png' },
+          { hid: 'og:site_name', property: 'og:site_name', content: 'Walter' },
+        ]
+      }
+    },
+    components: {
+      AppFilter,
+      AppNews,
+      AppPageTitle,
+      AppContactBox,
+      AppMoreCard
+    },
     data() {
       return {
         loading: true,
@@ -49,13 +71,6 @@
         search: '',
         selectedFilter: -1
       }
-    },
-    components: {
-      AppFilter,
-      AppNews,
-      AppPageTitle,
-      AppContactBox,
-      AppMoreCard
     },
     async asyncData({ app }) {
       const page = await app.$axios.$get('pages/66');
@@ -148,6 +163,6 @@
   @import "../../assets/styles/mixins";
 
   .items {
-    @include grid-items(0px, 20px, 1, 1, 1);
+    @include grid-items(5%, 2em, 3, 2, 1);
   }
 </style>

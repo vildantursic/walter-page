@@ -62,6 +62,14 @@
   import { find } from 'lodash'
 
   export default {
+    head () {
+      return {
+        title: 'Services - Walter',
+        meta: [
+          { hid: 'description', name: 'description', content: 'Walter Services' }
+        ]
+      }
+    },
     components: {
       AppSingleService,
       AppSideNavigation,

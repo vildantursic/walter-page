@@ -1,8 +1,7 @@
 <template>
   <div class="other-news">
     <p class="category">
-      <span v-for="(category, index) of item.categories" :key="index"> {{category.name}}<span
-        v-if="index < item.categories.length - 1">,</span></span>
+      <span>{{item.categories.map(category => category.name).join(', ')}}</span>
     </p>
     <p class="author">{{date}}</p>
     <h1 class="title">

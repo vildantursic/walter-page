@@ -9,9 +9,9 @@
       <div class="item animated fadeIn padded-content">
         <div class="img-header">
           <p class="category">
-            <span v-for="(category, index) of page.categories" :key="index"> {{category.name}}<span v-if="index < page.categories.length - 1">,</span></span>
+            <span>{{page.categories.map(category => category.name).join(', ')}}</span>
           </p>
-          <p class="author">{{date}}</p>
+          <p class="author">Published: {{date}}</p>
         </div>
         <div v-if="page.acf.gallery_images !== ''" class="img-container">
           <AppSlider v-if="page.acf.gallery_images" :images="page.acf.gallery_images.split(',')" :miniSlider="false"></AppSlider>
@@ -48,6 +48,21 @@
   import moment from 'moment'
 
   export default {
+    head () {
+      return {
+        title: `${this.page.title ? this.page.title.rendered : 'Article'} - Walter`,
+        meta: [
+          { hid: 'description', name: 'description', content: this.page.acf.title },
+          { hid: 'image', name: 'image', content: this.page._embedded ? this.page._embedded['wp:featuredmedia'][0].source_url : './walter.png'},
+
+          { hid: 'og:title', property: 'og:title', content: this.page.acf.title  },
+          { hid: 'og:description', property: 'og:description', content: this.page.acf.description },
+          { hid: 'og:url', property: 'og:url', content: 'http://walter.ba' },
+          { hid: 'og:image', property: 'og:image', content: this.page._embedded ? this.page._embedded['wp:featuredmedia'][0].source_url : './walter.png' },
+          { hid: 'og:site_name', property: 'og:site_name', content: 'Walter' },
+        ]
+      }
+    },
     components: {
       AppLoading,
       AppFilter,
@@ -67,6 +82,9 @@
           acf: {}
         },
       }
+    },
+    validate ({ params }) {
+      return /^\d+$/.test(params.id)
     },
     created() {
       this.getArticle();
@@ -171,7 +189,7 @@
   .img-header {
 
     .category {
-      margin: 0;
+      margin-bottom: 20px;
       font-size: 1.3em;
       font-weight: 700;
       color: $main-color;

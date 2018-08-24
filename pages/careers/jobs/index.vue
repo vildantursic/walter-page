@@ -24,6 +24,26 @@
   import { orderBy, find, isEqual } from 'lodash'
 
   export default {
+    head () {
+      return {
+        title: 'Jobs - Walter',
+        meta: [
+          { hid: 'description', name: 'description', content: this.page.acf.title },
+          { hid: 'image', name: 'image', content: './walter.png'},
+
+          { hid: 'og:title', property: 'og:title', content: this.page.acf.title  },
+          { hid: 'og:description', property: 'og:description', content: this.page.acf.description },
+          { hid: 'og:url', property: 'og:url', content: 'http://walter.ba/jobs' },
+          { hid: 'og:image', property: 'og:image', content: './walter.png' },
+          { hid: 'og:site_name', property: 'og:site_name', content: 'Walter' },
+        ]
+      }
+    },
+    components: {
+      AppFilter,
+      AppPageTitle,
+      AppPosition
+    },
     data() {
       return {
         loading: true,
@@ -44,11 +64,6 @@
         tempItems: [],
         categories: []
       }
-    },
-    components: {
-      AppFilter,
-      AppPageTitle,
-      AppPosition
     },
     async asyncData({ app }) {
       const page = await app.$axios.$get('pages/64');

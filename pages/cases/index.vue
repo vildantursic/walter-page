@@ -32,7 +32,14 @@
       return {
         title: 'Cases - Walter',
         meta: [
-          { hid: 'description', name: 'description', content: 'Our cases' }
+          { hid: 'description', name: 'description', content: this.page.acf.title },
+          { hid: 'image', name: 'image', content: './walter.png'},
+
+          { hid: 'og:title', property: 'og:title', content: this.page.acf.title  },
+          { hid: 'og:description', property: 'og:description', content: this.page.acf.description },
+          { hid: 'og:url', property: 'og:url', content: 'http://walter.ba/cases' },
+          { hid: 'og:image', property: 'og:image', content: './walter.png' },
+          { hid: 'og:site_name', property: 'og:site_name', content: 'Walter' },
         ]
       }
     },
