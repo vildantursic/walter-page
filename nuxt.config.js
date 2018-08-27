@@ -81,16 +81,18 @@ module.exports = {
   workbox: {
     runtimeCaching: [
       {
-        urlPattern: 'https://walter.ba/.*',
+        urlPattern: '/.*',
+        handler: 'networkFirst',
+        method: 'GET',
         strategyOptions: {
           cacheName: 'our-cache',
-          cacheExpiration: {
-            maxEntries: 10,
-            maxAgeSeconds: 300
-          }
-        }
-      }
-    ]
+          // cacheExpiration: {
+          //   maxEntries: 10,
+          //   maxAgeSeconds: 300
+          // }
+        },
+      },
+    ],
   },
   manifest: {
     'name': 'Walter',

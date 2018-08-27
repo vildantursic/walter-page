@@ -16,7 +16,7 @@
     "@nuxtjs/axios": "^5.3.1",
     "@nuxtjs/icon": "^2.1.0",
     "@nuxtjs/manifest": "^2.1.0",
-    "@nuxtjs/pwa": "^2.0.8",
+    "@nuxtjs/pwa": "^2.3.2",
     "@nuxtjs/sitemap": "^0.1.1",
     "@nuxtjs/workbox": "^2.2.0",
     "animate.css": "^3.6.1",
