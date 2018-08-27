@@ -116,7 +116,7 @@
           { hid: 'og:title', property: 'og:title', content: this.page.acf.title  },
           { hid: 'og:description', property: 'og:description', content: this.page.acf.description },
           { hid: 'og:url', property: 'og:url', content: 'http://walter.ba/about' },
-          { hid: 'og:image', property: 'og:image', content: './walter.png' },
+          { hid: 'og:image', property: 'og:image', content: './video-image-jpg' },
           { hid: 'og:site_name', property: 'og:site_name', content: 'Walter' },
         ]
       }

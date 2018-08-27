@@ -29,7 +29,7 @@
 
           { hid: 'og:title', property: 'og:title', content: 'Contact'  },
           { hid: 'og:url', property: 'og:url', content: 'http://walter.ba/contact' },
-          { hid: 'og:image', property: 'og:image', content: './walter.png' },
+          { hid: 'og:image', property: 'og:image', content: './video-image-jpg' },
           { hid: 'og:site_name', property: 'og:site_name', content: 'Walter' },
         ]
       }

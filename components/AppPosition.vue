@@ -9,7 +9,7 @@
     <p class="number">Number of positions: {{item.acf.number_of_positions}}</p>
     <p class="published">Deadline: {{deadline}}</p>
     <div class="bottom">
-      <AppSocial></AppSocial>
+      <!--<AppSocial :item="item"></AppSocial>-->
       <nuxt-link :to="`/careers/jobs/${item.id}`" class="more-container nav-link">
         <div class="plus">+</div>
         <div class="read"> Read <span class="more">more</span></div>

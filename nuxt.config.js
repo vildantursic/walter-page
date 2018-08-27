@@ -11,24 +11,27 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Walter, Your strategic BIM partner' },
       { name: 'keywords', content: 'Walter, BIM, Sarajevo, Europe' },
-      { hid: 'image', name: 'image', content: '/walter.png' },
+      { hid: 'image', name: 'image', content: '/images/video-image.jpg' },
 
       { hid: 'og:title', property: 'og:title', content: 'Walter, Your strategic BIM partner' },
       { hid: 'og:url', property: 'og:url', content: 'http://walter.ba' },
-      { hid: 'og:image', property: 'og:image', content: '/walter.png' },
+      { hid: 'og:image', property: 'og:image', content: '/images/video-image.jpg' },
       { hid: 'og:description', property: 'og:description', content: 'Your strategic BIM partner' },
       { hid: 'og:site_name', property: 'og:site_name', content: 'Walter' },
 
-      { name: 'twitter:card', content: '/walter.png' },
+      { name: 'twitter:card', content: '/images/video-image.jpg' },
       { name: 'twitter:site', content: '@walter' },
       { name: 'twitter:title', content: 'Walter, Your strategic BIM partner' },
       { name: 'twitter:description', content: 'Your strategic BIM partner' },
       { name: 'twitter:creator', content: '@walter' },
-      { name: 'twitter:image:src', content: '/walter.png' }
+      { name: 'twitter:image:src', content: '/images/video-image.jpg' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
+  },
+  performance: {
+    prefetch: false
   },
   /*
   ** Customize the progress bar color
@@ -63,8 +66,6 @@ module.exports = {
       'moment',
       'lodash'
     ]
-  },
-  router: {
   },
   modules: [
     '@nuxtjs/workbox',
@@ -101,7 +102,6 @@ module.exports = {
     'start_url': '/',
     'splash_pages': null
   },
-  icon: {},
   sitemap: {
     hostname: 'https://www.walter.com',
     cacheTime: 1000,
@@ -123,10 +123,11 @@ module.exports = {
   ],
   plugins: [
     { src: '~/plugins/swiper.js', ssr: false },
-    { src: '~/plugins/scroll.js', ssr: true},
+    { src: '~/plugins/scroll.js', ssr: true },
     { src: '~/plugins/aos.js', ssr: false },
     { src: '~/plugins/viewer.js', ssr: false },
     { src: '~/plugins/analytics.js', ssr: false },
+    { src: '~/plugins/social.js', ssr: false },
     '~/plugins/vue2-filters.js',
     '~/plugins/filters.js'
   ]
