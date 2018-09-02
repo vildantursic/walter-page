@@ -42,11 +42,6 @@
 
   export default {
     props: ['item'],
-    data() {
-      return {
-        showLightBox: false
-      }
-    },
     components: {
       AppSlider,
       AppSocial

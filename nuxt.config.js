@@ -30,9 +30,6 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  performance: {
-    prefetch: false
-  },
   /*
   ** Customize the progress bar color
   */
@@ -54,12 +51,6 @@ module.exports = {
         })
       }
     },
-    loaders:[
-      {
-        test: /\.svg$/,
-        loader: 'vue-svg-loader'
-      }
-    ],
     vendor: [
       'axios',
       'aos',
@@ -68,41 +59,11 @@ module.exports = {
     ]
   },
   modules: [
-    '@nuxtjs/workbox',
-    '@nuxtjs/pwa',
-    '@nuxtjs/manifest',
-    '@nuxtjs/icon',
     '@nuxtjs/sitemap',
     '@nuxtjs/axios',
   ],
   axios: {
     baseURL: 'https://walter.ba/cms/wp-json/wp/v2/'
-  },
-  workbox: {
-    runtimeCaching: [
-      {
-        urlPattern: '/.*',
-        handler: 'networkFirst',
-        method: 'GET',
-        strategyOptions: {
-          cacheName: 'our-cache',
-          // cacheExpiration: {
-          //   maxEntries: 10,
-          //   maxAgeSeconds: 300
-          // }
-        },
-      },
-    ],
-  },
-  manifest: {
-    'name': 'Walter',
-    'short_name': 'Walter',
-    'theme_color': '#469fc1',
-    'background_color': '#ffffff',
-    'display': 'standalone',
-    'Scope': '/',
-    'start_url': '/',
-    'splash_pages': null
   },
   sitemap: {
     hostname: 'https://www.walter.com',
@@ -120,7 +81,6 @@ module.exports = {
     '~/assets/styles/variables.scss',
     '~/assets/styles/mixins.scss',
     '~/assets/styles/main.scss',
-    'vue-image-lightbox/dist/vue-image-lightbox.min.css',
     'viewerjs/dist/viewer.css'
   ],
   plugins: [
