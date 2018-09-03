@@ -14,17 +14,17 @@ module.exports = {
       { hid: 'image', name: 'image', content: '/images/video-image.jpg' },
 
       { hid: 'og:title', property: 'og:title', content: 'Walter, Your strategic BIM partner' },
-      { hid: 'og:url', property: 'og:url', content: 'http://walter.ba' },
+      { hid: 'og:url', property: 'og:url', content: 'https://walter.surge.sh' },
       { hid: 'og:image', property: 'og:image', content: '/images/video-image.jpg' },
       { hid: 'og:description', property: 'og:description', content: 'Your strategic BIM partner' },
       { hid: 'og:site_name', property: 'og:site_name', content: 'Walter' },
 
-      { name: 'twitter:card', content: '/images/video-image.jpg' },
-      { name: 'twitter:site', content: '@walter' },
-      { name: 'twitter:title', content: 'Walter, Your strategic BIM partner' },
-      { name: 'twitter:description', content: 'Your strategic BIM partner' },
-      { name: 'twitter:creator', content: '@walter' },
-      { name: 'twitter:image:src', content: '/images/video-image.jpg' }
+      { hid: 'twitter:card', content: '/images/video-image.jpg' },
+      { hid: 'twitter:site', content: '@walter' },
+      { hid: 'twitter:title', content: 'Walter, Your strategic BIM partner' },
+      { hid: 'twitter:description', content: 'Your strategic BIM partner' },
+      { hid: 'twitter:creator', content: '@walter' },
+      { hid: 'twitter:image:src', content: '/images/video-image.jpg' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -66,7 +66,7 @@ module.exports = {
     baseURL: 'https://walter.ba/cms/wp-json/wp/v2/'
   },
   sitemap: {
-    hostname: 'https://www.walter.com',
+    hostname: 'https://walter.surge.sh',
     cacheTime: 1000,
     generate: true,
     routes () {

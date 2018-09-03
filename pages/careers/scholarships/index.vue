@@ -47,7 +47,7 @@
 
           { hid: 'og:title', property: 'og:title', content: this.page.acf.title  },
           { hid: 'og:description', property: 'og:description', content: this.page.acf.description },
-          { hid: 'og:url', property: 'og:url', content: 'http://walter.ba/scholarships' },
+          { hid: 'og:url', property: 'og:url', content: 'https://walter.surge.sh/scholarships' },
           { hid: 'og:image', property: 'og:image', content: './video-image-jpg' },
           { hid: 'og:site_name', property: 'og:site_name', content: 'Walter' },
         ]

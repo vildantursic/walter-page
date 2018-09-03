@@ -1,6 +1,6 @@
 <template>
   <div class="social">
-    <social-sharing :url="`https://walter.ba${link}`"
+    <social-sharing :url="`https://walter.surge.sh${link}`"
                     :title="item.title.rendered"
                     :description="item.acf.description"
                     :quote="item.acf.description"
