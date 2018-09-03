@@ -38,7 +38,7 @@
         title: 'News - Walter',
         meta: [
           { hid: 'description', name: 'description', content: this.page.acf.title },
-          { hid: 'image', name: 'image', content: '/walter.png' },
+          { hid: 'image', name: 'image', content: '/images/video-image.jpg' },
 
           { hid: 'og:title', property: 'og:title', content: this.page.acf.title  },
           { hid: 'og:description', property: 'og:description', content: this.page.acf.description },
